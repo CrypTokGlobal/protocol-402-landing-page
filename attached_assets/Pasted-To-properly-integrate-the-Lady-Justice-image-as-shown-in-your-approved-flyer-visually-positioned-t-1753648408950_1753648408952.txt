@@ -1,0 +1,70 @@
+To properly integrate the Lady Justice image as shown in your approved flyer — visually positioned to the left with the sword pointing toward the form — you already have the <img src="lady-justice.png" class="lady-justice"> line in your HTML.
+
+To fully achieve the elegant, layered result you're going for, here’s exactly what you should do in your style.css file:
+
+✅ Add this CSS to your style.css (or replace the existing .lady-justice styles):
+css
+Copy
+Edit
+.lady-justice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.3;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(1.1) saturate(1.1) contrast(1.05);
+}
+
+.hero {
+  position: relative;
+  background: linear-gradient(to right, #000000, #0c0c0c);
+  color: white;
+  overflow: hidden;
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.06);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+💡 Extra polish tips:
+If the image is too bold, reduce opacity to 0.2 or apply a blur() with CSS filters.
+
+Be sure the image file is named lady-justice.png and uploaded to your Replit public/ folder.
+
+✅ Optional enhancement:
+If you want to anchor the Lady Justice image only on larger screens, wrap the above .lady-justice rule in a media query like this:
+
+css
+Copy
+Edit
+@media (min-width: 768px) {
+  .lady-justice {
+    /* ... styles as above ... */
+  }
+}
+Once you do this, your layout will:
+
+Match the approved design mockup,
+
+Feature the Lady Justice figure softly in the background left,
+
+And remain clean and readable for form + headline sections.
+
+Let me know if you want to add motion effects (e.g., slow fade-in or parallax scroll), or need me to generate the full style.css file from scratch with all integrated!
