@@ -1,0 +1,125 @@
+👋 Hi Replit Assistant! Please act as a senior full-stack developer and UI/UX architect helping me build a production-ready landing page for a high-visibility government-backed tech initiative. I’d like detailed code with thoughtful file structure, smart defaults, and clean logic that can be migrated into Squarespace or embedded externally. Use modern design best practices, mobile responsiveness, and minimal dependencies.
+
+Now here’s the project scope:
+
+🔥 PROJECT OVERVIEW:
+Build a fully custom one-page landing site for a major state-level initiative:
+SCETA — South Carolina Emerging Technology Association
+Protocol 402: South Carolina’s Blueprint for Monetized Digital Infrastructure
+
+This landing page is the primary source to collect emails and deliver the whitepaper. The experience must feel sleek, authoritative, trustworthy, and professional enough for law and government, while still appealing to crypto/Web3 audiences.
+
+🎯 GOAL:
+Design a high-quality user experience that:
+
+Encourages users to download the whitepaper
+
+Captures Name + Email
+
+Saves submissions to a Google Sheet (or temp placeholder)
+
+Can later connect to SCETA’s official email system
+
+Looks bold and feels like a billion-dollar initiative from the first second
+
+🔧 PAGE FEATURES:
+✅ 1. HERO SECTION (Above the Fold)
+H1: South Carolina Emerging Technology Association
+H2: Protocol 402 — South Carolina’s Blueprint for Monetized Digital Infrastructure
+H3: #AI=$BTC — Where Intelligence Meets Value
+
+Subtext:
+
+Presented by SCETA, USC Law, and TECHINLAW
+
+Paragraph:
+
+Download the official whitepaper detailing how SC can become a digital powerhouse through blockchain, smart services, and AI-enhanced governance.
+
+📨 Download Form:
+
+Name (Your Name)
+
+Email (Your Email)
+
+Submit Button: Get the Whitepaper
+
+🧠 On Submit:
+
+Save submission to:
+
+✅ Google Sheet via Sheety or SheetDB (or temp CSV/log fallback)
+
+Display confirmation message
+
+Trigger .pdf download (or show button/redirect)
+
+Eventually connect to CRM/email marketing platform
+
+✅ 2. "What’s Inside Protocol 402?" Section
+Responsive 4-column layout (mobile-friendly) with title, icon, and 1-line description:
+
+💡 Monetized APIs — Transform public data into digital revenue via pay-per-use interfaces.
+
+🏦 Blockchain Finance — Secure, auditable, permissioned ledgers.
+
+🪙 PalmettoCoin™ — SC’s stablecoin to retain wealth and modernize payments.
+
+⚖️ Smart Contracts — AI logic for automated budgeting and governance.
+
+(Optional 5th card if spacing allows: 🌐 Digital Sovereignty — Citizen-powered IDs, clouds, services)
+
+✅ 3. FOOTER / CALL TO ACTION
+Bold text: Join us in shaping South Carolina’s digital frontier.
+
+Button: Learn More at SCETA.io
+
+Logos or placeholders for: SCETA, USC Law, TECHINLAW
+
+Footer text: © 2025 South Carolina Emerging Technology Association (SCETA). All rights reserved.
+
+🎨 DESIGN SPECS
+Theme Colors: Garnet (#7C0A02), Gold, Black, White
+
+Fonts: Inter for body, DM Serif Display (or equivalent) for headings
+
+Mobile responsive layout
+
+Clean spacing with Flexbox/Grid
+
+Hover effects on buttons (glow, scale, etc.)
+
+Optional: fade-in scroll reveal for each "What's Inside" block
+
+⚙️ BACKEND
+Node.js + Express
+
+Route: /submit
+
+Save name, email, (and timestamp)
+
+Storage:
+
+✅ Google Sheets API (via Sheety or SheetDB API) OR
+
+✅ Fallback CSV file or console log
+
+Serve static front-end and trigger .pdf download
+
+🛠️ FILE STRUCTURE
+/public/index.html
+
+/public/style.css
+
+/public/script.js (if needed)
+
+/server.js
+
+/whitepaper.pdf (or placeholder for now)
+
+🧠 REQUEST:
+Please generate the complete working code (with comments) for the front-end and Express backend. Make it clean, modern, and ready to preview or export.
+
+This is for an elite SCETA-backed tech/law project, so polish and UX excellence matter. Build it with ❤️ like it’s going on stage in front of Congress.
+
+Let’s go!
