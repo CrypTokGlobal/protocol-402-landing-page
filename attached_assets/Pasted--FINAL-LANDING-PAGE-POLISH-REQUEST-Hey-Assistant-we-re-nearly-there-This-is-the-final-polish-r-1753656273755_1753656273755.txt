@@ -1,0 +1,84 @@
+✨ FINAL LANDING PAGE POLISH REQUEST ✨
+Hey Assistant — we’re nearly there! This is the final polish request to perfect the SCETA Protocol 402 landing page before delivery. Please follow these steps precisely for a world-class, mobile-friendly result that aligns with the official flyer and video mockups.
+
+🖼️ DESIGN REFERENCES
+Visual Goal: Match the layout and elegance shown in FINAL LADY LANDING.mov and LADY BURGUNDY V1.mov
+
+Screenshot Reference: See uploaded images of the working version (glow buttons, layout, color theme, text legibility)
+
+Style Guide: Burgundy, Gold, Black — classic USC South Carolina branding (professional, powerful, elegant)
+
+✅ REQUIRED VISUAL POLISH
+🧱 Hero Layout + Form Block
+Add backdrop-filter: blur(3px) behind the entire form+text block to ensure legibility over background
+
+Ensure Lady Justice image stays crisp, clean, and left-aligned across all devices
+
+Add 12px border-radius and a very soft box-shadow behind the white form (ambient glow, not drop shadow)
+
+Make sure text spacing above and below is visually balanced — especially above form
+
+🎨 Theme Colors
+Update the color palette:
+
+Background: deep burgundy (#4b000f)
+
+Accent Gold: #f5c518
+
+Dark Base Text: #ffffff or soft white for contrast
+
+🔘 Button Style
+Update button:
+
+Primary background: #f5c518 (gold)
+
+Text: bold #0a0a0a
+
+Add hover: soft outer glow using gold (box-shadow: 0 0 10px #f5c518)
+
+Add subtle button scaling effect on hover
+
+📱 MOBILE OPTIMIZATION
+Ensure full responsive layout:
+
+Stack form inputs vertically on narrow screens
+
+Shrink Lady Justice or fade image behind text below 768px
+
+Maintain padding/margin harmony — avoid crowding on smaller screens
+
+🔁 GOOGLE SHEET INTEGRATION
+✅ Sheet is ready with NAME, EMAIL, TIMESTAMP
+
+✅ Public access is set to "Anyone with the link"
+
+✅ Sheet.best connection URL:
+
+env
+Copy
+Edit
+GOOGLE_SHEETS_URL=https://sheet.best/api/sheets/[your-generated-sheet-id]
+Please confirm:
+
+server.js or index.js uses fetch(process.env.GOOGLE_SHEETS_URL) to POST form data
+
+Timestamp is appended using new Date().toISOString()
+
+🧾 DELIVERABLE CHECKLIST
+ Visuals fully match FINAL LADY LANDING video (spacing, shadows, layout)
+
+ Colors match burgundy + gold South Carolina brand
+
+ Button and form feel “floating” and high-end
+
+ Mobile layout renders cleanly
+
+ Google Sheet collects name/email/timestamp
+
+ PDF auto-download after form submit is confirmed
+
+✅ PDF download:
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+
+Let’s do this. This is the final stretch — time to blow them away. 🤝
+
