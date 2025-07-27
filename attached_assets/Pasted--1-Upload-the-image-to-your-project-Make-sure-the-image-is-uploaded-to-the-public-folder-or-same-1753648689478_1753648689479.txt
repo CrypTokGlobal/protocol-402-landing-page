@@ -1,0 +1,95 @@
+✅ 1. Upload the image to your project
+Make sure the image is uploaded to the public/ folder (or same directory as index.html) and named exactly:
+
+bash
+Copy
+Edit
+lady-justice.png
+If it's in a different format (e.g., .jpg or .webp), rename the file or update the code accordingly.
+
+✅ 2. Edit index.html
+Your file is already correctly structured with this line:
+
+html
+Copy
+Edit
+<img src="lady-justice.png" alt="Lady Justice" class="lady-justice" />
+✅ No change needed unless the image path is wrong — just make sure that file is in the same folder or public directory.
+
+✅ 3. Edit style.css and add this code:
+Open your public/style.css and scroll to the bottom. Paste the following CSS exactly to style the image and layer it correctly behind the form:
+
+css
+Copy
+Edit
+.lady-justice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  max-height: 800px;
+  z-index: 0;
+  opacity: 0.25;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(1.1) saturate(1.1) contrast(1.05);
+}
+
+/* Ensure the hero section positions its children relative to this image */
+.hero {
+  position: relative;
+  background: linear-gradient(to right, #000000, #0c0c0c);
+  color: white;
+  overflow: hidden;
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Keep your form and text readable above the image */
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+✅ Final Touches
+Optional: Make it only visible on desktop
+css
+Copy
+Edit
+@media (max-width: 768px) {
+  .lady-justice {
+    display: none;
+  }
+}
+✅ Recap of What You Must Do:
+✅ Upload lady-justice.png into the Replit file system (same folder as index.html or in public/).
+
+✅ Make sure this line is in index.html inside .hero-content:
+
+html
+Copy
+Edit
+<img src="lady-justice.png" alt="Lady Justice" class="lady-justice" />
+✅ Paste the CSS from above into style.css.
+
+Once those 3 are done, refresh the Replit preview and the Lady Justice image should appear left-aligned, layered behind your hero section content exactly as in the approved flyer.
+
+Let me know if you want a subtle animation or fading effect!
+
+
+
+
+
+
+
+Ask ChatGPT
