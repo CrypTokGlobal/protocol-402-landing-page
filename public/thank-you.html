@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thank You | Protocol 402 - SCETA</title>
   <meta name="description" content="Thank you for downloading the Protocol 402 whitepaper from SCETA.">
-  <link rel="icon" type="image/png" href="/lady-justice.png" />
+  <link rel="icon" type="image/svg+xml" href="/sword.svg" />
+  <link rel="icon" type="image/png" href="/sceta-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -83,6 +84,8 @@
       transform: translateY(-3px) scale(1.02);
       box-shadow: 0 15px 40px rgba(245, 197, 24, 0.6);
       border-color: #F5C518;
+      text-decoration: none;
+      color: #2a0008;
     }
     
     .footer {
@@ -115,14 +118,32 @@
         transform: translateY(-5px);
       }
     }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 2rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      p {
+        font-size: 1.1rem;
+      }
+      
+      .cta-button {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <span class="emoji">🎉</span>
     <h1>Thank You!</h1>
-    <p>Thanks for downloading the Protocol 402 Whitepaper.<br>
-    Your download should have started automatically.</p>
+    <p>Thanks for downloading the Protocol 402 Whitepaper — Learn more at SCETA.io</p>
     <a href="https://sceta.io" class="cta-button">Learn More at SCETA.io</a>
     <div class="footer">
       <p>© 2025 South Carolina Emerging Technology Association (SCETA)</p>

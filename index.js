@@ -25,14 +25,13 @@ app.use(express.static('public'));
 // Store submissions in memory for now (can be replaced with Google Sheets API)
 let submissions = [];
 
-// Google Sheets configuration (set these in Replit Secrets)
-// GOOGLE_SHEETS_URL should be a Google Apps Script Web App URL or Sheety/SheetDB endpoint
-const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL || 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0';
+// Sheet.best API configuration
+const SHEET_BEST_URL = process.env.SHEET_BEST_URL || 'https://sheet.best/api/sheets/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0';
 
-// Function to save to Google Sheets
+// Function to save to Google Sheets via Sheet.best
 async function saveToGoogleSheets(data) {
-    if (!GOOGLE_SHEETS_URL) {
-        console.log('Google Sheets URL not configured, skipping Google Sheets save');
+    if (!SHEET_BEST_URL) {
+        console.log('Sheet.best URL not configured, skipping Google Sheets save');
         return false;
     }
 
@@ -40,8 +39,7 @@ async function saveToGoogleSheets(data) {
         const payload = JSON.stringify({
             name: data.name,
             email: data.email,
-            timestamp: data.timestamp,
-            source: 'Protocol 402 Landing Page'
+            timestamp: data.timestamp
         });
 
         const options = {
@@ -53,24 +51,24 @@ async function saveToGoogleSheets(data) {
         };
 
         return new Promise((resolve, reject) => {
-            const req = https.request(GOOGLE_SHEETS_URL, options, (res) => {
+            const req = https.request(SHEET_BEST_URL, options, (res) => {
                 let responseBody = '';
                 res.on('data', (chunk) => {
                     responseBody += chunk;
                 });
                 res.on('end', () => {
                     if (res.statusCode >= 200 && res.statusCode < 300) {
-                        console.log('Successfully saved to Google Sheets');
+                        console.log('Successfully saved to Google Sheets via Sheet.best');
                         resolve(true);
                     } else {
-                        console.error('Google Sheets API error:', res.statusCode, responseBody);
+                        console.error('Sheet.best API error:', res.statusCode, responseBody);
                         resolve(false);
                     }
                 });
             });
 
             req.on('error', (error) => {
-                console.error('Google Sheets request error:', error);
+                console.error('Sheet.best request error:', error);
                 resolve(false);
             });
 
@@ -78,7 +76,7 @@ async function saveToGoogleSheets(data) {
             req.end();
         });
     } catch (error) {
-        console.error('Google Sheets save error:', error);
+        console.error('Sheet.best save error:', error);
         return false;
     }
 }
@@ -137,7 +135,8 @@ app.post('/submit', async (req, res) => {
     res.json({ 
       success: true, 
       message: '✅ Thank you! Download will start shortly.',
-      downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
+      downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf',
+      redirectUrl: '/thank-you.html'
     });
 
   } catch (error) {
@@ -162,10 +161,11 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 SCETA Protocol 402 server running on port ${PORT}`);
   console.log(`📊 Admin submissions view: http://localhost:${PORT}/admin/submissions`);
   console.log('');
-  console.log('📋 Google Sheets Integration:');
+  console.log('📋 Google Sheets Integration via Sheet.best:');
   console.log('   ✅ Sheet.best API configured and ready');
   console.log('   📊 Spreadsheet: https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0');
   console.log('   💾 Data saved to both CSV (backup) and Google Sheets');
+  console.log('   🔗 API Endpoint: Sheet.best');
   console.log('');
   console.log(`📈 Sheet.best Status: ✅ Active`);
 });

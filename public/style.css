@@ -90,7 +90,7 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   background: 
-    linear-gradient(90deg, rgba(75, 0, 15, 0.15) 0%, rgba(75, 0, 15, 0.4) 45%, rgba(75, 0, 15, 0.92) 100%), 
+    linear-gradient(90deg, rgba(75, 0, 15, 0.25) 0%, rgba(75, 0, 15, 0.5) 45%, rgba(75, 0, 15, 0.94) 100%), 
     url('lady-justice.png');
   background-size: cover;
   background-position: left center;
@@ -229,7 +229,14 @@ h1 {
   opacity: 0;
   transform: translateY(40px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: floatUp 6s ease-in-out infinite;
+  animation: formFadeIn 1.5s ease-out 1.2s forwards, floatUp 6s ease-in-out 2s infinite;
+}
+
+@keyframes formFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInForm {
@@ -723,7 +730,7 @@ footer p {
 @media (min-width: 1200px) {
   .hero {
     background: 
-      linear-gradient(90deg, rgba(75, 0, 15, 0.2) 0%, rgba(75, 0, 15, 0.5) 40%, rgba(75, 0, 15, 0.88) 100%), 
+      linear-gradient(90deg, rgba(75, 0, 15, 0.3) 0%, rgba(75, 0, 15, 0.6) 40%, rgba(75, 0, 15, 0.92) 100%), 
       url('lady-justice.png');
     background-size: cover;
     background-position: left center;
@@ -735,11 +742,11 @@ footer p {
 
   h1 {
     font-size: 3.8rem;
-    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.8), 0 1px 6px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 1px 6px rgba(0, 0, 0, 0.7);
   }
 
   .description {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   }
 }
 
