@@ -1,0 +1,230 @@
+https://d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev/
+
+Performance
+92
+Accessibility
+93
+Best Practices
+54
+SEO
+Performance
+Values are estimated and may vary. The performance score is calculated directly from these metrics.See calculator.
+0–49
+50–89
+90–100
+Final Screenshot
+
+Metrics
+Collapse view
+First Contentful Paint
+0.9 s
+First Contentful Paint marks the time at which the first text or image is painted. Learn more about the First Contentful Paint metric.
+Largest Contentful Paint
+Error!
+NO_LCP
+Total Blocking Time
+Error!
+NO_LCP
+Cumulative Layout Shift
+0
+Cumulative Layout Shift measures the movement of visible elements within the viewport. Learn more about the Cumulative Layout Shift metric.
+Speed Index
+1.8 s
+Speed Index shows how quickly the contents of a page are visibly populated. Learn more about the Speed Index metric.
+View Treemap
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Screenshot
+Later this year, insights will replace performance audits. Learn more and provide feedback here.
+Go back to audits
+Show audits relevant to:
+
+All
+
+FCP
+
+LCP
+Insights
+Modern HTTP
+HTTP/2 and HTTP/3 offer many benefits over HTTP/1.1, such as multiplexing. Learn more about using modern HTTP.LCP
+URL
+Protocol
+replit.dev 1st party
+https://d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev
+http/1.1
+/style.css(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+/lady-justice.png(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+/logo-sceta.png(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+/logo-usc.png(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+/logo-techinlaw.png(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+/script.js(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+http/1.1
+Render blocking requests
+Requests are blocking the page's initial render, which may delay LCP. Deferring or inlining can move these network requests out of the critical path.LCP
+URL
+Transfer Size
+Est Savings
+replit.dev 1st party
+5.6 KiB	0 ms
+/style.css(d7168099-784f-475e-b0d0-28806f751156-00-ut8rdzaxk0s1.spock.replit.dev)
+5.6 KiB
+Google Fonts cdn 
+1.2 KiB	0 ms
+/css2?family=…(fonts.googleapis.com)
+1.2 KiB
+Document request latency Est savings of 2 KiB
+Your first network request is the most important. Reduce its latency by avoiding redirects, ensuring a fast server response, and enabling text compression.FCPLCP
+Avoids redirects
+Server responds quickly
+No compression applied
+INP by phase
+Start investigating with the longest phase. Delays can be minimized. To reduce processing duration, optimize the main-thread costs, often JS.
+Phase
+Duration
+Input delay
+60 ms
+Processing duration
+20 ms
+Presentation delay
+130 ms
+html
+3rd parties
+These insights are also available in the Chrome DevTools Performance Panel - record a trace to view more detailed information.
+Diagnostics
+Minify CSS Error!
+Minify JavaScript Error!
+Preconnect to required origins Error!
+Use HTTP/2 Error!
+Lazy load third-party resources with facades Error!
+Defer offscreen images Error!
+Avoid serving legacy JavaScript to modern browsers Error!
+Reduce unused CSS Error!
+Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. Learn how to reduce unused CSS.
+Reduce unused JavaScript Error!
+Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. Learn how to reduce unused JavaScript.
+Avoid long main-thread tasks Error!
+Lists the longest tasks on the main thread, useful for identifying worst contributors to input delay. Learn how to avoid long main-thread tasks
+More information about the performance of your application. These numbers don't directly affect the Performance score.
+Passed audits (19)
+Show
+92
+Accessibility
+These checks highlight opportunities to improve the accessibility of your web app. Automatic detection can only detect a subset of issues and does not guarantee the accessibility of your web app, so manual testing is also encouraged.
+Contrast
+Background and foreground colors do not have a sufficient contrast ratio.
+Low-contrast text is difficult or impossible for many users to read. Learn how to provide sufficient color contrast.
+Failing Elements
+h2
+section.features
+h3
+div.card
+p
+div.card
+h3
+div.card
+p
+div.card
+h3
+div.card
+p
+div.card
+h3
+div.card
+p
+div.card
+These are opportunities to improve the legibility of your content.
+Additional items to manually check (10)
+Show
+These items address areas which an automated testing tool cannot cover. Learn more in our guide on conducting an accessibility review.
+Passed audits (12)
+Show
+Not applicable (44)
+Show
+93
+Best Practices
+General
+Browser errors were logged to the console
+Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. Learn more about this errors in console diagnostic audit
+Source
+Description
+replit.dev 1st party
+logo-sceta.png:1
+Failed to load resource: the server responded with a status of 404 (Not Found)
+logo-usc.png:1
+Failed to load resource: the server responded with a status of 404 (Not Found)
+logo-techinlaw.png:1
+Failed to load resource: the server responded with a status of 404 (Not Found)
+Issues were logged in the Issues panel in Chrome Devtools
+Issues logged to the Issues panel in Chrome Devtools indicate unresolved problems. They can come from network request failures, insufficient security controls, and other browser concerns. Open up the Issues panel in Chrome DevTools for more details on each issue.
+Issue type
+Content security policy
+Trust and Safety
+Ensure CSP is effective against XSS attacks
+A strong Content Security Policy (CSP) significantly reduces the risk of cross-site scripting (XSS) attacks. Learn how to use a CSP to prevent XSS
+Description
+Directive
+Severity
+No CSP found in enforcement mode
+High
+Use a strong HSTS policy
+Deployment of the HSTS header significantly reduces the risk of downgrading HTTP connections and eavesdropping attacks. A rollout in stages, starting with a low max-age is recommended. Learn more about using a strong HSTS policy.
+Description
+Directive
+Severity
+No HSTS header found
+High
+Ensure proper origin isolation with COOP
+The Cross-Origin-Opener-Policy (COOP) can be used to isolate the top-level window from other documents such as pop-ups. Learn more about deploying the COOP header.
+Description
+Directive
+Severity
+No COOP header found
+High
+Mitigate clickjacking with XFO or CSP
+The X-Frame-Options (XFO) header or the frame-ancestors directive in the Content-Security-Policy (CSP) header control where a page can be embedded. These can mitigate clickjacking attacks by blocking some or all sites from embedding the page. Learn more about mitigating clickjacking.
+Description
+Severity
+No frame control policy found
+High
+Passed audits (12)
+Show
+Not applicable (3)
+Show
+54
+SEO
+These checks ensure that your page is following basic search engine optimization advice. There are many additional factors Lighthouse does not score here that may affect your search ranking, including performance on Core Web Vitals. Learn more about Google Search Essentials.
+Crawling and Indexing
+Page is blocked from indexing
+Search engines are unable to include your pages in search results if they don't have permission to crawl them. Learn more about crawler directives.
+Blocking Directive Source
+X-Robots-Tag: none, noindex, noarchive, nofollow, nositelinkssearchbox, noimageindex
+X-Robots-Tag: none, noindex, noarchive, nofollow, nositelinkssearchbox, noimageindex
+To appear in search results, crawlers need access to your app.
+Content Best Practices
+Document does not have a meta description
+Meta descriptions may be included in search results to concisely summarize page content. Learn more about the meta description.
+Format your HTML in a way that enables crawlers to better understand your app’s content.
+Additional items to manually check (1)
+Show
+Run these additional validators on your site to check additional SEO best practices.
+Passed audits (6)
+Show
+Not applicable (2)
+Show
+Captured at Jul 27, 2025, 5:13 PM EDT
+Emulated Desktop with Lighthouse 12.6.0
+Single page session
+Initial page load
+Custom throttling
+Using Chromium 138.0.0.0 with devtools
+Generated by Lighthouse 12.6.0 | File an issue
