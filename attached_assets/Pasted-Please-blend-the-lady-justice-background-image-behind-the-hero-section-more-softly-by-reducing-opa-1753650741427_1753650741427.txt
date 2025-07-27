@@ -1,0 +1,78 @@
+Please blend the .lady-justice background image behind the .hero section more softly by reducing opacity, adding a dark overlay with .hero::before, and ensuring text sits above it with z-index. Hide the image on mobile. Also ensure the whitepaper auto-download still works after form submission.
+
+
+
+✅ Final CSS fix for .lady-justice:
+css
+Copy
+Edit
+.lady-justice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.18;
+  filter: brightness(0.9) contrast(1.1) saturate(1.1);
+  pointer-events: none;
+}
+
+/* Optional dark overlay to smooth it */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.3));
+  z-index: 1;
+}
+
+/* Ensure text and form sit above */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hide Lady Justice on mobile */
+@media (max-width: 768px) {
+  .lady-justice {
+    display: none;
+  }
+}
+✅ Your index.html should include:
+Inside the .hero section:
+
+html
+Copy
+Edit
+<header class="hero">
+  <img src="lady-justice.png" alt="Lady Justice" class="lady-justice" />
+  <div class="hero-content">
+    <!-- your headings, form, and copy -->
+  </div>
+</header>
+✅ BONUS: Fix whitepaper download on form submit
+In your script.js file, make sure you trigger the download like this:
+
+js
+Copy
+Edit
+document.getElementById('whitepaper-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+
+  const res = await fetch('/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email })
+  });
+
+  if (res.ok) {
+    document.getElementById('thank-you').classList.remove('hidden');
+    setTimeout(() => {
+      window.location.href = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+    }, 800); // slight delay for "Thank you" effect
+  }
+});
