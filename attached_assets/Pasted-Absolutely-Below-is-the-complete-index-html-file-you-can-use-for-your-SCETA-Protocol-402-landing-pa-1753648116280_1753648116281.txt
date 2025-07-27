@@ -1,0 +1,311 @@
+Absolutely. Below is the complete index.html file you can use for your SCETA Protocol 402 landing page — built to match the flyer exactly and styled with class, authority, and subtle brilliance.
+
+✅ COPY-PASTE THIS INTO /public/index.html:
+html
+Copy
+Edit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocol 402 – SCETA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <img src="lady-justice.png" alt="Lady Justice" class="lady-bg" />
+    </div>
+    
+    <div class="header-logos">
+      <img src="logo-sceta.png" alt="SCETA" />
+      <img src="logo-usc.png" alt="USC" />
+      <img src="logo-techinlaw.png" alt="TECHINLAW" />
+    </div>
+
+    <h2 class="series-tag">#AI=$BTC: DIGITAL ASSET CONVERGENCE SERIES</h2>
+    <h3 class="subtitle">Legal Frontiers in the Age of Digital Capital</h3>
+
+    <h1>Protocol 402: SC’s Blueprint for Monetized Digital Infrastructure</h1>
+    <p class="meta"><em>#AI=$BTC — Where Intelligence Meets Value</em></p>
+    <p class="description">Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.</p>
+
+    <!-- Form -->
+    <form id="whitepaperForm" class="form-box">
+      <input type="text" placeholder="Your Name" name="name" required />
+      <input type="email" placeholder="Email Address" name="email" required />
+      <button type="submit">
+        📄 Get the Whitepaper
+      </button>
+    </form>
+  </section>
+
+  <!-- Inside the Protocol -->
+  <section class="features">
+    <h2>What’s Inside the Protocol?</h2>
+    <div class="cards">
+      <div class="card">
+        <span>💡</span>
+        <h3>Monetized APIs</h3>
+        <p>Transform public data into digital revenue via pay-per-use interfaces.</p>
+      </div>
+      <div class="card">
+        <span>🏦</span>
+        <h3>Blockchain Finance</h3>
+        <p>Ensure trust with secure, auditable, permissioned ledgers.</p>
+      </div>
+      <div class="card">
+        <span>🪙</span>
+        <h3>PalmettoCoin™</h3>
+        <p>SC’s state stablecoin designed to retain wealth in-state and modernize payments.</p>
+      </div>
+      <div class="card">
+        <span>⚖️</span>
+        <h3>Smart Contracts</h3>
+        <p>Digitally transform budgeting and state finance with AI-driven logic.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Join us in shaping South Carolina’s digital frontier.</p>
+    <a href="https://sceta.io" class="footer-btn">Learn More at SCETA.io</a>
+    <div class="footer-logos">
+      <span>SCETA</span>
+      <span>USC Law</span>
+      <span>TECHINLAW</span>
+    </div>
+    <p class="legal">© 2025 South Carolina Emerging Technology Association (SCETA). All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+✅ CREATE /public/style.css WITH THIS:
+css
+Copy
+Edit
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: white;
+  background: #000814;
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', serif;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+  background: linear-gradient(to bottom, #000000 0%, #000814 100%);
+  color: white;
+}
+
+.overlay .lady-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.header-logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  z-index: 2;
+  position: relative;
+}
+
+h2.series-tag {
+  color: #F5C518;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-style: italic;
+  color: #F5C518;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.description, .meta {
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.form-box {
+  margin-top: 2rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  display: inline-block;
+  color: black;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.form-box input {
+  padding: 0.8rem;
+  margin: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-box button {
+  background: #002B5B;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 8px #002B5B;
+}
+
+.form-box button:hover {
+  box-shadow: 0 0 12px #F5C518;
+  background-color: #002B5B;
+}
+
+.features {
+  background: #f9f9f9;
+  color: black;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 260px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card span {
+  font-size: 2rem;
+}
+
+footer {
+  background: #000814;
+  padding: 2rem;
+  text-align: center;
+  color: white;
+}
+
+.footer-btn {
+  background: #F5C518;
+  color: black;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.legal {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+✅ /public/script.js:
+javascript
+Copy
+Edit
+document.getElementById("whitepaperForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const name = this.name.value.trim();
+  const email = this.email.value.trim();
+  const timestamp = new Date().toISOString();
+
+  const submission = { name, email, timestamp };
+
+  try {
+    const res = await fetch("/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(submission),
+    });
+
+    if (res.ok) {
+      alert("✅ Thank you! Your download will begin shortly.");
+      window.location.href = "https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf";
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("There was an error submitting the form.");
+  }
+});
+✅ /server.js (basic working version):
+javascript
+Copy
+Edit
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+app.use(express.static("public"));
+app.use(express.json());
+
+app.post("/submit", (req, res) => {
+  const { name, email, timestamp } = req.body;
+  const entry = `${name},${email},${timestamp}\n`;
+  fs.appendFile("submissions.csv", entry, (err) => {
+    if (err) {
+      console.error("❌ Error saving to CSV:", err);
+      return res.status(500).send("Failed to save");
+    }
+    res.status(200).send("Saved");
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
