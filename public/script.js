@@ -1,4 +1,3 @@
-
 // DOM Elements
 const downloadForm = document.getElementById('downloadForm');
 const successMessage = document.getElementById('successMessage');
@@ -7,27 +6,27 @@ const submitButton = downloadForm.querySelector('button[type="submit"]');
 // Form Submission Handler
 downloadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData(downloadForm);
     const data = {
         name: formData.get('name'),
         email: formData.get('email')
     };
-    
+
     // Basic validation
     if (!data.name.trim() || !data.email.trim()) {
         showError('Please fill in all fields');
         return;
     }
-    
+
     if (!isValidEmail(data.email)) {
         showError('Please enter a valid email address');
         return;
     }
-    
+
     // Show loading state
     setButtonLoading(true);
-    
+
     try {
         const response = await fetch('/submit', {
             method: 'POST',
@@ -36,26 +35,37 @@ downloadForm.addEventListener('submit', async (e) => {
             },
             body: JSON.stringify(data)
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             // Show success message
             downloadForm.style.display = 'none';
             successMessage.style.display = 'block';
-            
+
+            successMessage.innerHTML = `
+            <div class="success-content">
+                <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22,4 12,14.01 9,11.01"/>
+                </svg>
+                <h4>✅ Success!</h4>
+                <p>Your download has started. Please check your email for future SCETA updates.</p>
+            </div>
+        `;
+
             // Trigger download after a brief delay
             setTimeout(() => {
                 triggerDownload();
             }, 1000);
-            
+
             // Track conversion (could integrate with analytics)
             trackConversion(data);
-            
+
         } else {
             showError(result.error || 'Something went wrong. Please try again.');
         }
-        
+
     } catch (error) {
         console.error('Submission error:', error);
         showError('Network error. Please check your connection and try again.');
@@ -104,10 +114,10 @@ function showError(message) {
         `;
         downloadForm.appendChild(errorDiv);
     }
-    
+
     errorDiv.textContent = message;
     errorDiv.style.display = 'block';
-    
+
     // Auto-hide after 5 seconds
     setTimeout(() => {
         if (errorDiv) {
@@ -132,7 +142,7 @@ function triggerDownload() {
 function trackConversion(data) {
     // In production, integrate with Google Analytics, Mixpanel, etc.
     console.log('Conversion tracked:', data);
-    
+
     // Example: Google Analytics 4
     if (typeof gtag !== 'undefined') {
         gtag('event', 'whitepaper_download', {
@@ -152,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
+
             if (targetElement) {
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
@@ -161,13 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-    
+
     // Add scroll reveal animation for feature cards
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -175,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, observerOptions);
-    
+
     // Observe all feature cards
     const featureCards = document.querySelectorAll('.feature-card');
     featureCards.forEach(card => {
@@ -187,17 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // Form enhancements
 document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('input');
-    
+
     inputs.forEach(input => {
         // Add floating label effect
         input.addEventListener('focus', () => {
             input.style.transform = 'scale(1.02)';
         });
-        
+
         input.addEventListener('blur', () => {
             input.style.transform = 'scale(1)';
         });
-        
+
         // Real-time validation feedback
         input.addEventListener('input', () => {
             if (input.type === 'email' && input.value) {
@@ -217,7 +227,7 @@ window.addEventListener('load', () => {
     const criticalResources = [
         '/whitepaper.pdf'
     ];
-    
+
     criticalResources.forEach(resource => {
         const link = document.createElement('link');
         link.rel = 'preload';
