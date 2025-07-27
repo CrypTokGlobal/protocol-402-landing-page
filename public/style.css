@@ -34,6 +34,8 @@ h1, h2, h3 {
   opacity: 0.18;
   filter: brightness(0.9) contrast(1.1) saturate(1.1);
   pointer-events: none;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* Dark overlay to blend the background smoothly */
@@ -54,9 +56,10 @@ h1, h2, h3 {
   position: relative;
 }
 
-.header-logos img {
+.header-logos span {
   height: 40px;
-  width: auto;
+  line-height: 40px;
+  font-family: 'DM Serif Display', serif;
 }
 
 h2.series-tag {
