@@ -25,10 +25,33 @@ body.loaded {
   opacity: 1;
 }
 
-/* Page Load Animation */
-body.loading * {
+/* Enhanced Page Loading Animation */
+.loading * {
   opacity: 0;
-  transform: translateY(30px);
+  animation-play-state: paused;
+}
+
+/* Premium fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 body.loaded .hero-content {
@@ -83,32 +106,30 @@ h1, h2, h3 {
   box-shadow: 0 8px 25px rgba(245, 197, 24, 0.5);
 }
 
-/* Hero Section - Enhanced with Better Lady Justice Integration */
+/* Hero Section */
 .hero {
   min-height: 100vh;
+  background: linear-gradient(90deg, rgba(75, 0, 15, 0.05) 0%, rgba(75, 0, 15, 0.25) 45%, rgba(75, 0, 15, 0.92) 100%), url('/lady-justice.png');
+  background-size: cover;
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: 
-    linear-gradient(90deg, rgba(75, 0, 15, 0.15) 0%, rgba(75, 0, 15, 0.4) 45%, rgba(75, 0, 15, 0.92) 100%), 
-    url('lady-justice.png');
-  background-size: cover;
-  background-position: left center;
-  background-repeat: no-repeat;
+  text-align: center;
   padding: 2rem;
   position: relative;
+  z-index: 1;
+  overflow: hidden;
 }
 
 .hero-content {
+  max-width: 900px;
+  margin: 0 auto;
   position: relative;
   z-index: 2;
-  margin-left: auto;
-  margin-right: 8%;
-  max-width: 580px;
-  width: 100%;
-  padding: 0;
-  opacity: 0;
-  transform: translateY(30px);
+  animation: fadeInScale 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
 }
 
 /* Header Logos - Perfect Spacing */
@@ -211,25 +232,27 @@ h1 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced Glassmorphism Form Design */
+/* Enhanced Form Box */
 .form-box {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  border-radius: 16px;
-  padding: 3.2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.99));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(245, 197, 24, 0.25);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  margin: 2rem auto 0;
+  max-width: 440px;
+  width: 100%;
   box-shadow: 
-    0 0 0 1px rgba(245, 197, 24, 0.2),
-    0 30px 100px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 50px rgba(245, 197, 24, 0.15),
-    0 8px 32px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  opacity: 0;
-  transform: translateY(40px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: floatUp 6s ease-in-out infinite;
+    0 0 0 1px rgba(245, 197, 24, 0.25),
+    0 30px 100px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 60px rgba(245, 197, 24, 0.15);
+  transform: translateY(0);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 10;
+  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
 }
 
 @keyframes fadeInForm {

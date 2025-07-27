@@ -209,7 +209,7 @@ function showSuccessMessage() {
   successDiv.innerHTML = `
     <span class="checkmark">🎉</span>
     <div>Thank You!</div>
-    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will begin shortly...</div>
+    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">🎉 Your download will begin shortly...</div>
   `;
   
   document.body.appendChild(successDiv);

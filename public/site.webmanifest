@@ -1,0 +1,22 @@
+
+{
+  "name": "SCETA Protocol 402",
+  "short_name": "Protocol 402",
+  "description": "SC's Blueprint for Monetized Digital Infrastructure",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4b000f",
+  "theme_color": "#F5C518",
+  "icons": [
+    {
+      "src": "/lady-justice.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/lady-justice.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
