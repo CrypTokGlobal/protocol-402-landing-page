@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,50 +15,14 @@
     <link rel="stylesheet" href="style.css">
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
 </head>
 <body>
-    <!-- Hero Section with Lady Justice -->
+    <!-- Hero Section -->
     <header class="hero">
-        <!-- Lady Justice Background -->
-        <div class="lady-justice-bg">
-            <svg class="lady-justice-svg" viewBox="0 0 400 600" fill="none">
-                <!-- Lady Justice Silhouette -->
-                <g opacity="0.3">
-                    <!-- Head -->
-                    <circle cx="200" cy="120" r="25" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <!-- Body -->
-                    <path d="M200 145 L200 350" stroke="url(#goldGradient)" stroke-width="3"/>
-                    <!-- Arms -->
-                    <path d="M150 200 L200 180 L250 200" stroke="url(#goldGradient)" stroke-width="2"/>
-                    <!-- Scale (left) -->
-                    <circle cx="150" cy="200" r="15" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <path d="M140 190 L160 190" stroke="url(#goldGradient)" stroke-width="1"/>
-                    <!-- Scale (right) -->
-                    <circle cx="250" cy="200" r="15" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <path d="M240 190 L260 190" stroke="url(#goldGradient)" stroke-width="1"/>
-                    <!-- Dress -->
-                    <path d="M180 250 L200 350 L220 250 Z" stroke="url(#goldGradient)" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
-                </g>
-                
-                <defs>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.8" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
-
         <div class="hero-content">
-            <!-- Updated Text Hierarchy -->
-            <div class="hero-header">
-                <h1 class="hero-tagline">#AI=$BTC – Where Intelligence Meets Value</h1>
-                <h2 class="hero-subtitle">Legal Frontiers in the Age of Digital Capital</h2>
-            </div>
-
-            <!-- SCETA Brand -->
-            <div class="brand-section">
+            <!-- SCETA Brand Header -->
+            <div class="brand-header">
                 <div class="usc-badge">
                     <svg class="usc-logo" viewBox="0 0 100 100" fill="currentColor">
                         <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3"/>
@@ -70,57 +33,49 @@
                         <circle cx="70" cy="65" r="2"/>
                     </svg>
                 </div>
-                <h3 class="organization-name">South Carolina Emerging Technology Association (SCETA)</h3>
-                <h1 class="main-title">Protocol 402 — South Carolina's Blueprint for Monetized Digital Infrastructure</h1>
+                <h1>South Carolina Emerging Technology Association (SCETA)</h1>
             </div>
 
+            <!-- Main Title -->
+            <h2 class="main-title">Protocol 402: South Carolina's Blueprint for Monetized Digital Infrastructure</h2>
+
+            <!-- Tagline -->
+            <h3 class="tagline">#AI=$BTC — Where Intelligence Meets Value</h3>
+
+            <!-- Subtitle -->
+            <p class="subtitle">Presented by SCETA, USC Law, and TECHINLAW</p>
+
+            <!-- Description -->
+            <p class="description">
+                Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.
+            </p>
+
             <!-- Download Form -->
-            <div class="download-section">
-                <p class="download-description">
-                    Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.
-                </p>
+            <form id="downloadForm" class="download-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <button type="submit" class="cta-button">
+                    <span>Get the Whitepaper</span>
+                    <span class="download-emoji">📥</span>
+                </button>
+            </form>
 
-                <form id="downloadForm" class="download-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <button type="submit" class="cta-button">
-                        <span>Get the Whitepaper</span>
-                        <span class="download-emoji">📥</span>
-                    </button>
-                </form>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="success-message" style="display: none;">
-                    <div class="success-content">
-                        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22,4 12,14.01 9,11.01"/>
-                        </svg>
-                        <h4><strong>✅ Success!</strong></h4>
-                        <p><strong>Your whitepaper download will begin shortly.</strong><br>
-                        Be on the lookout for updates from SCETA and USC Law.</p>
-                    </div>
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message" style="display: none;">
+                <div class="success-content">
+                    <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22,4 12,14.01 9,11.01"/>
+                    </svg>
+                    <h4><strong>✅ Success!</strong></h4>
+                    <p><strong>Your whitepaper download will begin shortly.</strong><br>
+                    Be on the lookout for updates from SCETA and USC Law.</p>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Embedded Flyer Section -->
-    <section class="flyer-section">
-        <div class="flyer-content">
-            <div class="flyer-mini">
-                <div class="flyer-header">
-                    <h3>Digital Asset Convergence Series</h3>
-                    <h4>Legal Frontiers in the Age of Digital Capital</h4>
-                </div>
-                <div class="flyer-cta">
-                    <a href="#" class="flyer-button">See Event Details</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- What's Inside Section -->
     <section class="features">
