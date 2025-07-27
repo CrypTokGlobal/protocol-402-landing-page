@@ -1,0 +1,65 @@
+👋 Hi Assistant! We're almost there — now I need your help to polish the final layout and visuals of this whitepaper landing page.
+
+Here’s exactly what I need you to check, polish, and fix so the page looks WOW and perfectly matches the flyer:
+
+✅ FINAL POLISH GOALS:
+Lady Justice Alignment & Display
+
+Ensure the left-side Lady Justice image stays crisp and elegant on all screen sizes
+
+She should subtly point her sword toward the download form
+
+Keep her on the left-half of the screen, balanced with the content on the right
+
+Make sure her brightness/contrast isn’t too dark or too washed out
+
+Form Box Visual
+
+Final version should look clean, premium, and modern
+
+Keep the yellow border glow ONLY on hover or active input
+
+Smooth drop shadow behind the form so it pops off the background
+
+Input fields should have better spacing / padding so it feels easier to type
+
+"Get the Whitepaper" Button
+
+Use consistent styling from the footer CTA (rounded, soft glow, subtle hover movement)
+
+Keep the icon on the left, white text, gold background on hover
+
+The form should still submit properly to the .env Google Sheet via SheetBest
+
+Typography & Colors
+
+Titles = DM Serif Display, Body = Inter
+
+Gold = #F5C518, Dark Blue = #0F172A, Garnet = #7C0A02
+
+Ensure text doesn’t clash with background image (add a backdrop blur or gradient overlay if needed)
+
+Responsive Polish
+
+On mobile/tablet, Lady Justice should be hidden or repositioned below
+
+Form should center-stack vertically
+
+No text should ever overlap or fall outside the container
+
+Performance Touches
+
+Compress and properly serve lady-justice.png for fast loading
+
+Use background-size: contain or cover wisely so she never gets stretched
+
+💥 BONUS IF POSSIBLE:
+Add a soft vertical gradient overlay (dark to light) to make content easier to read
+
+Include a subtle scroll animation or fade-in for hero content
+
+This is for a law + government-backed $1B digital infrastructure initiative, so please bring your best polish, clarity, and subtle elegance.
+
+Let me know once the visuals are locked in and fully optimized for both beauty and function — and don’t change the working SheetBest submission logic!
+
+Thank you SO much. Let’s finish this strong 💛⚖️🚀
