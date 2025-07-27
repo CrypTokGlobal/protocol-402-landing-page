@@ -142,7 +142,7 @@ function initializeFormHandling() {
         
         // Start download with delay for better UX
         setTimeout(() => {
-          window.open(result.downloadUrl, '_blank');
+          window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
         }, 1500);
 
         // Reset form after success
@@ -379,14 +379,14 @@ function initializeOptimizations() {
 
   // Enhanced intersection observer for scroll animations
   const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -30px 0px'
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('animate-in');
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateY(0)';
       }
@@ -394,8 +394,10 @@ function initializeOptimizations() {
   }, observerOptions);
 
   // Observe animated elements with enhanced effects
-  document.querySelectorAll('.card, .features h2').forEach((el, index) => {
-    el.style.transitionDelay = `${index * 0.1}s`;
+  document.querySelectorAll('.card, .features h2, .form-box').forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
     observer.observe(el);
   });
 

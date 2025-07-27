@@ -27,7 +27,7 @@ let submissions = [];
 
 // Google Sheets configuration (set these in Replit Secrets)
 // GOOGLE_SHEETS_URL should be a Google Apps Script Web App URL or Sheety/SheetDB endpoint
-const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL;
+const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL || 'https://docs.google.com/spreadsheets/d/1IJHdMg7TcefcHEnsgKzXUy-80-xWsjTf8aWe1KBt7x0';
 
 // Function to save to Google Sheets
 async function saveToGoogleSheets(data) {
@@ -132,7 +132,7 @@ app.post('/submit', async (req, res) => {
 
     res.json({ 
       success: true, 
-      message: 'Success! Your download is starting.',
+      message: '✅ Thank you! Download will start shortly.',
       downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
     });
 
