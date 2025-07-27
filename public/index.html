@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,14 +21,14 @@
 <body>
     <!-- Hero Section with Lady Justice Background -->
     <header class="hero">
-        <!-- Lady Justice Full Background -->
+        <!-- Lady Justice Golden Neon Background -->
         <div class="lady-justice-backdrop">
-            <div class="lady-justice-image"></div>
+            <div class="lady-justice-silhouette"></div>
             <div class="hero-overlay"></div>
         </div>
 
         <div class="hero-container">
-            <!-- Branding Bar -->
+            <!-- Top Branding Bar -->
             <div class="brand-bar">
                 <div class="brand-logos">
                     <div class="sceta-logo">SCETA</div>
@@ -40,48 +41,57 @@
                             <circle cx="50" cy="67" r="2"/>
                             <circle cx="70" cy="65" r="2"/>
                         </svg>
-                        <span>South Carolina</span>
+                        <span>University of<br>South Carolina<br>Joseph Gimble School of Law</span>
                     </div>
-                    <div class="techinlaw-logo">TECHINLAW:<br><span>The Technology, Innovation,<br>and Law Collaborative</span></div>
+                    <div class="techinlaw-logo">
+                        <strong>TECHINLAW:</strong><br>
+                        <span>The Technology, Innovation,<br>and Law Collaborative</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Hero Content -->
+            <!-- Main Hero Content -->
             <div class="hero-content">
-                <!-- Hero Headlines -->
-                <div class="hero-headlines">
-                    <h1 class="hero-tagline">#AI=$BTC — Where Intelligence Meets Value</h1>
-                    <h2 class="hero-subtitle">Legal Frontiers in the Age of Digital Capital</h2>
+                <!-- Event Series Banner -->
+                <div class="convergence-banner">
+                    <h2 class="series-title">#AI=$BTC: DIGITAL ASSET CONVERGENCE SERIES</h2>
+                    <h1 class="series-subtitle">Legal Frontiers in the Age of Digital Capital</h1>
                 </div>
 
-                <!-- Main Title Section -->
-                <div class="main-title-section">
-                    <h3 class="organization-name">South Carolina Emerging Technology Association (SCETA)</h3>
-                    <h1 class="main-title">Protocol 402 — South Carolina's Blueprint for Monetized Digital Infrastructure</h1>
-                    <p class="main-description">
-                        Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.
-                    </p>
-                </div>
+                <!-- Main Content Area -->
+                <div class="main-content-grid">
+                    <!-- Left Side: Protocol Info -->
+                    <div class="protocol-info">
+                        <h1 class="protocol-title">Protocol 402: SC's Blueprint for Monetized Digital Infrastructure</h1>
+                        <p class="protocol-tagline">#AI=$BTC — Where Intelligence Meets Value</p>
+                        <p class="protocol-description">
+                            Get the official 75-page whitepaper detailing how SC can become a digital powerhouse 
+                            via blockchain, smart services, and AI-enhanced governance.
+                        </p>
+                    </div>
 
-                <!-- Download Form -->
-                <div class="download-form-section">
-                    <form id="downloadForm" class="download-form">
-                        <div class="form-row">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <!-- Right Side: Download Form -->
+                    <div class="download-form-section">
+                        <form id="downloadForm" class="download-form">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            </div>
                             <button type="submit" class="cta-button">
                                 <span>Get the Whitepaper</span>
-                                <span class="download-icon">📥</span>
+                                <span class="download-icon">📄</span>
                             </button>
-                        </div>
-                    </form>
+                        </form>
 
-                    <!-- Success Message -->
-                    <div id="successMessage" class="success-message" style="display: none;">
-                        <div class="success-content">
-                            <div class="success-icon">✅</div>
-                            <h4>Success!</h4>
-                            <p>Your whitepaper download will begin shortly.<br>Be on the lookout for updates from SCETA and USC Law.</p>
+                        <!-- Success Message -->
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            <div class="success-content">
+                                <div class="success-icon">✅</div>
+                                <h4>Success!</h4>
+                                <p>Your whitepaper download will begin shortly.<br>Be on the lookout for updates from SCETA and USC Law.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,21 +99,10 @@
         </div>
     </header>
 
-    <!-- Digital Asset Convergence Mini-Flyer -->
-    <section class="convergence-section">
-        <div class="convergence-content">
-            <div class="convergence-card">
-                <h3 class="convergence-title">Digital Asset Convergence Series</h3>
-                <h4 class="convergence-subtitle">Legal Frontiers in the Age of Digital Capital</h4>
-                <a href="#" class="convergence-cta">See Event Details</a>
-            </div>
-        </div>
-    </section>
-
     <!-- What's Inside Protocol 402 -->
     <section class="features-section">
         <div class="features-container">
-            <h2 class="section-title">What's Inside Protocol 402?</h2>
+            <h2 class="section-title">What's Inside the Protocol?</h2>
 
             <div class="features-grid">
                 <div class="feature-card">
@@ -144,7 +143,10 @@
         <div class="final-cta-content">
             <h2>Download the Full Protocol 402 Whitepaper</h2>
             <p>Be part of SC's digital revolution. Submit your email to receive the PDF and innovation updates.</p>
-            <a href="#downloadForm" class="cta-button secondary">Download Whitepaper</a>
+            <a href="#downloadForm" class="cta-button secondary">
+                <span>Download Whitepaper</span>
+                <span class="download-icon">📄</span>
+            </a>
         </div>
     </section>
 
