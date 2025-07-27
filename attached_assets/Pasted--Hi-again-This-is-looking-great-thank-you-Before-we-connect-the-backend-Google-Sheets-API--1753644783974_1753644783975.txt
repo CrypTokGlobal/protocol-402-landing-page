@@ -1,0 +1,61 @@
+👋 Hi again! This is looking great — thank you!
+
+Before we connect the backend (Google Sheets API), I’d like to polish the design and apply some final high-impact custom touches to make this landing page feel like a serious SCETA/USC-level project. These tweaks are important because this will be seen by USC Law faculty, government orgs, and potential funders. Let’s make it the most polished version.
+
+🎨 FINAL REFINEMENTS REQUEST:
+✅ 1. Replace the stars/moon emoji in the hero box header
+Replace with a subtle university-inspired logo in the top left of the hero box — specifically:
+
+Use the white USC "gate & palmetto" logo or the black-and-white USC icon uploaded (choose whichever blends best with the white/blue theme)
+
+✅ Make sure it’s low-opacity or watermark style (not too loud or commercial)
+
+✅ Position it as a small “badge of credibility” without disrupting layout
+
+✅ 2. Add hover glow to the "Get the Whitepaper" button
+Deep blue background
+
+White text
+
+On hover: light glow + pointer cursor
+
+✅ 3. Ensure the success message feels powerful
+Replace the “Thank you!” message with something more polished:
+
+✅ Success! Your whitepaper download will begin shortly.
+Be on the lookout for updates from SCETA and USC Law.
+
+Use a slightly bolder font and green check icon if possible.
+
+✅ 4. “What’s Inside Protocol 402?” card polish
+Add box-shadow and rounded corners
+
+Ensure each card has equal height and spacing
+
+Make icons SVG if possible (or keep emojis aligned and size-matched)
+
+✅ 5. Footer tweaks
+Add a light line or divider above the footer content
+
+Style the org logos inline:
+
+SCETA | USC Law | TECHINLAW
+
+Use the SC Department of Education seal in blue only if it looks balanced — otherwise skip
+
+✅ 6. Mobile adjustments
+Confirm the hero scales well on iPhone screens
+
+Stack input fields vertically on mobile
+
+Ensure the call-to-action text and form buttons are still center-aligned and visible without zooming
+
+🧠 Optional Bonus (if quick):
+Add a soft background gradient to the hero section:
+→ Light blue fading into white or gold — very subtle
+→ This adds polish without distracting
+
+Once these are in place, we’re ready to hook up the backend (SheetDB + download trigger).
+
+Let me know when you’ve applied these and I’ll move to connect the logic with zero bugs.
+
