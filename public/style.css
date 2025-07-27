@@ -37,7 +37,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   color: white;
-  background: #1a0a0a;
+  background: #0a0a1a;
 }
 
 h1, h2, h3 {
@@ -48,9 +48,9 @@ h1, h2, h3 {
   position: relative;
   background: 
     linear-gradient(to right, 
-      rgba(139, 69, 19, 0.2) 0%, 
-      rgba(139, 0, 0, 0.5) 40%, 
-      rgba(26, 10, 10, 0.9) 100%),
+      rgba(135, 206, 235, 0.2) 0%, 
+      rgba(70, 130, 180, 0.5) 40%, 
+      rgba(10, 10, 26, 0.9) 100%),
     url('/lady-justice.png');
   background-size: auto 90%;
   background-position: left 8% center;
@@ -72,8 +72,8 @@ h1, h2, h3 {
   inset: 0;
   background: linear-gradient(to right, 
     transparent 0%, 
-    rgba(139, 0, 0, 0.1) 40%, 
-    rgba(26, 10, 10, 0.6) 100%);
+    rgba(70, 130, 180, 0.1) 40%, 
+    rgba(10, 10, 26, 0.6) 100%);
   z-index: 1;
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3 {
   height: 40px;
   line-height: 40px;
   font-family: 'DM Serif Display', serif;
-  color: #DAA520;
+  color: #FFD700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -116,7 +116,7 @@ h1 {
 }
 
 h2.series-tag {
-  color: #DAA520;
+  color: #FFD700;
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
   animation: slideInFromLeft 1s ease-out 0.2s both;
@@ -127,7 +127,7 @@ h2.series-tag {
 
 .subtitle {
   font-style: italic;
-  color: rgba(218, 165, 32, 0.9);
+  color: rgba(255, 215, 0, 0.9);
   margin-bottom: 2.5rem;
   animation: slideInFromLeft 1s ease-out 0.3s both;
   font-family: 'DM Serif Display', serif;
@@ -143,12 +143,12 @@ h2.series-tag {
   z-index: 2;
   text-align: left;
   color: white;
-  background-color: rgba(139, 0, 0, 0.15);
+  background-color: rgba(70, 130, 180, 0.15);
   padding: 3rem 2.5rem;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(218, 165, 32, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.3);
   animation: fadeInUp 1.2s ease-out 0.5s both;
 }
 
@@ -284,22 +284,22 @@ footer p {
 }
 
 .footer-logos span {
-  color: #DAA520;
+  color: #FFD700;
   font-weight: 600;
 }
 
 .form-box {
   margin-top: 2.5rem;
-  background-color: rgba(139, 0, 0, 0.2);
+  background-color: rgba(70, 130, 180, 0.2);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(218, 165, 32, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   padding: 25px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   color: white;
-  box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+  box-shadow: 0 0 20px rgba(70, 130, 180, 0.4);
   position: relative;
   z-index: 2;
   animation: fadeInUp 1.2s ease-out 0.7s both;
@@ -319,8 +319,8 @@ footer p {
 
 .form-box input:focus {
   outline: none;
-  border-color: #DAA520;
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
   background: rgba(255, 255, 255, 0.15);
 }
 
@@ -329,7 +329,7 @@ footer p {
 }
 
 .form-box button {
-  background: #DAA520;
+  background: #FFD700;
   color: #000;
   border: none;
   padding: 1.2rem 2rem;
@@ -338,17 +338,17 @@ footer p {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(218, 165, 32, 0.5);
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
 }
 
 .form-box button:hover {
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.6);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
   transform: translateY(-2px);
-  background-color: #B8860B;
+  background-color: #FFC125;
 }
 
 .features {
-  background: linear-gradient(135deg, #2c1010, #1a0a0a);
+  background: linear-gradient(135deg, #1e3a5f, #0a0a1a);
   color: white;
   padding: 4rem 1rem;
   text-align: center;
@@ -363,12 +363,12 @@ footer p {
 }
 
 .card {
-  background: rgba(139, 0, 0, 0.1);
-  border: 1px solid rgba(218, 165, 32, 0.2);
+  background: rgba(70, 130, 180, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.2);
   border-radius: 12px;
   padding: 2rem;
   width: 260px;
-  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(70, 130, 180, 0.3);
   backdrop-filter: blur(10px);
   transition: all 0.4s ease;
   opacity: 0;
@@ -383,8 +383,8 @@ footer p {
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(139, 0, 0, 0.4);
-  border-color: rgba(218, 165, 32, 0.4);
+  box-shadow: 0 12px 30px rgba(70, 130, 180, 0.4);
+  border-color: rgba(255, 215, 0, 0.4);
 }
 
 .card span {
@@ -394,7 +394,7 @@ footer p {
 }
 
 .card h3 {
-  color: #DAA520;
+  color: #FFD700;
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
@@ -406,14 +406,14 @@ footer p {
 }
 
 footer {
-  background: linear-gradient(135deg, #1a0a0a, #2c1010);
+  background: linear-gradient(135deg, #0a0a1a, #1e3a5f);
   padding: 2rem;
   text-align: center;
   color: white;
 }
 
 .footer-btn {
-  background: #DAA520;
+  background: #FFD700;
   color: black;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
@@ -426,9 +426,9 @@ footer {
 
 .footer-btn:hover {
   text-decoration: underline;
-  box-shadow: 0 0 15px rgba(218, 165, 32, 0.5);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
   transform: translateY(-2px);
-  background: #B8860B;
+  background: #FFC125;
 }
 
 .footer-logos {
@@ -446,7 +446,7 @@ footer {
 
 @media (max-width: 768px) {
   .hero {
-    background: linear-gradient(135deg, #1a0a0a, #2c1010);
+    background: linear-gradient(135deg, #0a0a1a, #1e3a5f);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -466,7 +466,7 @@ footer {
     max-width: 400px;
     margin-top: 0;
     padding: 2rem 1.5rem;
-    background-color: rgba(139, 0, 0, 0.2);
+    background-color: rgba(70, 130, 180, 0.2);
   }
 
   h1 {
