@@ -61,13 +61,15 @@ document.getElementById('whitepaperForm').addEventListener('submit', async funct
       // Show success message
       const button = this.querySelector('button');
       const originalText = button.textContent;
-      button.textContent = '✅ Download Started!';
-      button.style.background = '#28a745';
+      button.textContent = '✅ Thank You! Download Started';
+      button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+      button.style.boxShadow = '0 8px 25px rgba(40, 167, 69, 0.4)';
 
       setTimeout(() => {
         button.textContent = originalText;
-        button.style.background = '#F5C518';
-      }, 3000);
+        button.style.background = 'linear-gradient(135deg, #F5C518, #E6B800)';
+        button.style.boxShadow = '0 8px 25px rgba(245, 197, 24, 0.4)';
+      }, 4000);
 
       // Reset form
       this.reset();
@@ -78,12 +80,14 @@ document.getElementById('whitepaperForm').addEventListener('submit', async funct
     console.error('Error:', error);
     const button = this.querySelector('button');
     const originalText = button.textContent;
-    button.textContent = '❌ Error - Try Again';
-    button.style.background = '#dc3545';
+    button.textContent = '❌ Error - Please Try Again';
+    button.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
+    button.style.boxShadow = '0 8px 25px rgba(220, 53, 69, 0.4)';
 
     setTimeout(() => {
       button.textContent = originalText;
-      button.style.background = '#F5C518';
-    }, 3000);
+      button.style.background = 'linear-gradient(135deg, #F5C518, #E6B800)';
+      button.style.boxShadow = '0 8px 25px rgba(245, 197, 24, 0.4)';
+    }, 4000);
   }
 });

@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -36,7 +35,7 @@ async function saveToGoogleSheets(data) {
         console.log('Google Sheets URL not configured, skipping Google Sheets save');
         return false;
     }
-    
+
     try {
         const payload = JSON.stringify({
             name: data.name,
@@ -44,7 +43,7 @@ async function saveToGoogleSheets(data) {
             timestamp: data.timestamp,
             source: 'Protocol 402 Landing Page'
         });
-        
+
         const options = {
             method: 'POST',
             headers: {
@@ -52,7 +51,7 @@ async function saveToGoogleSheets(data) {
                 'Content-Length': Buffer.byteLength(payload)
             }
         };
-        
+
         return new Promise((resolve, reject) => {
             const req = https.request(GOOGLE_SHEETS_URL, options, (res) => {
                 let responseBody = '';
@@ -69,12 +68,12 @@ async function saveToGoogleSheets(data) {
                     }
                 });
             });
-            
+
             req.on('error', (error) => {
                 console.error('Google Sheets request error:', error);
                 resolve(false);
             });
-            
+
             req.write(payload);
             req.end();
         });
@@ -92,17 +91,17 @@ app.get('/', (req, res) => {
 // Handle form submission
 app.post('/submit', async (req, res) => {
   const { name, email } = req.body;
-  
+
   if (!name || !email) {
     return res.status(400).json({ error: 'Name and email are required' });
   }
-  
+
   // Basic email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({ error: 'Please enter a valid email address' });
   }
-  
+
   // Create submission object
   const submission = {
     name: name.trim(),
@@ -110,33 +109,33 @@ app.post('/submit', async (req, res) => {
     timestamp: new Date().toISOString(),
     id: Date.now()
   };
-  
+
   try {
     // Store submission in memory
     submissions.push(submission);
-    
+
     // Log to console for debugging
     console.log('New submission:', submission);
-    
+
     // Save to CSV file as backup (always)
     const csvLine = `${submission.timestamp},${submission.name},${submission.email}\n`;
     fs.appendFileSync('submissions.csv', csvLine);
-    
+
     // Try to save to Google Sheets (if configured)
     const sheetsSuccess = await saveToGoogleSheets(submission);
-    
+
     if (sheetsSuccess) {
       console.log('✅ Data saved to both CSV and Google Sheets');
     } else {
       console.log('⚠️ Data saved to CSV only (Google Sheets not configured or failed)');
     }
-    
+
     res.json({ 
       success: true, 
       message: 'Success! Your download is starting.',
       downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
     });
-    
+
   } catch (error) {
     console.error('Error processing submission:', error);
     res.status(500).json({ 
@@ -160,10 +159,11 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`📊 Admin submissions view: http://localhost:${PORT}/admin/submissions`);
   console.log('');
   console.log('📋 Setup Instructions:');
-  console.log('   To enable Google Sheets integration:');
-  console.log('   1. Create a Google Apps Script or use Sheety/SheetDB');
-  console.log('   2. Set GOOGLE_SHEETS_URL in Replit Secrets');
-  console.log('   3. Data will be saved to both CSV (backup) and Google Sheets');
+  console.log('   To enable Sheet.best integration:');
+  console.log('   1. Create a Google Sheet with headers: NAME | EMAIL | TIMESTAMP');
+  console.log('   2. Get Sheet.best API URL from https://sheet.best');
+  console.log('   3. Set GOOGLE_SHEETS_URL in Replit Secrets');
+  console.log('   4. Data will be saved to both CSV (backup) and Google Sheets');
   console.log('');
-  console.log(`📈 Google Sheets: ${GOOGLE_SHEETS_URL ? '✅ Configured' : '❌ Not configured (using CSV only)'}`);
+  console.log(`📈 Sheet.best: ${GOOGLE_SHEETS_URL ? '✅ Configured' : '❌ Not configured (using CSV only)'}`);
 });
