@@ -254,16 +254,17 @@ h1 {
 .form-box {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
-  border-radius: 20px;
-  padding: 2.8rem;
+  border-radius: 16px;
+  padding: 3.2rem;
   box-shadow: 
     0 0 0 1px rgba(245, 197, 24, 0.2),
-    0 25px 80px rgba(0, 0, 0, 0.3),
+    0 30px 100px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 40px rgba(245, 197, 24, 0.1);
+    0 0 50px rgba(245, 197, 24, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 2rem;
   opacity: 0;
   transform: translateY(40px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -615,9 +616,9 @@ footer p {
   .hero {
     background: 
       linear-gradient(135deg, 
-        rgba(75, 0, 15, 0.8) 0%, 
-        rgba(75, 0, 15, 0.95) 100%),
-      url('/lady-justice.png');
+        rgba(75, 0, 15, 0.95) 0%, 
+        rgba(42, 0, 8, 0.98) 50%,
+        rgba(75, 0, 15, 0.95) 100%);
     background-size: cover;
     background-position: center;
     background-attachment: scroll;
@@ -628,8 +629,8 @@ footer p {
 
   .hero::before {
     background: linear-gradient(135deg, 
-      rgba(75, 0, 15, 0.6) 0%, 
-      rgba(75, 0, 15, 0.85) 100%);
+      rgba(75, 0, 15, 0.3) 0%, 
+      rgba(75, 0, 15, 0.6) 100%);
   }
 
   .hero-content {
@@ -675,9 +676,14 @@ footer p {
   }
 
   .form-box {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2rem;
     margin-top: 2rem;
-    gap: 1.5rem;
+    gap: 1.8rem;
+    border-radius: 16px;
+    box-shadow: 
+      0 0 0 1px rgba(245, 197, 24, 0.3),
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(245, 197, 24, 0.2);
   }
 
   .form-box input {

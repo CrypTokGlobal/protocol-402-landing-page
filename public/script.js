@@ -138,7 +138,7 @@ function initializeFormHandling() {
         showSuccessMessage();
         
         // Success button state with enhanced styling
-        button.textContent = '✅ Download Started!';
+        button.textContent = '🎉 Download Started!';
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
         button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
         
@@ -150,7 +150,7 @@ function initializeFormHandling() {
         // Redirect to thank you page after successful download
         setTimeout(() => {
           window.location.href = '/thank-you.html';
-        }, 3000);
+        }, 2500);
 
       } else {
         throw new Error(result.error || 'Submission failed');
@@ -207,7 +207,7 @@ function showSuccessMessage() {
   const successDiv = document.createElement('div');
   successDiv.className = 'success-message';
   successDiv.innerHTML = `
-    <span class="checkmark">✅</span>
+    <span class="checkmark">🎉</span>
     <div>Thank You!</div>
     <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will start shortly...</div>
   `;
