@@ -1,0 +1,93 @@
+🟡 FINAL POLISH REQUEST — SCETA Protocol 402 Landing Page
+Hey Assistant — we’re nearly there!
+
+This is the final polish request to ensure the Protocol 402 landing page looks and feels like a polished billion-dollar initiative, matching South Carolina USC branding, and built to impress.
+
+✅ DESIGN GOAL
+Please match the layout, spacing, color palette, and glow effects exactly like the attached screenshots and reference video (FINAL LADY LANDING.mov). Here’s what needs to be finalized:
+
+🔧 1. HERO SECTION POLISH (Lady Justice layout)
+Form box:
+
+Add soft inner shadow or ambient gold glow behind the white form box to make it visually "float"
+
+Apply 12px border-radius for subtle curvature
+
+Ensure no harsh white-on-dark clashes
+
+Spacing:
+
+Add more top padding above the form box so the hero layout breathes
+
+Add vertical spacing between the “SCETA | USC | TECHINLAW” text and top edge
+
+Ensure the form is vertically centered with Lady Justice’s pose (so sword points naturally toward it)
+
+Text readability:
+
+Add backdrop-filter: blur(3px) or subtle dark overlay behind the heading and form area (not over Lady Justice)
+
+This will improve contrast on high-brightness backgrounds
+
+🎨 2. COLOR PALETTE FINALIZATION
+Update everything to the official USC theme:
+
+Primary: Deep Burgundy → #7C0A02
+
+Accent: Gold → #F5C518
+
+Background: Navy/Black → #0A0F1C or #010409 (already working great!)
+
+Apply this scheme to:
+
+Get the Whitepaper button (Gold background, white text, burgundy glow on hover)
+
+Headers and subheadings (Burgundy or Gold, depending on section)
+
+Footer and Learn More CTA (deep burgundy background with gold button)
+
+Add hover transition styles for elegance
+
+💾 3. FORM BACKEND SETUP (Sheet.best)
+Google Sheet is confirmed public and headers are set as:
+
+pgsql
+Copy
+Edit
+NAME | EMAIL | TIMESTAMP
+We’ve generated a Sheet.best POST URL.
+
+Please confirm:
+
+env
+Copy
+Edit
+GOOGLE_SHEETS_URL=https://sheet.best/api/sheets/[YOUR_FINAL_API_HERE]
+In /server.js:
+
+Use fetch(process.env.GOOGLE_SHEETS_URL, { method: 'POST', body: JSON.stringify(data) })
+
+Ensure CORS, headers, and .then or await logic handles 200 OK and displays ✅ Thank You message
+
+Trigger auto-download of the whitepaper (hosted PDF) after success
+
+✨ 4. MOBILE OPTIMIZATION
+Confirm Lady Justice hides or fades subtly on mobile for clarity
+
+Ensure form and button are still fully visible and clean
+
+Mobile font sizes and spacing should not break
+
+🏁 SUCCESS =
+🔥 Client opens the page and says “WOW”
+
+💼 Form sends submissions to Sheet.best backend
+
+🧾 PDF auto-download triggers instantly
+
+🎨 Layout and brand colors match USC excellence
+
+👩‍⚖️ Lady Justice remains the powerful centerpiece, not a distraction
+
+Thank you — this is the final lap! Please take your time and let’s make this legendary ✅
+
