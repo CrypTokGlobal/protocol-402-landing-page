@@ -1,3 +1,12 @@
+// Auto-focus name field and initialize scroll animations
+window.addEventListener('load', function() {
+  // Auto-focus the name field
+  const nameField = document.querySelector('input[name="name"]');
+  if (nameField) {
+    setTimeout(() => nameField.focus(), 500);
+  }
+});
+
 // Check if Lady Justice image loads properly
 document.addEventListener('DOMContentLoaded', function() {
   const ladyJusticeImg = document.querySelector('.lady-justice');
