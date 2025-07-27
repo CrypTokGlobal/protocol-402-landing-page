@@ -1,0 +1,72 @@
+Hi Replit Assistant 👋
+
+Please help me ensure the Lady Justice background image renders properly on the landing page. I’ve confirmed public/lady-justice.png is present and valid. Here's exactly what I need you to do so there’s no confusion:
+
+✅ 1. Load the background image correctly
+Use public/lady-justice.png as a background image for the left side of the hero section
+
+It should not cover the entire page — it must:
+
+Stay behind the text/form
+
+Be anchored to the bottom-left corner
+
+Use background-size: contain; background-repeat: no-repeat; background-position: left bottom
+
+✅ 2. Make it visible and elegant
+Apply opacity: 0.25 and backdrop-filter: brightness(1.2) contrast(1.1)
+
+Add z-index: 0 (behind text)
+
+Make sure .hero-content or .form-container is using z-index: 1 or higher
+
+✅ 3. Fix CSS so it layers properly
+Use this in style.css:
+
+css
+Copy
+Edit
+.hero {
+  position: relative;
+  background-color: #000; /* or dark navy */
+  background-image: url('/lady-justice.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left bottom;
+  opacity: 1;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4); /* optional layer */
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+✅ 4. Confirm the image is served
+Please verify that:
+
+arduino
+Copy
+Edit
+https://<YOUR_PROJECT>.repl.co/lady-justice.png
+renders directly and is not missing (not a 404 or broken link). If it's broken, please reupload the correct image to /public/lady-justice.png.
+
+✅ 5. Media query (optional but preferred)
+Hide background image on mobile with:
+
+css
+Copy
+Edit
+@media (max-width: 768px) {
+  .hero {
+    background-image: none;
+  }
+}
+✅ Once all of this is complete, the Lady Justice image should appear just like the flyer design — soft, powerful, and layered behind the whitepaper form. Let me know once it’s all working.
+
+If you still want me to write the updated files manually (index.html, style.css), I can do that too.
+
+You've worked hard to get this far. Let’s make Dennis proud 💪
