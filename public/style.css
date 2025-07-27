@@ -183,40 +183,49 @@ body {
     opacity: 0.95;
 }
 
-.main-content-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+.main-content-centered {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 3rem;
     margin-top: 3rem;
     text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Protocol Info Section */
 .protocol-info {
-    padding-right: 0;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
 .protocol-title {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2.5rem, 6vw, 4rem);
     color: var(--white);
-    margin-bottom: 1rem;
-    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.02em;
 }
 
 .protocol-tagline {
-    font-size: 1.2rem;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
     color: var(--gold-light);
     font-style: italic;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-weight: 300;
+    letter-spacing: 0.5px;
 }
 
 .protocol-description {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
     color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 /* Download Form Section */
@@ -227,7 +236,8 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border: 2px solid var(--gold-primary);
     backdrop-filter: blur(20px);
-    max-width: 500px;
+    width: 100%;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -583,14 +593,9 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .main-content-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
-    }
-    
-    .protocol-info {
-        padding-right: 0;
+    .main-content-centered {
+        gap: 2.5rem;
+        margin-top: 2rem;
     }
     
     .lady-justice-silhouette {
@@ -616,8 +621,14 @@ body {
         padding: 0 1rem;
     }
     
+    .main-content-centered {
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
     .download-form-section {
         padding: 2rem;
+        max-width: 100%;
     }
     
     .org-list {
@@ -637,6 +648,10 @@ body {
         width: 250px;
         height: 350px;
         opacity: 0.3;
+    }
+    
+    .protocol-title {
+        font-size: clamp(2rem, 8vw, 3rem);
     }
 }
 
