@@ -10,21 +10,30 @@ h1, h2, h3 {
 }
 
 .hero {
-  text-align: center;
-  padding: 4rem 1rem 3rem;
   position: relative;
-  background: linear-gradient(to bottom, #000000 0%, #000814 100%);
+  background: linear-gradient(to right, #000000, #0c0c0c);
   color: white;
+  overflow: hidden;
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  text-align: center;
 }
 
-.overlay .lady-bg {
+.lady-justice {
   position: absolute;
-  top: 0;
   left: 0;
+  top: 0;
   height: 100%;
-  object-fit: contain;
-  opacity: 0.3;
   z-index: 0;
+  opacity: 0.3;
+  object-fit: cover;
+  pointer-events: none;
+  filter: brightness(1.1) saturate(1.1) contrast(1.05);
 }
 
 .header-logos {
@@ -56,6 +65,19 @@ h1 {
 .description, .meta {
   color: #ccc;
   margin-top: 0.5rem;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 900px;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.06);
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
 }
 
 .form-box {
