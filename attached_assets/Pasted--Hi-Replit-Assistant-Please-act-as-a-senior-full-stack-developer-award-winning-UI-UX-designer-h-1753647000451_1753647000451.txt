@@ -1,0 +1,98 @@
+👋 Hi Replit Assistant! Please act as a senior full-stack developer + award-winning UI/UX designer helping me finalize a high-priority landing page for a billion-dollar government-backed tech and legal initiative in South Carolina. I’m relying on you to get this 100% right so there’s no misunderstandings and the client is blown away.
+
+Here’s exactly what I need for this final version:
+
+✅ PROJECT OVERVIEW
+This is the landing page for SCETA’s Protocol 402 Whitepaper, and it must feel clean, polished, and powerful — just like the approved mockups provided below. It’s designed to:
+
+Let users download the whitepaper
+
+Track email + name submissions
+
+Impress a law/government audience (USC Law, TECHINLAW, SC Department of Education)
+
+And visually feel like a billion-dollar initiative backed by South Carolina.
+
+🔥 FINAL VISUAL INTEGRATION
+Please integrate the golden neon "Lady Justice" animation (attached as a background image) just like in the flyer. She should be:
+
+On the left side of the hero section
+
+Sword pointing subtly toward the “Download Whitepaper” form
+
+Styled with a dark background gradient behind her, but…
+
+Keep the form area light (white/blue) to retain the trustworthy government feel
+
+👉 IMPORTANT: Blend her in tastefully, like the original flyer mockup (attached). She should not overpower the form but rather guide the user’s eye to it. If needed, use transparent overlays or backdrop-filter blur to soften behind text fields.
+
+✨ FRONTEND POLISH REQUESTS
+Title font: Use DM Serif Display for headlines, Inter for body
+
+Color scheme: Navy Blue (#002B5B), Garnet (#7C0A02), and subtle Gold (#F5C518) accents
+
+“Get the Whitepaper” button should:
+
+Be deep blue
+
+Have a soft glow hover effect
+
+Include a 📄 or 📨 icon (already applied ✅)
+
+Style the “What’s Inside” boxes with:
+
+Subtle drop shadows
+
+Hover elevation effect
+
+Clean spacing and consistent icons
+
+Footer should include:
+
+SCETA, USC Law, TECHINLAW logos (or placeholders)
+
+Legal line: © 2025 South Carolina Emerging Technology Association (SCETA). All rights reserved.
+
+📨 FORM BEHAVIOR
+Name + Email inputs
+
+On submit:
+
+Save to Google Sheet via App Secret GOOGLE_SHEETS_URL (I'll paste the final one in)
+
+Show “Thank you” confirmation with ✅ icon
+
+Auto-download the whitepaper (or link to hosted PDF: https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf)
+
+🧠 USER EXPERIENCE PRIORITY
+Must feel like a custom branded portal, not a template
+
+Clean, minimalist, legally elegant, and persuasive
+
+No unnecessary distractions — sleek, branded, modern
+
+🧾 ATTACHMENTS YOU MUST REFERENCE:
+✅ The neon Lady Justice flyer (integrate that layout and energy)
+
+✅ Final approved layout screenshots (in white + blue)
+
+✅ SCETA branding guidance (colors, fonts, tone)
+
+✅ Whitepaper PDF URL
+
+🏁 DELIVERABLES
+/public/index.html
+
+/public/style.css
+
+/public/script.js (only if needed)
+
+/server.js — includes express, form submission handler
+
+.env or Replit secret for GOOGLE_SHEETS_URL
+
+Include responsive layout and full comments in code
+
+Let’s do this! This is the final step to deliver something the legal, tech, and government community of SC will be proud of. I trust you to use world-class design instincts to polish this into a visually stunning, technically reliable masterpiece.
+
+Let me know if anything needs clarification. I’m attaching the latest Lady Justice flyer and layout screenshots now ✅
