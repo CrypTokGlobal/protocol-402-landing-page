@@ -1,15 +1,37 @@
 
-// Enhanced landing page interactions
+// Enhanced landing page with world-class animations and interactions
 document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
+  
+  // Initialize page load animation
+  initializePageLoad();
+  
   // Initialize smooth scroll and focus management
   initializePageInteractions();
   
-  // Enhanced form handling
+  // Enhanced form handling with success animation
   initializeFormHandling();
   
   // Performance and accessibility enhancements
   initializeOptimizations();
+  
+  // Initialize scroll-to-top
+  initializeScrollToTop();
 });
+
+function initializePageLoad() {
+  // Remove loading class after a brief delay to trigger animations
+  setTimeout(() => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('loaded');
+  }, 100);
+  
+  // Track conversion for analytics
+  console.log('Conversion tracked:', {
+    name: 'Page Load',
+    email: 'analytics@sceta.io'
+  });
+}
 
 function initializePageInteractions() {
   // Auto-focus name field after animations complete
@@ -18,32 +40,49 @@ function initializePageInteractions() {
     if (nameField) {
       nameField.focus();
     }
-  }, 1500);
+  }, 2000);
 
-  // Smooth scroll for any internal links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  // Smooth scroll for download anchor
+  const scrollToFormLink = document.querySelector('.scroll-to-form');
+  if (scrollToFormLink) {
+    scrollToFormLink.addEventListener('click', function(e) {
       e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
+      const formBox = document.querySelector('.form-box');
+      if (formBox) {
+        formBox.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'center'
         });
+        
+        // Add focus highlight after scroll
+        setTimeout(() => {
+          formBox.style.boxShadow = '0 0 0 3px rgba(245, 197, 24, 0.5), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.3)';
+          setTimeout(() => {
+            formBox.style.boxShadow = '0 0 0 1px rgba(245, 197, 24, 0.2), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.1)';
+          }, 2000);
+        }, 500);
       }
     });
-  });
+  }
 
-  // Enhanced button interactions
-  const buttons = document.querySelectorAll('button, .footer-btn');
+  // Enhanced button interactions with cursor effects
+  const buttons = document.querySelectorAll('button, .footer-btn, .scroll-to-form');
   buttons.forEach(button => {
     button.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-3px) scale(1.02)';
+      this.style.cursor = 'pointer';
+      if (!this.classList.contains('processing')) {
+        this.style.transform = this.style.transform || 'translateY(0) scale(1)';
+        if (this.classList.contains('scroll-to-form')) {
+          this.style.transform = 'translateY(-2px) rotate(-1deg)';
+        } else {
+          this.style.transform = 'translateY(-3px) scale(1.02) rotate(-1deg)';
+        }
+      }
     });
     
     button.addEventListener('mouseleave', function() {
       if (!this.classList.contains('processing')) {
-        this.style.transform = 'translateY(0) scale(1)';
+        this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
       }
     });
   });
@@ -63,7 +102,7 @@ function initializeFormHandling() {
       email: formData.get('email').trim()
     };
 
-    // Validation
+    // Enhanced validation
     if (!data.name || data.name.length < 2) {
       showFormFeedback('Please enter your full name', 'error');
       return;
@@ -74,10 +113,11 @@ function initializeFormHandling() {
       return;
     }
 
-    // Set processing state
+    // Set enhanced processing state
     button.classList.add('processing');
     button.textContent = '⏳ Processing...';
     button.style.background = 'linear-gradient(135deg, #6c757d, #5a6268)';
+    button.style.boxShadow = '0 4px 15px rgba(108, 117, 125, 0.4)';
     button.disabled = true;
 
     try {
@@ -92,25 +132,25 @@ function initializeFormHandling() {
       const result = await response.json();
 
       if (result.success) {
-        // Success state
-        showFormFeedback('Success! Your download is starting...', 'success');
+        // Show enhanced success animation
+        showSuccessMessage();
         
-        // Start download
-        setTimeout(() => {
-          window.open(result.downloadUrl, '_blank');
-        }, 500);
-
-        // Success button state
+        // Success button state with enhanced styling
         button.textContent = '✅ Download Started!';
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-        button.style.boxShadow = '0 0 20px rgba(40, 167, 69, 0.4)';
+        button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
+        
+        // Start download with delay for better UX
+        setTimeout(() => {
+          window.open(result.downloadUrl, '_blank');
+        }, 1500);
 
-        // Reset form
+        // Reset form after success
         setTimeout(() => {
           this.reset();
           resetButton();
-          showFormFeedback('Thank you! Check your downloads folder.', 'info', 3000);
-        }, 3000);
+          showFormFeedback('Thank you! Check your downloads folder.', 'info', 4000);
+        }, 4000);
 
       } else {
         throw new Error(result.error || 'Submission failed');
@@ -130,13 +170,13 @@ function initializeFormHandling() {
       button.classList.remove('processing');
       button.textContent = originalButtonText;
       button.style.background = 'linear-gradient(135deg, #F5C518, #E6B800)';
-      button.style.boxShadow = '0 8px 25px rgba(245, 197, 24, 0.4)';
-      button.style.transform = 'translateY(0) scale(1)';
+      button.style.boxShadow = '0 8px 25px rgba(245, 197, 24, 0.4), 0 0 0 1px rgba(245, 197, 24, 0.2)';
+      button.style.transform = 'translateY(0) scale(1) rotate(0deg)';
       button.disabled = false;
     }
   });
 
-  // Real-time input validation
+  // Real-time input validation with enhanced UX
   const inputs = form.querySelectorAll('input');
   inputs.forEach(input => {
     input.addEventListener('blur', function() {
@@ -148,7 +188,46 @@ function initializeFormHandling() {
         validateInput(this);
       }
     });
+
+    // Add focus effects
+    input.addEventListener('focus', function() {
+      this.style.transform = 'translateY(-1px)';
+    });
+
+    input.addEventListener('blur', function() {
+      if (!this.classList.contains('error')) {
+        this.style.transform = 'translateY(0)';
+      }
+    });
   });
+}
+
+function showSuccessMessage() {
+  // Create enhanced success modal
+  const successDiv = document.createElement('div');
+  successDiv.className = 'success-message';
+  successDiv.innerHTML = `
+    <span class="checkmark">✅</span>
+    <div>Thank You!</div>
+    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will start shortly...</div>
+  `;
+  
+  document.body.appendChild(successDiv);
+  
+  // Animate in
+  setTimeout(() => {
+    successDiv.classList.add('show');
+  }, 100);
+  
+  // Animate out
+  setTimeout(() => {
+    successDiv.classList.remove('show');
+    setTimeout(() => {
+      if (successDiv.parentNode) {
+        successDiv.parentNode.removeChild(successDiv);
+      }
+    }, 400);
+  }, 3000);
 }
 
 function validateInput(input) {
@@ -176,12 +255,14 @@ function setInputError(input, message) {
   input.classList.add('error');
   input.style.borderColor = '#dc3545';
   input.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.2)';
+  input.style.transform = 'translateY(1px)';
 }
 
 function setInputSuccess(input) {
   input.classList.remove('error');
   input.style.borderColor = '#28a745';
   input.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.2)';
+  input.style.transform = 'translateY(0)';
 }
 
 function isValidEmail(email) {
@@ -195,26 +276,28 @@ function showFormFeedback(message, type, duration = 5000) {
     existingFeedback.remove();
   }
 
-  // Create feedback element
+  // Create enhanced feedback element
   const feedback = document.createElement('div');
   feedback.className = `form-feedback ${type}`;
   feedback.textContent = message;
   
-  // Style feedback
+  // Enhanced styling
   feedback.style.cssText = `
     position: fixed;
     top: 20px;
     right: 20px;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
+    padding: 1.2rem 1.8rem;
+    border-radius: 12px;
     color: white;
     font-weight: 600;
     z-index: 10000;
     opacity: 0;
     transform: translateX(100px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 300px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 350px;
     word-wrap: break-word;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   `;
 
   // Set background based on type
@@ -237,62 +320,109 @@ function showFormFeedback(message, type, duration = 5000) {
   setTimeout(() => {
     feedback.style.opacity = '0';
     feedback.style.transform = 'translateX(100px)';
-    setTimeout(() => feedback.remove(), 300);
+    setTimeout(() => {
+      if (feedback.parentNode) {
+        feedback.remove();
+      }
+    }, 400);
   }, duration);
 }
 
+function initializeScrollToTop() {
+  // Create scroll-to-top button
+  const scrollToTopBtn = document.createElement('button');
+  scrollToTopBtn.className = 'scroll-to-top';
+  scrollToTopBtn.innerHTML = '↑';
+  scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
+  document.body.appendChild(scrollToTopBtn);
+
+  // Show/hide based on scroll position
+  let scrollTimer;
+  window.addEventListener('scroll', function() {
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      
+      if (scrollPercent > 50) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    }, 10);
+  });
+
+  // Smooth scroll to top
+  scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
 function initializeOptimizations() {
-  // Lazy load background image for better performance
+  // Enhanced lazy loading for Lady Justice image
   const hero = document.querySelector('.hero');
   if (hero) {
     const img = new Image();
     img.onload = function() {
+      console.log('Lady Justice image loaded successfully');
       hero.style.backgroundImage = hero.style.backgroundImage || 
         `linear-gradient(90deg, rgba(75, 0, 15, 0.1) 0%, rgba(75, 0, 15, 0.3) 45%, rgba(75, 0, 15, 0.95) 100%), url('/lady-justice.png')`;
+    };
+    img.onerror = function() {
+      console.warn('Lady Justice image failed to load, using fallback');
+      hero.style.background = 'linear-gradient(135deg, #4b000f 0%, #2a0008 100%)';
     };
     img.src = '/lady-justice.png';
   }
 
-  // Preload critical resources
-  const preloadLinks = [
-    { href: '/lady-justice.png', as: 'image' },
-    { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap', as: 'style' }
-  ];
-
-  preloadLinks.forEach(link => {
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.href = link.href;
-    preloadLink.as = link.as;
-    document.head.appendChild(preloadLink);
-  });
-
-  // Intersection Observer for scroll animations
+  // Enhanced intersection observer for scroll animations
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.style.animationPlayState = 'running';
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
       }
     });
   }, observerOptions);
 
-  // Observe animated elements
-  document.querySelectorAll('.card, .features h2').forEach(el => {
+  // Observe animated elements with enhanced effects
+  document.querySelectorAll('.card, .features h2').forEach((el, index) => {
+    el.style.transitionDelay = `${index * 0.1}s`;
     observer.observe(el);
   });
 
-  console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
+  console.log('🚀 SCETA Protocol 402 landing page fully loaded');
 }
 
-// Performance monitoring
+// Enhanced performance monitoring
 window.addEventListener('load', function() {
   if ('performance' in window) {
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
     console.log(`⚡ Page loaded in ${loadTime}ms`);
+    
+    // Track performance for analytics
+    if (loadTime < 3000) {
+      console.log('✅ Excellent load performance');
+    } else if (loadTime < 5000) {
+      console.log('⚠️ Good load performance');
+    } else {
+      console.log('🔄 Consider optimizing load performance');
+    }
   }
+});
+
+// Add conversion tracking
+window.addEventListener('beforeunload', function() {
+  console.log('Conversion tracked:', {
+    name: 'Session End',
+    email: 'analytics@sceta.io'
+  });
 });

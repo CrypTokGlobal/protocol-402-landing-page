@@ -18,13 +18,65 @@ body {
   overflow-x: hidden;
 }
 
+/* Page Load Animation */
+body.loading * {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+body.loaded .hero-content {
+  animation: fadeInUp 1.2s ease-out 0.2s forwards;
+}
+
+body.loaded .form-box {
+  animation: fadeInUp 1s ease-out 0.6s forwards;
+}
+
+body.loaded .features {
+  animation: fadeInUp 0.8s ease-out 1s forwards;
+}
+
+body.loaded footer {
+  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+}
+
 h1, h2, h3 {
   font-family: 'DM Serif Display', Georgia, serif;
   font-weight: 400;
   line-height: 1.2;
 }
 
-/* Hero Section - Perfect Layout */
+/* Scroll to top button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #F5C518, #E6B800);
+  border: none;
+  border-radius: 50%;
+  color: #000;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-3px) rotate(-5deg);
+  box-shadow: 0 8px 25px rgba(245, 197, 24, 0.5);
+}
+
+/* Hero Section - Enhanced with Better Lady Justice Integration */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -58,6 +110,24 @@ h1, h2, h3 {
   z-index: 1;
 }
 
+/* Enhanced Lady Justice on large screens */
+@media (min-width: 1024px) {
+  .hero {
+    background-size: auto 110%;
+    filter: brightness(120%) contrast(110%) blur(0.2px);
+  }
+  
+  .hero::before {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(75, 0, 15, 0.1) 30%,
+      rgba(75, 0, 15, 0.6) 70%,
+      rgba(75, 0, 15, 0.9) 100%
+    );
+  }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -66,6 +136,8 @@ h1, h2, h3 {
   max-width: 580px;
   width: 100%;
   padding: 0;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 /* Header Logos - Perfect Spacing */
@@ -109,6 +181,34 @@ h1, h2, h3 {
   font-family: 'DM Serif Display', serif;
 }
 
+/* Scroll to form link */
+.scroll-to-form {
+  display: inline-block;
+  color: #F5C518;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid rgba(245, 197, 24, 0.3);
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(5px);
+  background: rgba(245, 197, 24, 0.1);
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.8s forwards;
+}
+
+.scroll-to-form:hover {
+  border-color: #F5C518;
+  background: rgba(245, 197, 24, 0.2);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: #F5C518;
+  cursor: pointer;
+  transform: translateY(-2px) rotate(-1deg);
+}
+
 h1 {
   font-size: 3.2rem;
   line-height: 1.1;
@@ -130,31 +230,39 @@ h1 {
 }
 
 .description {
-  color: rgba(255, 255, 255, 0.9);
+  color: #e1e1e1;
   font-size: 1.1rem;
   line-height: 1.7;
   margin-bottom: 3rem;
   opacity: 0;
   animation: fadeIn 1s ease-out 1.2s forwards;
   font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Premium Form Design */
+/* Enhanced Glassmorphism Form Design */
 .form-box {
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
   padding: 2.8rem;
   box-shadow: 
-    0 0 0 1px rgba(245, 197, 24, 0.3),
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(245, 197, 24, 0.15);
+    0 0 0 1px rgba(245, 197, 24, 0.2),
+    0 25px 80px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 40px rgba(245, 197, 24, 0.1);
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
   opacity: 0;
-  animation: slideUp 1s ease-out 1.4s forwards;
-  transform: translateY(30px);
+  transform: translateY(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: floatUp 6s ease-in-out infinite;
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
 }
 
 .form-box input {
@@ -162,10 +270,11 @@ h1 {
   border: 2px solid rgba(124, 10, 2, 0.15);
   border-radius: 12px;
   font-size: 1rem;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   color: #333;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(5px);
 }
 
 .form-box input:focus {
@@ -183,6 +292,7 @@ h1 {
   font-weight: 400;
 }
 
+/* Enhanced CTA Button with Animated Glow */
 .form-box button {
   background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
   color: #0a0a0a;
@@ -212,31 +322,87 @@ h1 {
 }
 
 .form-box button:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-3px) scale(1.02) rotate(-1deg);
   box-shadow: 
-    0 0 30px rgba(245, 197, 24, 0.6),
+    0 0 30px rgba(245, 197, 24, 0.8),
+    0 0 12px #F5C518,
     0 15px 40px rgba(245, 197, 24, 0.3);
   background: linear-gradient(135deg, #E6B800 0%, #D4A500 100%);
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
 .form-box button:hover::before {
   left: 100%;
 }
 
-/* Features Section - Seamless Flow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(245, 197, 24, 0.8),
+      0 0 12px #F5C518,
+      0 15px 40px rgba(245, 197, 24, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(245, 197, 24, 1),
+      0 0 20px #F5C518,
+      0 20px 50px rgba(245, 197, 24, 0.5);
+  }
+}
+
+/* Success Animation */
+.success-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(40, 167, 69, 0.95);
+  color: white;
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  z-index: 10000;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.success-message.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.success-message .checkmark {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Features Section - Enhanced with Floating Icons */
 .features {
   background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
   padding: 8rem 2rem;
   text-align: center;
   border-top: 1px solid rgba(245, 197, 24, 0.1);
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .features h2 {
   font-size: 2.5rem;
   margin-bottom: 4rem;
   color: #ffffff;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -249,36 +415,42 @@ h1 {
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(245, 197, 24, 0.2);
   border-radius: 16px;
   padding: 2.5rem;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   transform: translateY(40px);
-  animation: slideUp 0.8s ease-out forwards;
 }
 
-.card:nth-child(1) { animation-delay: 0.2s; }
-.card:nth-child(2) { animation-delay: 0.4s; }
-.card:nth-child(3) { animation-delay: 0.6s; }
-.card:nth-child(4) { animation-delay: 0.8s; }
+.card:nth-child(1) { animation: slideUp 0.8s ease-out 0.2s forwards; }
+.card:nth-child(2) { animation: slideUp 0.8s ease-out 0.4s forwards; }
+.card:nth-child(3) { animation: slideUp 0.8s ease-out 0.6s forwards; }
+.card:nth-child(4) { animation: slideUp 0.8s ease-out 0.8s forwards; }
 
 .card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-12px);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(245, 197, 24, 0.1);
-  border-color: rgba(245, 197, 24, 0.4);
-  background: rgba(255, 255, 255, 0.05);
+    0 25px 60px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(245, 197, 24, 0.15);
+  border-color: rgba(245, 197, 24, 0.5);
+  background: rgba(255, 255, 255, 0.08);
 }
 
+/* Floating Icon Animation */
 .card span {
   font-size: 3rem;
   display: block;
   margin-bottom: 1.5rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease-out;
+}
+
+.card:hover span {
+  transform: translateY(-6px);
+  filter: drop-shadow(0 8px 15px rgba(245, 197, 24, 0.3));
 }
 
 .card h3 {
@@ -289,9 +461,10 @@ h1 {
 }
 
 .card p {
-  color: rgba(255, 255, 255, 0.85);
+  color: #e1e1e1;
   line-height: 1.6;
   font-size: 1rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer - Professional Finish */
@@ -301,12 +474,15 @@ footer {
   text-align: center;
   color: white;
   border-top: 1px solid rgba(245, 197, 24, 0.2);
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 footer p {
   font-size: 1.1rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: #e1e1e1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .footer-btn {
@@ -324,7 +500,7 @@ footer p {
 }
 
 .footer-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) rotate(-1deg);
   box-shadow: 0 8px 25px rgba(245, 197, 24, 0.4);
   background: linear-gradient(135deg, #E6B800, #D4A500);
   text-decoration: none;
@@ -351,7 +527,7 @@ footer p {
   border-top: 1px solid rgba(245, 197, 24, 0.1);
 }
 
-/* Animations */
+/* Core Animations */
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -405,13 +581,13 @@ footer p {
   }
 }
 
-/* Mobile Optimization - Perfect Responsive Design */
+/* Mobile Optimization - Enhanced Responsive Design */
 @media (max-width: 768px) {
   .hero {
     background: 
       linear-gradient(135deg, 
-        rgba(75, 0, 15, 0.85) 0%, 
-        rgba(75, 0, 15, 0.95) 100%),
+        rgba(75, 0, 15, 0.7) 0%, 
+        rgba(75, 0, 15, 0.9) 100%),
       url('/lady-justice.png');
     background-size: cover;
     background-position: center;
@@ -419,18 +595,24 @@ footer p {
     padding: 2rem 1rem;
     text-align: center;
     justify-content: center;
+    opacity: 0.8;
   }
 
   .hero::before {
     background: linear-gradient(135deg, 
-      rgba(75, 0, 15, 0.7) 0%, 
-      rgba(75, 0, 15, 0.9) 100%);
+      rgba(75, 0, 15, 0.6) 0%, 
+      rgba(75, 0, 15, 0.85) 100%);
   }
 
   .hero-content {
     margin: 0 auto;
     max-width: 100%;
     padding: 2rem 1rem;
+  }
+
+  .scroll-to-form {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
   }
 
   .header-logos {
@@ -507,6 +689,13 @@ footer p {
     gap: 2rem;
     flex-wrap: wrap;
   }
+
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -556,5 +745,17 @@ footer p {
         rgba(75, 0, 15, 0.95) 100%
       ),
       url('/lady-justice.png');
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .form-box input {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+  }
+  
+  .form-box input:focus {
+    background: #ffffff;
   }
 }
