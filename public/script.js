@@ -1,27 +1,73 @@
-document.getElementById("whitepaperForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+// Check if Lady Justice image loads properly
+document.addEventListener('DOMContentLoaded', function() {
+  const ladyJusticeImg = document.querySelector('.lady-justice');
 
-  const name = this.name.value.trim();
-  const email = this.email.value.trim();
-  const timestamp = new Date().toISOString();
-
-  const submission = { name, email, timestamp };
-
-  try {
-    const res = await fetch("/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(submission),
+  if (ladyJusticeImg) {
+    ladyJusticeImg.addEventListener('error', function() {
+      console.warn('Lady Justice image failed to load');
+      // Hide the image if it fails to load to prevent broken image icon
+      this.style.display = 'none';
     });
 
-    if (res.ok) {
-      alert("✅ Thank you! Your download will begin shortly.");
-      window.location.href = "https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf";
+    ladyJusticeImg.addEventListener('load', function() {
+      console.log('Lady Justice image loaded successfully');
+    });
+  }
+});
+
+// Add event listener to the form
+document.getElementById('whitepaperForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email')
+  };
+
+  console.log('Conversion tracked:', data);
+
+  try {
+    const response = await fetch('/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Start the download
+      window.open(result.downloadUrl, '_blank');
+
+      // Show success message
+      const button = this.querySelector('button');
+      const originalText = button.textContent;
+      button.textContent = '✅ Download Started!';
+      button.style.background = '#28a745';
+
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '#F5C518';
+      }, 3000);
+
+      // Reset form
+      this.reset();
     } else {
-      alert("Something went wrong. Please try again.");
+      throw new Error(result.error || 'Something went wrong');
     }
-  } catch (err) {
-    console.error(err);
-    alert("There was an error submitting the form.");
+  } catch (error) {
+    console.error('Error:', error);
+    const button = this.querySelector('button');
+    const originalText = button.textContent;
+    button.textContent = '❌ Error - Try Again';
+    button.style.background = '#dc3545';
+
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.background = '#F5C518';
+    }, 3000);
   }
 });
