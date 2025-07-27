@@ -1,0 +1,90 @@
+👋 Hi Replit Assistant — thank you! We are at the final mile of this build. I’ve reviewed everything side-by-side with the approved flyer and current live build, and here is the last request to polish and finalize the landing page to WOW everyone.
+
+Please treat this as a VIP-level polish pass.
+
+🎯 FINAL GOAL
+Make the landing page look exactly like the final flyer and video walkthrough — elegant, powerful, easy to read, and emotionally exciting when someone first loads it.
+
+✅ FIX / IMPROVE THESE VISUAL DETAILS:
+1. 🖼️ Lady Justice Image:
+Please resize and position Lady Justice slightly more to the left and down so her sword points directly to the form
+
+Keep her fully visible on desktop — don't crop her above the elbow
+
+Apply a subtle fade gradient on her side if she bleeds into the form
+
+✅ Keep:
+
+opacity: 0.25
+
+object-fit: contain
+
+filter: brightness(1.1) contrast(1.2)
+
+2. 🧊 Hero Form Background Box
+Apply a soft translucent backdrop under the form:
+
+css
+Copy
+Edit
+backdrop-filter: blur(8px);
+background-color: rgba(0, 0, 0, 0.5);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 12px;
+box-shadow: 0 0 20px rgba(0,0,0,0.3);
+Add 15–25px of padding inside the form area and more spacing between the lines of text
+
+Make the button brighter and add a soft hover animation:
+
+css
+Copy
+Edit
+.form-box button:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+3. ✨ Entry Animations
+Add fade-in or upward slide to:
+
+Main headline
+
+Subheadline
+
+Form container
+
+Each card in the “What’s Inside the Protocol” section
+
+Use keyframes or simple CSS animation — doesn’t need to be overdone.
+
+4. 📱 Mobile Optimization
+Keep Lady Justice hidden on mobile (display: none under 768px)
+
+Stack form vertically and center everything
+
+Shrink font size slightly so it fits on first screen without scrolling too much
+
+5. 🔁 Scroll Feel
+Make page scroll smooth:
+
+css
+Copy
+Edit
+html {
+  scroll-behavior: smooth;
+}
+Add scroll reveal (optional) on cards or footer logos
+
+🧠 Final Reminder
+This is going in front of USC Law, SCETA, and potential state policy funders, so it must:
+
+Look beautiful and powerful
+
+Read easily
+
+Make the form and whitepaper feel important
+
+Highlight Lady Justice as the visual symbol of integrity and future-forward legal innovation
+
+Please apply these and let me know when ready for final review and sign-off 🙏
+
+Thank you so much — you’ve gotten us to the finish line!
