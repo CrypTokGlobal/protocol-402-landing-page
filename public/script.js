@@ -142,15 +142,15 @@ function initializeFormHandling() {
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
         button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
         
-        // Start download with delay for better UX
+        // Start download immediately
         setTimeout(() => {
-          window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
-        }, 1500);
+          window.open(result.downloadUrl, '_blank');
+        }, 800);
 
         // Redirect to thank you page after successful download
         setTimeout(() => {
-          window.location.href = '/thank-you.html';
-        }, 2500);
+          window.location.href = result.redirectUrl || '/thank-you.html';
+        }, 2000);
 
       } else {
         throw new Error(result.error || 'Submission failed');
@@ -209,7 +209,7 @@ function showSuccessMessage() {
   successDiv.innerHTML = `
     <span class="checkmark">🎉</span>
     <div>Thank You!</div>
-    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will start shortly...</div>
+    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will begin shortly...</div>
   `;
   
   document.body.appendChild(successDiv);

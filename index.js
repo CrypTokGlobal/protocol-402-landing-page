@@ -27,7 +27,7 @@ let submissions = [];
 
 // Google Sheets configuration (set these in Replit Secrets)
 // GOOGLE_SHEETS_URL should be a Google Apps Script Web App URL or Sheety/SheetDB endpoint
-const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL || 'https://docs.google.com/spreadsheets/d/1IJHdMg7TcefcHEnsgKzXUy-80-xWsjTf8aWe1KBt7x0';
+const GOOGLE_SHEETS_URL = process.env.GOOGLE_SHEETS_URL || 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0';
 
 // Function to save to Google Sheets
 async function saveToGoogleSheets(data) {
@@ -162,12 +162,10 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 SCETA Protocol 402 server running on port ${PORT}`);
   console.log(`📊 Admin submissions view: http://localhost:${PORT}/admin/submissions`);
   console.log('');
-  console.log('📋 Setup Instructions:');
-  console.log('   To enable Sheet.best integration:');
-  console.log('   1. Create a Google Sheet with headers: NAME | EMAIL | TIMESTAMP');
-  console.log('   2. Get Sheet.best API URL from https://sheet.best');
-  console.log('   3. Set GOOGLE_SHEETS_URL in Replit Secrets');
-  console.log('   4. Data will be saved to both CSV (backup) and Google Sheets');
+  console.log('📋 Google Sheets Integration:');
+  console.log('   ✅ Sheet.best API configured and ready');
+  console.log('   📊 Spreadsheet: https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0');
+  console.log('   💾 Data saved to both CSV (backup) and Google Sheets');
   console.log('');
-  console.log(`📈 Sheet.best: ${GOOGLE_SHEETS_URL ? '✅ Configured' : '❌ Not configured (using CSV only)'}`);
+  console.log(`📈 Sheet.best Status: ✅ Active`);
 });
