@@ -29,12 +29,14 @@ h1, h2, h3 {
   top: 0;
   left: 0;
   height: 100%;
-  max-width: 50%;
+  max-height: 700px;
+  opacity: 0.35;
   object-fit: contain;
-  opacity: 0.25;
-  filter: brightness(1.1) contrast(1.1);
-  z-index: 1;
+  z-index: 0;
+  filter: brightness(1.2) contrast(1.2) saturate(1.1);
   pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 0 60px rgba(255, 190, 90, 0.2);
 }
 
 .header-logos {
