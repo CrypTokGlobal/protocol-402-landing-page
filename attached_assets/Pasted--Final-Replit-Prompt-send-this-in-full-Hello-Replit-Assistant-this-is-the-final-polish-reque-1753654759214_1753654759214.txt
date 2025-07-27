@@ -1,0 +1,60 @@
+🧠 Final Replit Prompt (send this in full):
+
+Hello Replit Assistant — this is the final polish request to complete our SCETA Protocol 402 landing page. The visual is very close to perfect, but we need a few high-impact visual tweaks and backend confirmations to guarantee the best result when the client opens the link.
+
+🎯 GOAL: Match the design in this video/frame exactly:
+📎 Reference: “FINAL LADY LANDING.mov” and attached screenshots (gold accent borders, layout spacing, button glow, and elegant form placement)
+
+✅ VISUAL FIXES NEEDED:
+
+Form box polish:
+
+Add a soft inner shadow or ambient glow behind the white form box so it floats more naturally over the Lady Justice image.
+
+Apply a slight border-radius (maybe 12px) and remove any harsh edges.
+
+Spacing & alignment:
+
+Add more vertical spacing above the form and below the heading block for breathing room.
+
+Ensure the gold “SCETA | USC | TECHINLAW” logos are vertically aligned with padding between them and the top edge.
+
+Text legibility:
+
+Add a backdrop-filter: blur(3px) behind the text block (but not the image!) to ensure legibility over brighter parts of the background image.
+
+Glow button polish:
+
+Add a gold hover glow around the “Get the Whitepaper” button (soft outer shadow, not inner).
+
+Increase contrast for white text on yellow background.
+
+📥 GOOGLE SHEETS SETUP (for backend tracking):
+
+The Google Sheet is public and formatted with headers: NAME, EMAIL, TIMESTAMP
+
+I used Sheet.best to generate the URL. Please confirm:
+
+env
+Copy
+Edit
+GOOGLE_SHEETS_URL=https://sheet.best/api/sheets/[your-custom-sheet-id]
+Confirm that server.js is correctly posting the form submission using fetch(googleSheetURL, { method: 'POST', body: ... }).
+
+📦 Files you may need to adjust:
+
+/public/style.css for layout, shadows, fonts, mobile responsiveness
+
+/public/index.html for form spacing, background image layering
+
+/server.js (or index.js) to confirm the Sheet.best POST logic works
+
+🏁 FINAL GOAL:
+
+Must look stunning on desktop and clean/legible on mobile.
+
+Must submit the form data to Sheet.best + auto-trigger whitepaper PDF download.
+
+Must evoke the same power and elegance as the attached flyer mockup, with Lady Justice as the visual anchor.
+
+You’ve got this — please make the final tweaks so we can call this DONE ✅
