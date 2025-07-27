@@ -11,45 +11,35 @@ h1, h2, h3 {
 
 .hero {
   position: relative;
-  background: linear-gradient(to left, #000000, #1a1a1a);
+  background: linear-gradient(to right, #000814, #001122);
   color: white;
   overflow: hidden;
-  padding: 5rem 2rem;
+  padding: 2rem;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   font-family: 'DM Serif Display', serif;
-  text-align: right;
+  background-image: url('/lady-justice.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: left center;
 }
 
 .lady-justice {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 65%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center left;
-  z-index: 0;
-  opacity: 0.8;
-  filter: brightness(1.3) contrast(1.4) saturate(1.5) sepia(0.4) hue-rotate(25deg);
-  pointer-events: none;
-  will-change: opacity;
-  transform: translateZ(0);
+  display: none; /* Hide the img tag since we're using background-image now */
 }
 
-/* Enhanced gradient overlay to showcase the golden figure */
+/* Gradient overlay to ensure text readability while showcasing the golden figure */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to left, 
-    rgba(0, 0, 0, 0.85) 0%, 
-    rgba(0, 0, 0, 0.5) 40%, 
-    rgba(0, 0, 0, 0.2) 70%, 
-    rgba(245, 197, 24, 0.1) 100%);
+  background: linear-gradient(to right, 
+    rgba(0, 8, 20, 0.1) 0%, 
+    rgba(0, 8, 20, 0.3) 45%, 
+    rgba(0, 8, 20, 0.7) 70%, 
+    rgba(0, 8, 20, 0.9) 100%);
   z-index: 1;
 }
 
@@ -94,18 +84,18 @@ h1 {
 
 .hero-content {
   position: relative;
-  max-width: 500px;
+  max-width: 550px;
   margin-left: auto;
-  margin-right: 0;
+  margin-right: 2rem;
   z-index: 2;
-  text-align: right;
+  text-align: left;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 3rem 2rem;
+  background-color: rgba(0, 8, 20, 0.8);
+  padding: 3rem 2.5rem;
   border-radius: 1rem;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(245, 197, 24, 0.3);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 197, 24, 0.4);
 }
 
 .form-box {
@@ -333,15 +323,13 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .lady-justice {
-    width: 100%;
-    opacity: 0.4;
-    object-position: center;
-  }
-  
   .hero {
+    background-image: none;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 2rem 1rem;
   }
   
   .hero-content {
@@ -349,9 +337,22 @@ footer {
     margin-right: auto;
     text-align: center;
     max-width: 400px;
+    margin-top: 0;
   }
   
   .header-logos {
     justify-content: center;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    background-size: 40%;
+    background-position: left center;
+  }
+  
+  .hero-content {
+    max-width: 450px;
+    margin-right: 1rem;
   }
 }
