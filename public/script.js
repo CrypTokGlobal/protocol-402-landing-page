@@ -47,7 +47,7 @@ downloadForm.addEventListener('submit', async (e) => {
             // Trigger download after a brief delay
             setTimeout(() => {
                 triggerDownload();
-            }, 1500);
+            }, 1000);
             
             // Track conversion (could integrate with analytics)
             trackConversion(data);
@@ -80,11 +80,7 @@ function setButtonLoading(loading) {
         submitButton.classList.remove('loading');
         submitButton.innerHTML = `
             <span>Get the Whitepaper</span>
-            <svg class="button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7,10 12,15 17,10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
+            <span class="download-emoji">📥</span>
         `;
     }
 }
@@ -122,9 +118,10 @@ function showError(message) {
 
 // Download trigger
 function triggerDownload() {
-    // Create a temporary link element
+    // Create a temporary link element for the real SCETA PDF
     const link = document.createElement('a');
-    link.href = '/whitepaper.pdf';
+    link.href = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+    link.target = '_blank';
     link.download = 'Protocol-402-Whitepaper.pdf';
     document.body.appendChild(link);
     link.click();

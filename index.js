@@ -47,17 +47,14 @@ app.post('/submit', (req, res) => {
   
   res.json({ 
     success: true, 
-    message: 'Thank you! Your download will begin shortly.',
-    downloadUrl: '/whitepaper.pdf'
+    message: 'Success! Your download is starting.',
+    downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
   });
 });
 
-// Serve whitepaper (placeholder for now)
+// Redirect to actual whitepaper PDF
 app.get('/whitepaper.pdf', (req, res) => {
-  // In production, serve actual PDF file
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename="Protocol-402-Whitepaper.pdf"');
-  res.send('PDF placeholder - replace with actual whitepaper file');
+  res.redirect('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
 });
 
 // Admin endpoint to view submissions (remove in production)
