@@ -1,0 +1,130 @@
+👋 Hi Assistant — thank you again! We’re now incorporating client feedback from the head of SCETA and USC Law partners, and this final version needs to feel premium, polished, and worthy of a public campaign. Please read carefully.
+
+🔥 FINAL DESIGN GOAL:
+We’re merging two looks:
+
+The white + blue trusted landing page
+
+With the gold glowing “Lady Justice” flyer design (uploaded)
+We want to combine the professionalism of SCETA with the excitement of the event in a layout that is elegant, powerful, and not overwhelming.
+
+🧠 Please do the following:
+1. 🎨 Hero Section
+Use the “Lady Justice” illustration from the flyer mockup (uploaded)
+
+Position her on the left or right as background or layered hero art (semi-transparent if needed)
+
+Overlay or position content beside her on desktop
+
+Background:
+
+Elegant gradient: deep navy → soft garnet OR deep blue with very subtle gold waves (like on the flyer)
+
+NOT solid white anymore — this version should feel more powerful
+
+2. ✍️ Text Stack Updates (Center-aligned or left-aligned if needed):
+nginx
+Copy
+Edit
+#AI=$BTC – Where Intelligence Meets Value
+Legal Frontiers in the Age of Digital Capital
+(You can move these above or below the H1 if needed. Remove the colon in the main header as Dennis requested.)
+
+Then:
+
+java
+Copy
+Edit
+South Carolina Emerging Technology Association (SCETA)
+Protocol 402 — South Carolina’s Blueprint for Monetized Digital Infrastructure
+3. 📥 Form Section (Download CTA)
+Input fields: “Your Name” and “Your Email”
+
+Submit button: “Get the Whitepaper”
+
+Style: Deep blue button with glow hover
+
+Include small 📥 emoji or right-arrow icon
+
+On submit:
+
+POST to /submit (or temporary SheetDB endpoint)
+
+Save Name, Email, Timestamp
+
+Show confirmation message or modal
+
+Trigger download of whitepaper from:
+
+pgsql
+Copy
+Edit
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+4. 🧩 Merge & Miniaturize the Flyer into the Page
+Below the form, embed a mini version of the flyer section (uploaded images)
+
+Include:
+
+“Digital Asset Convergence Series”
+
+“Legal Frontiers in the Age of Digital Capital”
+
+With a link to “Seminar Details”
+
+Don’t make it too large — just enough to show it’s part of the bigger initiative and tie both efforts together
+
+Add a “See event flyer” or “See the law seminar” button (optional)
+
+5. 📦 What’s Inside Protocol 402 Section
+✅ Keep cards for:
+
+Monetized APIs
+
+Blockchain Finance
+
+PalmettoCoin™
+
+Smart Contracts
+
+(Optional: Digital Sovereignty)
+
+Make sure they match the flyer style:
+
+Rounded corners
+
+Box-shadow
+
+Blue/Gold text accent colors
+
+Fade-in animation on scroll
+
+6. 📍 Footer
+Collaborating Organizations (inline or stacked):
+
+SCETA
+
+USC Law
+
+TECHINLAW
+
+Make sure logos are aligned and styled cleanly
+
+Footer background: solid dark navy or garnet
+
+CTA button: Learn More at SCETA.io
+
+🛠️ Additional Notes:
+Mobile-first design
+
+Use Inter + DM Serif or similar font pairing
+
+Remove the colon from the main Protocol 402 title (per Dennis)
+
+Ensure all brand elements match the look of USC, SCETA, and the Digital Asset flyer
+
+🚀 Closing:
+This page will be shared by USC Law, SCETA, and across state government email lists and social channels. It must impress and convert.
+
+Once this is complete, I’ll wire in the live backend (Google Sheets) and deploy final assets.
+
+Let’s go — this is our final polish for launch.
