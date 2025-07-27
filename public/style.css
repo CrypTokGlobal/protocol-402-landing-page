@@ -29,12 +29,12 @@ h1, h2, h3 {
   left: 0;
   top: 0;
   height: 100%;
+  max-height: 800px;
   z-index: 0;
-  opacity: 0.3;
+  opacity: 0.25;
   object-fit: cover;
   pointer-events: none;
   filter: brightness(1.1) saturate(1.1) contrast(1.05);
-  display: none; /* Hidden until image is added */
 }
 
 .header-logos {
@@ -180,4 +180,10 @@ footer {
 .legal {
   font-size: 0.8rem;
   color: #aaa;
+}
+
+@media (max-width: 768px) {
+  .lady-justice {
+    display: none;
+  }
 }
