@@ -52,7 +52,7 @@ body {
     align-items: center;
     color: var(--white);
     overflow: hidden;
-    background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-primary) 50%, #1a237e 100%);
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
 }
 
 .lady-justice-backdrop {
@@ -67,13 +67,13 @@ body {
 .lady-justice-silhouette {
     position: absolute;
     top: 50%;
-    left: 15%;
+    left: 10%;
     transform: translateY(-50%);
-    width: 300px;
-    height: 400px;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400"><defs><linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23F5C518;stop-opacity:0.9"/><stop offset="50%" style="stop-color:%23FFD700;stop-opacity:0.7"/><stop offset="100%" style="stop-color:%23B8860B;stop-opacity:0.8"/></linearGradient><filter id="neonGlow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(150,50)" filter="url(%23neonGlow)"><circle cx="0" cy="40" r="30" fill="none" stroke="url(%23goldGlow)" stroke-width="3"/><path d="M0 70 L0 320" stroke="url(%23goldGlow)" stroke-width="4"/><path d="M-80 140 L0 120 L80 140" stroke="url(%23goldGlow)" stroke-width="3"/><circle cx="-80" cy="140" r="25" fill="none" stroke="url(%23goldGlow)" stroke-width="2"/><path d="M-90 130 L-70 130 M-85 125 L-75 125 M-85 135 L-75 135" stroke="url(%23goldGlow)" stroke-width="1.5"/><circle cx="80" cy="140" r="25" fill="none" stroke="url(%23goldGlow)" stroke-width="2"/><path d="M70 130 L90 130 M75 125 L85 125 M75 135 L85 135" stroke="url(%23goldGlow)" stroke-width="1.5"/><path d="M-30 200 L0 320 L30 200 Z" fill="rgba(245,197,24,0.1)" stroke="url(%23goldGlow)" stroke-width="2"/><path d="M10 280 L25 340 L35 275" stroke="url(%23goldGlow)" stroke-width="3" fill="none"/><path d="M-5 40 L5 40 M0 35 L0 45" stroke="url(%23goldGlow)" stroke-width="2"/></g></svg>') no-repeat center;
+    width: 400px;
+    height: 500px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500"><defs><linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFD700;stop-opacity:1"/><stop offset="50%" style="stop-color:%23F5C518;stop-opacity:0.9"/><stop offset="100%" style="stop-color:%23B8860B;stop-opacity:0.8"/></linearGradient><filter id="neonGlow"><feGaussianBlur stdDeviation="6" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g transform="translate(200,80)" filter="url(%23neonGlow)"><circle cx="0" cy="40" r="35" fill="none" stroke="url(%23goldGlow)" stroke-width="4"/><path d="M0 75 L0 380" stroke="url(%23goldGlow)" stroke-width="5"/><path d="M-100 160 L0 140 L100 160" stroke="url(%23goldGlow)" stroke-width="4"/><circle cx="-100" cy="160" r="30" fill="none" stroke="url(%23goldGlow)" stroke-width="3"/><path d="M-115 150 L-85 150 M-110 145 L-90 145 M-110 155 L-90 155" stroke="url(%23goldGlow)" stroke-width="2"/><circle cx="100" cy="160" r="30" fill="none" stroke="url(%23goldGlow)" stroke-width="3"/><path d="M85 150 L115 150 M90 145 L110 145 M90 155 L110 155" stroke="url(%23goldGlow)" stroke-width="2"/><path d="M-40 220 L0 380 L40 220 Z" fill="rgba(255,215,0,0.15)" stroke="url(%23goldGlow)" stroke-width="3"/><path d="M15 320 L30 390 L45 315" stroke="url(%23goldGlow)" stroke-width="4" fill="none"/><path d="M-6 40 L6 40 M0 34 L0 46" stroke="url(%23goldGlow)" stroke-width="3"/></g></svg>') no-repeat center;
     background-size: contain;
-    opacity: 0.6;
+    opacity: 0.8;
     animation: ladyJusticeGlow 6s ease-in-out infinite;
 }
 
@@ -84,9 +84,9 @@ body {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(0, 43, 91, 0.3) 0%, 
-        rgba(30, 58, 138, 0.2) 50%, 
-        rgba(26, 35, 126, 0.3) 100%);
+        rgba(0, 0, 0, 0.2) 0%, 
+        rgba(20, 20, 20, 0.1) 50%, 
+        rgba(40, 40, 40, 0.2) 100%);
     z-index: 2;
 }
 
@@ -119,7 +119,7 @@ body {
     font-weight: 800;
     color: var(--gold-primary);
     letter-spacing: 3px;
-    text-shadow: var(--shadow-glow);
+    text-shadow: 0 0 20px rgba(245, 197, 24, 0.6), 0 0 40px rgba(245, 197, 24, 0.4);
     font-family: var(--font-heading);
 }
 
@@ -185,15 +185,16 @@ body {
 
 .main-content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    grid-template-columns: 1fr;
+    gap: 3rem;
     align-items: center;
     margin-top: 3rem;
+    text-align: center;
 }
 
 /* Protocol Info Section */
 .protocol-info {
-    padding-right: 2rem;
+    padding-right: 0;
 }
 
 .protocol-title {
@@ -220,12 +221,14 @@ body {
 
 /* Download Form Section */
 .download-form-section {
-    background: rgba(255, 255, 255, 0.98);
-    padding: 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5rem;
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-premium);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border: 2px solid var(--gold-primary);
     backdrop-filter: blur(20px);
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .download-form {
@@ -593,7 +596,9 @@ body {
     .lady-justice-silhouette {
         left: 50%;
         transform: translate(-50%, -50%);
-        opacity: 0.3;
+        opacity: 0.4;
+        width: 300px;
+        height: 400px;
     }
     
     .brand-logos {
@@ -629,9 +634,9 @@ body {
     }
     
     .lady-justice-silhouette {
-        width: 200px;
-        height: 300px;
-        opacity: 0.2;
+        width: 250px;
+        height: 350px;
+        opacity: 0.3;
     }
 }
 
