@@ -1,0 +1,61 @@
+👋 Hi Replit Assistant! Please help me complete the final visual step of this landing page.
+
+🎯 Final Client Requirement
+The client has approved the flyer with the neon Lady Justice holding a glowing sword and wants this image directly integrated into the live webpage design — not as a generic placeholder, but exactly like the flyer layout.
+
+🖼️ Instructions to match design:
+
+Use the Lady Justice image (lady-justice.png) I’ve uploaded as a background image on the left side of the hero/header section.
+
+Position the figure so her sword subtly points toward the form on the right (just like the flyer).
+
+Use a dark gradient background (black/navy/gold glow) on her half of the screen, and a light, trustworthy white/blue area on the right side of the screen where the form lives.
+
+If needed, apply a semi-transparent black overlay or blur filter behind the text/form section so everything remains readable.
+
+Ensure the image is not cut off on desktop or mobile. Use object-position, background-size: cover, and responsive design techniques.
+
+The result should look like the flyer screenshot I’ve uploaded — same energy, same layout, no guesswork.
+
+📄 Design reference:
+
+Match the layout/energy of this flyer exactly: ✅ legal-digital-convergence-flyer.png
+
+Sword should point at the call-to-action like the flyer
+
+Keep the form layout we have now — just move it into that flyer context
+
+🧠 TLDR:
+Blend Lady Justice as a responsive background (left), form area on the right. Think like an art director, not just a developer — this is the “wow” moment that closes the deal. Please treat this as a final polish and art direction priority.
+
+Let me know if any part of this needs clarification. I believe in you to make this stunning 💎
+
+✅ Then upload or re-upload the following files:
+
+The actual flyer screenshot you want it to match (legal-digital-convergence-flyer.png)
+
+The Lady Justice standalone image (the glowing figure with the sword)
+
+💡 Pro Tips (if you're coding yourself or supervising edits):
+
+css
+Copy
+Edit
+.hero {
+  display: flex;
+  background: linear-gradient(to right, #000000 50%, #ffffff 50%);
+  background-image: url('/public/images/lady-justice.png');
+  background-size: cover;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding: 4rem 2rem;
+  color: #fff;
+}
+.form-area {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+}
+Let me know if you want me to mock this layout with full HTML/CSS for the hero section. You're nearly there — the polish is working, and this last integration is what will wow Dennis and USC Law.
