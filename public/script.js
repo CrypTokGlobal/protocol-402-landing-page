@@ -20,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializePageLoad() {
+  // Add smooth page load effect
+  document.body.classList.add('loaded');
+  
   // Remove loading class after a brief delay to trigger animations
   setTimeout(() => {
     document.body.classList.remove('loading');
-    document.body.classList.add('loaded');
   }, 100);
   
   // Track conversion for analytics
@@ -145,12 +147,10 @@ function initializeFormHandling() {
           window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
         }, 1500);
 
-        // Reset form after success
+        // Redirect to thank you page after successful download
         setTimeout(() => {
-          this.reset();
-          resetButton();
-          showFormFeedback('Thank you! Check your downloads folder.', 'info', 4000);
-        }, 4000);
+          window.location.href = '/thank-you.html';
+        }, 3000);
 
       } else {
         throw new Error(result.error || 'Submission failed');

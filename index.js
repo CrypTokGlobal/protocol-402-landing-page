@@ -88,6 +88,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+app.get('/thank-you.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'thank-you.html'));
+});
+
 // Handle form submission
 app.post('/submit', async (req, res) => {
   const { name, email } = req.body;
