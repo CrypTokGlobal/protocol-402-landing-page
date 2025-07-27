@@ -204,9 +204,10 @@ body {
 .main-content-centered {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: calc(100vh - 120px);
     padding-top: 120px;
     gap: 0;
+    position: relative;
 }
 
 /* Protocol Info Section - Left Side */
@@ -252,13 +253,12 @@ body {
 /* Download Form Section - Right Side */
 .download-form-section {
     position: absolute;
-    right: 0;
+    right: 2rem;
     top: 50%;
     transform: translateY(-50%);
-    width: 45%;
-    max-width: 500px;
+    width: 40%;
+    max-width: 450px;
     padding: 3rem 2.5rem;
-    margin-right: 2rem;
     background: rgba(255, 255, 255, 0.97);
     border-radius: var(--border-radius-lg);
     box-shadow: 
@@ -631,6 +631,33 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .download-form-section {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 90%;
+        max-width: 500px;
+        margin: 2rem auto 0;
+        padding: 2.5rem;
+    }
+    
+    .main-content-centered {
+        flex-direction: column;
+        padding-top: 120px;
+        gap: 2rem;
+        align-items: center;
+    }
+    
+    .protocol-info {
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+        max-width: 800px;
+    }
+}
+
 @media (max-width: 1024px) {
     .hero {
         background: linear-gradient(to bottom,
@@ -654,29 +681,6 @@ body {
         width: 300px;
         height: 400px;
         opacity: 0.8;
-    }
-    
-    .main-content-centered {
-        flex-direction: column;
-        padding-top: 60px;
-        gap: 2rem;
-    }
-    
-    .protocol-info {
-        width: 100%;
-        text-align: center;
-        padding: 2rem;
-    }
-    
-    .download-form-section {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: 90%;
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 2.5rem;
     }
     
     .brand-logos {
