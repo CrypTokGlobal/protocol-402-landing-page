@@ -1,0 +1,51 @@
+🧠 Final Polish Request: Protocol 402 Landing Page
+
+Please apply the following adjustments to make this a visually stunning, highly readable, and technically reliable page that reflects billion-dollar-level precision:
+
+🎨 Visual/UI Enhancements
+Dark Overlay Adjustment on Hero Image
+‣ Reduce Lady Justice brightness only on the right side behind text (gradient overlay or backdrop-filter blur)
+‣ Ensure high readability of white and yellow text (try background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1));)
+
+Typography Polish
+‣ Increase base font size by +1px for better legibility on large screens
+‣ Add text-shadow to h1 and h2 to make the white pop against gold flare (e.g. text-shadow: 0 1px 4px rgba(0,0,0,0.3);)
+
+Add Scroll Reveal or Fade-In Animation
+‣ Add fade-in on form and "What’s Inside" cards when scrolling into view
+‣ Use AOS (Animate on Scroll) or a simple @keyframes fadeUp if needed
+
+Card Design Tweaks
+‣ Add subtle hover transition with transform: scale(1.02)
+‣ Use box-shadow: 0 8px 24px rgba(0,0,0,0.08); for smooth depth
+
+Hero Mobile Padding
+‣ Increase padding-top and padding-bottom on small screens for breathing room
+
+🔐 Backend Confirmation (Google Sheets)
+‣ Confirm form is submitting via Sheety or SheetBest (we are using:
+https://docs.google.com/spreadsheets/d/1IJHdMg7TcefcHEnsgKzXUy-80-xWsjTf8aWe1KBt7x0)
+
+‣ Save full name, email, timestamp to columns: NAME | EMAIL | TIMESTAMP
+
+‣ Response on success: ✅ Thank you! Download will start shortly.
+
+‣ Download trigger: redirect or open https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+
+📱 Responsive Final Touch
+Ensure the background Lady Justice fades out cleanly on mobile
+
+Form and text remain top-priority center for mobile UX
+
+✅ This is the FINAL push — please confirm the following:
+
+All fonts load properly (DM Serif Display, Inter)
+
+Lady Justice is perfectly positioned and responsive
+
+Text remains readable and hierarchy is visually clear
+
+Form success saves and triggers download
+
+Code is commented and easy to maintain
+
