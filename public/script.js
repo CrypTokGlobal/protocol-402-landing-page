@@ -11,8 +11,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     ladyJusticeImg.addEventListener('load', function() {
       console.log('Lady Justice image loaded successfully');
+      // Mark as LCP candidate
+      this.setAttribute('data-lcp', 'true');
     });
   }
+
+  // Log when page is fully loaded for debugging
+  window.addEventListener('load', function() {
+    console.log('🚀 SCETA Protocol 402 landing page fully loaded');
+  });
 });
 
 // Add event listener to the form
