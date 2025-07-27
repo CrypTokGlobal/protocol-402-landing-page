@@ -1,19 +1,376 @@
-Applying the requested theme and styling updates for a polished look.
-```
 
-```replit_final_file
-html {
-  scroll-behavior: smooth;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@keyframes fadeInUp {
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #ffffff;
+  background: #4b000f;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* Hero Section - Perfect Layout */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: 
+    linear-gradient(
+      90deg, 
+      rgba(75, 0, 15, 0.1) 0%,
+      rgba(75, 0, 15, 0.3) 45%,
+      rgba(75, 0, 15, 0.95) 100%
+    ),
+    url('/lady-justice.png');
+  background-size: auto 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(75, 0, 15, 0.1) 30%,
+    rgba(75, 0, 15, 0.8) 70%,
+    rgba(75, 0, 15, 0.95) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  margin-left: auto;
+  margin-right: 8%;
+  max-width: 580px;
+  width: 100%;
+  padding: 0;
+}
+
+/* Header Logos - Perfect Spacing */
+.header-logos {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeInDown 1s ease-out 0.2s forwards;
+}
+
+.header-logos span {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #F5C518;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Typography Hierarchy */
+.series-tag {
+  color: #F5C518;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.8rem;
+  opacity: 0;
+  animation: slideInRight 1s ease-out 0.4s forwards;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.subtitle {
+  font-style: italic;
+  color: rgba(245, 197, 24, 0.9);
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: slideInRight 1s ease-out 0.6s forwards;
+  font-family: 'DM Serif Display', serif;
+}
+
+h1 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  opacity: 0;
+  animation: slideInRight 1.2s ease-out 0.8s forwards;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.02em;
+}
+
+.meta {
+  font-style: italic;
+  color: rgba(245, 197, 24, 0.8);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1s forwards;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.2s forwards;
+  font-weight: 400;
+}
+
+/* Premium Form Design */
+.form-box {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2.8rem;
+  box-shadow: 
+    0 0 0 1px rgba(245, 197, 24, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  opacity: 0;
+  animation: slideUp 1s ease-out 1.4s forwards;
+  transform: translateY(30px);
+}
+
+.form-box input {
+  padding: 1.4rem 1.6rem;
+  border: 2px solid rgba(124, 10, 2, 0.15);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', sans-serif;
+}
+
+.form-box input:focus {
+  outline: none;
+  border-color: #F5C518;
+  box-shadow: 
+    0 0 0 3px rgba(245, 197, 24, 0.2),
+    0 4px 12px rgba(245, 197, 24, 0.15);
+  background: #ffffff;
+  transform: translateY(-1px);
+}
+
+.form-box input::placeholder {
+  color: rgba(124, 10, 2, 0.5);
+  font-weight: 400;
+}
+
+.form-box button {
+  background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
+  color: #0a0a0a;
+  border: none;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 25px rgba(245, 197, 24, 0.4),
+    0 0 0 1px rgba(245, 197, 24, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-box button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.form-box button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 0 30px rgba(245, 197, 24, 0.6),
+    0 15px 40px rgba(245, 197, 24, 0.3);
+  background: linear-gradient(135deg, #E6B800 0%, #D4A500 100%);
+}
+
+.form-box button:hover::before {
+  left: 100%;
+}
+
+/* Features Section - Seamless Flow */
+.features {
+  background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
+  padding: 8rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(245, 197, 24, 0.1);
+}
+
+.features h2 {
+  font-size: 2.5rem;
+  margin-bottom: 4rem;
+  color: #ffffff;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(245, 197, 24, 0.2);
+  border-radius: 16px;
+  padding: 2.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.2s; }
+.card:nth-child(2) { animation-delay: 0.4s; }
+.card:nth-child(3) { animation-delay: 0.6s; }
+.card:nth-child(4) { animation-delay: 0.8s; }
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(245, 197, 24, 0.1);
+  border-color: rgba(245, 197, 24, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.card span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.card h3 {
+  color: #F5C518;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.card p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Footer - Professional Finish */
+footer {
+  background: linear-gradient(135deg, #7C0A02 0%, #5A0701 100%);
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  color: white;
+  border-top: 1px solid rgba(245, 197, 24, 0.2);
+}
+
+footer p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-btn {
+  background: linear-gradient(135deg, #F5C518, #E6B800);
+  color: #0a0a0a;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(245, 197, 24, 0.3);
+}
+
+.footer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 197, 24, 0.4);
+  background: linear-gradient(135deg, #E6B800, #D4A500);
+  text-decoration: none;
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 2rem 0;
+  font-weight: 600;
+}
+
+.footer-logos span {
+  color: #F5C518;
+  font-family: 'DM Serif Display', serif;
+}
+
+.legal {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(245, 197, 24, 0.1);
+}
+
+/* Animations */
+@keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -26,136 +383,15 @@ html {
   }
 }
 
-@keyframes slideInFromLeft {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
-}
-
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  color: white;
-  background: #4b000f;
-}
-
-h1, h2, h3 {
-  font-family: 'DM Serif Display', serif;
-}
-
-.hero {
-  position: relative;
-  background: 
-    linear-gradient(to right, 
-      rgba(75, 0, 15, 0.2) 0%, 
-      rgba(75, 0, 15, 0.4) 40%, 
-      rgba(75, 0, 15, 0.8) 100%),
-    url('/lady-justice.png');
-  background-size: auto 95%;
-  background-position: left 8% center;
-  background-repeat: no-repeat;
-  color: white;
-  overflow: hidden;
-  padding: 4rem 2rem;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-family: 'DM Serif Display', serif;
-}
-
-/* Clean gradient overlay */
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, 
-    transparent 0%, 
-    rgba(124, 10, 2, 0.15) 40%, 
-    rgba(10, 15, 28, 0.8) 100%);
-  z-index: 1;
-}
-
-.header-logos {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2.5rem;
-  z-index: 2;
-  position: relative;
-  animation: fadeInUp 1s ease-out 0.1s both;
-}
-
-.header-logos span {
-  height: 40px;
-  line-height: 40px;
-  font-family: 'DM Serif Display', serif;
-  color: #F5C518;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  line-height: 1.15;
-  animation: slideInFromLeft 1.2s ease-out 0.4s both;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.description, .meta {
-  color: rgba(255, 255, 255, 0.85);
-  margin-top: 0.8rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.7;
-  animation: fadeInUp 1s ease-out 0.6s both;
-  font-weight: 400;
-}
-
-h2.series-tag {
-  color: #7C0A02;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  animation: slideInFromLeft 1s ease-out 0.2s both;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.subtitle {
-  font-style: italic;
-  color: rgba(245, 197, 24, 0.9);
-  margin-bottom: 2.5rem;
-  animation: slideInFromLeft 1s ease-out 0.3s both;
-  font-family: 'DM Serif Display', serif;
-  font-weight: 400;
-  font-size: 1.1rem;
-}
-
-.hero-content {
-  position: relative;
-  max-width: 520px;
-  width: 100%;
-  margin-right: 3rem;
-  z-index: 2;
-  text-align: left;
-  color: white;
-  background-color: rgba(75, 0, 15, 0.25);
-  padding: 4rem 2.5rem;
-  border-radius: 12px;
-  box-shadow: 
-    0 25px 70px rgba(0, 0, 0, 0.6),
-    0 0 40px rgba(245, 197, 24, 0.2);
-  backdrop-filter: blur(3px);
-  border: 1px solid rgba(245, 197, 24, 0.4);
-  animation: fadeInUp 1.2s ease-out 0.5s both;
 }
 
 @keyframes fadeInUp {
@@ -169,295 +405,156 @@ h2.series-tag {
   }
 }
 
-.form-box {
-  margin-top: 3rem;
-  background-color: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(3px);
-  border: 1px solid rgba(245, 197, 24, 0.5);
-  padding: 2.5rem;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  color: #333;
-  box-shadow: 
-    0 0 30px rgba(245, 197, 24, 0.4),
-    0 15px 40px rgba(0, 0, 0, 0.2),
-    inset 0 0 20px rgba(245, 197, 24, 0.1);
-  position: relative;
-  z-index: 2;
-  animation: fadeInUp 1.2s ease-out 0.7s both;
-  max-width: 450px;
-}
-
-.form-box input {
-  padding: 1.2rem;
-  border: 1px solid rgba(124, 10, 2, 0.2);
-  border-radius: 8px;
-  font-size: 1rem;
-  background: rgba(255, 255, 255, 0.9);
-  color: #333;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-}
-
-.form-box input:focus {
-  outline: none;
-  border-color: #7C0A02;
-  box-shadow: 0 0 15px rgba(124, 10, 2, 0.3);
-  background: rgba(255, 255, 255, 1);
-}
-
-.form-box input::placeholder {
-  color: rgba(124, 10, 2, 0.6);
-}
-
-.form-box button {
-  background: linear-gradient(135deg, #f5c518, #e6b800);
-  color: #0a0a0a;
-  border: none;
-  padding: 1.3rem 2.5rem;
-  border-radius: 12px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 
-    0 8px 25px rgba(245, 197, 24, 0.4),
-    0 0 0 1px rgba(245, 197, 24, 0.3);
-  text-shadow: none;
-}
-
-.form-box button:hover {
-  box-shadow: 
-    0 0 20px rgba(245, 197, 24, 0.8),
-    0 12px 35px rgba(245, 197, 24, 0.5);
-  transform: translateY(-3px) scale(1.02);
-  background: linear-gradient(135deg, #e6b800, #d4a500);
-}
-
-.features {
-  background: linear-gradient(135deg, #4b000f, #2a0008);
-  color: white;
-  padding: 4rem 1rem;
-  text-align: center;
-}
-
-.features h2 {
-  font-size: 2rem;
-  margin-bottom: 3rem;
-  color: white;
-  animation: fadeInUp 0.8s ease-out 0.1s both;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 3rem;
-}
-
-.card {
-  background: rgba(75, 0, 15, 0.15);
-  border: 1px solid rgba(245, 197, 24, 0.3);
-  border-radius: 12px;
-  padding: 2rem;
-  width: 260px;
-  box-shadow: 0 4px 15px rgba(75, 0, 15, 0.4);
-  backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.card:nth-child(1) { animation-delay: 0.3s; }
-.card:nth-child(2) { animation-delay: 0.5s; }
-.card:nth-child(3) { animation-delay: 0.7s; }
-.card:nth-child(4) { animation-delay: 0.9s; }
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(124, 10, 2, 0.2);
-  border-color: rgba(245, 197, 24, 0.4);
-}
-
-.card span {
-  font-size: 2.5rem;
-  display: block;
-  margin-bottom: 1.2rem;
-}
-
-.card h3 {
-  color: #F5C518;
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
-}
-
-.card p {
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-footer {
-  background: linear-gradient(135deg, #7C0A02, #5A0701);
-  padding: 2rem;
-  text-align: center;
-  color: white;
-}
-
-.footer-btn {
-  background: #F5C518;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
-  margin: 1rem 0;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(245, 197, 24, 0.3);
-}
-
-.footer-btn:hover {
-  text-decoration: none;
-  box-shadow: 0 6px 20px rgba(245, 197, 24, 0.5);
-  transform: translateY(-2px);
-  background: #E6B800;
-}
-
-.footer-logos {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 1rem 0;
-  font-weight: bold;
-}
-
-.footer-logos span {
-  color: #F5C518;
-  font-weight: 600;
-}
-
-.legal {
-  font-size: 0.8rem;
-  color: #aaa;
-}
-
+/* Mobile Optimization - Perfect Responsive Design */
 @media (max-width: 768px) {
   .hero {
     background: 
       linear-gradient(135deg, 
-        rgba(75, 0, 15, 0.9) 0%, 
+        rgba(75, 0, 15, 0.85) 0%, 
         rgba(75, 0, 15, 0.95) 100%),
       url('/lady-justice.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    background-attachment: scroll;
     padding: 2rem 1rem;
-    min-height: 100vh;
+    text-align: center;
+    justify-content: center;
   }
 
   .hero::before {
     background: linear-gradient(135deg, 
-      rgba(75, 0, 15, 0.8) 0%, 
+      rgba(75, 0, 15, 0.7) 0%, 
       rgba(75, 0, 15, 0.9) 100%);
   }
 
   .hero-content {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    max-width: 90%;
-    margin-top: 0;
-    padding: 2.5rem 1.5rem;
-    background-color: rgba(75, 0, 15, 0.3);
-    backdrop-filter: blur(3px);
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  h2.series-tag {
-    font-size: 1.2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .description {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 2rem 1rem;
   }
 
   .header-logos {
     justify-content: center;
-    gap: 1.5rem;
+    gap: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .header-logos span {
+    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .series-tag {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
   }
 
   .form-box {
     padding: 2rem 1.5rem;
-    max-width: 100%;
     margin-top: 2rem;
-    background-color: rgba(255, 255, 255, 0.98);
+    gap: 1.5rem;
   }
 
   .form-box input {
-    padding: 1rem;
+    padding: 1.2rem 1.4rem;
     font-size: 1rem;
   }
 
   .form-box button {
-    padding: 1.2rem 2rem;
+    padding: 1.3rem 2rem;
     font-size: 1rem;
   }
 
+  .features {
+    padding: 6rem 1rem;
+  }
+
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+
   .cards {
-    gap: 1.5rem;
-    margin-top: 2rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 400px;
   }
 
   .card {
-    width: 90%;
-    max-width: 300px;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .card span {
+    font-size: 2.5rem;
+  }
+
+  .footer-logos {
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero {
-    background-size: auto 85%;
+    background-size: auto 90%;
     background-position: left 5% center;
   }
 
   .hero-content {
-    max-width: 450px;
-    margin-right: 2rem;
+    max-width: 500px;
+    margin-right: 5%;
+  }
+
+  h1 {
+    font-size: 2.8rem;
   }
 }
 
 @media (min-width: 1200px) {
   .hero {
-    background-size: auto 95%;
-    background-position: left 10% center;
+    background-size: auto 100%;
+    background-position: left 8% center;
   }
 
   .hero-content {
-    max-width: 550px;
-    margin-right: 4rem;
+    max-width: 600px;
+    margin-right: 10%;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+  }
+
+  .form-box {
+    padding: 3rem;
   }
 }
-`
+
+/* High-DPI Display Optimization */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .hero {
+    background-image: 
+      linear-gradient(
+        90deg, 
+        rgba(75, 0, 15, 0.1) 0%,
+        rgba(75, 0, 15, 0.3) 45%,
+        rgba(75, 0, 15, 0.95) 100%
+      ),
+      url('/lady-justice.png');
+  }
+}
