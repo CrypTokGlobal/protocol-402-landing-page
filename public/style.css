@@ -64,7 +64,7 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--white) 0%, #f0f8ff 100%);
+    background: linear-gradient(135deg, var(--white) 0%, #f0f8ff 50%, rgba(255, 215, 0, 0.05) 100%);
     color: var(--navy);
     position: relative;
     overflow: hidden;
@@ -116,9 +116,17 @@ h1, h2, h3 {
     box-shadow: var(--shadow-md);
 }
 
-.sc-flag {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+.usc-badge {
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: center;
+}
+
+.usc-logo {
+    width: 50px;
+    height: 50px;
+    color: var(--navy);
+    opacity: 0.6;
 }
 
 .brand-header h1 {
@@ -222,8 +230,9 @@ h1, h2, h3 {
 
 .cta-button:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4), 0 0 20px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.4), 0 0 25px rgba(59, 130, 246, 0.5), 0 0 50px rgba(59, 130, 246, 0.2);
     background: linear-gradient(135deg, var(--navy-light) 0%, var(--navy) 100%);
+    cursor: pointer;
 }
 
 .cta-button.secondary {
@@ -272,15 +281,17 @@ h1, h2, h3 {
 
 .success-message h4 {
     color: #16a34a;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: var(--font-body);
 }
 
 .success-message p {
     color: #15803d;
     margin: 0;
-    font-weight: 500;
+    font-weight: 600;
+    line-height: 1.5;
 }
 
 /* Features Section */
@@ -313,13 +324,16 @@ h1, h2, h3 {
 .feature-card {
     background: var(--white);
     padding: 2.5rem;
-    border-radius: var(--border-radius-lg);
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 6px 25px rgba(59, 130, 246, 0.12), 0 2px 8px rgba(30, 58, 138, 0.06);
-    border: 1px solid rgba(30, 58, 138, 0.08);
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.15), 0 4px 12px rgba(30, 58, 138, 0.08);
+    border: 1px solid rgba(30, 58, 138, 0.1);
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
 }
 
 .feature-card::before {
@@ -336,7 +350,7 @@ h1, h2, h3 {
 
 .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(30, 58, 138, 0.15);
+    box-shadow: 0 15px 50px rgba(30, 58, 138, 0.2), 0 8px 25px rgba(59, 130, 246, 0.15);
 }
 
 .feature-card:hover::before {
@@ -368,6 +382,7 @@ h1, h2, h3 {
 .feature-card p {
     color: var(--gray-600);
     line-height: 1.6;
+    margin-top: auto;
 }
 
 /* CTA Section */
@@ -401,6 +416,7 @@ h1, h2, h3 {
     background: var(--gray-900);
     color: var(--white);
     padding: 3rem 0 2rem;
+    border-top: 3px solid rgba(30, 58, 138, 0.3);
 }
 
 .footer-content {
@@ -418,6 +434,27 @@ h1, h2, h3 {
     font-size: 0.8rem;
     color: var(--gray-200);
     line-height: 1.3;
+}
+
+.partner-logos-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.partner-name {
+    color: var(--white);
+    font-family: var(--font-body);
+    letter-spacing: 0.5px;
+}
+
+.divider {
+    color: var(--gray-400);
+    font-weight: 300;
 }
 
 .footer-bottom {
@@ -454,14 +491,23 @@ h1, h2, h3 {
         grid-template-columns: 1fr;
     }
 
-    .partner-logos {
-        gap: 1.5rem;
+    .partner-logos-inline {
         flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .divider {
+        display: none;
     }
 
     .hero {
         min-height: auto;
         padding: 4rem 0;
+    }
+
+    .cta-button {
+        width: 100%;
+        justify-content: center;
     }
 }
 
