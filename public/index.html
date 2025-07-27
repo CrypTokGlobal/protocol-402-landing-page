@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:wght@400&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="style.css">
@@ -19,140 +18,119 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚖️</text></svg>">
 </head>
 <body>
-    <!-- Hero Section with Lady Justice -->
+    <!-- Hero Section with Lady Justice Background -->
     <header class="hero">
-        <!-- Lady Justice Background -->
-        <div class="lady-justice-bg">
-            <svg class="lady-justice-svg" viewBox="0 0 400 600" fill="none">
-                <!-- Lady Justice Silhouette -->
-                <g opacity="0.3">
-                    <!-- Head -->
-                    <circle cx="200" cy="120" r="25" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <!-- Body -->
-                    <path d="M200 145 L200 350" stroke="url(#goldGradient)" stroke-width="3"/>
-                    <!-- Arms -->
-                    <path d="M150 200 L200 180 L250 200" stroke="url(#goldGradient)" stroke-width="2"/>
-                    <!-- Scale (left) -->
-                    <circle cx="150" cy="200" r="15" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <path d="M140 190 L160 190" stroke="url(#goldGradient)" stroke-width="1"/>
-                    <!-- Scale (right) -->
-                    <circle cx="250" cy="200" r="15" stroke="url(#goldGradient)" stroke-width="2" fill="none"/>
-                    <path d="M240 190 L260 190" stroke="url(#goldGradient)" stroke-width="1"/>
-                    <!-- Dress -->
-                    <path d="M180 250 L200 350 L220 250 Z" stroke="url(#goldGradient)" stroke-width="2" fill="rgba(255,215,0,0.1)"/>
-                </g>
-                
-                <defs>
-                    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#FFA500;stop-opacity:0.8" />
-                    </linearGradient>
-                </defs>
-            </svg>
+        <!-- Lady Justice Full Background -->
+        <div class="lady-justice-backdrop">
+            <div class="lady-justice-image"></div>
+            <div class="hero-overlay"></div>
         </div>
 
-        <div class="hero-content">
-            <!-- Updated Text Hierarchy -->
-            <div class="hero-header">
-                <h1 class="hero-tagline">#AI=$BTC – Where Intelligence Meets Value</h1>
-                <h2 class="hero-subtitle">Legal Frontiers in the Age of Digital Capital</h2>
-            </div>
-
-            <!-- SCETA Brand -->
-            <div class="brand-section">
-                <div class="usc-badge">
-                    <svg class="usc-logo" viewBox="0 0 100 100" fill="currentColor">
-                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3"/>
-                        <text x="50" y="35" text-anchor="middle" font-size="12" font-weight="bold">USC</text>
-                        <path d="M20 60 Q50 70 80 60" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <circle cx="30" cy="65" r="2"/>
-                        <circle cx="50" cy="67" r="2"/>
-                        <circle cx="70" cy="65" r="2"/>
-                    </svg>
-                </div>
-                <h3 class="organization-name">South Carolina Emerging Technology Association (SCETA)</h3>
-                <h1 class="main-title">Protocol 402 — South Carolina's Blueprint for Monetized Digital Infrastructure</h1>
-            </div>
-
-            <!-- Download Form -->
-            <div class="download-section">
-                <p class="download-description">
-                    Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.
-                </p>
-
-                <form id="downloadForm" class="download-form">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <button type="submit" class="cta-button">
-                        <span>Get the Whitepaper</span>
-                        <span class="download-emoji">📥</span>
-                    </button>
-                </form>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="success-message" style="display: none;">
-                    <div class="success-content">
-                        <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22,4 12,14.01 9,11.01"/>
+        <div class="hero-container">
+            <!-- Branding Bar -->
+            <div class="brand-bar">
+                <div class="brand-logos">
+                    <div class="sceta-logo">SCETA</div>
+                    <div class="usc-logo">
+                        <svg class="usc-icon" viewBox="0 0 100 100" fill="currentColor">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3"/>
+                            <text x="50" y="35" text-anchor="middle" font-size="12" font-weight="bold">USC</text>
+                            <path d="M20 60 Q50 70 80 60" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <circle cx="30" cy="65" r="2"/>
+                            <circle cx="50" cy="67" r="2"/>
+                            <circle cx="70" cy="65" r="2"/>
                         </svg>
-                        <h4><strong>✅ Success!</strong></h4>
-                        <p><strong>Your whitepaper download will begin shortly.</strong><br>
-                        Be on the lookout for updates from SCETA and USC Law.</p>
+                        <span>South Carolina</span>
+                    </div>
+                    <div class="techinlaw-logo">TECHINLAW:<br><span>The Technology, Innovation,<br>and Law Collaborative</span></div>
+                </div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <!-- Hero Headlines -->
+                <div class="hero-headlines">
+                    <h1 class="hero-tagline">#AI=$BTC — Where Intelligence Meets Value</h1>
+                    <h2 class="hero-subtitle">Legal Frontiers in the Age of Digital Capital</h2>
+                </div>
+
+                <!-- Main Title Section -->
+                <div class="main-title-section">
+                    <h3 class="organization-name">South Carolina Emerging Technology Association (SCETA)</h3>
+                    <h1 class="main-title">Protocol 402 — South Carolina's Blueprint for Monetized Digital Infrastructure</h1>
+                    <p class="main-description">
+                        Get the official 76-page whitepaper detailing how SC can become a digital powerhouse via blockchain, smart services, and AI-enhanced governance.
+                    </p>
+                </div>
+
+                <!-- Download Form -->
+                <div class="download-form-section">
+                    <form id="downloadForm" class="download-form">
+                        <div class="form-row">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <button type="submit" class="cta-button">
+                                <span>Get the Whitepaper</span>
+                                <span class="download-icon">📥</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="successMessage" class="success-message" style="display: none;">
+                        <div class="success-content">
+                            <div class="success-icon">✅</div>
+                            <h4>Success!</h4>
+                            <p>Your whitepaper download will begin shortly.<br>Be on the lookout for updates from SCETA and USC Law.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Embedded Flyer Section -->
-    <section class="flyer-section">
-        <div class="flyer-content">
-            <div class="flyer-mini">
-                <div class="flyer-header">
-                    <h3>Digital Asset Convergence Series</h3>
-                    <h4>Legal Frontiers in the Age of Digital Capital</h4>
-                </div>
-                <div class="flyer-cta">
-                    <a href="#" class="flyer-button">See Event Details</a>
-                </div>
+    <!-- Digital Asset Convergence Mini-Flyer -->
+    <section class="convergence-section">
+        <div class="convergence-content">
+            <div class="convergence-card">
+                <h3 class="convergence-title">Digital Asset Convergence Series</h3>
+                <h4 class="convergence-subtitle">Legal Frontiers in the Age of Digital Capital</h4>
+                <a href="#" class="convergence-cta">See Event Details</a>
             </div>
         </div>
     </section>
 
-    <!-- What's Inside Section -->
-    <section class="features">
-        <div class="features-content">
+    <!-- What's Inside Protocol 402 -->
+    <section class="features-section">
+        <div class="features-container">
             <h2 class="section-title">What's Inside Protocol 402?</h2>
 
             <div class="features-grid">
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card">
                     <div class="feature-icon">💡</div>
                     <h3>Monetized APIs</h3>
                     <p>Transform public data into digital revenue via pay-per-use interfaces.</p>
                 </div>
 
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card">
                     <div class="feature-icon">🏦</div>
                     <h3>Blockchain Finance</h3>
                     <p>Ensure trust with secure, auditable, permissioned ledgers.</p>
                 </div>
 
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card">
                     <div class="feature-icon">🪙</div>
                     <h3>PalmettoCoin™</h3>
                     <p>SC's state stablecoin designed to retain wealth in-state and modernize payments.</p>
                 </div>
 
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-card">
                     <div class="feature-icon">⚖️</div>
                     <h3>Smart Contracts</h3>
                     <p>Digitally transform budgeting and state finance with AI-driven logic.</p>
                 </div>
 
-                <div class="feature-card feature-card-wide" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-card feature-wide">
                     <div class="feature-icon">🌐</div>
                     <h3>Digital Sovereignty</h3>
                     <p>Own the future with citizen-powered IDs, clouds, and services.</p>
@@ -161,9 +139,9 @@
         </div>
     </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section">
-        <div class="cta-content">
+    <!-- Final CTA Section -->
+    <section class="final-cta-section">
+        <div class="final-cta-content">
             <h2>Download the Full Protocol 402 Whitepaper</h2>
             <p>Be part of SC's digital revolution. Submit your email to receive the PDF and innovation updates.</p>
             <a href="#downloadForm" class="cta-button secondary">Download Whitepaper</a>
@@ -178,16 +156,16 @@
                 <a href="https://sceta.io" target="_blank" class="footer-button">Learn More at SCETA.io</a>
             </div>
 
-            <div class="partners">
+            <div class="collaborating-orgs">
                 <h4>Collaborating Organizations</h4>
-                <div class="partner-logos-inline">
-                    <span class="partner-name">SCETA</span>
+                <div class="org-list">
+                    <span class="org-name">SCETA</span>
                     <span class="divider">|</span>
-                    <span class="partner-name">USC Law</span>
+                    <span class="org-name">USC Law</span>
                     <span class="divider">|</span>
-                    <span class="partner-name">TECHINLAW</span>
+                    <span class="org-name">TECHINLAW</span>
                 </div>
-                <div class="logo-subtitle">
+                <div class="org-descriptions">
                     South Carolina Emerging Technology Association<br>
                     University of South Carolina School of Law<br>
                     Technology Law Initiative
