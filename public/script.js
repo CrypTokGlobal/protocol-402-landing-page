@@ -36,15 +36,13 @@ function initializePageLoad() {
 }
 
 function initializePageInteractions() {
-  // Auto-focus name field only on desktop (not mobile to prevent keyboard popup)
-  if (window.innerWidth > 768) {
-    setTimeout(() => {
-      const nameField = document.querySelector('input[name="name"]');
-      if (nameField) {
-        nameField.focus();
-      }
-    }, 2000);
-  }
+  // Auto-focus name field after animations complete
+  setTimeout(() => {
+    const nameField = document.querySelector('input[name="name"]');
+    if (nameField) {
+      nameField.focus();
+    }
+  }, 2000);
 
   // Smooth scroll for download anchor
   const scrollToFormLink = document.querySelector('.scroll-to-form');
@@ -211,7 +209,7 @@ function showSuccessMessage() {
   successDiv.innerHTML = `
     <span class="checkmark">🎉</span>
     <div>Thank You!</div>
-    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">🎉 Your download will begin shortly...</div>
+    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will begin shortly...</div>
   `;
   
   document.body.appendChild(successDiv);
@@ -363,12 +361,6 @@ function initializeScrollToTop() {
 }
 
 function initializeOptimizations() {
-  // Perfect mobile viewport handling
-  const viewport = document.querySelector('meta[name="viewport"]');
-  if (viewport) {
-    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
-  }
-
   // Enhanced lazy loading for Lady Justice image
   const hero = document.querySelector('.hero');
   if (hero) {
@@ -384,15 +376,6 @@ function initializeOptimizations() {
     };
     img.src = '/lady-justice.png';
   }
-
-  // Perfect responsive adjustments
-  function handleResize() {
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-  }
-  
-  window.addEventListener('resize', handleResize);
-  handleResize();
 
   // Enhanced intersection observer for scroll animations
   const observerOptions = {
