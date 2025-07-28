@@ -127,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     } catch (error) {
       console.error('❌ Form submission error:', error);
-      showMessage('Network error. Please check your connection and try again.', 'error');
+      showMessage('Network error, but your PDF download will still begin. Please check your connection and try again for form submission.', 'error');
+      
+      // Fallback: Still trigger PDF download even if Sheet.best fails
+      console.log('🔄 Fallback: PDF download triggered despite submission error');
+      window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
       
       // Reset button
       submitBtn.textContent = originalText;
