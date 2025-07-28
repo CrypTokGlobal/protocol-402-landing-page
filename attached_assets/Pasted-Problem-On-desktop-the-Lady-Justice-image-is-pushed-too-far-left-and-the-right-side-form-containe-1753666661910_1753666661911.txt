@@ -1,0 +1,88 @@
+Problem: On desktop, the Lady Justice image is pushed too far left and the right side (form container) feels crammed with harsh contrast and off-center alignment.
+
+Fix Instruction:
+
+Please center the entire hero section horizontally on desktop view. Use a CSS grid or flex layout so the Lady Justice image occupies 40% (left) and the form/content area 60% (right). Use media queries to ensure full-screen use on large monitors. The goal is symmetry and visual flow, not vertical stacking.
+
+🎨 2. Color + Visual Hierarchy (Match Original Poster)
+Problem: The maroon/red background doesn’t match the deep navy/blue background used in the official flyer, and breaks brand integrity.
+
+Fix Instruction:
+
+Please revert the hero background to deep navy gradient (#0D1117 to #002244) or use the original Lady Justice flyer background as a full-width background-image. Ensure white and gold text stays readable over it. Use slight backdrop-filter: blur(4px) under the form container for smooth contrast.
+
+⚖️ 3. Lady Justice Positioning
+Problem: On mobile it's perfect. On desktop, Lady Justice isn't positioned properly or blending smoothly.
+
+Fix Instruction:
+
+Keep lady-justice.png left-aligned with opacity: 0.6 and scale to 90% height. Apply object-fit: contain or cover, and let her sword subtly point toward the whitepaper form CTA. Add mix-blend-mode: screen or lighten to integrate her softly behind the text.
+
+📥 4. Form Submission + SheetBest Confirmation
+✅ Confirm form is connected to:
+
+arduino
+Copy
+Edit
+https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9
+Fields:
+
+name → NAME
+
+email → EMAIL
+
+timestamp → TIMESTAMP
+
+On Success:
+
+Show message ✅ "Thank you! Your download will begin shortly."
+
+Trigger redirect or force-download:
+
+pgsql
+Copy
+Edit
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+📱 5. Mobile Optimizations (KEEP THIS)
+✅ Mobile version is looking good — please preserve:
+
+Full-width form
+
+Top-centered Lady Justice fading out softly
+
+CTA readable and clean
+
+🌟 6. Final Polish
+Please also add:
+
+favicon.ico (SCETA or sword)
+
+/thank-you.html page (with 🎉 and link to SCETA.io)
+
+Open Graph / meta tags:
+
+html
+Copy
+Edit
+<meta property="og:title" content="Protocol 402 – South Carolina’s Digital Infrastructure Blueprint" />
+<meta property="og:description" content="Official SCETA whitepaper on monetized public infrastructure using AI, blockchain, and smart services." />
+<meta property="og:image" content="https://sceta.io/wp-content/uploads/2025/06/LadyJusticeBanner.jpg" />
+✅ Summary Checklist
+ Desktop layout centered
+
+ Lady Justice 40%, form content 60% layout
+
+ Navy or flyer-matching background
+
+ Text readable & spaced
+
+ Form posts to SheetBest
+
+ Success = message + download
+
+ Mobile untouched
+
+ SEO meta tags + favicon
+
+ /thank-you.html added with celebration
+
