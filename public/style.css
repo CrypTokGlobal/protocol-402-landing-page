@@ -71,27 +71,31 @@ h1, h2, h3 {
   border-left: 1px solid rgba(245, 197, 24, 0.2);
 }
 
-/* Header Logos */
+/* Header Logos - Updated for logo images */
 .header-logos {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 3rem;
   margin-bottom: 2rem;
 }
 
-.header-logos span,
-.header-logos a {
-  color: #F5C518;
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-decoration: none;
+.logo-link {
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.header-logos a:hover {
-  color: #FFD700;
+.logo-link:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.header-logo {
+  max-height: 60px;
+  height: auto;
+  width: auto;
+  display: block;
+  transition: all 0.3s ease;
 }
 
 /* Typography */
@@ -283,8 +287,14 @@ h1 {
 
   .header-logos {
     justify-content: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
     margin-bottom: 2rem;
+    align-items: center;
+  }
+
+  .header-logo {
+    max-height: 50px;
   }
 
   h1 {
@@ -389,22 +399,28 @@ footer p {
 .footer-logos {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 2rem;
   margin: 2rem 0;
-  font-weight: 600;
+  flex-wrap: wrap;
 }
 
-.footer-logos span,
-.footer-logos a {
-  color: #F5C518;
-  font-family: 'DM Serif Display', serif;
-  font-size: 1rem;
-  text-decoration: none;
+.footer-logo-link {
   transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.footer-logos a:hover {
-  color: #FFD700;
+.footer-logo-link:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.footer-logo {
+  max-height: 40px;
+  height: auto;
+  width: auto;
+  display: block;
+  transition: all 0.3s ease;
 }
 
 .legal {
