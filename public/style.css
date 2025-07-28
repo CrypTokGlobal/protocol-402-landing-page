@@ -26,6 +26,10 @@ body.loaded {
 }
 
 /* Premium Page Load Animation */
+body.loading {
+  opacity: 0;
+}
+
 body.loading * {
   opacity: 0;
   transform: translateY(30px);

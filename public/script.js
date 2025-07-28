@@ -1,7 +1,7 @@
 // Enhanced landing page with world-class animations and interactions
 document.addEventListener('DOMContentLoaded', function() {
   // Prevent duplicate initialization with more robust checking
-  if (window.scetaInitialized || document.body.dataset.initialized) return;
+  if (window.scetaInitialized || document.body.dataset.initialized === 'true') return;
   window.scetaInitialized = true;
   document.body.dataset.initialized = 'true';
 
@@ -35,9 +35,9 @@ function initializePageLoad() {
     document.body.classList.remove('loading');
   }, 100);
 
-  // Track conversion for analytics (only once)
+  // Track page load (only once)
   if (!window.pageLoadTracked) {
-    console.log('Page loaded successfully');
+    console.log('🚀 SCETA Protocol 402 - Page loaded successfully');
     window.pageLoadTracked = true;
   }
 }
@@ -414,21 +414,22 @@ function initializeOptimizations() {
   // Enhanced lazy loading for Lady Justice image
   const hero = document.querySelector('.hero');
   if (hero && !window.heroImageLoaded) {
+    window.heroImageLoaded = true; // Set flag immediately to prevent duplicates
     const img = new Image();
     img.onload = function() {
       console.log('Lady Justice image loaded successfully');
-      window.heroImageLoaded = true;
     };
     img.onerror = function() {
       console.warn('Lady Justice image failed to load, using fallback');
       hero.style.background = 'linear-gradient(135deg, #4b000f 0%, #2a0008 100%)';
-      window.heroImageLoaded = true;
     };
     img.src = '/lady-justice.png';
   }
 
   // Enhanced intersection observer for scroll animations
   if (!window.observerInitialized) {
+    window.observerInitialized = true; // Set flag immediately
+    
     const observerOptions = {
       threshold: 0.2,
       rootMargin: '0px 0px -50px 0px'
@@ -446,22 +447,32 @@ function initializeOptimizations() {
 
     // Observe animated elements with enhanced effects
     document.querySelectorAll('.card, .features h2, .form-box').forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(40px)';
-      el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-      observer.observe(el);
+      if (!el.dataset.observed) {
+        el.dataset.observed = 'true';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
+        el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+        observer.observe(el);
+      }
     });
 
-    window.observerInitialized = true;
-    console.log('Optimization complete');
+    console.log('✅ Optimization complete');
   }
 }
 
 // Enhanced performance monitoring
 window.addEventListener('load', function() {
   if (!window.performanceTracked && 'performance' in window) {
-    // Use modern Performance API if available
-    if (performance.now) {
+    // Use navigation timing for accurate load time
+    if (performance.timing) {
+      const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+      if (loadTime > 0 && loadTime < 60000) {
+        console.log(`⚡ Page loaded in ${loadTime}ms`);
+        if (loadTime < 3000) {
+          console.log('✅ Excellent load performance');
+        }
+      }
+    } else if (performance.now) {
       const loadTime = Math.round(performance.now());
       if (loadTime > 0 && loadTime < 60000) {
         console.log(`⚡ Page loaded in ${loadTime}ms`);
