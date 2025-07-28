@@ -1,0 +1,82 @@
+⚠️ URGENT DESIGN CLARIFICATION — Please read carefully before making more changes:
+
+The current mobile version looks great — clean, readable, visually sharp.
+
+But the desktop view is broken. Here's what went wrong and how to fix it:
+
+❌ WHAT’S BROKEN (Desktop View)
+The Lady Justice background image is getting heavily red-tinted or over-filtered.
+
+The background overlay (probably a dark red/gradient or backdrop-filter) is muddying the artwork and destroying contrast.
+
+Her sword, scale, and outline do not glow or stand out — it’s dull and flat.
+
+The main form container is too small and right-aligned. It feels crammed and weak compared to the original flyer design.
+
+The form glow and yellow button feel disconnected from the rest of the theme.
+
+The color scheme diverged from what we already approved:
+
+Garnet red + neon gold + deep navy is OK
+
+But the current maroon over-layer with opacity stack ruins the visual clarity
+
+✅ WHAT TO DO INSTEAD
+Revert Lady Justice’s color and contrast to the original
+
+Don’t apply heavy overlays or color shifts
+
+Use her as a background image, left-aligned, with 20–25% opacity if needed
+
+Use CSS filters subtly:
+
+css
+Copy
+Edit
+filter: brightness(1.1) contrast(1.05);
+opacity: 0.25;
+Hero section layout (Desktop)
+
+Use a split layout: left = Lady Justice, right = content box
+
+Content box should be wider, with:
+
+#002B5B background (or black w/ navy tint)
+
+Golden accents (#F5C518)
+
+White text (Inter / DM Serif)
+
+Use a 2-column CSS grid or flexbox
+
+Fix the button styling
+
+Blue button was previously better than yellow on dark
+
+Or if yellow is used, it needs a strong shadow or glow to stand out:
+
+css
+Copy
+Edit
+background-color: #F5C518;
+box-shadow: 0 0 12px rgba(245, 197, 24, 0.5);
+color: #002B5B;
+Ensure mobile keeps the current look
+
+The mobile version is beautiful — do not override its layout
+
+Keep form centered and stacked
+
+Hide Lady Justice below 768px if needed
+
+🎯 Summary
+Keep the Lady Justice glowing and visible — don’t dull her out
+
+Match the flyer’s energy and contrast
+
+Use strong layout on desktop (not a narrow mobile-style column)
+
+Restore approved SCETA color scheme
+
+Thank you! Please confirm before pushing any changes so we stay aligned on the design vision.
+
