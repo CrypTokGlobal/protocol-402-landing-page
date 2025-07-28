@@ -94,33 +94,61 @@ h1, h2, h3 {
   box-shadow: 0 8px 25px rgba(245, 197, 24, 0.5);
 }
 
-/* Hero Section - Burgundy Theme with Subtle Lady Justice */
+/* Hero Section - Split Layout for Desktop */
 .hero {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
-  padding: 2rem;
   position: relative;
   overflow: hidden;
 }
 
-/* Clean Burgundy Theme - No Muddy Overlays */
-@media (min-width: 768px) {
+/* Mobile Layout - Stack vertically */
+@media (max-width: 767px) {
   .hero {
-    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
-  }
-  
-  .hero::before {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
   }
 }
 
-/* Mobile: Hide Lady Justice completely for clean mobile experience */
-@media (max-width: 767px) {
+/* Desktop Layout - Split Screen */
+@media (min-width: 768px) {
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+  
   .hero::before {
-    display: none !important;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background: url('/lady-justice.png') no-repeat center center;
+    background-size: cover;
+    opacity: 0.8;
+    z-index: 1;
+  }
+  
+  .hero-content {
+    grid-column: 2;
+    z-index: 2;
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #002B5B;
+    padding: 4rem;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
   }
 }
 
@@ -155,32 +183,30 @@ h1, h2, h3 {
   animation: fadeInDown 1s ease-out 0.2s forwards;
 }
 
-/* Desktop optimizations - Clean burgundy layout */
-@media (min-width: 1200px) {
-  .hero {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
+/* Desktop Content Styling */
+@media (min-width: 768px) {
+  .hero-content h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
   }
   
-  .hero-content {
-    margin: 0 auto;
-    max-width: 650px;
-    padding: 4rem;
-    background: rgba(128, 0, 32, 0.9);
+  .hero-content .description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    color: #e1e1e1;
   }
-}
-
-@media (min-width: 1400px) {
-  .hero-content {
-    max-width: 680px;
+  
+  .hero-content .series-tag {
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
-}
-
-@media (min-width: 1600px) {
-  .hero-content {
-    max-width: 700px;
+  
+  .hero-content .subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -215,84 +241,58 @@ h1, h2, h3 {
   font-family: 'DM Serif Display', serif;
 }
 
-/* Prominent Download CTA Section */
-.download-cta-section {
-  margin: 2.5rem 0;
-  text-align: center;
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.8s forwards;
+/* Hide download CTA section on desktop - use form only */
+@media (min-width: 768px) {
+  .download-cta-section {
+    display: none;
+  }
 }
 
-.primary-download-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
-  color: #002B5B;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.3rem;
-  padding: 1.5rem 3rem;
-  border-radius: 15px;
-  margin-bottom: 1rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 
-    0 0 20px rgba(245, 197, 24, 0.6),
-    0 10px 30px rgba(245, 197, 24, 0.4),
-    0 0 0 1px rgba(245, 197, 24, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  animation: primaryPulse 3s ease-in-out infinite;
-  cursor: pointer;
-}
+/* Keep download CTA on mobile */
+@media (max-width: 767px) {
+  .download-cta-section {
+    margin: 2.5rem 0;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.8s forwards;
+  }
 
-.primary-download-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.primary-download-btn:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 
-    0 0 30px rgba(245, 197, 24, 0.8),
-    0 15px 40px rgba(245, 197, 24, 0.5),
-    0 0 15px rgba(245, 197, 24, 0.6);
-  background: linear-gradient(135deg, #E6B800 0%, #D4A500 100%);
-  color: #002B5B;
-  text-decoration: none;
-}
-
-.primary-download-btn:hover::before {
-  left: 100%;
-}
-
-.download-subtitle {
-  color: rgba(245, 197, 24, 0.9);
-  font-size: 1rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-@keyframes primaryPulse {
-  0%, 100% {
+  .primary-download-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
+    color: #002B5B;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.3rem;
+    padding: 1.5rem 3rem;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 
       0 0 20px rgba(245, 197, 24, 0.6),
       0 10px 30px rgba(245, 197, 24, 0.4),
       0 0 0 1px rgba(245, 197, 24, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
   }
-  50% {
+
+  .primary-download-btn:hover {
+    transform: translateY(-4px) scale(1.05);
     box-shadow: 
       0 0 30px rgba(245, 197, 24, 0.8),
-      0 15px 40px rgba(245, 197, 24, 0.6),
-      0 0 20px rgba(245, 197, 24, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      0 15px 40px rgba(245, 197, 24, 0.5),
+      0 0 15px rgba(245, 197, 24, 0.6);
+    text-decoration: none;
+  }
+
+  .download-subtitle {
+    color: rgba(245, 197, 24, 0.9);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 }
 
@@ -354,27 +354,45 @@ h1 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Premium Glassmorphism Form Design - Enhanced Visibility */
+/* Form Design - Responsive */
 .form-box {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(25px);
-  border-radius: 20px;
-  padding: 3.2rem;
-  box-shadow: 
-    0 0 0 1px rgba(245, 197, 24, 0.3),
-    0 40px 140px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    0 0 80px rgba(245, 197, 24, 0.25),
-    0 15px 50px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   opacity: 0;
   transform: translateY(40px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: premiumFormFadeIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, premiumFloat 8s ease-in-out 3s infinite;
+  animation: premiumFormFadeIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
   position: relative;
   overflow: hidden;
+}
+
+/* Mobile Form Styling */
+@media (max-width: 767px) {
+  .form-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    padding: 3.2rem;
+    box-shadow: 
+      0 0 0 1px rgba(245, 197, 24, 0.3),
+      0 40px 140px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 0 80px rgba(245, 197, 24, 0.25),
+      0 15px 50px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Desktop Form Styling */
+@media (min-width: 768px) {
+  .form-box {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .form-box::before {
@@ -470,81 +488,53 @@ h1 {
   font-weight: 400;
 }
 
-/* Premium CTA Button with Strong Glow */
+/* CTA Button - Clean Design */
 .form-box button {
-  background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
-  color: #002B5B;
   border: none;
   padding: 1.5rem 2rem;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 
-    0 0 12px rgba(245, 197, 24, 0.5),
-    0 10px 30px rgba(245, 197, 24, 0.3),
-    0 0 0 1px rgba(245, 197, 24, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
-  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-@keyframes subtlePulse {
-  0%, 100% {
+/* Mobile Button Styling */
+@media (max-width: 767px) {
+  .form-box button {
+    background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
+    color: #002B5B;
     box-shadow: 
-      0 10px 30px rgba(245, 197, 24, 0.5),
-      0 0 0 1px rgba(245, 197, 24, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  }
-  50% {
-    box-shadow: 
-      0 15px 40px rgba(245, 197, 24, 0.7),
-      0 0 20px rgba(245, 197, 24, 0.4),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      0 0 12px rgba(245, 197, 24, 0.5),
+      0 10px 30px rgba(245, 197, 24, 0.3);
   }
 }
 
-.form-box button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.form-box button:hover {
-  transform: translateY(-3px) scale(1.02) rotate(-1deg);
-  box-shadow: 
-    0 0 12px rgba(0, 102, 204, 0.4),
-    0 0 30px rgba(245, 197, 24, 0.8),
-    0 0 15px rgba(245, 197, 24, 0.6),
-    0 15px 40px rgba(245, 197, 24, 0.4);
-  background: linear-gradient(135deg, #E6B800 0%, #D4A500 100%);
-  color: #002B5B;
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-.form-box button:hover::before {
-  left: 100%;
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 
-      0 0 30px rgba(245, 197, 24, 0.8),
-      0 0 12px #F5C518,
-      0 15px 40px rgba(245, 197, 24, 0.3);
+/* Desktop Button Styling - Professional Blue */
+@media (min-width: 768px) {
+  .form-box button {
+    background: linear-gradient(135deg, #0066CC 0%, #004499 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
   }
-  50% {
+  
+  .form-box button:hover {
+    background: linear-gradient(135deg, #0052A3 0%, #003D7A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+  }
+}
+
+/* Mobile Button Hover Effects */
+@media (max-width: 767px) {
+  .form-box button:hover {
+    transform: translateY(-2px);
     box-shadow: 
-      0 0 40px rgba(245, 197, 24, 1),
-      0 0 20px #F5C518,
-      0 20px 50px rgba(245, 197, 24, 0.5);
+      0 0 15px rgba(245, 197, 24, 0.6),
+      0 12px 35px rgba(245, 197, 24, 0.4);
+    background: linear-gradient(135deg, #E6B800 0%, #D4A500 100%);
   }
 }
 
