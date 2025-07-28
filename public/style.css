@@ -106,19 +106,20 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Lady Justice Background - Desktop Only 
-   Positioned on left side, behind content with subtle blur/darkening */
+/* Lady Justice Background - Desktop Only - Clean Integration */
 @media (min-width: 768px) {
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: url('lady-justice.png') left center / auto 85% no-repeat;
-    backdrop-filter: blur(1px) brightness(0.6);
-    z-index: 1;
+  .hero {
+    background: 
+      linear-gradient(90deg, 
+        rgba(75, 0, 15, 0.3) 0%, 
+        rgba(75, 0, 15, 0.7) 45%, 
+        rgba(75, 0, 15, 0.95) 70%,
+        rgba(42, 0, 8, 1) 100%
+      ),
+      url('lady-justice.png');
+    background-size: auto 90%, cover;
+    background-position: left 8% center, center;
+    background-repeat: no-repeat, no-repeat;
   }
 }
 
@@ -133,18 +134,21 @@ h1, h2, h3 {
   position: relative;
   z-index: 2;
   margin-left: auto;
-  margin-right: 5%;
-  max-width: 580px;
+  margin-right: 8%;
+  max-width: 520px;
   width: 100%;
-  padding: 3rem;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 20px;
+  padding: 3.5rem;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out 0.3s forwards;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 
+    0 25px 80px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(245, 197, 24, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* Header Logos - Perfect Spacing */
@@ -159,25 +163,38 @@ h1, h2, h3 {
 
 /* Desktop optimizations */
 @media (min-width: 1200px) {
-  .hero::before {
-    background-size: auto 90%;
+  .hero {
+    background-size: auto 95%, cover;
+    background-position: left 10% center, center;
   }
   
   .hero-content {
-    margin-right: 8%;
-    max-width: 620px;
+    margin-right: 6%;
+    max-width: 550px;
     padding: 4rem;
   }
 }
 
 @media (min-width: 1400px) {
-  .hero::before {
-    background-size: auto 95%;
+  .hero {
+    background-size: auto 98%, cover;
+    background-position: left 12% center, center;
+  }
+  
+  .hero-content {
+    margin-right: 8%;
+    max-width: 580px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero {
+    background-position: left 15% center, center;
   }
   
   .hero-content {
     margin-right: 10%;
-    max-width: 650px;
+    max-width: 600px;
   }
 }
 
@@ -843,53 +860,39 @@ footer p {
   }
 }
 
+/* Large desktop typography enhancements */
 @media (min-width: 1200px) {
-  .hero {
-    background: 
-      linear-gradient(90deg, rgba(75, 0, 15, 0.3) 0%, rgba(75, 0, 15, 0.6) 40%, rgba(75, 0, 15, 0.92) 100%), 
-      url('lady-justice.png');
-    background-size: auto 100vh;
-    background-position: left 5% center;
-    min-height: 100vh;
-  }
-
-  .hero-content {
-    max-width: 650px;
-    margin-right: 5%;
-  }
-
   h1 {
-    font-size: 3.8rem;
+    font-size: 3.4rem;
     text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9), 0 1px 6px rgba(0, 0, 0, 0.7);
   }
 
   .description {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    font-size: 1.1rem;
+    line-height: 1.7;
   }
 }
 
-@media (min-width: 1440px) {
-  .hero {
-    background-size: auto 105vh;
-    background-position: left 8% center;
-  }
-  
-  .hero-content {
-    margin-right: 8%;
+@media (min-width: 1600px) {
+  h1 {
+    font-size: 3.6rem;
   }
 }
 
 /* High-DPI Display Optimization */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .hero {
-    background-image: 
-      linear-gradient(
-        90deg, 
-        rgba(75, 0, 15, 0.1) 0%,
-        rgba(75, 0, 15, 0.3) 45%,
-        rgba(75, 0, 15, 0.95) 100%
-      ),
-      url('/lady-justice.png');
+  @media (min-width: 768px) {
+    .hero {
+      background-image: 
+        linear-gradient(90deg, 
+          rgba(75, 0, 15, 0.3) 0%, 
+          rgba(75, 0, 15, 0.7) 45%, 
+          rgba(75, 0, 15, 0.95) 70%,
+          rgba(42, 0, 8, 1) 100%
+        ),
+        url('lady-justice.png');
+    }
   }
 }
 

@@ -1,8 +1,9 @@
 // Enhanced landing page with world-class animations and interactions
 document.addEventListener('DOMContentLoaded', function() {
-  // Prevent duplicate initialization
-  if (window.scetaInitialized) return;
+  // Prevent duplicate initialization with more robust checking
+  if (window.scetaInitialized || document.body.dataset.initialized) return;
   window.scetaInitialized = true;
+  document.body.dataset.initialized = 'true';
 
   console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
 
@@ -423,19 +424,18 @@ function initializeOptimizations() {
 
 // Enhanced performance monitoring
 window.addEventListener('load', function() {
-  if (!window.performanceTracked && 'performance' in window && performance.timing) {
-    const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-
-    // Only log if we have valid timing data
-    if (loadTime > 0 && loadTime < 60000) { // Reasonable range: 0-60 seconds
-      console.log(`Page loaded in ${loadTime}ms`);
-
-      // Track performance for analytics
-      if (loadTime < 3000) {
-        console.log('Excellent load performance');
+  if (!window.performanceTracked && 'performance' in window) {
+    // Use modern Performance API if available
+    if (performance.now) {
+      const loadTime = Math.round(performance.now());
+      if (loadTime > 0 && loadTime < 60000) {
+        console.log(`⚡ Page loaded in ${loadTime}ms`);
+        if (loadTime < 3000) {
+          console.log('✅ Excellent load performance');
+        }
       }
     } else {
-      console.log('Page loaded successfully');
+      console.log('🚀 SCETA Protocol 402 landing page fully loaded');
     }
     window.performanceTracked = true;
   }
