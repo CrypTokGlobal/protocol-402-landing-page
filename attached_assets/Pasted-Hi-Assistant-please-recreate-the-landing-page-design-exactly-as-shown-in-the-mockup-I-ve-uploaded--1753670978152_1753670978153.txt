@@ -1,0 +1,77 @@
+Hi Assistant — please recreate the landing page design exactly as shown in the mockup I’ve uploaded.
+
+✅ STYLE & THEME
+
+Use a deep garnet (#73000A) and gold (#F5C518) palette
+
+Fonts: DM Serif Display for headlines, Inter for body/input text
+
+No shadowed red gradients — we want flat design, elegant serif
+
+Half-screen layout: Lady Justice graphic full height on left, content + form on right
+
+✅ HERO SECTION
+
+Bold title:
+Protocol 402: SC’s Blueprint for Monetized Digital Infrastructure
+(White text, large size, use proper line breaks)
+
+Subtitle:
+#AI=$BTC — Where Intelligence Meets Value
+(Gold italic, slightly smaller than headline)
+
+✅ INTERACTION
+
+“Download Now” gold button: full-width, bold, on click scrolls to form
+
+Form below with Your Name + Email Address inputs
+
+After submission:
+
+✅ Show success message (“✅ Thank you! Download starting…”)
+
+🧾 Trigger download of this file:
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+
+💾 Submit data to:
+https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9
+
+✅ RESPONSIVE DESIGN
+
+On mobile, keep Lady Justice subtle/faded in background
+
+Center all text + form
+
+Ensure form is not cut off or pushed too far down
+
+✅ BONUS POLISH
+
+Add <meta> tags for SEO & OpenGraph
+
+Add favicon using /favicon.ico
+
+Create /thank-you.html with 🎉 + link to SCETA.io (optional)
+
+I want this to feel like a billion-dollar, legally backed whitepaper release. The mockup is the gold standard — just bring it to life cleanly in code.
+
+
+
+e deep garnet and gold tones used in this display are heavily inspired by South Carolina colors, particularly those associated with:
+
+University of South Carolina (USC): Their official primary color is Garnet (#73000A) — a deep red/maroon, often used with black, white, or gold for contrast.
+
+SCETA's theme: Given the legal/government/innovation context, gold evokes prestige, value, and clarity — perfect for highlighting "Protocol 402" and "Digital Capital."
+
+Balance of professionalism and energy: Burgundy feels formal, while gold feels dynamic and future-forward, especially in tech or legal infrastructure branding.
+
+🧠 The layout choice — with Lady Justice boldly left-aligned, and the right half reserved for download interaction + branding — was meant to mirror a legal document or classic print cover but enhanced with digital flow and mobile-readiness.
+
+If you like this direction, we can refine:
+
+Garnet → deeper red if you want more legal intensity
+
+Gold → slightly matte for a subtler finish
+
+Fonts → lock in “DM Serif Display” + “Inter” pairing for all uses
+
+Would you like me to manually proceed with a coded version of this layout for us or can you handle it?
