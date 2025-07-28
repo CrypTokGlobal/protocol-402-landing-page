@@ -1,24 +1,23 @@
-
 // Enhanced landing page with world-class animations and interactions
 document.addEventListener('DOMContentLoaded', function() {
   // Prevent duplicate initialization
   if (window.scetaInitialized) return;
   window.scetaInitialized = true;
-  
+
   console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
-  
+
   // Initialize page load animation
   initializePageLoad();
-  
+
   // Initialize smooth scroll and focus management
   initializePageInteractions();
-  
+
   // Enhanced form handling with success animation
   initializeFormHandling();
-  
+
   // Performance and accessibility enhancements
   initializeOptimizations();
-  
+
   // Initialize scroll-to-top
   initializeScrollToTop();
 });
@@ -26,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializePageLoad() {
   // Add smooth page load effect
   document.body.classList.add('loaded');
-  
+
   // Remove loading class after a brief delay to trigger animations
   setTimeout(() => {
     document.body.classList.remove('loading');
   }, 100);
-  
+
   // Track conversion for analytics (only once)
   if (!window.pageLoadTracked) {
     console.log('Page loaded successfully');
@@ -59,7 +58,7 @@ function initializePageInteractions() {
           behavior: 'smooth',
           block: 'center'
         });
-        
+
         // Add focus highlight after scroll
         setTimeout(() => {
           formBox.style.boxShadow = '0 0 0 3px rgba(245, 197, 24, 0.5), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.3)';
@@ -85,7 +84,7 @@ function initializePageInteractions() {
         }
       }
     });
-    
+
     button.addEventListener('mouseleave', function() {
       if (!this.classList.contains('processing')) {
         this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
@@ -140,12 +139,12 @@ function initializeFormHandling() {
       if (result.success) {
         // Show enhanced success animation
         showSuccessMessage();
-        
+
         // Success button state with enhanced styling
         button.textContent = '🎉 Download Started!';
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
         button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
-        
+
         // Enhanced download for all devices
         setTimeout(() => {
           const downloadLink = document.createElement('a');
@@ -153,12 +152,12 @@ function initializeFormHandling() {
           downloadLink.download = 'Protocol-402-SCETA-Whitepaper.pdf';
           downloadLink.target = '_blank';
           downloadLink.rel = 'noopener noreferrer';
-          
+
           // Add to DOM temporarily for download
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
-          
+
           console.log('Protocol 402 whitepaper download initiated');
         }, 800);
 
@@ -173,11 +172,11 @@ function initializeFormHandling() {
     } catch (error) {
       console.error('Submission error:', error);
       showFormFeedback('Something went wrong. Please try again.', 'error');
-      
+
       button.textContent = '❌ Try Again';
       button.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
       button.style.boxShadow = '0 0 20px rgba(220, 53, 69, 0.4)';
-      
+
       setTimeout(resetButton, 4000);
     }
 
@@ -226,14 +225,14 @@ function showSuccessMessage() {
     <div>Thank You!</div>
     <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will begin shortly...</div>
   `;
-  
+
   document.body.appendChild(successDiv);
-  
+
   // Animate in
   setTimeout(() => {
     successDiv.classList.add('show');
   }, 100);
-  
+
   // Animate out
   setTimeout(() => {
     successDiv.classList.remove('show');
@@ -247,21 +246,21 @@ function showSuccessMessage() {
 
 function validateInput(input) {
   const value = input.value.trim();
-  
+
   if (input.name === 'name') {
     if (value.length < 2) {
       setInputError(input, 'Name must be at least 2 characters');
       return false;
     }
   }
-  
+
   if (input.name === 'email') {
     if (!isValidEmail(value)) {
       setInputError(input, 'Please enter a valid email address');
       return false;
     }
   }
-  
+
   setInputSuccess(input);
   return true;
 }
@@ -295,7 +294,7 @@ function showFormFeedback(message, type, duration = 5000) {
   const feedback = document.createElement('div');
   feedback.className = `form-feedback ${type}`;
   feedback.textContent = message;
-  
+
   // Enhanced styling
   feedback.style.cssText = `
     position: fixed;
@@ -357,7 +356,7 @@ function initializeScrollToTop() {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => {
       const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-      
+
       if (scrollPercent > 50) {
         scrollToTopBtn.classList.add('visible');
       } else {
@@ -426,11 +425,11 @@ function initializeOptimizations() {
 window.addEventListener('load', function() {
   if (!window.performanceTracked && 'performance' in window && performance.timing) {
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-    
+
     // Only log if we have valid timing data
     if (loadTime > 0 && loadTime < 60000) { // Reasonable range: 0-60 seconds
       console.log(`Page loaded in ${loadTime}ms`);
-      
+
       // Track performance for analytics
       if (loadTime < 3000) {
         console.log('Excellent load performance');

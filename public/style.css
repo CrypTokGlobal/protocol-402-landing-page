@@ -106,7 +106,8 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Lady Justice Background - Desktop Only */
+/* Lady Justice Background - Desktop Only 
+   Positioned on left side, behind content with subtle blur/darkening */
 @media (min-width: 768px) {
   .hero::before {
     content: '';
@@ -118,6 +119,13 @@ h1, h2, h3 {
     background: url('lady-justice.png') left center / auto 85% no-repeat;
     backdrop-filter: blur(1px) brightness(0.6);
     z-index: 1;
+  }
+}
+
+/* Mobile: Hide Lady Justice completely for clean mobile experience */
+@media (max-width: 767px) {
+  .hero::before {
+    display: none !important;
   }
 }
 

@@ -50,9 +50,9 @@ async function saveToGoogleSheets(data) {
 
     try {
         const payload = JSON.stringify({
-            name: data.name,
-            email: data.email,
-            timestamp: data.timestamp
+            NAME: data.name,
+            EMAIL: data.email,
+            TIMESTAMP: data.timestamp
         });
 
         const options = {
