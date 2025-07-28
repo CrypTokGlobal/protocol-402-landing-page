@@ -30,10 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
     messageDiv.textContent = message;
     messageDiv.style.cssText = `
       padding: 12px 20px;
-      margin: 10px 0;
+      margin: 15px 0;
       border-radius: 8px;
       font-weight: 500;
       text-align: center;
+      font-size: 14px;
       ${type === 'success' ? 
         'background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : 
         'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'
@@ -43,14 +44,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // Insert message after the form
     form.parentNode.insertBefore(messageDiv, form.nextSibling);
     
-    // Auto-remove error messages after 5 seconds
+    // Auto-remove error messages after 6 seconds
     if (type === 'error') {
       setTimeout(() => {
         if (messageDiv.parentNode) {
           messageDiv.remove();
         }
-      }, 5000);
+      }, 6000);
     }
+  }
+
+  // Function to trigger PDF download
+  function downloadPDF() {
+    console.log('📄 Starting PDF download...');
+    const pdfUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+    
+    // Create a temporary link and trigger download
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'Protocol-402-SCETA-Whitepaper.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    console.log('✅ PDF download triggered');
   }
 
   // Handle form submission
@@ -88,36 +106,51 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.disabled = true;
 
     try {
-      // Submit to Sheet.best API using fetch with FormData (not JSON)
+      // Submit to Sheet.best API using fetch with FormData
       console.log('📤 Submitting to Sheet.best API...');
       const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
-        body: formData // Send FormData directly (Sheet.best requirement)
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          TIMESTAMP: timestamp
+        })
       });
 
       console.log('📤 Response status:', response.status);
       console.log('📤 Response ok:', response.ok);
 
-      if (response.status === 200 || response.ok) {
+      if (response.ok || response.status === 200 || response.status === 201) {
         console.log('✅ Form submitted successfully to Sheet.best');
 
         // Show success message
-        showMessage('✅ Form submitted successfully! Your whitepaper download will begin shortly.', 'success');
+        showMessage('✅ Success! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
 
-        // Trigger PDF download
-        console.log('✅ PDF download triggered via window.open');
-        window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
+        // Trigger PDF download immediately
+        downloadPDF();
 
-        // Redirect to thank you page after 3 seconds
+        // Reset form
+        form.reset();
+
+        // Redirect to thank you page after 2 seconds
         setTimeout(() => {
           console.log('🔄 Redirecting to thank-you page');
           window.location.href = '/thank-you.html';
-        }, 3000);
+        }, 2000);
 
       } else {
         console.error('❌ Sheet.best API error:', response.status, response.statusText);
-        const responseText = await response.text();
-        console.error('❌ Response body:', responseText);
+        let responseText = '';
+        try {
+          responseText = await response.text();
+          console.error('❌ Response body:', responseText);
+        } catch (e) {
+          console.error('❌ Could not read response text:', e);
+        }
+        
         showMessage('There was an error submitting your form. Please try again.', 'error');
         
         // Reset button
