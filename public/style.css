@@ -440,9 +440,13 @@ h1 {
 
   .hero-content {
     height: auto;
-    background: rgba(128, 0, 32, 0.9);
-    backdrop-filter: blur(6px);
-    border: none;
+    background: 
+      linear-gradient(135deg, 
+        rgba(139, 21, 56, 0.95) 0%, 
+        rgba(107, 17, 40, 0.95) 100%
+      );
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     padding: 2.5rem 2rem;
     border-radius: 20px;
     margin: 2rem 0;
@@ -486,7 +490,7 @@ h1 {
 
   .primary-download-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+    background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
     color: #000;
     text-decoration: none;
     font-weight: 700;
@@ -496,23 +500,26 @@ h1 {
     margin-bottom: 1rem;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 
-      0 0 20px rgba(218, 165, 32, 0.6),
-      0 10px 30px rgba(218, 165, 32, 0.4);
+      0 0 25px rgba(255, 215, 0, 0.7),
+      0 12px 35px rgba(218, 165, 32, 0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .primary-download-btn:hover {
     transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, #FFED4A 0%, #FFD700 100%);
     box-shadow: 
-      0 0 30px rgba(218, 165, 32, 0.8),
-      0 15px 40px rgba(218, 165, 32, 0.5);
+      0 0 35px rgba(255, 215, 0, 0.9),
+      0 18px 45px rgba(255, 215, 0, 0.6);
     text-decoration: none;
   }
 
   .download-subtitle {
-    color: rgba(218, 165, 32, 0.9);
+    color: rgba(255, 215, 0, 0.95);
     font-size: 1rem;
     font-weight: 500;
     margin-top: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -794,9 +801,13 @@ footer p {
 
   .hero-content {
     height: auto;
-    background: rgba(128, 0, 32, 0.9);
-    backdrop-filter: blur(6px);
-    border: none;
+    background: 
+      linear-gradient(135deg, 
+        rgba(139, 21, 56, 0.95) 0%, 
+        rgba(107, 17, 40, 0.95) 100%
+      );
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
     padding: 2.5rem 2rem;
     border-radius: 20px;
     margin: 2rem 0;
@@ -852,7 +863,7 @@ footer p {
 
   .primary-download-btn {
     display: inline-block;
-    background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);
+    background: linear-gradient(135deg, #FFD700 0%, #DAA520 100%);
     color: #000;
     text-decoration: none;
     font-weight: 700;
@@ -862,23 +873,26 @@ footer p {
     margin-bottom: 1rem;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     box-shadow: 
-      0 0 20px rgba(218, 165, 32, 0.6),
-      0 10px 30px rgba(218, 165, 32, 0.4);
+      0 0 25px rgba(255, 215, 0, 0.7),
+      0 12px 35px rgba(218, 165, 32, 0.5);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .primary-download-btn:hover {
     transform: translateY(-3px) scale(1.05);
+    background: linear-gradient(135deg, #FFED4A 0%, #FFD700 100%);
     box-shadow: 
-      0 0 30px rgba(218, 165, 32, 0.8),
-      0 15px 40px rgba(218, 165, 32, 0.5);
+      0 0 35px rgba(255, 215, 0, 0.9),
+      0 18px 45px rgba(255, 215, 0, 0.6);
     text-decoration: none;
   }
 
   .download-subtitle {
-    color: rgba(218, 165, 32, 0.9);
+    color: rgba(255, 215, 0, 0.95);
     font-size: 1rem;
     font-weight: 500;
     margin-top: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   }
 }
 
