@@ -12,7 +12,7 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #ffffff;
-  background: #4b000f;
+  background: #800020;
   line-height: 1.6;
   overflow-x: hidden;
   margin: 0;
@@ -94,32 +94,32 @@ h1, h2, h3 {
   box-shadow: 0 8px 25px rgba(245, 197, 24, 0.5);
 }
 
-/* Hero Section - Enhanced with Better Lady Justice Integration */
+/* Hero Section - Burgundy Theme with Subtle Lady Justice */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
+  background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
   padding: 2rem;
   position: relative;
   overflow: hidden;
 }
 
-/* Lady Justice Background - Desktop Only - Clear and Prominent */
+/* Lady Justice Background - Desktop Only - Subtle and Elegant */
 @media (min-width: 768px) {
   .hero {
     background: 
       linear-gradient(90deg, 
-        rgba(0, 43, 91, 0.1) 0%, 
-        rgba(0, 43, 91, 0.2) 30%, 
-        rgba(0, 43, 91, 0.4) 50%,
-        rgba(0, 0, 0, 0.8) 70%,
-        rgba(0, 0, 0, 0.95) 100%
+        rgba(128, 0, 32, 0.95) 0%, 
+        rgba(128, 0, 32, 0.85) 40%, 
+        rgba(74, 0, 18, 0.9) 60%,
+        rgba(74, 0, 18, 0.95) 80%,
+        rgba(74, 0, 18, 1) 100%
       ),
       url('lady-justice.png');
-    background-size: auto 80%, cover;
-    background-position: left 5% center, center;
+    background-size: contain, cover;
+    background-position: left 10% center, center;
     background-repeat: no-repeat, no-repeat;
   }
   
@@ -128,12 +128,12 @@ h1, h2, h3 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+    width: 45%;
     height: 100%;
     background: url('lady-justice.png') no-repeat left center;
-    background-size: auto 80%;
-    filter: brightness(1.1) contrast(1.05);
-    opacity: 0.25;
+    background-size: contain;
+    filter: brightness(0.7) contrast(1.2) sepia(0.3) hue-rotate(320deg);
+    opacity: 0.15;
     z-index: 1;
   }
 }
@@ -153,18 +153,18 @@ h1, h2, h3 {
   max-width: 600px;
   width: 100%;
   padding: 4rem;
-  background: rgba(0, 43, 91, 0.65);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(128, 0, 32, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 24px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out 0.3s forwards;
   box-shadow: 
-    0 30px 100px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(245, 197, 24, 0.2),
-    0 0 40px rgba(245, 197, 24, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 30px 100px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(245, 197, 24, 0.3),
+    0 0 40px rgba(245, 197, 24, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Header Logos - Perfect Spacing */
@@ -177,37 +177,39 @@ h1, h2, h3 {
   animation: fadeInDown 1s ease-out 0.2s forwards;
 }
 
-/* Desktop optimizations - Split layout with clear Lady Justice */
+/* Desktop optimizations - Split layout with burgundy theme */
 @media (min-width: 1200px) {
   .hero {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     align-items: center;
-    background-size: auto 85%, cover;
-    background-position: left 8% center, center;
+    background-size: contain, cover;
+    background-position: left 15% center, center;
   }
   
   .hero::before {
-    background-size: auto 85%;
+    background-size: contain;
+    width: 40%;
   }
   
   .hero-content {
     margin-right: 3%;
     max-width: 650px;
     padding: 4rem;
-    background: rgba(0, 43, 91, 0.75);
+    background: rgba(128, 0, 32, 0.9);
   }
 }
 
 @media (min-width: 1400px) {
   .hero {
-    background-size: auto 88%, cover;
-    background-position: left 10% center, center;
+    background-size: contain, cover;
+    background-position: left 18% center, center;
   }
   
   .hero::before {
-    background-size: auto 88%;
+    background-size: contain;
+    width: 38%;
   }
   
   .hero-content {
@@ -218,12 +220,13 @@ h1, h2, h3 {
 
 @media (min-width: 1600px) {
   .hero {
-    background-size: auto 90%, cover;
-    background-position: left 12% center, center;
+    background-size: contain, cover;
+    background-position: left 20% center, center;
   }
   
   .hero::before {
-    background-size: auto 90%;
+    background-size: contain;
+    width: 36%;
   }
   
   .hero-content {
@@ -557,11 +560,11 @@ h1 {
 
 /* Features Section - Enhanced with Floating Icons */
 .features {
-  background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
+  background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
   padding: 8rem 2rem;
   margin: 0;
   text-align: center;
-  border-top: 1px solid rgba(245, 197, 24, 0.1);
+  border-top: 1px solid rgba(245, 197, 24, 0.2);
   opacity: 0;
   transform: translateY(30px);
 }
@@ -637,7 +640,7 @@ h1 {
 
 /* Footer - Professional Finish */
 footer {
-  background: linear-gradient(135deg, #7C0A02 0%, #5A0701 100%);
+  background: linear-gradient(135deg, #660019 0%, #4a0012 100%);
   padding: 4rem 2rem 2rem;
   margin: 0;
   text-align: center;
@@ -769,7 +772,7 @@ footer p {
 /* Mobile Optimization - Enhanced Responsive Design */
 @media (max-width: 767px) {
   .hero {
-    background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
+    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
     padding: 4rem 1.5rem;
     text-align: center;
     justify-content: center;
@@ -783,8 +786,8 @@ footer p {
     margin: 0 auto;
     max-width: 100%;
     padding: 2.5rem 2rem;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
+    background: rgba(128, 0, 32, 0.7);
+    backdrop-filter: blur(6px);
   }
 
   .scroll-to-form {
@@ -884,27 +887,28 @@ footer p {
   .hero {
     background: 
       linear-gradient(90deg, 
-        rgba(0, 43, 91, 0.1) 0%, 
-        rgba(0, 43, 91, 0.3) 35%, 
-        rgba(0, 43, 91, 0.6) 60%,
-        rgba(0, 0, 0, 0.9) 100%
+        rgba(128, 0, 32, 0.9) 0%, 
+        rgba(128, 0, 32, 0.8) 35%, 
+        rgba(74, 0, 18, 0.85) 60%,
+        rgba(74, 0, 18, 0.95) 100%
       ),
       url('lady-justice.png');
-    background-size: auto 75%, cover;
-    background-position: left 8% center, center;
+    background-size: contain, cover;
+    background-position: left 12% center, center;
     background-repeat: no-repeat, no-repeat;
   }
   
   .hero::before {
-    background-size: auto 75%;
-    background-position: left 8% center;
+    background-size: contain;
+    background-position: left 12% center;
+    width: 42%;
   }
 
   .hero-content {
     max-width: 520px;
     margin-right: 4%;
     padding: 3.5rem;
-    background: rgba(0, 43, 91, 0.7);
+    background: rgba(128, 0, 32, 0.85);
   }
 
   h1 {
