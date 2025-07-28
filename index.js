@@ -39,7 +39,7 @@ app.use((req, res) => {
 let submissions = [];
 
 // Sheet.best API configuration
-const SHEET_BEST_URL = process.env.SHEET_BEST_URL || 'https://sheet.best/api/sheets/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0';
+const SHEET_BEST_URL = process.env.SHEET_BEST_URL || 'https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9';
 
 // Function to save to Google Sheets via Sheet.best
 async function saveToGoogleSheets(data) {

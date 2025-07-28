@@ -19,6 +19,109 @@
     }
     
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 4rem 3rem;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    
+    .emoji {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 2rem;
+      animation: bounce 2s infinite;
+    }
+    
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #F5C518;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      color: #e1e1e1;
+    }
+    
+    .cta-button {
+      background: linear-gradient(135deg, #F5C518, #E6B800);
+      color: #0a0a0a;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(245, 197, 24, 0.3);
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 197, 24, 0.4);
+      text-decoration: none;
+      color: #0a0a0a;
+    }
+    
+    .footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .footer p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 3rem 2rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .emoji {
+        font-size: 3rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #4b000f 0%, #2a0008 100%);
       color: white;
@@ -176,11 +279,45 @@
   <div class="container">
     <span class="emoji">🎉</span>
     <h1>Thank You!</h1>
-    <p>Thanks for downloading the Protocol 402 Whitepaper — Learn more at SCETA.io</p>
+    <p>Thanks for downloading the Protocol 402 Whitepaper — South Carolina's blueprint for the future of digital infrastructure!</p>
     <a href="https://sceta.io" class="cta-button">Learn More at SCETA.io</a>
     <div class="footer">
       <p>© 2025 South Carolina Emerging Technology Association (SCETA)</p>
     </div>
   </div>
+
+  <script>
+    // Trigger download on page load with better mobile support
+    window.addEventListener('load', function() {
+      // Prevent duplicate downloads
+      if (window.downloadInitiated) return;
+      window.downloadInitiated = true;
+      
+      setTimeout(() => {
+        const downloadUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+        
+        // Create download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = downloadUrl;
+        downloadLink.download = 'Protocol-402-SCETA-Whitepaper.pdf';
+        downloadLink.target = '_blank';
+        downloadLink.rel = 'noopener noreferrer';
+        downloadLink.style.display = 'none';
+        
+        // Add to DOM, click, and remove
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        
+        // Clean up
+        setTimeout(() => {
+          if (downloadLink.parentNode) {
+            document.body.removeChild(downloadLink);
+          }
+        }, 100);
+        
+        console.log('Protocol 402 whitepaper download initiated');
+      }, 1000);
+    });
+  </script>
 </body>
-</html>
+</html>/html>
