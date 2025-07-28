@@ -138,6 +138,25 @@
       }
     }
   </style>
+  <script>
+    // Trigger download on page load
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        const downloadLink = document.createElement('a');
+        downloadLink.href = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+        downloadLink.download = 'Protocol-402-SCETA-Whitepaper.pdf';
+        downloadLink.target = '_blank';
+        downloadLink.rel = 'noopener noreferrer';
+        
+        // Enhanced download for all devices
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        console.log('Protocol 402 whitepaper download initiated');
+      }, 1000);
+    });
+  </script>
 </head>
 <body>
   <div class="container">

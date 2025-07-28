@@ -135,38 +135,38 @@ app.post('/submit', async (req, res) => {
   };
 
   try {
-    // Store submission in memory
-    submissions.push(submission);
+      // Store submission in memory
+      submissions.push(submission);
 
-    // Log to console for debugging
-    console.log('New submission:', submission);
+      // Log to console for debugging
+      console.log('New submission:', submission);
 
-    // Save to CSV file as backup (always)
-    const csvLine = `${submission.timestamp},${submission.name},${submission.email}\n`;
-    fs.appendFileSync('submissions.csv', csvLine);
+      // Save to CSV file as backup (always)
+      const csvLine = `${submission.timestamp},${submission.name},${submission.email}\n`;
+      fs.appendFileSync('submissions.csv', csvLine);
 
-    // Try to save to Google Sheets (if configured)
-    const sheetsSuccess = await saveToGoogleSheets(submission);
+      // Try to save to Google Sheets (if configured)
+      const sheetsSuccess = await saveToGoogleSheets(submission);
 
-    if (sheetsSuccess) {
-      console.log('✅ Data saved to both CSV and Google Sheets');
-    } else {
-      console.log('⚠️ Data saved to CSV only (Google Sheets not configured or failed)');
+      if (sheetsSuccess) {
+        console.log('✅ Data saved to both CSV and Google Sheets');
+      } else {
+        console.log('⚠️ Data saved to CSV only (Google Sheets not configured or failed)');
+      }
+
+      res.json({ 
+        success: true, 
+        message: '✅ Thank you! Download will start shortly.',
+        downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf',
+        redirectUrl: '/thank-you.html'
+      });
+
+    } catch (error) {
+      console.error('Error processing submission:', error);
+      res.status(500).json({ 
+        error: 'An error occurred while processing your request. Please try again.' 
+      });
     }
-
-    res.json({ 
-      success: true, 
-      message: '✅ Thank you! Download will start shortly.',
-      downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf',
-      redirectUrl: '/thank-you.html'
-    });
-
-  } catch (error) {
-    console.error('Error processing submission:', error);
-    res.status(500).json({ 
-      error: 'An error occurred while processing your request. Please try again.' 
-    });
-  }
 });
 
 // Redirect to actual whitepaper PDF
@@ -177,6 +177,12 @@ app.get('/whitepaper.pdf', (req, res) => {
 // Admin endpoint to view submissions (remove in production)
 app.get('/admin/submissions', (req, res) => {
   res.json(submissions);
+} catch (error) {
+    console.error('Error processing submission:', error);
+    res.status(500).json({ 
+      error: 'An error occurred while processing your request. Please try again.' 
+    });
+  }
 });
 
 app.listen(PORT, '0.0.0.0', () => {

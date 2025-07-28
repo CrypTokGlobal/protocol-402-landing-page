@@ -1,0 +1,29 @@
+
+{
+  "name": "Protocol 402: SC's Blueprint for Monetized Digital Infrastructure",
+  "short_name": "Protocol 402",
+  "description": "Download SCETA's official whitepaper on South Carolina's digital transformation strategy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4b000f",
+  "theme_color": "#F5C518",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/sceta-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/sceta-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "government", "technology"],
+  "lang": "en-US",
+  "scope": "/",
+  "prefer_related_applications": false
+}

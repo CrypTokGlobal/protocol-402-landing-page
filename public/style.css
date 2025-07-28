@@ -25,26 +25,37 @@ body.loaded {
   opacity: 1;
 }
 
-/* Page Load Animation */
+/* Premium Page Load Animation */
 body.loading * {
   opacity: 0;
   transform: translateY(30px);
 }
 
 body.loaded .hero-content {
-  animation: fadeInUp 1.2s ease-out 0.2s forwards;
+  animation: premiumFadeInUp 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 
 body.loaded .form-box {
-  animation: fadeInUp 1s ease-out 0.6s forwards;
+  animation: premiumFadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
 }
 
 body.loaded .features {
-  animation: fadeInUp 0.8s ease-out 1s forwards;
+  animation: premiumFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
 }
 
 body.loaded footer {
-  animation: fadeInUp 0.8s ease-out 1.2s forwards;
+  animation: premiumFadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.4s forwards;
+}
+
+@keyframes premiumFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 h1, h2, h3 {
@@ -90,13 +101,14 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   background: 
-    linear-gradient(90deg, rgba(75, 0, 15, 0.25) 0%, rgba(75, 0, 15, 0.5) 45%, rgba(75, 0, 15, 0.94) 100%), 
+    linear-gradient(90deg, rgba(75, 0, 15, 0.3) 0%, rgba(75, 0, 15, 0.6) 40%, rgba(75, 0, 15, 0.92) 100%), 
     url('lady-justice.png');
-  background-size: cover;
-  background-position: left center;
+  background-size: auto 95vh;
+  background-position: left 10% center;
   background-repeat: no-repeat;
   padding: 2rem;
   position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -211,25 +223,70 @@ h1 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Enhanced Glassmorphism Form Design */
+/* Premium Glassmorphism Form Design */
 .form-box {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(20px);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 3.2rem;
   box-shadow: 
-    0 0 0 1px rgba(245, 197, 24, 0.2),
-    0 30px 100px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 50px rgba(245, 197, 24, 0.15),
-    0 8px 32px rgba(0, 0, 0, 0.1);
+    0 0 0 1px rgba(245, 197, 24, 0.25),
+    0 35px 120px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 60px rgba(245, 197, 24, 0.2),
+    0 10px 40px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   opacity: 0;
   transform: translateY(40px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: formFadeIn 1.5s ease-out 1.2s forwards, floatUp 6s ease-in-out 2s infinite;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: premiumFormFadeIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, premiumFloat 8s ease-in-out 3s infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 197, 24, 0.05), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes premiumFormFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes premiumFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes formFadeIn {
@@ -282,22 +339,39 @@ h1 {
   font-weight: 400;
 }
 
-/* Enhanced CTA Button with Animated Glow */
+/* Premium CTA Button with Advanced Glow */
 .form-box button {
   background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
   color: #0a0a0a;
   border: none;
   padding: 1.5rem 2rem;
-  border-radius: 12px;
+  border-radius: 15px;
   font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   box-shadow: 
-    0 8px 25px rgba(245, 197, 24, 0.4),
-    0 0 0 1px rgba(245, 197, 24, 0.2);
+    0 10px 30px rgba(245, 197, 24, 0.5),
+    0 0 0 1px rgba(245, 197, 24, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    box-shadow: 
+      0 10px 30px rgba(245, 197, 24, 0.5),
+      0 0 0 1px rgba(245, 197, 24, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 
+      0 15px 40px rgba(245, 197, 24, 0.7),
+      0 0 20px rgba(245, 197, 24, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
 }
 
 .form-box button::before {
@@ -732,12 +806,14 @@ footer p {
     background: 
       linear-gradient(90deg, rgba(75, 0, 15, 0.3) 0%, rgba(75, 0, 15, 0.6) 40%, rgba(75, 0, 15, 0.92) 100%), 
       url('lady-justice.png');
-    background-size: cover;
-    background-position: left center;
+    background-size: auto 100vh;
+    background-position: left 5% center;
+    min-height: 100vh;
   }
 
   .hero-content {
     max-width: 650px;
+    margin-right: 5%;
   }
 
   h1 {
@@ -747,6 +823,17 @@ footer p {
 
   .description {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero {
+    background-size: auto 105vh;
+    background-position: left 8% center;
+  }
+  
+  .hero-content {
+    margin-right: 8%;
   }
 }
 

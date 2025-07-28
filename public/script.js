@@ -145,9 +145,20 @@ function initializeFormHandling() {
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
         button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
         
-        // Start download immediately
+        // Enhanced download for mobile and desktop
         setTimeout(() => {
-          window.open(result.downloadUrl, '_blank');
+          const downloadLink = document.createElement('a');
+          downloadLink.href = result.downloadUrl;
+          downloadLink.download = 'Protocol-402-SCETA-Whitepaper.pdf';
+          downloadLink.target = '_blank';
+          downloadLink.rel = 'noopener noreferrer';
+          
+          // Force download on mobile devices
+          if (/Mobi|Android/i.test(navigator.userAgent)) {
+            downloadLink.click();
+          } else {
+            window.open(result.downloadUrl, '_blank');
+          }
         }, 800);
 
         // Redirect to thank you page after successful download
