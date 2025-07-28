@@ -1,0 +1,84 @@
+ frontend is deployed on Render, but your backend (index.js) isn't.
+
+That means when your form tries to POST to:
+
+bash
+Copy
+Edit
+https://protocol-402-landing-page.onrender.com/submit
+…it fails with a 404 Not Found, because there's no Express server running to handle /submit.
+
+✅ What You Need to Do
+🛠 Option A: Deploy fullstack (frontend + backend) together
+Make sure your Render project is set up as a fullstack web service:
+
+index.js must run your server.
+
+public/ folder must be served statically from Express.
+
+Form posts must go to /submit as defined in index.js.
+
+Update your start script in package.json:
+
+json
+Copy
+Edit
+"scripts": {
+  "start": "node index.js"
+}
+Confirm your index.js looks like this (simplified):
+
+js
+Copy
+Edit
+const express = require('express');
+const fetch = require('node-fetch');
+const path = require('path');
+const app = express();
+require('dotenv').config();
+
+app.use(express.static('public'));
+app.use(express.json());
+
+app.post('/submit', async (req, res) => {
+  const { name, email } = req.body;
+  const timestamp = new Date().toISOString();
+
+  try {
+    const response = await fetch(process.env.GOOGLE_SHEETS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, timestamp })
+    });
+    if (!response.ok) throw new Error('Submission failed');
+    res.status(200).json({ message: 'OK' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
+Push to Render and deploy as a single Node.js backend — not just a static frontend repo.
+
+🛠 Option B: Use a separate backend URL (Sheet.best only)
+If you're only using Sheet.best and don't need a custom backend:
+
+Change your form submission in script.js to:
+
+js
+Copy
+Edit
+await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name,
+    email,
+    timestamp: new Date().toISOString()
+  })
+});
+This skips the /submit route and posts directly to Sheet.best.
+
