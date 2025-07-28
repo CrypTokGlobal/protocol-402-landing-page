@@ -14,13 +14,20 @@ function scrollToForm() {
       block: 'center'
     });
 
-    // Focus on name input after scroll
+    // Add bounce animation and focus on name input after scroll
     setTimeout(() => {
+      formBox.classList.add('bounce-in');
       const nameInput = formBox.querySelector('input[name="name"]');
       if (nameInput) {
         nameInput.focus();
+        nameInput.select();
       }
     }, 800);
+
+    // Remove bounce class after animation
+    setTimeout(() => {
+      formBox.classList.remove('bounce-in');
+    }, 1400);
   }
 }
 

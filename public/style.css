@@ -25,76 +25,49 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-/* Hero Section - Clean Split Layout */
+/* Hero Section - Perfect Split Layout */
 .hero {
   min-height: 100vh;
-  background: #000000;
-  position: relative;
+  display: flex;
+  align-items: stretch;
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  align-items: center;
 }
 
 /* Left Side - Lady Justice */
 .hero-left {
-  position: relative;
-  height: 100vh;
+  width: 50%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: 
-    radial-gradient(ellipse at center, rgba(115, 0, 10, 0.3) 0%, transparent 70%),
-    linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  justify-content: flex-start;
+  padding-left: 2rem;
 }
 
 .lady-justice-container {
-  position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .lady-justice-image {
-  width: 80%;
+  width: 90%;
   height: auto;
-  max-height: 85vh;
+  max-height: 95vh;
   object-fit: contain;
-  filter: drop-shadow(0 0 30px rgba(245, 197, 24, 0.4));
-}
-
-/* Golden Text Overlay on Lady Justice */
-.legal-frontiers-text {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 3;
-}
-
-.legal-frontiers-text h2 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 3.2rem;
-  font-style: italic;
-  color: #F5C518;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  line-height: 1.1;
-  margin: 0;
+  filter: drop-shadow(0 0 30px rgba(245, 197, 24, 0.3));
 }
 
 /* Right Side - Content */
 .hero-content {
-  position: relative;
-  z-index: 3;
-  padding: 4rem 3rem;
-  height: 100vh;
+  width: 50%;
+  background: #73000A;
+  padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #73000A;
+  min-height: 100vh;
   border-left: 1px solid rgba(245, 197, 24, 0.2);
 }
 
@@ -166,48 +139,72 @@ h1 {
   background: #F5C518;
   color: #000000;
   border: none;
-  padding: 1.2rem 2rem;
+  padding: 1.3rem 2rem;
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .download-button:hover {
   background: #FFD700;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 197, 24, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(245, 197, 24, 0.5);
 }
 
 /* Form Design - Clean White with Gold Accents */
 .form-box {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.97);
   border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  padding: 2.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   border: 1px solid rgba(245, 197, 24, 0.3);
+  transition: all 0.4s ease;
+}
+
+.form-box.bounce-in {
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .form-box input {
   width: 100%;
-  padding: 1rem 1.2rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 1.2rem 1.4rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1.1rem;
   background: #ffffff;
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   transition: all 0.3s ease;
   font-family: 'Inter', sans-serif;
+  box-shadow: none;
 }
 
 .form-box input:focus {
   outline: none;
   border-color: #F5C518;
-  box-shadow: 0 0 0 2px rgba(245, 197, 24, 0.2);
+  box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.2);
+  transform: translateY(-2px);
 }
 
 .form-box input::placeholder {
@@ -220,18 +217,21 @@ h1 {
   background: #73000A;
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 6px;
-  font-size: 1.1rem;
+  padding: 1.2rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-box button:hover {
   background: #5a0008;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(115, 0, 10, 0.4);
 }
 
 /* Mobile Responsive Design */
@@ -243,6 +243,7 @@ h1 {
       url('/lady-justice.png') center/cover;
     padding: 2rem;
     text-align: center;
+    min-height: 100vh;
   }
 
   .hero-left {
@@ -250,7 +251,9 @@ h1 {
   }
 
   .hero-content {
+    width: 100%;
     height: auto;
+    min-height: auto;
     background: rgba(115, 0, 10, 0.95);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(245, 197, 24, 0.3);
@@ -269,8 +272,13 @@ h1 {
     font-size: 2.2rem;
   }
 
-  .legal-frontiers-text {
-    display: none;
+  .download-button {
+    font-size: 1.2rem;
+    padding: 1.2rem 2rem;
+  }
+
+  .form-box {
+    padding: 2rem;
   }
 }
 
