@@ -1,0 +1,105 @@
+The mobile version is great. But the desktop (web) layout is wrong and needs to be fixed to match the approved mockup and branding guidelines.
+
+❌ PROBLEMS WITH CURRENT DESKTOP VERSION
+Layout is too narrow
+
+The content is stacked like mobile, even on large screens.
+
+We need a split-screen layout: Lady Justice on the left, form on the right.
+
+Background is wrong
+
+Flat red fill is overpowering the theme.
+
+There is no Lady Justice image present on desktop.
+
+Background gradient and positioning of Lady Justice were lost.
+
+Form is duplicated
+
+There are two "Get the Whitepaper" buttons.
+
+It creates confusion and visual clutter — keep only one clean form.
+
+Wrong button colors
+
+The yellow button is too strong without proper background balance.
+
+Glows don’t match SCETA’s aesthetic. The original deep blue button was better.
+
+Typography and spacing is off
+
+Font sizes feel squished together.
+
+Margins/padding need cleanup so content can breathe.
+
+✅ DESKTOP VERSION SHOULD LOOK LIKE:
+✔️ Left half: Lady Justice image full-height, aligned left
+✔️ Right half: content container with:
+
+Title
+
+Description
+
+Name/email form
+
+✅ Submit response
+
+PDF auto-download
+
+✔️ Hero section should be two columns (CSS Grid or Flexbox):
+
+css
+Copy
+Edit
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.hero .left {
+  background: url('/lady-justice.png') no-repeat center;
+  background-size: cover;
+  opacity: 0.25;
+}
+
+.hero .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  background-color: #002B5B;
+  color: white;
+}
+🧠 Design Intent Summary:
+Lady Justice must glow and subtly guide the eye toward the form
+
+Form should feel secure, modern, and trusted (government/academic)
+
+Mobile is already clean — don’t change that layout
+
+Desktop should match the attached flyer exactly: elegant, powerful, branded
+
+BONUS: Visual Polish Checklist
+✅ Font: "DM Serif Display" for titles, "Inter" for body
+
+✅ Lady Justice visible on desktop, hidden or faded out on mobile
+
+✅ Responsive spacing and clean card layout
+
+✅ Only one form
+
+✅ Strong call-to-action button (blue OR gold, not both)
+
+✅ After submit:
+
+Show ✅ success message
+
+Auto-trigger download of:
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+
+This is the final polish. Please align all components accordingly so it looks visually stunning, branded, and responsive on all screen sizes.
+
+Let me know when ready to test.
+
