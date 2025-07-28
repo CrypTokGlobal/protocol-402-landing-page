@@ -91,11 +91,27 @@ h1, h2, h3 {
 }
 
 .header-logo {
-  max-height: 60px;
   height: auto;
   width: auto;
   display: block;
   transition: all 0.3s ease;
+  object-fit: contain;
+}
+
+/* Specific logo sizing for optimal display */
+.header-logo.sceta-logo {
+  max-height: 65px;
+  max-width: 65px;
+}
+
+.header-logo.usc-logo {
+  max-height: 55px;
+  max-width: 120px;
+}
+
+.header-logo.techlaw-logo {
+  max-height: 50px;
+  max-width: 100px;
 }
 
 /* Typography */
@@ -396,11 +412,27 @@ footer p {
 }
 
 .footer-logo {
-  max-height: 40px;
   height: auto;
   width: auto;
   display: block;
   transition: all 0.3s ease;
+  object-fit: contain;
+}
+
+/* Specific footer logo sizing */
+.footer-logo.sceta-logo {
+  max-height: 45px;
+  max-width: 45px;
+}
+
+.footer-logo.usc-logo {
+  max-height: 35px;
+  max-width: 80px;
+}
+
+.footer-logo.techlaw-logo {
+  max-height: 30px;
+  max-width: 70px;
 }
 
 .legal {
