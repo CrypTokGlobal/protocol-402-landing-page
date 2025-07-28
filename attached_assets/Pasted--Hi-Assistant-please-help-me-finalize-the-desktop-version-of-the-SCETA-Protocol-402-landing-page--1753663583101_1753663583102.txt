@@ -1,0 +1,88 @@
+👋 Hi Assistant, please help me finalize the desktop version of the SCETA Protocol 402 landing page to match the mobile version’s elegance and clarity. I’m attaching the working /index.html, and I want you to follow these exact final polish instructions:
+
+🔧 DESIGN + FUNCTIONALITY FIXES
+Lady Justice Image
+
+Ensure the image is positioned left of the hero section content (on desktop), just like the flyer.
+
+It should not cover the form or text.
+
+Add a backdrop-filter: blur(1px) and brightness(0.6) effect to help text remain legible.
+
+Only show it on screens min-width: 768px and up.
+
+Hero Content Container
+
+Wrap the hero-content in a styled card or translucent container with:
+
+background: rgba(0,0,0,0.65)
+
+backdrop-filter: blur(6px)
+
+border: 1px solid rgba(255,255,255,0.15)
+
+Rounded corners and padding
+
+This ensures the text block remains readable over the background image and mimics the flyer design.
+
+Button
+
+The "Get the Whitepaper" button should glow subtly on hover:
+
+css
+Copy
+Edit
+box-shadow: 0 0 12px rgba(0, 102, 204, 0.4);
+Typography
+
+Confirm the following font pairing:
+
+Headings: DM Serif Display
+
+Body and UI: Inter
+
+Favicon
+
+Confirm that /favicon.ico is working (or replace with /lady-justice.png temporarily for testing)
+
+Responsive Behavior
+
+On mobile, hide the Lady Justice image entirely.
+
+The form and headline should center-align on small screens.
+
+✅ FORM HANDLING
+Save form submissions (Name + Email + Timestamp) to:
+
+arduino
+Copy
+Edit
+https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9
+Use method: POST
+
+Data format: { "name": "", "email": "", "timestamp": "" }
+
+After submit:
+
+Show the ✅ success message
+
+Auto-download the whitepaper:
+
+pgsql
+Copy
+Edit
+https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf
+🎉 Bonus Enhancements (Optional but appreciated)
+Add a thank-you.html page with confetti emoji 🎉 and a link to sceta.io
+
+Add Open Graph tags and meta preview image:
+
+html
+Copy
+Edit
+<meta property="og:image" content="/lady-justice.png" />
+<meta name="twitter:card" content="summary_large_image" />
+Improve desktop hero spacing so content doesn’t feel too squished
+
+Let me know if you need any image sizes, links, or fonts confirmed. This is the final step and we want it to WOW legal, tech, and state government stakeholders alike. Thank you! 🙏
+
