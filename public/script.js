@@ -79,13 +79,13 @@ function initializeFormHandling() {
         // Show success message
         showSuccessMessage();
 
-        // Trigger PDF download
-        setTimeout(() => {
-          window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
-        }, 1000);
-
         // Reset form
         form.reset();
+
+        // Trigger PDF download with multiple fallback methods
+        setTimeout(() => {
+          triggerPDFDownload();
+        }, 500);
 
         // Optional: Redirect to thank you page after delay
         setTimeout(() => {
@@ -100,7 +100,15 @@ function initializeFormHandling() {
 
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('There was an error submitting your information. Please try again.');
+      
+      // Still allow download even if submission fails
+      showSuccessMessage('Download starting (submission may have failed)...');
+      setTimeout(() => {
+        triggerPDFDownload();
+      }, 500);
+      
+      // Reset form
+      form.reset();
     } finally {
       // Reset button
       submitBtn.textContent = originalText;
@@ -109,7 +117,61 @@ function initializeFormHandling() {
   });
 }
 
-function showSuccessMessage() {
+function triggerPDFDownload() {
+  const pdfUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+  
+  // Method 1: Try window.open (works on most browsers)
+  try {
+    const downloadWindow = window.open(pdfUrl, '_blank');
+    
+    // If popup was blocked, fallback to other methods
+    if (!downloadWindow || downloadWindow.closed || typeof downloadWindow.closed == 'undefined') {
+      throw new Error('Popup blocked');
+    }
+    
+    console.log('✅ PDF download triggered via window.open');
+    return;
+  } catch (error) {
+    console.log('Window.open failed, trying alternative methods...');
+  }
+
+  // Method 2: Create invisible download link (works on mobile)
+  try {
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.download = 'Protocol-402-SCETA-Whitepaper.pdf';
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    
+    // Make link invisible
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    
+    // Trigger click
+    link.click();
+    
+    // Clean up
+    setTimeout(() => {
+      document.body.removeChild(link);
+    }, 100);
+    
+    console.log('✅ PDF download triggered via invisible link');
+    return;
+  } catch (error) {
+    console.log('Download link failed, trying direct navigation...');
+  }
+
+  // Method 3: Direct navigation (last resort)
+  try {
+    window.location.href = pdfUrl;
+    console.log('✅ PDF download triggered via direct navigation');
+  } catch (error) {
+    console.error('All download methods failed:', error);
+    alert('Please click here to download: ' + pdfUrl);
+  }
+}
+
+function showSuccessMessage(customMessage) {
   // Remove any existing success messages
   const existingMessage = document.querySelector('.success-message');
   if (existingMessage) {
@@ -121,7 +183,7 @@ function showSuccessMessage() {
   successDiv.className = 'success-message';
   successDiv.innerHTML = `
     <span class="checkmark">✅</span>
-    Thank you! Download starting shortly...
+    ${customMessage || 'Thank you! Download starting shortly...'}
   `;
 
   document.body.appendChild(successDiv);
@@ -131,13 +193,13 @@ function showSuccessMessage() {
     successDiv.classList.add('show');
   }, 100);
 
-  // Hide message after 3 seconds
+  // Hide message after 4 seconds
   setTimeout(() => {
     successDiv.classList.remove('show');
     setTimeout(() => {
       successDiv.remove();
     }, 400);
-  }, 3000);
+  }, 4000);
 }
 
 // Make scrollToForm globally available
