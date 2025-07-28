@@ -64,18 +64,20 @@ function initializeFormHandling() {
     submitBtn.disabled = true;
 
     try {
-      // Submit to backend server
-      const response = await fetch('/submit', {
+      // Submit directly to Sheet.best API
+      const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({ 
+          NAME: name,
+          EMAIL: email,
+          TIMESTAMP: new Date().toISOString()
+        })
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (response.ok) {
         // Show success message
         showSuccessMessage();
 
@@ -89,13 +91,11 @@ function initializeFormHandling() {
 
         // Optional: Redirect to thank you page after delay
         setTimeout(() => {
-          if (result.redirectUrl) {
-            window.location.href = result.redirectUrl;
-          }
+          window.location.href = '/thank-you.html';
         }, 3000);
 
       } else {
-        throw new Error(result.error || 'Submission failed');
+        throw new Error('Submission failed');
       }
 
     } catch (error) {
