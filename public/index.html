@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
   <meta name="keywords" content="South Carolina, digital infrastructure, blockchain, AI governance, smart contracts, PalmettoCoin, SCETA, Protocol 402, digital transformation">
   <meta name="author" content="South Carolina Emerging Technology Association (SCETA)">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#F5C518">
+  <meta name="theme-color" content="#DAA520">
 
   <title>Protocol 402: SC's Blueprint for Monetized Digital Infrastructure | SCETA</title>
 
@@ -27,7 +28,7 @@
   <link rel="apple-touch-icon" sizes="57x57" href="/sceta-icon.png">
   <link rel="shortcut icon" href="/sceta-icon.png" type="image/png" />
   <link rel="manifest" href="/manifest.json">
-  <meta name="msapplication-TileColor" content="#F5C518">
+  <meta name="msapplication-TileColor" content="#DAA520">
   <meta name="msapplication-TileImage" content="/sceta-icon.png">
 
   <!-- Open Graph Meta Tags -->
@@ -71,7 +72,7 @@
   <link rel="preload" href="lady-justice.png" as="image" type="image/png">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=DM+Serif+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="loading">
@@ -79,13 +80,24 @@
   <!-- Download Anchor -->
   <div id="download-anchor"></div>
 
-  <!-- Hero Section -->
+  <!-- Hero Section - Split Layout -->
   <section class="hero">
+    <!-- Left Side - Lady Justice -->
+    <div class="hero-left">
+      <div class="lady-justice-container">
+        <img src="/lady-justice.png" alt="Lady Justice" class="lady-justice-image" />
+        <div class="legal-frontiers-text">
+          <h2>Legal<br>Frontiers<br>in the Age<br>of Digital<br>Capital</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Content -->
     <div class="hero-content">
       <div class="header-logos">
-        <span style="color: #F5C518; font-weight: bold; font-size: 1.2rem;">SCETA</span>
-        <span style="color: #F5C518; font-weight: bold; font-size: 1.2rem;">USC</span>
-        <span style="color: #F5C518; font-weight: bold; font-size: 1.2rem;">TECHINLAW</span>
+        <span>SCETA</span>
+        <span>USC</span>
+        <span>TECHINLAW</span>
       </div>
 
       <h2 class="series-tag">#AI=$BTC: DIGITAL ASSET CONVERGENCE SERIES</h2>
@@ -101,14 +113,7 @@
         <p class="download-subtitle">Free 76-page PDF • Instant Download</p>
       </div>
 
-      <!-- Download Button -->
-      <div class="download-button-container">
-        <button type="button" id="downloadButton" class="download-whitepaper-btn">
-          📄 Download the Whitepaper
-        </button>
-      </div>
-
-      <!-- Single Form -->
+      <!-- Form -->
       <form id="whitepaperForm" class="form-box">
         <input type="text" placeholder="Your Name" name="name" required />
         <input type="email" placeholder="Email Address" name="email" required />
