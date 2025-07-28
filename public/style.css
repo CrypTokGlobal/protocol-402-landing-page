@@ -106,35 +106,14 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Lady Justice Background - Desktop Only - Subtle and Elegant */
+/* Clean Burgundy Theme - No Muddy Overlays */
 @media (min-width: 768px) {
   .hero {
-    background: 
-      linear-gradient(90deg, 
-        rgba(128, 0, 32, 0.95) 0%, 
-        rgba(128, 0, 32, 0.85) 40%, 
-        rgba(74, 0, 18, 0.9) 60%,
-        rgba(74, 0, 18, 0.95) 80%,
-        rgba(74, 0, 18, 1) 100%
-      ),
-      url('lady-justice.png');
-    background-size: contain, cover;
-    background-position: left 10% center, center;
-    background-repeat: no-repeat, no-repeat;
+    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
   }
   
   .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 45%;
-    height: 100%;
-    background: url('lady-justice.png') no-repeat left center;
-    background-size: contain;
-    filter: brightness(0.7) contrast(1.2) sepia(0.3) hue-rotate(320deg);
-    opacity: 0.15;
-    z-index: 1;
+    display: none;
   }
 }
 
@@ -148,23 +127,22 @@ h1, h2, h3 {
 .hero-content {
   position: relative;
   z-index: 3;
-  margin-left: auto;
-  margin-right: 5%;
+  margin: 0 auto;
   max-width: 600px;
   width: 100%;
   padding: 4rem;
-  background: rgba(128, 0, 32, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(245, 197, 24, 0.3);
   border-radius: 24px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out 0.3s forwards;
   box-shadow: 
     0 30px 100px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(245, 197, 24, 0.3),
-    0 0 40px rgba(245, 197, 24, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 0 0 1px rgba(245, 197, 24, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 /* Header Logos - Perfect Spacing */
@@ -177,24 +155,17 @@ h1, h2, h3 {
   animation: fadeInDown 1s ease-out 0.2s forwards;
 }
 
-/* Desktop optimizations - Split layout with burgundy theme */
+/* Desktop optimizations - Clean burgundy layout */
 @media (min-width: 1200px) {
   .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    display: flex;
     align-items: center;
-    background-size: contain, cover;
-    background-position: left 15% center, center;
-  }
-  
-  .hero::before {
-    background-size: contain;
-    width: 40%;
+    justify-content: center;
+    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
   }
   
   .hero-content {
-    margin-right: 3%;
+    margin: 0 auto;
     max-width: 650px;
     padding: 4rem;
     background: rgba(128, 0, 32, 0.9);
@@ -202,35 +173,13 @@ h1, h2, h3 {
 }
 
 @media (min-width: 1400px) {
-  .hero {
-    background-size: contain, cover;
-    background-position: left 18% center, center;
-  }
-  
-  .hero::before {
-    background-size: contain;
-    width: 38%;
-  }
-  
   .hero-content {
-    margin-right: 2%;
     max-width: 680px;
   }
 }
 
 @media (min-width: 1600px) {
-  .hero {
-    background-size: contain, cover;
-    background-position: left 20% center, center;
-  }
-  
-  .hero::before {
-    background-size: contain;
-    width: 36%;
-  }
-  
   .hero-content {
-    margin-right: 1%;
     max-width: 700px;
   }
 }
@@ -885,28 +834,16 @@ footer p {
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero {
-    background: 
-      linear-gradient(90deg, 
-        rgba(128, 0, 32, 0.9) 0%, 
-        rgba(128, 0, 32, 0.8) 35%, 
-        rgba(74, 0, 18, 0.85) 60%,
-        rgba(74, 0, 18, 0.95) 100%
-      ),
-      url('lady-justice.png');
-    background-size: contain, cover;
-    background-position: left 12% center, center;
-    background-repeat: no-repeat, no-repeat;
+    background: linear-gradient(135deg, #800020 0%, #4a0012 100%);
   }
   
   .hero::before {
-    background-size: contain;
-    background-position: left 12% center;
-    width: 42%;
+    display: none;
   }
 
   .hero-content {
     max-width: 520px;
-    margin-right: 4%;
+    margin: 0 auto;
     padding: 3.5rem;
     background: rgba(128, 0, 32, 0.85);
   }
