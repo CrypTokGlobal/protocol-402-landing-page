@@ -1,488 +1,137 @@
-// Enhanced landing page with world-class animations and interactions
+// Protocol 402 Landing Page - Clean JavaScript
 document.addEventListener('DOMContentLoaded', function() {
-  // Prevent duplicate initialization with more robust checking
-  if (window.scetaInitialized || document.body.dataset.initialized === 'true') return;
-  window.scetaInitialized = true;
-  document.body.dataset.initialized = 'true';
+  console.log('🚀 SCETA Protocol 402 - Landing page loaded');
 
-  console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
-
-  // Initialize page load animation
-  initializePageLoad();
-
-  // Initialize smooth scroll and focus management
-  initializePageInteractions();
-
-  // Enhanced form handling with success animation
+  // Initialize form handling
   initializeFormHandling();
-
-  // Performance and accessibility enhancements
-  initializeOptimizations();
-
-  // Initialize scroll-to-top
-  initializeScrollToTop();
-
-  // Initialize download button
-  initializeDownloadButton();
 });
 
-function initializePageLoad() {
-  // Add smooth page load effect
-  document.body.classList.add('loaded');
+function scrollToForm() {
+  const formBox = document.querySelector('.form-box');
+  if (formBox) {
+    formBox.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'center'
+    });
 
-  // Remove loading class after a brief delay to trigger animations
-  setTimeout(() => {
-    document.body.classList.remove('loading');
-  }, 100);
-
-  // Track page load (only once)
-  if (!window.pageLoadTracked) {
-    console.log('🚀 SCETA Protocol 402 - Page loaded successfully');
-    window.pageLoadTracked = true;
+    // Focus on name input after scroll
+    setTimeout(() => {
+      const nameInput = formBox.querySelector('input[name="name"]');
+      if (nameInput) {
+        nameInput.focus();
+      }
+    }, 800);
   }
-}
-
-function initializePageInteractions() {
-  // Auto-focus name field after animations complete
-  setTimeout(() => {
-    const nameField = document.querySelector('input[name="name"]');
-    if (nameField) {
-      nameField.focus();
-    }
-  }, 2000);
-
-  // Smooth scroll for download buttons
-  const downloadLinks = document.querySelectorAll('.scroll-to-form, .primary-download-btn');
-  downloadLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const formBox = document.querySelector('.form-box');
-      if (formBox) {
-        formBox.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-
-        // Add focus highlight after scroll
-        setTimeout(() => {
-          formBox.style.boxShadow = '0 0 0 3px rgba(245, 197, 24, 0.5), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.3)';
-          setTimeout(() => {
-            formBox.style.boxShadow = '0 0 0 1px rgba(245, 197, 24, 0.2), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.1)';
-          }, 2000);
-        }, 500);
-        
-        // Focus the name input after scroll
-        setTimeout(() => {
-          const nameField = document.querySelector('input[name="name"]');
-          if (nameField) {
-            nameField.focus();
-          }
-        }, 800);
-      }
-    });
-  });
-
-  // Enhanced button interactions with cursor effects
-  const buttons = document.querySelectorAll('button, .footer-btn, .scroll-to-form');
-  buttons.forEach(button => {
-    button.addEventListener('mouseenter', function() {
-      this.style.cursor = 'pointer';
-      if (!this.classList.contains('processing')) {
-        this.style.transform = this.style.transform || 'translateY(0) scale(1)';
-        if (this.classList.contains('scroll-to-form')) {
-          this.style.transform = 'translateY(-2px) rotate(-1deg)';
-        } else {
-          this.style.transform = 'translateY(-3px) scale(1.02) rotate(-1deg)';
-        }
-      }
-    });
-
-    button.addEventListener('mouseleave', function() {
-      if (!this.classList.contains('processing')) {
-        this.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-      }
-    });
-  });
 }
 
 function initializeFormHandling() {
   const form = document.getElementById('whitepaperForm');
-  const button = form.querySelector('button');
-  const originalButtonText = button.textContent;
+  if (!form) return;
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const formData = new FormData(this);
-    const data = {
-      name: formData.get('name').trim(),
-      email: formData.get('email').trim()
-    };
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
 
-    // Enhanced validation
-    if (!data.name || data.name.length < 2) {
-      showFormFeedback('Please enter your full name', 'error');
+    // Get form data
+    const formData = new FormData(form);
+    const name = formData.get('name').trim();
+    const email = formData.get('email').trim();
+
+    // Basic validation
+    if (!name || !email) {
+      alert('Please fill in all fields');
       return;
     }
 
-    if (!isValidEmail(data.email)) {
-      showFormFeedback('Please enter a valid email address', 'error');
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address');
       return;
     }
 
-    // Set enhanced processing state
-    button.classList.add('processing');
-    button.textContent = '⏳ Processing...';
-    button.style.background = 'linear-gradient(135deg, #6c757d, #5a6268)';
-    button.style.boxShadow = '0 4px 15px rgba(108, 117, 125, 0.4)';
-    button.disabled = true;
+    // Update button state
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.disabled = true;
 
     try {
+      // Submit to backend
       const response = await fetch('/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ name, email })
       });
 
       const result = await response.json();
 
-      if (result.success) {
-        // Show enhanced success animation
+      if (response.ok && result.success) {
+        // Show success message
         showSuccessMessage();
 
-        // Success button state with enhanced styling
-        button.textContent = '🎉 Download Started!';
-        button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
-        button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
-
-        // Enhanced download for all devices
+        // Trigger PDF download
         setTimeout(() => {
-          const downloadLink = document.createElement('a');
-          downloadLink.href = result.downloadUrl;
-          downloadLink.download = 'Protocol-402-SCETA-Whitepaper.pdf';
-          downloadLink.target = '_blank';
-          downloadLink.rel = 'noopener noreferrer';
+          window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
+        }, 1000);
 
-          // Add to DOM temporarily for download
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
+        // Reset form
+        form.reset();
 
-          console.log('Protocol 402 whitepaper download initiated');
-        }, 800);
-
-        // Redirect to thank you page after successful download
+        // Optional: Redirect to thank you page after delay
         setTimeout(() => {
-          window.location.href = result.redirectUrl || '/thank-you.html';
-        }, 2000);
+          if (result.redirectUrl) {
+            window.location.href = result.redirectUrl;
+          }
+        }, 3000);
 
       } else {
         throw new Error(result.error || 'Submission failed');
       }
+
     } catch (error) {
-      console.error('Submission error:', error);
-      showFormFeedback('Something went wrong. Please try again.', 'error');
-
-      button.textContent = '❌ Try Again';
-      button.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
-      button.style.boxShadow = '0 0 20px rgba(220, 53, 69, 0.4)';
-
-      setTimeout(resetButton, 4000);
+      console.error('Form submission error:', error);
+      alert('There was an error submitting your information. Please try again.');
+    } finally {
+      // Reset button
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
     }
-
-    function resetButton() {
-      button.classList.remove('processing');
-      button.textContent = originalButtonText;
-      button.style.background = 'linear-gradient(135deg, #F5C518, #E6B800)';
-      button.style.boxShadow = '0 8px 25px rgba(245, 197, 24, 0.4), 0 0 0 1px rgba(245, 197, 24, 0.2)';
-      button.style.transform = 'translateY(0) scale(1) rotate(0deg)';
-      button.disabled = false;
-    }
-  });
-
-  // Real-time input validation with enhanced UX
-  const inputs = form.querySelectorAll('input');
-  inputs.forEach(input => {
-    input.addEventListener('blur', function() {
-      validateInput(this);
-    });
-
-    input.addEventListener('input', function() {
-      if (this.classList.contains('error')) {
-        validateInput(this);
-      }
-    });
-
-    // Add focus effects
-    input.addEventListener('focus', function() {
-      this.style.transform = 'translateY(-1px)';
-    });
-
-    input.addEventListener('blur', function() {
-      if (!this.classList.contains('error')) {
-        this.style.transform = 'translateY(0)';
-      }
-    });
   });
 }
 
 function showSuccessMessage() {
-  // Create enhanced success modal
+  // Remove any existing success messages
+  const existingMessage = document.querySelector('.success-message');
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+
+  // Create success message
   const successDiv = document.createElement('div');
   successDiv.className = 'success-message';
   successDiv.innerHTML = `
-    <span class="checkmark">🎉</span>
-    <div>Thank You!</div>
-    <div style="font-size: 1rem; font-weight: 400; margin-top: 0.5rem;">Your download will begin shortly...</div>
+    <span class="checkmark">✅</span>
+    Thank you! Download starting shortly...
   `;
 
   document.body.appendChild(successDiv);
 
-  // Animate in
+  // Show message with animation
   setTimeout(() => {
     successDiv.classList.add('show');
   }, 100);
 
-  // Animate out
+  // Hide message after 3 seconds
   setTimeout(() => {
     successDiv.classList.remove('show');
     setTimeout(() => {
-      if (successDiv.parentNode) {
-        successDiv.parentNode.removeChild(successDiv);
-      }
+      successDiv.remove();
     }, 400);
   }, 3000);
 }
 
-function validateInput(input) {
-  const value = input.value.trim();
-
-  if (input.name === 'name') {
-    if (value.length < 2) {
-      setInputError(input, 'Name must be at least 2 characters');
-      return false;
-    }
-  }
-
-  if (input.name === 'email') {
-    if (!isValidEmail(value)) {
-      setInputError(input, 'Please enter a valid email address');
-      return false;
-    }
-  }
-
-  setInputSuccess(input);
-  return true;
-}
-
-function setInputError(input, message) {
-  input.classList.add('error');
-  input.style.borderColor = '#dc3545';
-  input.style.boxShadow = '0 0 0 3px rgba(220, 53, 69, 0.2)';
-  input.style.transform = 'translateY(1px)';
-}
-
-function setInputSuccess(input) {
-  input.classList.remove('error');
-  input.style.borderColor = '#28a745';
-  input.style.boxShadow = '0 0 0 3px rgba(40, 167, 69, 0.2)';
-  input.style.transform = 'translateY(0)';
-}
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function showFormFeedback(message, type, duration = 5000) {
-  // Remove existing feedback
-  const existingFeedback = document.querySelector('.form-feedback');
-  if (existingFeedback) {
-    existingFeedback.remove();
-  }
-
-  // Create enhanced feedback element
-  const feedback = document.createElement('div');
-  feedback.className = `form-feedback ${type}`;
-  feedback.textContent = message;
-
-  // Enhanced styling
-  feedback.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 1.2rem 1.8rem;
-    border-radius: 12px;
-    color: white;
-    font-weight: 600;
-    z-index: 10000;
-    opacity: 0;
-    transform: translateX(100px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 350px;
-    word-wrap: break-word;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  `;
-
-  // Set background based on type
-  const backgrounds = {
-    success: 'linear-gradient(135deg, #28a745, #20c997)',
-    error: 'linear-gradient(135deg, #dc3545, #c82333)',
-    info: 'linear-gradient(135deg, #17a2b8, #138496)'
-  };
-  feedback.style.background = backgrounds[type] || backgrounds.info;
-
-  document.body.appendChild(feedback);
-
-  // Animate in
-  setTimeout(() => {
-    feedback.style.opacity = '1';
-    feedback.style.transform = 'translateX(0)';
-  }, 100);
-
-  // Animate out
-  setTimeout(() => {
-    feedback.style.opacity = '0';
-    feedback.style.transform = 'translateX(100px)';
-    setTimeout(() => {
-      if (feedback.parentNode) {
-        feedback.remove();
-      }
-    }, 400);
-  }, duration);
-}
-
-function initializeDownloadButton() {
-  const downloadButton = document.getElementById('downloadButton');
-  if (!downloadButton) return;
-
-  downloadButton.addEventListener('click', function() {
-    const formBox = document.querySelector('.form-box');
-    if (formBox) {
-      // Smooth scroll to form
-      formBox.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-      });
-
-      // Auto-focus the name field after scroll completes
-      setTimeout(() => {
-        const nameField = document.querySelector('input[name="name"]');
-        if (nameField) {
-          nameField.focus();
-        }
-      }, 800);
-    }
-  });
-}
-
-function initializeScrollToTop() {
-  // Create scroll-to-top button
-  const scrollToTopBtn = document.createElement('button');
-  scrollToTopBtn.className = 'scroll-to-top';
-  scrollToTopBtn.innerHTML = '↑';
-  scrollToTopBtn.setAttribute('aria-label', 'Scroll to top');
-  document.body.appendChild(scrollToTopBtn);
-
-  // Show/hide based on scroll position
-  let scrollTimer;
-  window.addEventListener('scroll', function() {
-    clearTimeout(scrollTimer);
-    scrollTimer = setTimeout(() => {
-      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-
-      if (scrollPercent > 50) {
-        scrollToTopBtn.classList.add('visible');
-      } else {
-        scrollToTopBtn.classList.remove('visible');
-      }
-    }, 10);
-  });
-
-  // Smooth scroll to top
-  scrollToTopBtn.addEventListener('click', function() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-}
-
-function initializeOptimizations() {
-  // Enhanced lazy loading for Lady Justice image
-  const hero = document.querySelector('.hero');
-  if (hero && !window.heroImageLoaded) {
-    window.heroImageLoaded = true; // Set flag immediately to prevent duplicates
-    const img = new Image();
-    img.onload = function() {
-      console.log('Lady Justice image loaded successfully');
-    };
-    img.onerror = function() {
-      console.warn('Lady Justice image failed to load, using fallback');
-      hero.style.background = 'linear-gradient(135deg, #4b000f 0%, #2a0008 100%)';
-    };
-    img.src = '/lady-justice.png';
-  }
-
-  // Enhanced intersection observer for scroll animations
-  if (!window.observerInitialized) {
-    window.observerInitialized = true; // Set flag immediately
-    
-    const observerOptions = {
-      threshold: 0.2,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe animated elements with enhanced effects
-    document.querySelectorAll('.card, .features h2, .form-box').forEach((el, index) => {
-      if (!el.dataset.observed) {
-        el.dataset.observed = 'true';
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(40px)';
-        el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-        observer.observe(el);
-      }
-    });
-
-    console.log('✅ Optimization complete');
-  }
-}
-
-// Enhanced performance monitoring
-window.addEventListener('load', function() {
-  if (!window.performanceTracked && 'performance' in window) {
-    // Use navigation timing for accurate load time
-    if (performance.timing) {
-      const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-      if (loadTime > 0 && loadTime < 60000) {
-        console.log(`⚡ Page loaded in ${loadTime}ms`);
-        if (loadTime < 3000) {
-          console.log('✅ Excellent load performance');
-        }
-      }
-    } else if (performance.now) {
-      const loadTime = Math.round(performance.now());
-      if (loadTime > 0 && loadTime < 60000) {
-        console.log(`⚡ Page loaded in ${loadTime}ms`);
-        if (loadTime < 3000) {
-          console.log('✅ Excellent load performance');
-        }
-      }
-    } else {
-      console.log('🚀 SCETA Protocol 402 landing page fully loaded');
-    }
-    window.performanceTracked = true;
-  }
-});
+// Make scrollToForm globally available
+window.scrollToForm = scrollToForm;
