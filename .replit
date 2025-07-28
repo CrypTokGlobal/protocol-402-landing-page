@@ -12,7 +12,7 @@ packages = ["file"]
 [deployment]
 deploymentTarget = "gce"
 ignorePorts = false
-run = ["sh", "-c", "node index.js "]
+run = ["sh", "-c", "node index.js"]
 
 [workflows]
 runButton = "Start Server"
