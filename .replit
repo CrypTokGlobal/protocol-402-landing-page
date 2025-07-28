@@ -10,9 +10,10 @@ channel = "stable-24_11"
 packages = ["file"]
 
 [deployment]
-deploymentTarget = "gce"
+deploymentTarget = "static"
 ignorePorts = false
-run = ["sh", "-c", "node index.js"]
+build = ["sh", "-c", "node index.js"]
+publicDir = "public"
 
 [workflows]
 runButton = "Start Server"
