@@ -167,6 +167,12 @@ app.post('/submit', async (req, res) => {
         error: 'An error occurred while processing your request. Please try again.' 
       });
     }
+  } catch (error) {
+    console.error('Error processing submission:', error);
+    res.status(500).json({ 
+      error: 'An error occurred while processing your request. Please try again.' 
+    });
+  }
 });
 
 // Redirect to actual whitepaper PDF
@@ -177,12 +183,6 @@ app.get('/whitepaper.pdf', (req, res) => {
 // Admin endpoint to view submissions (remove in production)
 app.get('/admin/submissions', (req, res) => {
   res.json(submissions);
-} catch (error) {
-    console.error('Error processing submission:', error);
-    res.status(500).json({ 
-      error: 'An error occurred while processing your request. Please try again.' 
-    });
-  }
 });
 
 app.listen(PORT, '0.0.0.0', () => {
