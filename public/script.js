@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize scroll-to-top
   initializeScrollToTop();
+
+  // Initialize download button
+  initializeDownloadButton();
 });
 
 function initializePageLoad() {
@@ -349,6 +352,30 @@ function showFormFeedback(message, type, duration = 5000) {
       }
     }, 400);
   }, duration);
+}
+
+function initializeDownloadButton() {
+  const downloadButton = document.getElementById('downloadButton');
+  if (!downloadButton) return;
+
+  downloadButton.addEventListener('click', function() {
+    const formBox = document.querySelector('.form-box');
+    if (formBox) {
+      // Smooth scroll to form
+      formBox.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+      // Auto-focus the name field after scroll completes
+      setTimeout(() => {
+        const nameField = document.querySelector('input[name="name"]');
+        if (nameField) {
+          nameField.focus();
+        }
+      }, 800);
+    }
+  });
 }
 
 function initializeScrollToTop() {

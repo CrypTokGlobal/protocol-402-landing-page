@@ -254,6 +254,57 @@ h1, h2, h3 {
   }
 }
 
+/* Download Button Above Form */
+.download-button-container {
+  margin: 2rem 0 3rem 0;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.2s forwards;
+}
+
+.download-whitepaper-btn {
+  background: linear-gradient(135deg, #F5C518 0%, #E6B800 100%);
+  color: #002B5B;
+  border: none;
+  font-weight: 700;
+  font-size: 1.3rem;
+  padding: 1.2rem 2.5rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 0 20px rgba(245, 197, 24, 0.6),
+    0 10px 30px rgba(245, 197, 24, 0.4),
+    0 0 0 1px rgba(245, 197, 24, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.download-whitepaper-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 0 30px rgba(245, 197, 24, 0.8),
+    0 15px 40px rgba(245, 197, 24, 0.5),
+    0 0 15px rgba(245, 197, 24, 0.6);
+}
+
+.download-whitepaper-btn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Mobile responsiveness for download button */
+@media (max-width: 767px) {
+  .download-button-container {
+    margin: 1.5rem 0 2rem 0;
+  }
+  
+  .download-whitepaper-btn {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+}
+
 /* Keep download CTA on mobile */
 @media (max-width: 767px) {
   .download-cta-section {
