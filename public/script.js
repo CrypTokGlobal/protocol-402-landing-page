@@ -1,6 +1,10 @@
 
 // Enhanced landing page with world-class animations and interactions
 document.addEventListener('DOMContentLoaded', function() {
+  // Prevent duplicate initialization
+  if (window.scetaInitialized) return;
+  window.scetaInitialized = true;
+  
   console.log('🚀 SCETA Protocol 402 - World-class landing page initialized');
   
   // Initialize page load animation
@@ -30,10 +34,7 @@ function initializePageLoad() {
   
   // Track conversion for analytics (only once)
   if (!window.pageLoadTracked) {
-    console.log('Conversion tracked:', {
-      name: 'Page Load',
-      email: 'analytics@sceta.io'
-    });
+    console.log('Page loaded successfully');
     window.pageLoadTracked = true;
   }
 }
@@ -145,7 +146,7 @@ function initializeFormHandling() {
         button.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
         button.style.boxShadow = '0 0 30px rgba(40, 167, 69, 0.6), 0 0 12px #28a745';
         
-        // Enhanced download for mobile and desktop
+        // Enhanced download for all devices
         setTimeout(() => {
           const downloadLink = document.createElement('a');
           downloadLink.href = result.downloadUrl;
@@ -153,12 +154,12 @@ function initializeFormHandling() {
           downloadLink.target = '_blank';
           downloadLink.rel = 'noopener noreferrer';
           
-          // Force download on mobile devices
-          if (/Mobi|Android/i.test(navigator.userAgent)) {
-            downloadLink.click();
-          } else {
-            window.open(result.downloadUrl, '_blank');
-          }
+          // Add to DOM temporarily for download
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+          
+          console.log('Protocol 402 whitepaper download initiated');
         }, 800);
 
         // Redirect to thank you page after successful download
@@ -381,8 +382,6 @@ function initializeOptimizations() {
     const img = new Image();
     img.onload = function() {
       console.log('Lady Justice image loaded successfully');
-      hero.style.backgroundImage = hero.style.backgroundImage || 
-        `linear-gradient(90deg, rgba(75, 0, 15, 0.1) 0%, rgba(75, 0, 15, 0.3) 45%, rgba(75, 0, 15, 0.95) 100%), url('/lady-justice.png')`;
       window.heroImageLoaded = true;
     };
     img.onerror = function() {
@@ -419,37 +418,26 @@ function initializeOptimizations() {
     });
 
     window.observerInitialized = true;
-    console.log('🚀 SCETA Protocol 402 landing page fully loaded');
+    console.log('Optimization complete');
   }
 }
 
 // Enhanced performance monitoring
 window.addEventListener('load', function() {
-  if ('performance' in window && performance.timing) {
+  if (!window.performanceTracked && 'performance' in window && performance.timing) {
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
     
     // Only log if we have valid timing data
     if (loadTime > 0 && loadTime < 60000) { // Reasonable range: 0-60 seconds
-      console.log(`⚡ Page loaded in ${loadTime}ms`);
+      console.log(`Page loaded in ${loadTime}ms`);
       
       // Track performance for analytics
       if (loadTime < 3000) {
-        console.log('✅ Excellent load performance');
-      } else if (loadTime < 5000) {
-        console.log('⚠️ Good load performance');
-      } else {
-        console.log('🔄 Consider optimizing load performance');
+        console.log('Excellent load performance');
       }
     } else {
-      console.log('⚡ Page loaded successfully');
+      console.log('Page loaded successfully');
     }
+    window.performanceTracked = true;
   }
-});
-
-// Add conversion tracking
-window.addEventListener('beforeunload', function() {
-  console.log('Conversion tracked:', {
-    name: 'Session End',
-    email: 'analytics@sceta.io'
-  });
 });
