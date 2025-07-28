@@ -18,9 +18,22 @@ app.use((req, res, next) => {
 });
 
 // Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static('public'));
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({ 
+    error: 'An unexpected error occurred. Please try again.' 
+  });
+});
+
+// Handle 404s
+app.use((req, res) => {
+  res.status(404).json({ error: 'Page not found' });
+});
 
 // Store submissions in memory for now (can be replaced with Google Sheets API)
 let submissions = [];
@@ -92,22 +105,31 @@ app.get('/thank-you.html', (req, res) => {
 
 // Handle form submission
 app.post('/submit', async (req, res) => {
-  const { name, email } = req.body;
+  try {
+    const { name, email } = req.body;
 
-  if (!name || !email) {
-    return res.status(400).json({ error: 'Name and email are required' });
-  }
+    if (!name || !email) {
+      return res.status(400).json({ error: 'Name and email are required' });
+    }
 
-  // Basic email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ error: 'Please enter a valid email address' });
-  }
+    // Sanitize inputs
+    const sanitizedName = String(name).trim().substring(0, 100);
+    const sanitizedEmail = String(email).trim().toLowerCase().substring(0, 100);
+
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(sanitizedEmail)) {
+      return res.status(400).json({ error: 'Please enter a valid email address' });
+    }
+
+    // Use sanitized values
+    const name_clean = sanitizedName;
+    const email_clean = sanitizedEmail;
 
   // Create submission object
   const submission = {
-    name: name.trim(),
-    email: email.trim().toLowerCase(),
+    name: name_clean,
+    email: email_clean,
     timestamp: new Date().toISOString(),
     id: Date.now()
   };

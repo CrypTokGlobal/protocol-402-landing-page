@@ -28,11 +28,14 @@ function initializePageLoad() {
     document.body.classList.remove('loading');
   }, 100);
   
-  // Track conversion for analytics
-  console.log('Conversion tracked:', {
-    name: 'Page Load',
-    email: 'analytics@sceta.io'
-  });
+  // Track conversion for analytics (only once)
+  if (!window.pageLoadTracked) {
+    console.log('Conversion tracked:', {
+      name: 'Page Load',
+      email: 'analytics@sceta.io'
+    });
+    window.pageLoadTracked = true;
+  }
 }
 
 function initializePageInteractions() {
@@ -363,60 +366,71 @@ function initializeScrollToTop() {
 function initializeOptimizations() {
   // Enhanced lazy loading for Lady Justice image
   const hero = document.querySelector('.hero');
-  if (hero) {
+  if (hero && !window.heroImageLoaded) {
     const img = new Image();
     img.onload = function() {
       console.log('Lady Justice image loaded successfully');
       hero.style.backgroundImage = hero.style.backgroundImage || 
         `linear-gradient(90deg, rgba(75, 0, 15, 0.1) 0%, rgba(75, 0, 15, 0.3) 45%, rgba(75, 0, 15, 0.95) 100%), url('/lady-justice.png')`;
+      window.heroImageLoaded = true;
     };
     img.onerror = function() {
       console.warn('Lady Justice image failed to load, using fallback');
       hero.style.background = 'linear-gradient(135deg, #4b000f 0%, #2a0008 100%)';
+      window.heroImageLoaded = true;
     };
     img.src = '/lady-justice.png';
   }
 
   // Enhanced intersection observer for scroll animations
-  const observerOptions = {
-    threshold: 0.2,
-    rootMargin: '0px 0px -50px 0px'
-  };
+  if (!window.observerInitialized) {
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe animated elements with enhanced effects
+    document.querySelectorAll('.card, .features h2, .form-box').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(40px)';
+      el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
+      observer.observe(el);
     });
-  }, observerOptions);
 
-  // Observe animated elements with enhanced effects
-  document.querySelectorAll('.card, .features h2, .form-box').forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(40px)';
-    el.style.transition = `all 0.8s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-    observer.observe(el);
-  });
-
-  console.log('🚀 SCETA Protocol 402 landing page fully loaded');
+    window.observerInitialized = true;
+    console.log('🚀 SCETA Protocol 402 landing page fully loaded');
+  }
 }
 
 // Enhanced performance monitoring
 window.addEventListener('load', function() {
-  if ('performance' in window) {
+  if ('performance' in window && performance.timing) {
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-    console.log(`⚡ Page loaded in ${loadTime}ms`);
     
-    // Track performance for analytics
-    if (loadTime < 3000) {
-      console.log('✅ Excellent load performance');
-    } else if (loadTime < 5000) {
-      console.log('⚠️ Good load performance');
+    // Only log if we have valid timing data
+    if (loadTime > 0 && loadTime < 60000) { // Reasonable range: 0-60 seconds
+      console.log(`⚡ Page loaded in ${loadTime}ms`);
+      
+      // Track performance for analytics
+      if (loadTime < 3000) {
+        console.log('✅ Excellent load performance');
+      } else if (loadTime < 5000) {
+        console.log('⚠️ Good load performance');
+      } else {
+        console.log('🔄 Consider optimizing load performance');
+      }
     } else {
-      console.log('🔄 Consider optimizing load performance');
+      console.log('⚡ Page loaded successfully');
     }
   }
 });
