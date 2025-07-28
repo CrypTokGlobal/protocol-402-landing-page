@@ -48,10 +48,10 @@ function initializePageInteractions() {
     }
   }, 2000);
 
-  // Smooth scroll for download anchor
-  const scrollToFormLink = document.querySelector('.scroll-to-form');
-  if (scrollToFormLink) {
-    scrollToFormLink.addEventListener('click', function(e) {
+  // Smooth scroll for download buttons
+  const downloadLinks = document.querySelectorAll('.scroll-to-form, .primary-download-btn');
+  downloadLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
       e.preventDefault();
       const formBox = document.querySelector('.form-box');
       if (formBox) {
@@ -67,9 +67,17 @@ function initializePageInteractions() {
             formBox.style.boxShadow = '0 0 0 1px rgba(245, 197, 24, 0.2), 0 25px 80px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 40px rgba(245, 197, 24, 0.1)';
           }, 2000);
         }, 500);
+        
+        // Focus the name input after scroll
+        setTimeout(() => {
+          const nameField = document.querySelector('input[name="name"]');
+          if (nameField) {
+            nameField.focus();
+          }
+        }, 800);
       }
     });
-  }
+  });
 
   // Enhanced button interactions with cursor effects
   const buttons = document.querySelectorAll('button, .footer-btn, .scroll-to-form');
