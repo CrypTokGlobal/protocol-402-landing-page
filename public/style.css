@@ -111,15 +111,15 @@ h1, h2, h3 {
   .hero {
     background: 
       linear-gradient(90deg, 
-        rgba(75, 0, 15, 0.2) 0%, 
-        rgba(75, 0, 15, 0.5) 35%, 
-        rgba(75, 0, 15, 0.8) 60%,
-        rgba(42, 0, 8, 0.95) 85%,
+        rgba(75, 0, 15, 0.1) 0%, 
+        rgba(75, 0, 15, 0.3) 25%, 
+        rgba(75, 0, 15, 0.6) 50%,
+        rgba(42, 0, 8, 0.9) 75%,
         rgba(42, 0, 8, 1) 100%
       ),
       url('lady-justice.png');
-    background-size: auto 85%, cover;
-    background-position: left 2% center, center;
+    background-size: auto 75%, cover;
+    background-position: left 8% center, center;
     background-repeat: no-repeat, no-repeat;
   }
 }
@@ -162,15 +162,15 @@ h1, h2, h3 {
   animation: fadeInDown 1s ease-out 0.2s forwards;
 }
 
-/* Desktop optimizations - Perfect Lady Justice scaling */
+/* Desktop optimizations - Perfect Lady Justice scaling with sword pointing to form */
 @media (min-width: 1200px) {
   .hero {
-    background-size: auto 88%, cover;
-    background-position: left 5% center, center;
+    background-size: auto 78%, cover;
+    background-position: left 12% center, center;
   }
   
   .hero-content {
-    margin-right: 4%;
+    margin-right: 5%;
     max-width: 560px;
     padding: 4rem;
   }
@@ -178,8 +178,8 @@ h1, h2, h3 {
 
 @media (min-width: 1400px) {
   .hero {
-    background-size: auto 90%, cover;
-    background-position: left 8% center, center;
+    background-size: auto 80%, cover;
+    background-position: left 15% center, center;
   }
   
   .hero-content {
@@ -190,24 +190,24 @@ h1, h2, h3 {
 
 @media (min-width: 1600px) {
   .hero {
-    background-size: auto 92%, cover;
-    background-position: left 12% center, center;
+    background-size: auto 82%, cover;
+    background-position: left 18% center, center;
   }
   
   .hero-content {
-    margin-right: 8%;
+    margin-right: 7%;
     max-width: 600px;
   }
 }
 
 @media (min-width: 1800px) {
   .hero {
-    background-size: auto 94%, cover;
-    background-position: left 15% center, center;
+    background-size: auto 84%, cover;
+    background-position: left 20% center, center;
   }
   
   .hero-content {
-    margin-right: 10%;
+    margin-right: 8%;
     max-width: 620px;
   }
 }
@@ -862,20 +862,20 @@ footer p {
   .hero {
     background: 
       linear-gradient(90deg, 
-        rgba(75, 0, 15, 0.3) 0%, 
-        rgba(75, 0, 15, 0.6) 40%, 
-        rgba(75, 0, 15, 0.85) 65%,
+        rgba(75, 0, 15, 0.2) 0%, 
+        rgba(75, 0, 15, 0.5) 35%, 
+        rgba(75, 0, 15, 0.8) 60%,
         rgba(42, 0, 8, 1) 100%
       ),
       url('lady-justice.png');
-    background-size: auto 82%, cover;
-    background-position: left 0% center, center;
+    background-size: auto 72%, cover;
+    background-position: left 5% center, center;
     background-repeat: no-repeat, no-repeat;
   }
 
   .hero-content {
     max-width: 480px;
-    margin-right: 3%;
+    margin-right: 4%;
     padding: 3rem;
     background: rgba(0, 0, 0, 0.8);
   }
