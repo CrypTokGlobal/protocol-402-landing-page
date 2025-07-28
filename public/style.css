@@ -87,7 +87,7 @@ h1, h2, h3 {
   font-weight: 600;
   letter-spacing: 1px;
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .header-logos a:hover {
@@ -400,6 +400,11 @@ footer p {
   font-family: 'DM Serif Display', serif;
   font-size: 1rem;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-logos a:hover {
+  color: #FFD700;
 }
 
 .legal {
