@@ -35,64 +35,8 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Page not found' });
 });
 
-// Store submissions in memory for now (can be replaced with Google Sheets API)
+// Store submissions in memory for debugging (optional)
 let submissions = [];
-
-// Sheet.best API configuration
-const SHEET_BEST_URL = process.env.SHEET_BEST_URL || 'https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9';
-
-// Function to save to Google Sheets via Sheet.best
-async function saveToGoogleSheets(data) {
-    if (!SHEET_BEST_URL) {
-        console.log('Sheet.best URL not configured, skipping Google Sheets save');
-        return false;
-    }
-
-    try {
-        const payload = JSON.stringify({
-            NAME: data.name,
-            EMAIL: data.email,
-            TIMESTAMP: data.timestamp
-        });
-
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(payload)
-            }
-        };
-
-        return new Promise((resolve, reject) => {
-            const req = https.request(SHEET_BEST_URL, options, (res) => {
-                let responseBody = '';
-                res.on('data', (chunk) => {
-                    responseBody += chunk;
-                });
-                res.on('end', () => {
-                    if (res.statusCode >= 200 && res.statusCode < 300) {
-                        console.log('Successfully saved to Google Sheets via Sheet.best');
-                        resolve(true);
-                    } else {
-                        console.error('Sheet.best API error:', res.statusCode, responseBody);
-                        resolve(false);
-                    }
-                });
-            });
-
-            req.on('error', (error) => {
-                console.error('Sheet.best request error:', error);
-                resolve(false);
-            });
-
-            req.write(payload);
-            req.end();
-        });
-    } catch (error) {
-        console.error('Sheet.best save error:', error);
-        return false;
-    }
-}
 
 // Routes
 app.get('/', (req, res) => {
@@ -103,77 +47,7 @@ app.get('/thank-you.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'thank-you.html'));
 });
 
-// Handle form submission
-app.post('/submit', async (req, res) => {
-  try {
-    const { name, email } = req.body;
 
-    if (!name || !email) {
-      return res.status(400).json({ error: 'Name and email are required' });
-    }
-
-    // Sanitize inputs
-    const sanitizedName = String(name).trim().substring(0, 100);
-    const sanitizedEmail = String(email).trim().toLowerCase().substring(0, 100);
-
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(sanitizedEmail)) {
-      return res.status(400).json({ error: 'Please enter a valid email address' });
-    }
-
-    // Use sanitized values
-    const name_clean = sanitizedName;
-    const email_clean = sanitizedEmail;
-
-  // Create submission object
-  const submission = {
-    name: name_clean,
-    email: email_clean,
-    timestamp: new Date().toISOString(),
-    id: Date.now()
-  };
-
-  try {
-      // Store submission in memory
-      submissions.push(submission);
-
-      // Log to console for debugging
-      console.log('New submission:', submission);
-
-      // Save to CSV file as backup (always)
-      const csvLine = `${submission.timestamp},${submission.name},${submission.email}\n`;
-      fs.appendFileSync('submissions.csv', csvLine);
-
-      // Try to save to Google Sheets (if configured)
-      const sheetsSuccess = await saveToGoogleSheets(submission);
-
-      if (sheetsSuccess) {
-        console.log('✅ Data saved to both CSV and Google Sheets');
-      } else {
-        console.log('⚠️ Data saved to CSV only (Google Sheets not configured or failed)');
-      }
-
-      res.json({ 
-        success: true, 
-        message: '✅ Thank you! Download will start shortly.',
-        downloadUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf',
-        redirectUrl: '/thank-you.html'
-      });
-
-    } catch (error) {
-      console.error('Error processing submission:', error);
-      res.status(500).json({ 
-        error: 'An error occurred while processing your request. Please try again.' 
-      });
-    }
-  } catch (error) {
-    console.error('Error processing submission:', error);
-    res.status(500).json({ 
-      error: 'An error occurred while processing your request. Please try again.' 
-    });
-  }
-});
 
 // Redirect to actual whitepaper PDF
 app.get('/whitepaper.pdf', (req, res) => {
@@ -182,18 +56,22 @@ app.get('/whitepaper.pdf', (req, res) => {
 
 // Admin endpoint to view submissions (remove in production)
 app.get('/admin/submissions', (req, res) => {
-  res.json(submissions);
+  res.json({
+    message: 'Form submissions now go directly to Sheet.best API',
+    sheetUrl: 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0',
+    localSubmissions: submissions
+  });
 });
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 SCETA Protocol 402 server running on port ${PORT}`);
   console.log(`📊 Admin submissions view: http://localhost:${PORT}/admin/submissions`);
   console.log('');
-  console.log('📋 Google Sheets Integration via Sheet.best:');
-  console.log('   ✅ Sheet.best API configured and ready');
+  console.log('📋 Form Submission Architecture:');
+  console.log('   ✅ Frontend submits directly to Sheet.best API');
   console.log('   📊 Spreadsheet: https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0');
-  console.log('   💾 Data saved to both CSV (backup) and Google Sheets');
-  console.log('   🔗 API Endpoint: Sheet.best');
+  console.log('   🔗 API Endpoint: https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9');
+  console.log('   💡 No backend processing required');
   console.log('');
-  console.log(`📈 Sheet.best Status: ✅ Active`);
+  console.log(`📈 Sheet.best Integration: ✅ Direct Frontend to API`);
 });

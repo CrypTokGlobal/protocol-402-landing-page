@@ -70,7 +70,7 @@ function initializeFormHandling() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           NAME: name,
           EMAIL: email,
           TIMESTAMP: new Date().toISOString()
