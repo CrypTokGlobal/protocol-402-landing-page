@@ -64,16 +64,21 @@ function initializeFormHandling() {
     submitBtn.disabled = true;
 
     try {
-      // Submit to backend
-      const response = await fetch('/submit', {
+      // Submit directly to Sheet.best API
+      const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email })
+        body: JSON.stringify({ 
+          NAME: name, 
+          EMAIL: email, 
+          TIMESTAMP: new Date().toISOString() 
+        })
       });
 
-      const result = await response.json();
+      // Sheet.best returns the created row data, not a standard JSON response
+      const result = response.ok ? { success: true } : { success: false, error: 'Submission failed' };
 
       if (response.ok && result.success) {
         // Show success message
