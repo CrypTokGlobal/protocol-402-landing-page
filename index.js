@@ -35,8 +35,7 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Page not found' });
 });
 
-// Store submissions in memory for debugging (optional)
-let submissions = [];
+// No backend form processing - all submissions go directly to Sheet.best API
 
 // Routes
 app.get('/', (req, res) => {
