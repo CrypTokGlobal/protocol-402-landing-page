@@ -106,19 +106,20 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-/* Lady Justice Background - Desktop Only - Clean Integration */
+/* Lady Justice Background - Desktop Only - Perfectly Balanced Integration */
 @media (min-width: 768px) {
   .hero {
     background: 
       linear-gradient(90deg, 
-        rgba(75, 0, 15, 0.3) 0%, 
-        rgba(75, 0, 15, 0.7) 45%, 
-        rgba(75, 0, 15, 0.95) 70%,
+        rgba(75, 0, 15, 0.2) 0%, 
+        rgba(75, 0, 15, 0.5) 35%, 
+        rgba(75, 0, 15, 0.8) 60%,
+        rgba(42, 0, 8, 0.95) 85%,
         rgba(42, 0, 8, 1) 100%
       ),
       url('lady-justice.png');
-    background-size: auto 90%, cover;
-    background-position: left 8% center, center;
+    background-size: auto 85%, cover;
+    background-position: left 2% center, center;
     background-repeat: no-repeat, no-repeat;
   }
 }
@@ -134,21 +135,21 @@ h1, h2, h3 {
   position: relative;
   z-index: 2;
   margin-left: auto;
-  margin-right: 8%;
-  max-width: 520px;
+  margin-right: 5%;
+  max-width: 540px;
   width: 100%;
   padding: 3.5rem;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 24px;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out 0.3s forwards;
   box-shadow: 
-    0 25px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(245, 197, 24, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 30px 100px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(245, 197, 24, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 /* Header Logos - Perfect Spacing */
@@ -161,40 +162,53 @@ h1, h2, h3 {
   animation: fadeInDown 1s ease-out 0.2s forwards;
 }
 
-/* Desktop optimizations */
+/* Desktop optimizations - Perfect Lady Justice scaling */
 @media (min-width: 1200px) {
   .hero {
-    background-size: auto 95%, cover;
-    background-position: left 10% center, center;
+    background-size: auto 88%, cover;
+    background-position: left 5% center, center;
   }
   
   .hero-content {
-    margin-right: 6%;
-    max-width: 550px;
+    margin-right: 4%;
+    max-width: 560px;
     padding: 4rem;
   }
 }
 
 @media (min-width: 1400px) {
   .hero {
-    background-size: auto 98%, cover;
-    background-position: left 12% center, center;
+    background-size: auto 90%, cover;
+    background-position: left 8% center, center;
   }
   
   .hero-content {
-    margin-right: 8%;
+    margin-right: 6%;
     max-width: 580px;
   }
 }
 
 @media (min-width: 1600px) {
   .hero {
+    background-size: auto 92%, cover;
+    background-position: left 12% center, center;
+  }
+  
+  .hero-content {
+    margin-right: 8%;
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .hero {
+    background-size: auto 94%, cover;
     background-position: left 15% center, center;
   }
   
   .hero-content {
     margin-right: 10%;
-    max-width: 600px;
+    max-width: 620px;
   }
 }
 
@@ -288,24 +302,24 @@ h1 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* Premium Glassmorphism Form Design */
+/* Premium Glassmorphism Form Design - Enhanced Visibility */
 .form-box {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
   border-radius: 20px;
   padding: 3.2rem;
   box-shadow: 
-    0 0 0 1px rgba(245, 197, 24, 0.25),
-    0 35px 120px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    0 0 60px rgba(245, 197, 24, 0.2),
-    0 10px 40px rgba(0, 0, 0, 0.15);
+    0 0 0 1px rgba(245, 197, 24, 0.3),
+    0 40px 140px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 0 80px rgba(245, 197, 24, 0.25),
+    0 15px 50px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   gap: 2rem;
   opacity: 0;
   transform: translateY(40px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   animation: premiumFormFadeIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards, premiumFloat 8s ease-in-out 3s infinite;
   position: relative;
   overflow: hidden;
@@ -846,17 +860,28 @@ footer p {
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero {
-    background-size: auto 90%;
-    background-position: left 5% center;
+    background: 
+      linear-gradient(90deg, 
+        rgba(75, 0, 15, 0.3) 0%, 
+        rgba(75, 0, 15, 0.6) 40%, 
+        rgba(75, 0, 15, 0.85) 65%,
+        rgba(42, 0, 8, 1) 100%
+      ),
+      url('lady-justice.png');
+    background-size: auto 82%, cover;
+    background-position: left 0% center, center;
+    background-repeat: no-repeat, no-repeat;
   }
 
   .hero-content {
-    max-width: 500px;
-    margin-right: 5%;
+    max-width: 480px;
+    margin-right: 3%;
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.8);
   }
 
   h1 {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
   }
 }
 
