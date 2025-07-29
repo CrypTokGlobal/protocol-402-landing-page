@@ -133,28 +133,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Get form data after timestamp is updated
       const formData = new FormData(form);
-      const name = formData.get('NAME');
-      const email = formData.get('EMAIL');
+      const name = formData.get('name');
+      const email = formData.get('email');
       const timestamp = formData.get('TIMESTAMP');
 
       console.log('📋 Form data:', { name, email, timestamp });
 
       // Enhanced validation with professional feedback
       if (!name || !email || name.trim() === '' || email.trim() === '') {
-        showMessage('Please complete all required fields to proceed.', 'error');
+        showMessage('Please complete all required fields to download Protocol 402.', 'error');
+        reEnableButton();
         return;
       }
 
       // Enhanced email validation
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       if (!emailRegex.test(email.trim())) {
-        showMessage('Please provide a valid business email address.', 'error');
+        showMessage('Please provide a valid email address to proceed.', 'error');
+        reEnableButton();
         return;
       }
 
       // Name validation
       if (name.trim().length < 2) {
-        showMessage('Please enter your full name.', 'error');
+        showMessage('Please enter your full name to access the whitepaper.', 'error');
+        reEnableButton();
         return;
       }
 
@@ -216,8 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formDataForAPI.append('EMAIL', email.trim());
         formDataForAPI.append('TIMESTAMP', timestamp);
 
-        console.log('📤 Submitting to Sheet.best API with FormData...');
-        console.log('📤 FormData contents:', Array.from(formDataForAPI.entries()));
+        console.log('📤 Submitting to Sheet.best API...');
         console.log('📤 Data being sent:', {NAME: name.trim(), EMAIL: email.trim(), TIMESTAMP: timestamp});
 
         const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
@@ -244,39 +246,45 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
         
-        // Log response details for debugging
+        // Validate successful submission with proper data
+        let submissionSuccessful = false;
+        
         try {
           const responseText = await response.clone().text();
-          console.log('📤 Full response body:', responseText);
+          console.log('📤 Response body:', responseText);
           
-          // Try to parse as JSON for better debugging
-          try {
-            const responseJson = JSON.parse(responseText);
-            console.log('📤 Parsed response JSON:', responseJson);
-            
-            // Check if the response shows empty fields
-            if (Array.isArray(responseJson) && responseJson.length > 0) {
-              const firstRecord = responseJson[0];
-              if (firstRecord.NAME === "" || firstRecord.EMAIL === "") {
-                console.error("❌ API received empty NAME/EMAIL fields!");
-                console.error("❌ This suggests a field mapping issue in the FormData");
-                console.error("❌ Sent data:", {NAME: name.trim(), EMAIL: email.trim(), TIMESTAMP: timestamp});
-                console.error("❌ Received data:", firstRecord);
+          if (response.ok) {
+            try {
+              const responseJson = JSON.parse(responseText);
+              console.log('📤 Parsed response JSON:', responseJson);
+              
+              // Verify that data was actually saved
+              if (Array.isArray(responseJson) && responseJson.length > 0) {
+                const firstRecord = responseJson[0];
+                if (firstRecord.NAME && firstRecord.EMAIL && firstRecord.NAME.trim() !== "" && firstRecord.EMAIL.trim() !== "") {
+                  console.log('✅ Data verification successful - all fields populated');
+                  submissionSuccessful = true;
+                } else {
+                  console.error("❌ Data verification failed - empty fields in response");
+                  console.error("❌ Expected:", {NAME: name.trim(), EMAIL: email.trim()});
+                  console.error("❌ Received:", firstRecord);
+                }
               }
+            } catch (parseError) {
+              console.log('📤 Response is not JSON, treating as successful if status OK');
+              submissionSuccessful = response.ok;
             }
-          } catch (parseError) {
-            console.log('📤 Response is not JSON format');
           }
         } catch (readError) {
-          console.log('📤 Could not read response body:', readError);
+          console.error('❌ Could not read response:', readError);
         }
 
-        // Handle successful submission or fallback
-        if (response.ok || response.status === 200 || response.status === 201) {
-          console.log('✅ Form submitted successfully to Sheet.best');
+        // Handle based on verification results
+        if (submissionSuccessful) {
+          console.log('✅ Form submitted and verified successfully');
           handleSuccessfulSubmission();
         } else {
-          console.warn('⚠️ Sheet.best API error, proceeding with fallback:', response.status, response.statusText);
+          console.warn('⚠️ Submission verification failed, using fallback');
           handleFallbackSubmission();
         }
 
