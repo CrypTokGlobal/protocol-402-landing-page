@@ -354,8 +354,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update timestamp when page loads
   updateTimestamp();
 
-  // Verify critical assets exist
+  // Verify critical assets exist (with debouncing)
+  let assetVerificationRunning = false;
   async function verifyAssets() {
+    if (assetVerificationRunning) {
+      console.log('⏳ Asset verification already in progress...');
+      return;
+    }
+    
+    assetVerificationRunning = true;
     const criticalAssets = [
       '/sceta.png',
       '/usc-law.png', 
@@ -378,6 +385,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error(`❌ Asset check failed for ${asset}:`, error);
       }
     }
+    assetVerificationRunning = false;
+    console.log('✅ Asset verification completed');
   }
 
   // Run asset verification

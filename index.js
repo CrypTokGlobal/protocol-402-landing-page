@@ -8,8 +8,12 @@ const PORT = process.env.PORT || 5000;
 
 // HTTPS redirect middleware for production
 app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https') {
-    return res.redirect(`https://${req.header('host')}${req.url}`);
+  if (process.env.NODE_ENV === 'production' && 
+      req.header('x-forwarded-proto') !== 'https' && 
+      req.header('host') && 
+      !req.url.includes('/health')) {
+    console.log(`🔒 Redirecting to HTTPS: ${req.url}`);
+    return res.redirect(301, `https://${req.header('host')}${req.url}`);
   }
   next();
 });
@@ -45,6 +49,7 @@ setInterval(() => {
       requestCounts.delete(ip);
     }
   }
+  console.log(`🧹 Rate limit cleanup: ${requestCounts.size} IPs tracked`);
 }, RATE_LIMIT_WINDOW);
 
 // Rate limiting middleware
@@ -85,13 +90,21 @@ app.use(express.static('public', {
   etag: true
 }));
 
+// Error tracking
+let errorCount = 0;
+let lastError = null;
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
     uptime: Math.floor(process.uptime()),
-    environment: process.env.NODE_ENV || 'development'
+    environment: process.env.NODE_ENV || 'development',
+    rateLimitedIPs: requestCounts.size,
+    errorCount: errorCount,
+    lastError: lastError,
+    memoryUsage: process.memoryUsage()
   });
 });
 
@@ -132,6 +145,13 @@ app.use((req, res) => {
 
 // Global error handler (must be last)
 app.use((err, req, res, next) => {
+  errorCount++;
+  lastError = {
+    message: err.message,
+    timestamp: new Date().toISOString(),
+    url: req.url,
+    method: req.method
+  };
   console.error('Global error handler:', err);
   res.status(500).json({ 
     error: 'An unexpected error occurred. Please try again.' 
