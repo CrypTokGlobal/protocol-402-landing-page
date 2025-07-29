@@ -1,0 +1,96 @@
+✅ FINAL POLISH — PRODUCTION-READY ACROSS DESKTOP & MOBILE
+🚨 Do not overwrite or reset anything that’s currently working. Maintain full functionality and build on top of the existing version.
+
+This is a premium landing page being reviewed by leadership and external stakeholders. Treat this as a high-visibility, long-term project that must be clean, responsive, and refined.
+
+✅ APPLY THE FOLLOWING ENHANCEMENTS
+1. 📐 "Join SCETA" Link Position
+✅ On mobile, leave as-is.
+
+✅ On desktop, center the "Join SCETA" link above the logos.
+
+Use flexbox or media queries to handle this independently per device.
+
+Match vertical spacing and margin consistency above the logos.
+
+2. 🧠 David A. Pope’s Quote Section
+Italicize the full quote.
+
+Decrease the attribution text size (name and title lines) by 1pt.
+
+Maintain visual balance on both mobile and desktop.
+
+3. 🖼️ Lady Justice Panel
+Match or slightly enlarge her to reflect the original mockup.
+
+Ensure no overflow or horizontal scrolling occurs on mobile.
+
+Keep visual balance between Lady Justice and the content panel.
+
+Scale naturally with the window size on desktop — don’t crop.
+
+4. 📝 Seminar Registration Text Block
+Add this just above the “Get the Whitepaper” section on both mobile and desktop (make it visually distinct from the form):
+
+text
+Copy
+Edit
+Register for: [hyperlink to registration page]
+AI=$BTC + Wyoming Stable Token: A Winning Formula & Policy Framework 2030
+The full phrase should be visible.
+
+Hyperlink the entire registration title text.
+
+Use strong styling — but avoid overpowering the page headline.
+
+5. 📜 Supreme Court Note Placement
+Move the SC Supreme Court note below the registration text, and above the PDF description text.
+
+Keep this line:
+
+text
+Copy
+Edit
+✅ This CLE class has received approval from the SC Supreme Court.
+Style it with slightly smaller font than the form header, but not too faint.
+
+6. 🖥️ Desktop Priority Polish
+Ensure all spacing, form layout, quote alignment, and buttons look crisp on desktop viewports first (Dennis noted this is the priority since decision-makers will view it there).
+
+On mobile, make sure flow is stacked vertically and balanced.
+
+🧠 Execution Guidelines:
+✅ Do not remove or interfere with:
+
+Sheet.best form submission logic
+
+Auto PDF download
+
+Redirect timing or fallback text
+
+✅ Keep all logic, animations, transitions, and scaling cleanly scoped
+
+✅ Use comments to tag editable regions for future content swaps (e.g. registration title, quote)
+
+✅ FINAL OUTPUT:
+Please respond only once the following is confirmed:
+
+No existing features were removed or regressed
+
+All updates display properly across desktop and mobile
+
+Visual alignment, spacing, and polish meet premium design expectations
+
+Use this exact response:
+
+vbnet
+Copy
+Edit
+✅ FINAL POLISH COMPLETE — PRODUCTION READY ON ALL DEVICES
+Files modified:
+- public/index.html
+- public/style.css
+Notes:
+- All refinements from Dennis applied
+- Fully responsive and visually aligned on desktop and mobile
+- Quote section and registration title added per direction
