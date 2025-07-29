@@ -34,16 +34,18 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('input', updateTimestamp);
     form.addEventListener('focus', updateTimestamp, true);
 
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Always prevent default form submission
+      
       try {
         updateTimestamp();
 
         const nameField = form.querySelector('input[name="name"]');
         const emailField = form.querySelector('input[name="email"]');
+        const timestampField = form.querySelector('input[name="TIMESTAMP"]');
 
         if (!nameField || !emailField) {
           console.error('❌ Form fields not found');
-          e.preventDefault();
           return;
         }
 
@@ -52,40 +54,107 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = emailField.value.trim();
 
         if (!name || name.length < 2) {
-          e.preventDefault();
           alert('Please enter a valid name (at least 2 characters)');
           nameField.focus();
           return;
         }
 
         if (!email || !isValidEmail(email)) {
-          e.preventDefault();
           alert('Please enter a valid email address');
           emailField.focus();
           return;
         }
 
         // Format name to title case
-        nameField.value = toTitleCase(name);
-        emailField.value = email.toLowerCase();
+        const formattedName = toTitleCase(name);
+        const formattedEmail = email.toLowerCase();
 
         // Show loading state
         const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
         if (submitButton) {
           submitButton.textContent = 'Submitting...';
           submitButton.disabled = true;
         }
 
-        // Log successful validation - form will submit naturally to Sheet.best
+        // Prepare form data for SheetBest
+        const formData = new FormData();
+        formData.append('name', formattedName);
+        formData.append('email', formattedEmail);
+        formData.append('TIMESTAMP', timestampField.value);
+
         console.log('✅ Form validation passed, submitting to Sheet.best');
 
-        // Don't prevent default - let the form submit to Sheet.best
-        // The action URL in the HTML will handle the redirect
+        // Submit to SheetBest API
+        try {
+          const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            console.log('✅ Successfully submitted to SheetBest');
+            
+            // Short delay to show success, then redirect to PDF
+            setTimeout(() => {
+              console.log('🔗 Redirecting to PDF download...');
+              window.location.href = '/whitepaper.pdf';
+            }, 500);
+            
+          } else {
+            throw new Error(`SheetBest API error: ${response.status}`);
+          }
+
+        } catch (fetchError) {
+          console.error('❌ SheetBest submission failed:', fetchError);
+          
+          // Fallback: try backup route
+          try {
+            const backupResponse = await fetch('/submit-form', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                name: formattedName,
+                email: formattedEmail,
+                timestamp: timestampField.value
+              })
+            });
+
+            const backupResult = await backupResponse.json();
+            
+            if (backupResult.success) {
+              console.log('✅ Backup submission successful');
+              setTimeout(() => {
+                window.location.href = '/whitepaper.pdf';
+              }, 500);
+            } else {
+              throw new Error(backupResult.error || 'Backup submission failed');
+            }
+
+          } catch (backupError) {
+            console.error('❌ Backup submission also failed:', backupError);
+            alert('Unable to submit form. Please try again.');
+            
+            // Reset button
+            if (submitButton) {
+              submitButton.textContent = originalText;
+              submitButton.disabled = false;
+            }
+          }
+        }
 
       } catch (error) {
         console.error('❌ Form submission error:', error);
-        e.preventDefault();
         alert('An error occurred. Please try again.');
+        
+        // Reset button
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+          submitButton.textContent = 'SUBMIT & DOWNLOAD PDF';
+          submitButton.disabled = false;
+        }
       }
     });
   }

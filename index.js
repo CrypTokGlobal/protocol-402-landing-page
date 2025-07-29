@@ -122,6 +122,18 @@ app.use(express.static('public', {
   etag: true
 }));
 
+// Serve static files from public/static with proper headers
+app.use('/static', express.static(path.join(__dirname, 'public', 'static'), {
+  maxAge: '1d',
+  etag: true,
+  setHeaders: (res, path, stat) => {
+    if (path.endsWith('.pdf')) {
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline');
+    }
+  }
+}));
+
 // Error tracking
 let errorCount = 0;
 let lastError = null;
@@ -219,11 +231,23 @@ app.post('/submit-form', express.json(), (req, res) => {
 
 
 
-// Redirect to actual whitepaper PDF
+// Serve whitepaper PDF
 app.get('/whitepaper.pdf', (req, res) => {
   try {
     console.log(`📄 Whitepaper request from ${req.ip} at ${new Date().toISOString()}`);
-    res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+    
+    // Check if local PDF exists first
+    const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
+    
+    if (fs.existsSync(localPdfPath)) {
+      console.log('📄 Serving local PDF file');
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline; filename="Protocol_402_SCETA_Whitepaper.pdf"');
+      res.sendFile(localPdfPath);
+    } else {
+      console.log('📄 Local PDF not found, redirecting to external URL');
+      res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+    }
   } catch (error) {
     errorCount++;
     lastError = {
@@ -232,7 +256,7 @@ app.get('/whitepaper.pdf', (req, res) => {
       url: req.url,
       method: req.method
     };
-    console.error('❌ PDF redirect error:', error);
+    console.error('❌ PDF serve error:', error);
     res.status(500).json({ error: 'Unable to access whitepaper. Please try again.' });
   }
 });
