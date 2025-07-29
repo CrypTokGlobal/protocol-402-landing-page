@@ -1,0 +1,77 @@
+🚨 FINAL POLISH REQUEST – PRODUCTION STABILITY & VISUAL PERFECTION
+
+🧠 Imagine you're the smartest developer and UI/UX designer in the world. Please execute the following step by step with no misunderstandings:
+
+---
+
+✅ 1. LOGO INTEGRATION (Header + Footer)
+
+Replace current logos with the final versions below:
+
+- `public/sceta.png` → link: https://sceta.io
+- `public/usc-law.png` → link: https://www.sc.edu
+- `public/techinlaw.png` → link: https://bit.ly/Convergence01
+
+🔧 Design requirements:
+- Load high-res images (`max-height: 55px`, preserve aspect ratio)
+- All logos must be wrapped in links with `target="_blank"`
+- On desktop: logos should be horizontally aligned (flex with `gap: 2rem`)
+- On mobile: stack logos vertically, centered
+- Add CSS/HTML comments where logos are injected for easy future updates
+- Add hover effect:
+```css
+transition: all 0.3s ease-in-out;
+transform: scale(1.05);
+Apply margin-bottom: 15px to match flyer spacing
+
+✅ 2. FORM SUBMISSION + GOOGLE SHEETS TRACKING
+
+Submit form directly to:
+
+https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9
+
+Behavior requirements:
+
+Use FormData (NOT JSON)
+
+Fields: name, email, TIMESTAMP (via new Date().toISOString())
+
+Add this error logging:
+
+js
+Copy
+Edit
+if (!response.ok) {
+  console.error("❌ Submission failed:", response.status, response.statusText);
+  document.getElementById("thank-you").innerHTML =
+    "⚠️ We couldn't log your submission, but the download is still starting.";
+}
+PDF should download via window.open()
+
+Auto-redirect to /thank-you.html after 3 seconds regardless of API result
+
+Use preventDefault() to avoid duplicate submissions
+
+✅ 3. SHEET SYNC TEST
+
+Submit this for live test:
+
+Name: Dennis Fasuliotis
+
+Email: dennis@southcarolinablockchain.org
+
+Confirm:
+☑ Appears in Google Sheet immediately
+☑ PDF download initiates
+☑ Redirect to thank-you page completes
+
+✅ 4. SAFETY & MAINTAINABILITY
+
+Save a full snapshot or backup before making any changes
+
+When done, tell me exactly which files were changed
+
+Respond with:
+✅ LOGOS + TRACKING VERIFIED — FULLY PRODUCTION READY
+
+This is going to the SCETA board and public investors. Please ensure desktop and mobile versions look beautiful and bulletproof.
