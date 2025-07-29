@@ -58,7 +58,7 @@ app.get('/admin/submissions', (req, res) => {
   res.json({
     message: 'Form submissions now go directly to Sheet.best API',
     sheetUrl: 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0',
-    localSubmissions: submissions
+    localSubmissions: []
   });
 });
 
