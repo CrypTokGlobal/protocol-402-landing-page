@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (error) {
       console.error('❌ Form submission error:', error);
       // Re-enable button on error
-      submitBtn.textContent = 'Submit';
+      submitBtn.textContent = 'Submit & Download PDF';
       submitBtn.disabled = false;
       showMessage('❌ An unexpected error occurred. Please try again.', 'error');
     }
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Re-enable button function
     function reEnableButton() {
-      submitBtn.textContent = 'Submit';
+      submitBtn.textContent = 'Submit & Download PDF';
       submitBtn.disabled = false;
     }
 
@@ -147,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Disable submit button and show loading state
-      const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Submitting...';
       submitBtn.disabled = true;
 
@@ -193,23 +192,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       try {
-        // Create JSON payload for Sheet.best API (correct field names matching spreadsheet headers)
-        const apiData = {
-          NAME: name.trim(),
-          EMAIL: email.trim(),
-          TIMESTAMP: timestamp
-        };
+        // Create form data for Sheet.best API
+        const formDataForAPI = new FormData();
+        formDataForAPI.append('NAME', name.trim());
+        formDataForAPI.append('EMAIL', email.trim());
+        formDataForAPI.append('TIMESTAMP', timestamp);
 
-        console.log('📤 Submitting to Sheet.best API with JSON...');
-        console.log('📤 JSON payload:', apiData);
+        console.log('📤 Submitting to Sheet.best API with FormData...');
+        console.log('📤 FormData contents:', Array.from(formDataForAPI.entries()));
 
         const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
           method: 'POST',
           mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(apiData)
+          body: formDataForAPI
         });
 
         console.log('📤 Response status:', response.status);
