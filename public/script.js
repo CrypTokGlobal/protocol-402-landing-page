@@ -139,29 +139,30 @@ document.addEventListener('DOMContentLoaded', function() {
                   throw new Error('PDF file is empty');
                 } else if (pdfSizeBytes < 100000) {
                   console.warn(`⚠️ WARNING: PDF suspiciously small (${pdfSize}), may be corrupted`);
+                  console.log('📈 TRACKING: Small PDF detected, proceeding with caution');
                 }
                 
                 console.log('📊 PDF verified - Size:', pdfSize);
                 console.log('✅ PDF download confirmed available');
-                
-                // Track successful submission and PDF verification
                 console.log('📈 TRACKING: Form submitted successfully, PDF verified, initiating download');
                 
+                // Navigate to thank you page first, then trigger download
                 setTimeout(() => {
-                  console.log('🔗 Initiating PDF download...');
-                  // Use both methods for maximum reliability
-                  window.location.href = '/whitepaper.pdf';
+                  console.log('🔗 Navigating to thank you page...');
+                  window.location.href = '/thank-you.html';
                   
-                  // Backup method after 2 seconds
+                  // Trigger download after navigation
                   setTimeout(() => {
+                    console.log('📥 Triggering PDF download...');
                     const link = document.createElement('a');
                     link.href = '/whitepaper.pdf';
                     link.download = 'Protocol_402_SCETA_Whitepaper.pdf';
+                    link.style.display = 'none';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                    console.log('📥 Backup download method triggered');
-                  }, 2000);
+                    console.log('📈 TRACKING: PDF download triggered successfully');
+                  }, 1000);
                 }, 800);
               } else {
                 throw new Error(`PDF returned status: ${pdfCheck.status} ${pdfCheck.statusText}`);
@@ -172,9 +173,16 @@ document.addEventListener('DOMContentLoaded', function() {
               console.log('📈 TRACKING: Form submitted, local PDF failed, using external fallback');
               
               setTimeout(() => {
-                const fallbackUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
-                window.open(fallbackUrl, '_blank');
-                console.log('🌐 External PDF opened:', fallbackUrl);
+                // Navigate to thank you page first
+                window.location.href = '/thank-you.html';
+                
+                // Open external PDF after navigation
+                setTimeout(() => {
+                  const fallbackUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+                  window.open(fallbackUrl, '_blank');
+                  console.log('🌐 External PDF opened:', fallbackUrl);
+                  console.log('📈 TRACKING: External PDF fallback triggered');
+                }, 1000);
               }, 800);
             }
 
@@ -358,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (calculatedTime > 0 && calculatedTime < 60000) {
           loadTime = calculatedTime;
         } else {
-          loadTime = 'timing_error';
+          loadTime = document.readyState === 'complete' ? 'complete' : 'pending';
         }
       } else if (document.readyState === 'complete') {
         // Use performance.now() for relative timing since page load
@@ -369,8 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Complete fix for negative timing values and unreasonable numbers
       if (typeof loadTime === 'number') {
         if (loadTime < 0 || loadTime > 60000 || !isFinite(loadTime)) {
-          // Use document ready state as fallback
-          loadTime = document.readyState === 'complete' ? 'complete' : 'timing_error';
+          loadTime = document.readyState === 'complete' ? 'complete' : 'pending';
         }
       }
 

@@ -150,9 +150,9 @@
 
     <div class="button-container">
       <a href="https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Download Protocol 402 PDF">Download PDF</a>
-      
+
       <a href="https://sceta.io" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Visit SCETA.io">Visit SCETA.io</a>
-      
+
       <a href="https://bit.ly/Convergence01" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Register for TechInLaw Event">Register for TechInLaw Event</a>
 
       <!-- Future action buttons - styled but commented out for later activation -->
@@ -164,5 +164,52 @@
       -->
     </div>
   </div>
+
+  <script>
+    console.log('✅ Thank you page loaded successfully');
+    console.log('📊 User completed form submission flow');
+
+    // Automatically trigger PDF download after page loads
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        console.log('📥 Auto-triggering PDF download...');
+
+        // Check if PDF is available first
+        fetch('/whitepaper.pdf', { method: 'HEAD' })
+          .then(response => {
+            if (response.ok) {
+              const contentLength = response.headers.get('content-length');
+              const pdfSize = contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown';
+
+              if (contentLength && parseInt(contentLength) > 0) {
+                console.log(`📊 PDF verified (${pdfSize}), starting download...`);
+
+                // Create download link
+                const link = document.createElement('a');
+                link.href = '/whitepaper.pdf';
+                link.download = 'Protocol_402_SCETA_Whitepaper.pdf';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                console.log('📈 TRACKING: PDF download completed successfully');
+              } else {
+                throw new Error('PDF file is empty');
+              }
+            } else {
+              throw new Error(`PDF not available: ${response.status}`);
+            }
+          })
+          .catch(error => {
+            console.warn('⚠️ Local PDF failed, using external fallback:', error.message);
+            // Fallback to external PDF
+            const fallbackUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+            window.open(fallbackUrl, '_blank');
+            console.log('🌐 External PDF fallback triggered');
+          });
+      }, 2000); // Wait 2 seconds for page to fully load
+    });
+  </script>
 </body>
 </html>
