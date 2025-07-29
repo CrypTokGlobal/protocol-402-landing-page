@@ -1,10 +1,9 @@
-
 // SCETA Protocol 402 - Landing Page JavaScript
 // Handles form submission to Sheet.best API and PDF download
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🚀 SCETA Protocol 402 - Landing page loaded');
-  
+
   // Verify logo loading
   const logos = document.querySelectorAll('.header-logo, .footer-logo');
   logos.forEach(logo => {
@@ -18,15 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       this.style.display = 'none';
     });
-    
+
     logo.addEventListener('load', function() {
       console.log(`✅ Logo loaded successfully: ${this.alt}`);
     });
   });
-  
+
   const form = document.getElementById('whitepaper-form');
   const submitBtn = form.querySelector('button[type="submit"]');
-  
+
   // Function to update timestamp field
   function updateTimestamp() {
     const timestampField = document.getElementById('timestampField');
@@ -59,10 +58,10 @@ document.addEventListener('DOMContentLoaded', function() {
         'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'
       }
     `;
-    
+
     // Insert message after the form
     form.parentNode.insertBefore(messageDiv, form.nextSibling);
-    
+
     // Auto-remove error messages after 6 seconds
     if (type === 'error') {
       setTimeout(() => {
@@ -77,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function downloadPDF() {
     console.log('📄 Starting PDF download...');
     const pdfUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
-    
+
     // Use window.open for reliable cross-browser PDF download
     window.open(pdfUrl, '_blank');
-    
+
     console.log('✅ PDF download triggered via window.open');
   }
 
@@ -132,6 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
       formDataForAPI.append('TIMESTAMP', timestamp);
 
       console.log('📤 Submitting to Sheet.best API with FormData...');
+      console.log('📤 FormData contents:', [...formDataForAPI.entries()]); // Log FormData contents
+
       const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
         mode: 'cors',
@@ -152,13 +153,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     } catch (error) {
       console.warn('⚠️ Network error, proceeding with fallback:', error);
+      console.error("Full error object:", error); // Log the full error object
       handleFallbackSubmission();
     }
 
     // Success handler function
     function handleSuccessfulSubmission() {
       console.log('✅ Data logged to Google Sheet successfully');
-      
+
       // Show success message
       showMessage('✅ Success! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
 
@@ -178,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fallback handler function
     function handleFallbackSubmission() {
       console.log('🔄 Using fallback: PDF download without sheet logging');
-      
+
       // Show success message (user doesn't need to know about backend issues)
       showMessage('✅ Thank you! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
 
