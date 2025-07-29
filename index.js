@@ -140,8 +140,22 @@ let lastError = null;
 let submissionAttempts = 0;
 let lastSubmissionAttempt = null;
 
-// Health check endpoint
+// Health check endpoint with PDF verification
 app.get('/health', (req, res) => {
+  // Check PDF availability
+  const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
+  const pdfExists = fs.existsSync(localPdfPath);
+  let pdfSize = 0;
+  
+  if (pdfExists) {
+    try {
+      const stats = fs.statSync(localPdfPath);
+      pdfSize = Math.round(stats.size / 1024); // Size in KB
+    } catch (e) {
+      console.error('PDF stats error:', e);
+    }
+  }
+  
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -152,7 +166,17 @@ app.get('/health', (req, res) => {
     lastError: lastError,
     submissionAttempts: submissionAttempts,
     lastSubmissionAttempt: lastSubmissionAttempt,
-    memoryUsage: process.memoryUsage()
+    memoryUsage: process.memoryUsage(),
+    pdf: {
+      localExists: pdfExists,
+      sizeKB: pdfSize,
+      path: localPdfPath,
+      fallbackUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
+    },
+    sheetBest: {
+      apiUrl: 'https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9',
+      spreadsheetUrl: 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0'
+    }
   });
 });
 
@@ -231,7 +255,7 @@ app.post('/submit-form', express.json(), (req, res) => {
 
 
 
-// Serve whitepaper PDF
+// Serve whitepaper PDF with enhanced reliability
 app.get('/whitepaper.pdf', (req, res) => {
   try {
     console.log(`📄 Whitepaper request from ${req.ip} at ${new Date().toISOString()}`);
@@ -240,10 +264,25 @@ app.get('/whitepaper.pdf', (req, res) => {
     const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
     
     if (fs.existsSync(localPdfPath)) {
-      console.log('📄 Serving local PDF file');
+      const stats = fs.statSync(localPdfPath);
+      console.log(`📄 Serving local PDF file (${Math.round(stats.size / 1024)}KB)`);
+      
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', 'inline; filename="Protocol_402_SCETA_Whitepaper.pdf"');
-      res.sendFile(localPdfPath);
+      res.setHeader('Content-Length', stats.size);
+      res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+      
+      // Stream the file for better performance
+      const stream = fs.createReadStream(localPdfPath);
+      stream.pipe(res);
+      
+      stream.on('error', (streamError) => {
+        console.error('❌ PDF stream error:', streamError);
+        if (!res.headersSent) {
+          res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+        }
+      });
+      
     } else {
       console.log('📄 Local PDF not found, redirecting to external URL');
       res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
@@ -257,7 +296,16 @@ app.get('/whitepaper.pdf', (req, res) => {
       method: req.method
     };
     console.error('❌ PDF serve error:', error);
-    res.status(500).json({ error: 'Unable to access whitepaper. Please try again.' });
+    
+    // Fallback to external URL even on error
+    try {
+      res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+    } catch (redirectError) {
+      res.status(500).json({ 
+        error: 'Unable to access whitepaper. Please try again or contact support.',
+        fallbackUrl: 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf'
+      });
+    }
   }
 });
 

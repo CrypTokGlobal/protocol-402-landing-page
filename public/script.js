@@ -94,12 +94,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (response.ok) {
             console.log('✅ Successfully submitted to SheetBest');
+            
+            // Show success message
+            if (submitButton) {
+              submitButton.textContent = 'Success! Downloading PDF...';
+              submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+            }
 
-            // Short delay to show success, then redirect to PDF
-            setTimeout(() => {
-              console.log('🔗 Redirecting to PDF download...');
-              window.location.href = '/whitepaper.pdf';
-            }, 500);
+            // Verify PDF exists before redirecting
+            try {
+              const pdfCheck = await fetch('/whitepaper.pdf', { method: 'HEAD' });
+              if (pdfCheck.ok || pdfCheck.status === 200) {
+                setTimeout(() => {
+                  console.log('🔗 Redirecting to PDF download...');
+                  window.location.href = '/whitepaper.pdf';
+                }, 800);
+              } else {
+                throw new Error('PDF not accessible');
+              }
+            } catch (pdfError) {
+              console.log('⚠️ PDF check failed, trying external link');
+              setTimeout(() => {
+                window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
+              }, 800);
+            }
 
           } else {
             throw new Error(`SheetBest API error: ${response.status}`);
@@ -126,9 +144,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (backupResult.success) {
               console.log('✅ Backup submission successful');
+              
+              // Show success message
+              if (submitButton) {
+                submitButton.textContent = 'Success! Downloading PDF...';
+                submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+              }
+              
               setTimeout(() => {
                 window.location.href = '/whitepaper.pdf';
-              }, 500);
+              }, 800);
             } else {
               throw new Error(backupResult.error || 'Backup submission failed');
             }

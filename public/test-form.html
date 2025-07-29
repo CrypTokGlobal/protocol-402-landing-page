@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCETA Protocol 402 - Form Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #1a1a1a;
+      color: white;
+    }
+    .test-section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 1px solid #333;
+      border-radius: 8px;
+      background: #2a2a2a;
+    }
+    .test-form {
+      margin: 20px 0;
+    }
+    .test-form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #555;
+      border-radius: 4px;
+      background: #333;
+      color: white;
+    }
+    .test-form button {
+      background: #F5C518;
+      color: black;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .success { background: #065f46; border: 1px solid #10b981; }
+    .error { background: #7f1d1d; border: 1px solid #ef4444; }
+    .info { background: #1e3a8a; border: 1px solid #3b82f6; }
+  </style>
+</head>
+<body>
+  <h1>SCETA Protocol 402 - System Test</h1>
+  
+  <div class="test-section">
+    <h2>🏥 System Health Check</h2>
+    <button onclick="checkHealth()">Check System Health</button>
+    <div id="healthStatus"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>📄 PDF Download Test</h2>
+    <button onclick="testPDF()">Test PDF Download</button>
+    <div id="pdfStatus"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>📝 Form Submission Test</h2>
+    <form class="test-form" onsubmit="testForm(event)">
+      <input type="text" placeholder="Test Name" name="name" value="Test User" required>
+      <input type="email" placeholder="Test Email" name="email" value="test@example.com" required>
+      <button type="submit">Test Form Submission</button>
+    </form>
+    <div id="formStatus"></div>
+  </div>
+
+  <div class="test-section">
+    <h2>🔗 Quick Links</h2>
+    <ul>
+      <li><a href="/" style="color: #F5C518;">Main Landing Page</a></li>
+      <li><a href="/health" style="color: #F5C518;">Health Endpoint</a></li>
+      <li><a href="/whitepaper.pdf" style="color: #F5C518;">Direct PDF Link</a></li>
+      <li><a href="/admin/submissions" style="color: #F5C518;">Admin Submissions</a></li>
+    </ul>
+  </div>
+
+  <script>
+    function updateStatus(elementId, message, type = 'info') {
+      const element = document.getElementById(elementId);
+      element.innerHTML = `<div class="status ${type}">${message}</div>`;
+    }
+
+    async function checkHealth() {
+      updateStatus('healthStatus', '🔍 Checking system health...', 'info');
+      
+      try {
+        const response = await fetch('/health');
+        const data = await response.json();
+        
+        let healthReport = `
+          <strong>System Status:</strong> ${data.status}<br>
+          <strong>Uptime:</strong> ${Math.floor(data.uptime / 60)} minutes<br>
+          <strong>Environment:</strong> ${data.environment}<br>
+          <strong>PDF Local File:</strong> ${data.pdf?.localExists ? '✅ Available' : '❌ Missing'}<br>
+          <strong>PDF Size:</strong> ${data.pdf?.sizeKB || 0}KB<br>
+          <strong>Memory Usage:</strong> ${Math.round(data.memoryUsage.heapUsed / 1024 / 1024)}MB<br>
+          <strong>Error Count:</strong> ${data.errorCount}<br>
+          <strong>Submissions:</strong> ${data.submissionAttempts}
+        `;
+        
+        updateStatus('healthStatus', healthReport, 'success');
+      } catch (error) {
+        updateStatus('healthStatus', `❌ Health check failed: ${error.message}`, 'error');
+      }
+    }
+
+    async function testPDF() {
+      updateStatus('pdfStatus', '📄 Testing PDF download...', 'info');
+      
+      try {
+        const response = await fetch('/whitepaper.pdf', { method: 'HEAD' });
+        
+        if (response.ok) {
+          const contentLength = response.headers.get('content-length');
+          const contentType = response.headers.get('content-type');
+          
+          updateStatus('pdfStatus', `✅ PDF accessible<br>
+            <strong>Content-Type:</strong> ${contentType}<br>
+            <strong>Size:</strong> ${contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown'}<br>
+            <a href="/whitepaper.pdf" target="_blank" style="color: #F5C518;">Open PDF</a>`, 'success');
+        } else {
+          updateStatus('pdfStatus', `⚠️ PDF response: ${response.status} ${response.statusText}`, 'error');
+        }
+      } catch (error) {
+        updateStatus('pdfStatus', `❌ PDF test failed: ${error.message}`, 'error');
+      }
+    }
+
+    async function testForm(event) {
+      event.preventDefault();
+      updateStatus('formStatus', '📝 Testing form submission...', 'info');
+      
+      const formData = new FormData(event.target);
+      formData.append('TIMESTAMP', new Date().toISOString());
+      
+      try {
+        // Test Sheet.best API
+        const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          updateStatus('formStatus', '✅ Sheet.best API working correctly!<br>Form submission successful', 'success');
+        } else {
+          // Test backup route
+          const backupResponse = await fetch('/submit-form', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: formData.get('name'),
+              email: formData.get('email'),
+              timestamp: formData.get('TIMESTAMP')
+            })
+          });
+
+          const backupResult = await backupResponse.json();
+          
+          if (backupResult.success) {
+            updateStatus('formStatus', '✅ Backup route working!<br>Sheet.best failed but backup succeeded', 'success');
+          } else {
+            updateStatus('formStatus', `❌ Both routes failed<br>Sheet.best: ${response.status}<br>Backup: ${backupResult.error}`, 'error');
+          }
+        }
+      } catch (error) {
+        updateStatus('formStatus', `❌ Form test failed: ${error.message}`, 'error');
+      }
+    }
+
+    // Auto-run health check on page load
+    window.addEventListener('load', checkHealth);
+  </script>
+</body>
+</html>
