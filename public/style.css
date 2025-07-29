@@ -182,16 +182,17 @@ h1, h2, h3 {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem; /* Enhanced spacing for better visual separation */
   margin-bottom: 3rem;
   padding-right: 1rem;
 }
 
+/* Header Logo Styling - Enhanced Size & Quality */
 .partner-logo {
-  max-height: 75px;
+  max-height: 75px; /* Desktop size - enhanced for better visibility */
   width: auto;
-  object-fit: contain;
-  transition: all 0.3s ease-in-out;
+  object-fit: contain; /* Maintains aspect ratio without distortion */
+  transition: all 0.3s ease-in-out; /* Smooth hover animation */
   display: block;
   margin-bottom: 15px;
   filter: 
@@ -200,7 +201,7 @@ h1, h2, h3 {
 }
 
 .partner-logo:hover {
-  transform: scale(1.05) translateY(-2px);
+  transform: scale(1.05) translateY(-2px); /* Subtle lift and scale effect */
   filter: 
     drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))
     drop-shadow(0 0 20px rgba(245, 197, 24, 0.3))
@@ -208,7 +209,7 @@ h1, h2, h3 {
 }
 
 .logo-link {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease-in-out; /* Consistent timing with logo */
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -221,11 +222,12 @@ h1, h2, h3 {
 }
 
 .logo-link:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.05); /* Enhanced hover effect */
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(245, 197, 24, 0.2);
+    0 0 30px rgba(245, 197, 24, 0.2),
+    0 4px 15px rgba(245, 197, 24, 0.1); /* Added soft highlight */
   border-color: rgba(245, 197, 24, 0.3);
 }
 
@@ -538,28 +540,29 @@ h1 {
       0 10px 20px rgba(0, 0, 0, 0.2);
   }
 
+  /* Mobile Logo Layout - Enhanced Size & Center Alignment */
   .header-logos {
-    justify-content: center;
+    justify-content: center; /* Center alignment on mobile */
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem; /* Enhanced spacing */
     margin-bottom: 3rem;
     align-items: center;
     padding: 0;
   }
 
   .partner-logo {
-    max-height: 55px;
+    max-height: 60px; /* Mobile size - enhanced from 55px */
     margin-bottom: 10px;
   }
 
   .footer-logos {
     flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
+    gap: 2rem; /* Enhanced spacing */
+    align-items: center; /* Center alignment on mobile */
   }
 
   .footer-logo {
-    max-height: 45px;
+    max-height: 60px; /* Mobile size - enhanced from 45px */
     margin-bottom: 10px;
   }
 
@@ -755,12 +758,12 @@ footer p {
     0 5px 15px rgba(245, 197, 24, 0.3);
 }
 
-/* Footer Logo Styles */
+/* Footer Logo Styles - Enhanced Size & Polish */
 .footer-logos {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem; /* Enhanced spacing for better visual separation */
   margin: 3rem 0;
   flex-wrap: wrap;
   position: relative;
@@ -768,7 +771,7 @@ footer p {
 }
 
 .footer-logo-link {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease-in-out; /* Smooth hover animation */
   text-decoration: none;
   padding: 1rem;
   border-radius: 12px;
@@ -777,11 +780,12 @@ footer p {
 }
 
 .footer-logo-link:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-3px) scale(1.05); /* Smooth lift and scale */
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(245, 197, 24, 0.2);
+    0 0 20px rgba(245, 197, 24, 0.2),
+    0 4px 15px rgba(245, 197, 24, 0.1); /* Added soft highlight */
   border-color: rgba(245, 197, 24, 0.3);
 }
 
@@ -790,13 +794,14 @@ footer p {
   outline-offset: 2px;
 }
 
+/* Footer Logo Sizing - Enhanced for Better Visibility */
 .footer-logo {
   height: auto;
   width: auto;
   display: block;
-  transition: all 0.3s ease-in-out;
-  object-fit: contain;
-  max-height: 55px;
+  transition: all 0.3s ease-in-out; /* Consistent timing */
+  object-fit: contain; /* Maintains aspect ratio without distortion */
+  max-height: 75px; /* Desktop size - enhanced from 55px */
   margin-bottom: 15px;
   filter: 
     drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2))
@@ -804,7 +809,7 @@ footer p {
 }
 
 .footer-logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Subtle scale effect */
   filter: 
     drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))
     drop-shadow(0 0 20px rgba(245, 197, 24, 0.3))
@@ -872,74 +877,25 @@ footer p {
   }
 }
 
-/* Header Logo Styles */
-.header-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.logo-link {
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 15px;
-}
-
-.logo-link:hover {
-  transform: scale(1.05);
-}
-
-.partner-logo {
-  max-height: 55px;
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  opacity: 1;
-  filter: brightness(1);
-}
-
-/* Footer Logo Styles */
-.footer-logos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  margin: 2rem 0;
-  flex-wrap: wrap;
-}
-
-.footer-logo-link {
-  display: inline-block;
-  transition: all 0.3s ease-in-out;
-  margin-bottom: 15px;
-}
-
-.footer-logo-link:hover {
-  transform: scale(1.05);
-}
-
-.footer-logo {
-  max-height: 65px;
-  height: auto;
-  width: auto;
-  max-width: 100%;
-  object-fit: contain;
-  transition: all 0.3s ease-in-out;
-  filter: 
-    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
-    brightness(1.1);
-  opacity: 0.95;
-}
-
-.footer-logo:hover {
-  opacity: 1;
-  transform: scale(1.05);
-  filter: 
-    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))
-    drop-shadow(0 0 15px rgba(245, 197, 24, 0.2))
-    brightness(1.2);
-}
+/* =================================================================
+   LOGO STYLING SYSTEM - Enhanced Size & Responsive Design
+   ================================================================= 
+   
+   Desktop Sizes:
+   - Header Logos: max-height: 75px
+   - Footer Logos: max-height: 75px
+   
+   Mobile Sizes (768px and below):
+   - Header Logos: max-height: 60px  
+   - Footer Logos: max-height: 60px
+   
+   Quality Settings:
+   - object-fit: contain (maintains aspect ratio)
+   - Smooth transitions: 0.3s ease-in-out
+   - Scale hover effect: 1.05
+   
+   Future Logo Changes:
+   - Always use object-fit: contain to prevent distortion
+   - Test on both desktop and mobile viewports
+   - Maintain consistent gap spacing (3rem desktop, 2rem mobile)
+   ================================================================= */
