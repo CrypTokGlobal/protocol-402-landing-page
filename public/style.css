@@ -1260,7 +1260,7 @@ footer p {
     display: block;
     background: 
       linear-gradient(rgba(90, 0, 8, 0.75), rgba(115, 0, 10, 0.85), rgba(139, 21, 56, 0.8)),
-      url('/lady-justice.png') center/cover;
+      url('/lady-justice-burgundy.png') center/cover;
     padding: 1.5rem;
     text-align: center;
     min-height: 100vh;

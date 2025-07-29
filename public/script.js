@@ -78,10 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Log successful validation - form will submit naturally to Sheet.best
         console.log('✅ Form validation passed, submitting to Sheet.best');
-        
+
         // Don't prevent default - let the form submit to Sheet.best
         // The action URL in the HTML will handle the redirect
-        
+
       } catch (error) {
         console.error('❌ Form submission error:', error);
         e.preventDefault();
@@ -103,16 +103,16 @@ document.addEventListener('DOMContentLoaded', function() {
       '/sceta.png', 
       '/usc-law.png', 
       '/techinlaw.png', 
-      '/lady-justice.png', 
+      '/lady-justice-burgundy.png', 
       '/check-icon.svg',
       '/favicon.ico'
     ];
-    
+
     let loadedCount = 0;
     let failedCount = 0;
     let verificationComplete = false;
     const results = [];
-    
+
     assets.forEach(asset => {
       const img = new Image();
       img.onload = () => {
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
       };
       img.src = asset;
     });
-    
+
     function checkComplete() {
       if (!verificationComplete && loadedCount + failedCount === assets.length) {
         verificationComplete = true;
@@ -146,12 +146,12 @@ document.addEventListener('DOMContentLoaded', function() {
   function logPerformance() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
-      
+
       // Calculate DOM ready time
       const domReady = timing.domContentLoadedEventEnd > timing.navigationStart 
         ? timing.domContentLoadedEventEnd - timing.navigationStart 
         : 0;
-      
+
       // Calculate load complete time with proper validation
       let loadTime = 'pending';
       if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Use performance.now() for accurate timing
         loadTime = Math.round(performance.now());
       }
-      
+
       console.log('⚡ Page performance metrics:', {
         domContentLoaded: domReady,
         loadComplete: loadTime,
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Initialize all enhancements
   verifyAssets();
-  
+
   // Performance logging after page load
   if (document.readyState === 'complete') {
     logPerformance();
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (entry.isIntersecting) {
         entry.target.style.animationPlayState = 'running';
         entry.target.classList.add('animate-in');
-        
+
         // Special handling for cards with staggered animation
         if (entry.target.classList.contains('card')) {
           const cards = entry.target.parentElement.children;
