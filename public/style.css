@@ -105,8 +105,8 @@ h1, h2, h3 {
 }
 
 .header-logo.usc-logo {
-  max-height: 55px;
-  max-width: 120px;
+  max-height: 60px;
+  max-width: 150px;
 }
 
 .header-logo.techlaw-logo {
@@ -426,8 +426,8 @@ footer p {
 }
 
 .footer-logo.usc-logo {
-  max-height: 35px;
-  max-width: 80px;
+  max-height: 40px;
+  max-width: 100px;
 }
 
 .footer-logo.techlaw-logo {
