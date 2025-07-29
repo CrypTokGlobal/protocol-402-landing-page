@@ -1,0 +1,102 @@
+ Exact Prompt to Send to the Replit Assistant:
+Please help me finalize and polish this SCETA Protocol 402 landing page so that it meets the standard of a billion-dollar digital infrastructure proposal. This page is being reviewed by legal commissioners, state leaders, and university officials, so every detail must feel deliberate, elite, and professionally designed — not templated.
+
+🧠 Design Objective:
+Make it feel like a custom-built digital policy briefing site — modern, polished, mobile-optimized, and extremely credible.
+
+🔗 Live Preview:
+https://dzaxk0s1.spock.replit.dev
+
+✅ FIX THESE ISSUES FIRST:
+1. Mobile Text Rendering (Critical):
+
+The hero title “Protocol 402: South Carolina’s Path to Monetized Public Infrastructure Innovation” is currently blurry and heavily shadowed on mobile.
+
+Fix it by:
+
+Reducing or removing text-shadow for mobile
+
+Ensuring the font is crisp, well-sized, and anti-aliased
+
+Adjusting font-weight if needed to reduce blur
+
+2. Typography on Mobile:
+
+Ensure all fonts scale naturally (using clamp(), rem, or media queries).
+
+All core text must stay crisp, readable, and hierarchy-aware on small screens.
+
+3. Hero Section Image + Alignment:
+
+The new burgundy Lady Justice image must load cleanly and responsively.
+
+Confirm she doesn't overflow or break layout at any breakpoint.
+
+Background gradient must blend softly into the hero.
+
+4. Remove ✅ Emoji from CLE Approval Block:
+
+Replace it with:
+
+A legal-style icon (SVG), or
+
+Just styled gold text (no emoji)
+
+Ensure padding and spacing matches the rest of the design
+
+🔧 ADDITIONAL POLISH ITEMS:
+5. “Join SCETA” Button:
+
+Center above the logos on desktop only
+
+Add soft hover glow or gentle animation
+
+6. Logos Below Hero:
+
+SCETA, USC, and TECHINLAW logos must:
+
+Be sized evenly
+
+Stack gracefully on mobile
+
+Be free of pixelation or background artifacts
+
+7. Quote Section (David A. Pope):
+
+Remove awkward quotation glyph
+
+Improve spacing above and below the quote box
+
+Slightly reduce attribution font size and right-align neatly
+
+8. “Submit & Download PDF” Form:
+
+Use fetch() to post to SheetBest and redirect to PDF
+(Currently it shows raw JSON — fix that!)
+
+PDF Path: /static/pdf/Protocol_402_SCETA_Whitepaper.pdf
+
+Add hover glow to the CTA button
+
+9. Key Insights Section:
+
+Add hover glow or subtle card animation
+
+Ensure spacing on mobile doesn’t collapse
+
+10. Footer Alignment:
+
+Align logos beneath CTA button
+
+Add spacing between © text and bottom of page
+
+🧪 Technical QA:
+No console errors
+
+No layout shift
+
+No text clipping or overflow
+
+Add favicon and Open Graph meta preview (if not already set)
+
+🧨 This is for a statewide digital transformation initiative — the final site must feel like a policy-grade presentation, not a side project. Thank you!
