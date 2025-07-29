@@ -119,6 +119,8 @@ h1, h2, h3 {
   max-height: 50px;
   max-width: 50px;
   min-height: 40px;
+  object-fit: contain;
+  background: transparent;
 }
 
 /* USC Logo Styles */
@@ -161,9 +163,11 @@ h1, h2, h3 {
 }
 
 .header-logo.usc-logo {
-  max-height: 45px;
-  max-width: 120px;
-  min-height: 35px;
+  max-height: 60px;
+  max-width: 140px;
+  min-height: 45px;
+  object-fit: contain;
+  background: transparent;
 }
 
 /* TECHINLAW Logo Styles */
@@ -204,6 +208,17 @@ h1, h2, h3 {
   transition: all 0.3s ease;
   object-fit: contain;
   vertical-align: middle;
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.header-logo:not([src]) {
+  display: none;
+}
+
+/* Ensure logos have proper contrast and visibility */
+.logo-link:hover .header-logo {
+  filter: brightness(1.1) contrast(1.1);
 }
 
 /* Typography */
@@ -410,11 +425,13 @@ h1 {
   .header-logo.sceta-logo {
     max-height: 40px;
     max-width: 40px;
+    min-width: 35px;
   }
 
   .header-logo.usc-logo {
-    max-height: 35px;
-    max-width: 90px;
+    max-height: 45px;
+    max-width: 110px;
+    min-width: 80px;
   }
 
   .sceta-text {

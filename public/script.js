@@ -5,6 +5,19 @@
 document.addEventListener('DOMContentLoaded', function() {
   console.log('🚀 SCETA Protocol 402 - Landing page loaded');
   
+  // Verify logo loading
+  const logos = document.querySelectorAll('.header-logo, .footer-logo');
+  logos.forEach(logo => {
+    logo.addEventListener('error', function() {
+      console.warn(`⚠️ Logo failed to load: ${this.src}`);
+      this.style.display = 'none';
+    });
+    
+    logo.addEventListener('load', function() {
+      console.log(`✅ Logo loaded successfully: ${this.alt}`);
+    });
+  });
+  
   const form = document.getElementById('whitepaper-form');
   const submitBtn = form.querySelector('button[type="submit"]');
   
