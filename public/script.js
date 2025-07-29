@@ -146,6 +146,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
+      // Prevent empty or invalid submissions
+      if (!timestamp || timestamp === '') {
+        updateTimestamp();
+        console.log('⚠️ Timestamp was empty, regenerating...');
+      }
+
       // Disable submit button and show loading state
       submitBtn.textContent = 'Submitting...';
       submitBtn.disabled = true;
