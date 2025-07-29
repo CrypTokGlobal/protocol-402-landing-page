@@ -78,22 +78,22 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('📄 Starting PDF download...');
     const pdfUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
     
-    // Create a temporary link and trigger download
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.download = 'Protocol-402-SCETA-Whitepaper.pdf';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Use window.open for reliable cross-browser PDF download
+    window.open(pdfUrl, '_blank');
     
-    console.log('✅ PDF download triggered');
+    console.log('✅ PDF download triggered via window.open');
   }
 
   // Handle form submission
   form.addEventListener('submit', async function(e) {
     e.preventDefault(); // Prevent default form submission
     console.log('📝 Form submission initiated');
+
+    // Prevent double submission
+    if (submitBtn.disabled) {
+      console.log('⚠️ Form already submitting, ignoring duplicate request');
+      return;
+    }
 
     // Update timestamp before getting form data
     updateTimestamp();
@@ -125,67 +125,74 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.disabled = true;
 
     try {
-      // Submit to Sheet.best API using fetch with FormData
-      console.log('📤 Submitting to Sheet.best API...');
+      // Create FormData for Sheet.best API (they expect FormData, not JSON)
+      const formDataForAPI = new FormData();
+      formDataForAPI.append('name', name.trim());
+      formDataForAPI.append('email', email.trim());
+      formDataForAPI.append('TIMESTAMP', timestamp);
+
+      console.log('📤 Submitting to Sheet.best API with FormData...');
       const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
         mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: email.trim(),
-          TIMESTAMP: timestamp
-        })
+        body: formDataForAPI // Send as FormData, no Content-Type header needed
       });
 
       console.log('📤 Response status:', response.status);
       console.log('📤 Response ok:', response.ok);
 
+      // Handle successful submission or fallback
       if (response.ok || response.status === 200 || response.status === 201) {
         console.log('✅ Form submitted successfully to Sheet.best');
-
-        // Show success message
-        showMessage('✅ Success! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
-
-        // Trigger PDF download immediately
-        downloadPDF();
-
-        // Reset form
-        form.reset();
-
-        // Redirect to thank you page after 2 seconds
-        setTimeout(() => {
-          console.log('🔄 Redirecting to thank-you page');
-          window.location.href = '/thank-you.html';
-        }, 2000);
-
+        handleSuccessfulSubmission();
       } else {
-        console.error('❌ Sheet.best API error:', response.status, response.statusText);
-        let responseText = '';
-        try {
-          responseText = await response.text();
-          console.error('❌ Response body:', responseText);
-        } catch (e) {
-          console.error('❌ Could not read response text:', e);
-        }
-        
-        showMessage('There was an error submitting your form. Please try again.', 'error');
-        
-        // Reset button
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
+        console.warn('⚠️ Sheet.best API error, proceeding with fallback:', response.status, response.statusText);
+        handleFallbackSubmission();
       }
 
     } catch (error) {
-      console.error('❌ Form submission error:', error);
-      showMessage('Network error. Please check your connection and try again.', 'error');
+      console.warn('⚠️ Network error, proceeding with fallback:', error);
+      handleFallbackSubmission();
+    }
+
+    // Success handler function
+    function handleSuccessfulSubmission() {
+      console.log('✅ Data logged to Google Sheet successfully');
       
-      // Reset button
-      submitBtn.textContent = originalText;
-      submitBtn.disabled = false;
+      // Show success message
+      showMessage('✅ Success! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
+
+      // Trigger PDF download immediately
+      downloadPDF();
+
+      // Reset form
+      form.reset();
+
+      // Redirect to thank you page after 3 seconds
+      setTimeout(() => {
+        console.log('🔄 Redirecting to thank-you page');
+        window.location.href = '/thank-you.html';
+      }, 3000);
+    }
+
+    // Fallback handler function
+    function handleFallbackSubmission() {
+      console.log('🔄 Using fallback: PDF download without sheet logging');
+      
+      // Show success message (user doesn't need to know about backend issues)
+      showMessage('✅ Thank you! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
+
+      // Trigger PDF download immediately
+      downloadPDF();
+
+      // Reset form
+      form.reset();
+
+      // Redirect to thank you page after 3 seconds
+      setTimeout(() => {
+        console.log('🔄 Redirecting to thank-you page');
+        window.location.href = '/thank-you.html';
+      }, 3000);
     }
   });
 
