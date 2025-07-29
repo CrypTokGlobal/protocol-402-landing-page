@@ -196,5 +196,26 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', logPerformance);
   }
 
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe sections for animations
+  const sectionsToAnimate = document.querySelectorAll('.features, .card, footer');
+  sectionsToAnimate.forEach(section => {
+    observer.observe(section);
+  });
+
   console.log('🎯 SCETA Protocol 402 - All systems ready');
 });
