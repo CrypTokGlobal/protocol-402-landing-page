@@ -290,6 +290,11 @@ document.addEventListener('DOMContentLoaded', function() {
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
       }
 
+      // Fallback for invalid timing data
+      if (typeof loadTime === 'number' && loadTime < 0) {
+        loadTime = 'invalid_timing';
+      }
+
       console.log('⚡ Page performance metrics:', {
         domContentLoaded: domReady,
         loadComplete: loadTime,
