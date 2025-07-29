@@ -265,7 +265,15 @@ app.get('/whitepaper.pdf', (req, res) => {
     
     if (fs.existsSync(localPdfPath)) {
       const stats = fs.statSync(localPdfPath);
-      console.log(`📄 Serving local PDF file (${Math.round(stats.size / 1024)}KB)`);
+      const fileSizeKB = Math.round(stats.size / 1024);
+      
+      // Check if file is actually valid (not empty)
+      if (stats.size === 0) {
+        console.error('❌ PDF file exists but is empty (0KB), redirecting to external URL');
+        return res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+      }
+      
+      console.log(`📄 Serving local PDF file (${fileSizeKB}KB)`);
       
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', 'inline; filename="Protocol_402_SCETA_Whitepaper.pdf"');

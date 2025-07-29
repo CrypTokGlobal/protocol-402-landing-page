@@ -225,9 +225,29 @@ document.addEventListener('DOMContentLoaded', function() {
           results.push({ asset, status: 'skipped' });
           skippedCount++;
         } else {
-          console.warn(`⚠️ Asset failed to load: ${asset}`);
-          results.push({ asset, status: 'failed' });
-          failedCount++;
+          console.warn(`⚠️ Asset failed to load: ${asset} - checking if accessible`);
+          
+          // Try fetch to verify if asset is actually accessible
+          fetch(asset, { method: 'HEAD' })
+            .then(response => {
+              if (response.ok) {
+                console.log(`✅ Asset accessible via fetch: ${asset}`);
+                results.push({ asset, status: 'loaded' });
+                loadedCount++;
+              } else {
+                console.error(`❌ Asset not accessible: ${asset} (${response.status})`);
+                results.push({ asset, status: 'failed' });
+                failedCount++;
+              }
+              checkComplete();
+            })
+            .catch(() => {
+              console.error(`❌ Asset completely inaccessible: ${asset}`);
+              results.push({ asset, status: 'failed' });
+              failedCount++;
+              checkComplete();
+            });
+          return; // Don't call checkComplete() immediately
         }
         checkComplete();
       };
@@ -260,7 +280,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Calculate load complete time with proper validation
       let loadTime = 'pending';
       if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
-        loadTime = timing.loadEventEnd - timing.navigationStart;
+        const calculatedTime = timing.loadEventEnd - timing.navigationStart;
+        // Validate the calculated time is reasonable (less than 5 minutes)
+        loadTime = calculatedTime > 0 && calculatedTime < 300000 ? calculatedTime : 'invalid';
       } else if (document.readyState === 'complete') {
         // Use performance.now() for relative timing since page load
         const perfNow = Math.round(performance.now());
