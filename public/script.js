@@ -84,9 +84,16 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('TIMESTAMP', timestampField.value);
 
         console.log('✅ Form validation passed, submitting to Sheet.best');
+        console.log('📊 Form Data:', {
+          name: formattedName,
+          email: formattedEmail,
+          timestamp: timestampField.value,
+          userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+        });
 
         // Submit to SheetBest API
         try {
+          console.log('🔄 Sending request to Sheet.best API...');
           const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
             method: 'POST',
             body: formData
@@ -94,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (response.ok) {
             console.log('✅ Successfully submitted to SheetBest');
+            console.log('📈 Response status:', response.status);
 
             // Show success message
             if (submitButton) {
@@ -103,17 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Verify PDF exists before redirecting
             try {
+              console.log('🔍 Checking PDF availability...');
               const pdfCheck = await fetch('/whitepaper.pdf', { method: 'HEAD' });
+              console.log('📄 PDF check response:', pdfCheck.status);
+              
               if (pdfCheck.ok || pdfCheck.status === 200) {
+                const contentLength = pdfCheck.headers.get('content-length');
+                console.log('📊 PDF size:', contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown');
+                
                 setTimeout(() => {
-                  console.log('🔗 Redirecting to PDF download...');
+                  console.log('🔗 Redirecting to local PDF download...');
                   window.location.href = '/whitepaper.pdf';
                 }, 800);
               } else {
-                throw new Error('PDF not accessible');
+                throw new Error(`PDF returned status: ${pdfCheck.status}`);
               }
             } catch (pdfError) {
-              console.log('⚠️ PDF check failed, trying external link');
+              console.log('⚠️ Local PDF failed:', pdfError.message);
+              console.log('🌐 Using external fallback URL');
               setTimeout(() => {
                 window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
               }, 800);
@@ -290,8 +305,8 @@ document.addEventListener('DOMContentLoaded', function() {
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
       }
 
-      // Fallback for invalid timing data
-      if (typeof loadTime === 'number' && loadTime < 0) {
+      // Fallback for invalid timing data - fix the negative number issue
+      if (typeof loadTime === 'number' && (loadTime < 0 || loadTime > 60000)) {
         loadTime = 'invalid_timing';
       }
 

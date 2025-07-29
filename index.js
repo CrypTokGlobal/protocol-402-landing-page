@@ -213,10 +213,16 @@ app.post('/submit-form', express.json(), (req, res) => {
       NAME: name.trim(),
       EMAIL: email.toLowerCase().trim(),
       TIMESTAMP: timestamp,
-      source: 'backup_route'
+      source: 'backup_route',
+      userAgent: req.headers['user-agent'],
+      ip: req.ip
     };
 
     console.log('📝 Backup form submission received:', submissionData);
+    console.log('📊 User details:', {
+      isMobile: req.headers['user-agent']?.includes('Mobile') || false,
+      timestamp: new Date().toISOString()
+    });
 
     // In production, you could save to database or CSV here
     // For now, just log for admin review
