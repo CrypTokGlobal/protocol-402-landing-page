@@ -12,7 +12,9 @@ html {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #ffffff;
-  background: #000000;
+  background: 
+    linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a0608 50%, #0a0a0a 75%, #000000 100%);
+  background-attachment: fixed;
   line-height: 1.6;
   overflow-x: hidden;
   margin: 0;
@@ -171,17 +173,28 @@ h1, h2, h3 {
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(245, 197, 24, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(245, 197, 24, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(139, 21, 56, 0.1) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+    radial-gradient(circle at 20% 20%, rgba(245, 197, 24, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(245, 197, 24, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(139, 21, 56, 0.15) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
+    linear-gradient(45deg, transparent 30%, rgba(245, 197, 24, 0.08) 50%, transparent 70%);
   pointer-events: none;
-  animation: contentShimmer 10s ease-in-out infinite;
+  animation: sophisticatedShimmer 12s ease-in-out infinite;
 }
 
-@keyframes contentShimmer {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+@keyframes sophisticatedShimmer {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: translateX(0) scale(1);
+  }
+  33% { 
+    opacity: 0.9;
+    transform: translateX(-5px) scale(1.01);
+  }
+  66% { 
+    opacity: 1;
+    transform: translateX(5px) scale(1.02);
+  }
 }
 
 /* Join SCETA Button Styling */
@@ -315,17 +328,22 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 3.4rem;
   line-height: 1.1;
   margin-bottom: 2rem;
   color: #ffffff;
   letter-spacing: -0.02em;
   text-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.4),
-    0 8px 16px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(245, 197, 24, 0.15);
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.3),
+    0 0 80px rgba(245, 197, 24, 0.15);
   animation: premiumTitleGlow 4s ease-in-out infinite alternate;
-  font-weight: 400;
+  font-weight: 500;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 @keyframes premiumTitleGlow {
@@ -460,20 +478,21 @@ h1 {
 /* Executive Level Form Design */
 .form-box {
   background: 
-    linear-gradient(145deg, rgba(139, 21, 56, 0.95) 0%, rgba(115, 0, 10, 0.93) 50%, rgba(139, 21, 56, 0.95) 100%);
-  border-radius: 20px;
-  padding: 3rem;
+    linear-gradient(145deg, rgba(139, 21, 56, 0.85) 0%, rgba(115, 0, 10, 0.8) 25%, rgba(90, 0, 8, 0.75) 50%, rgba(115, 0, 10, 0.8) 75%, rgba(139, 21, 56, 0.85) 100%);
+  border-radius: 24px;
+  padding: 3.5rem;
   box-shadow: 
-    0 25px 60px rgba(0, 0, 0, 0.6),
-    0 15px 35px rgba(245, 197, 24, 0.2),
-    0 5px 15px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(245, 197, 24, 0.3),
-    0 0 0 2px rgba(245, 197, 24, 0.6);
-  border: 3px solid rgba(245, 197, 24, 0.7);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    0 30px 80px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(245, 197, 24, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.5),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 3px rgba(245, 197, 24, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px);
 }
 
 .form-box::before {
@@ -483,8 +502,24 @@ h1 {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(245, 197, 24, 0.12), transparent);
-  transition: left 0.8s ease;
+  background: 
+    linear-gradient(90deg, transparent, rgba(245, 197, 24, 0.15), rgba(255, 255, 255, 0.1), rgba(245, 197, 24, 0.15), transparent);
+  transition: left 1s ease;
+  z-index: 1;
+}
+
+.form-box::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(245, 197, 24, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .form-box:hover::before {
@@ -504,30 +539,40 @@ h1 {
 
 .form-box input {
   width: 100%;
-  padding: 1.5rem 1.8rem;
-  border: 2px solid rgba(245, 197, 24, 0.4);
-  border-radius: 12px;
+  padding: 1.8rem 2rem;
+  border: 2px solid rgba(245, 197, 24, 0.5);
+  border-radius: 16px;
   font-size: 1.15rem;
-  background: rgba(139, 21, 56, 0.3);
+  background: 
+    linear-gradient(145deg, rgba(139, 21, 56, 0.4) 0%, rgba(115, 0, 10, 0.3) 100%);
   color: #ffffff;
-  margin-bottom: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 1.8rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   box-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(245, 197, 24, 0.2);
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(245, 197, 24, 0.3);
   font-weight: 500;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
 }
 
 .form-box input:focus {
   outline: none;
   border-color: #F5C518;
-  background: rgba(139, 21, 56, 0.5);
+  background: 
+    linear-gradient(145deg, rgba(139, 21, 56, 0.6) 0%, rgba(115, 0, 10, 0.5) 100%);
   box-shadow: 
-    0 0 0 4px rgba(245, 197, 24, 0.3),
-    0 4px 12px rgba(245, 197, 24, 0.2),
-    inset 0 1px 0 rgba(245, 197, 24, 0.3);
-  transform: translateY(-2px);
+    0 0 0 4px rgba(245, 197, 24, 0.4),
+    0 8px 20px rgba(245, 197, 24, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+    0 0 30px rgba(245, 197, 24, 0.2);
+  transform: translateY(-3px) scale(1.02);
 }
 
 .form-box input::placeholder {
@@ -537,26 +582,30 @@ h1 {
 
 .form-box button {
   width: 100%;
-  background: linear-gradient(135deg, #F5C518 0%, #FFD700 50%, #F5C518 100%);
+  background: 
+    linear-gradient(135deg, #F5C518 0%, #FFD700 25%, #FFF200 50%, #FFD700 75%, #F5C518 100%);
   color: #000000;
   border: none;
-  padding: 1.5rem 2.5rem;
-  border-radius: 16px;
+  padding: 1.8rem 2.5rem;
+  border-radius: 18px;
   font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 6px 20px rgba(245, 197, 24, 0.4),
-    0 3px 10px rgba(245, 197, 24, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    0 8px 25px rgba(245, 197, 24, 0.5),
+    0 4px 15px rgba(245, 197, 24, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(245, 197, 24, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
 .form-box button::before {
@@ -766,18 +815,20 @@ h1 {
 
 .card {
   background: 
-    linear-gradient(145deg, rgba(115, 0, 10, 0.15) 0%, rgba(115, 0, 10, 0.08) 100%);
-  border: 2px solid rgba(245, 197, 24, 0.25);
-  border-radius: 20px;
-  padding: 3rem 2rem;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    linear-gradient(145deg, rgba(115, 0, 10, 0.2) 0%, rgba(90, 0, 8, 0.15) 50%, rgba(115, 0, 10, 0.12) 100%);
+  border: 2px solid rgba(245, 197, 24, 0.3);
+  border-radius: 24px;
+  padding: 3.5rem 2.5rem;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   box-shadow: 
-    0 10px 30px rgba(0, 0, 0, 0.2),
-    0 5px 15px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 15px 40px rgba(0, 0, 0, 0.3),
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(245, 197, 24, 0.1),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card::before {
@@ -798,15 +849,17 @@ h1 {
 }
 
 .card:hover {
-  transform: translateY(-15px) scale(1.03);
-  border-color: rgba(245, 197, 24, 0.7);
+  transform: translateY(-20px) scale(1.05) rotateX(5deg);
+  border-color: rgba(245, 197, 24, 0.8);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.3),
-    0 15px 30px rgba(245, 197, 24, 0.15),
-    0 5px 15px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    0 35px 70px rgba(0, 0, 0, 0.4),
+    0 20px 40px rgba(245, 197, 24, 0.2),
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 50px rgba(245, 197, 24, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   background: 
-    linear-gradient(145deg, rgba(115, 0, 10, 0.2) 0%, rgba(115, 0, 10, 0.12) 100%);
+    linear-gradient(145deg, rgba(115, 0, 10, 0.25) 0%, rgba(90, 0, 8, 0.2) 50%, rgba(115, 0, 10, 0.15) 100%);
 }
 
 .card span {
