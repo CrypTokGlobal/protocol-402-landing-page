@@ -47,33 +47,37 @@ const MAX_REQUESTS_PER_WINDOW = 100;
 // Only runs cleanup when needed to reduce CPU overhead
 let lastCleanupSize = 0;
 setInterval(() => {
-  const now = Date.now();
-  const currentSize = requestCounts.size;
-  
-  // Skip cleanup if map is small and hasn't grown much
-  if (currentSize < 10 && (currentSize - lastCleanupSize) < 5) {
-    return;
-  }
-  
-  const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
-  const beforeSize = currentSize;
-  
-  // Use more efficient cleanup approach
-  const ipsToDelete = [];
-  for (const [ip, data] of requestCounts.entries()) {
-    if (data.firstRequest < cutoffTime) {
-      ipsToDelete.push(ip);
+  try {
+    const now = Date.now();
+    const currentSize = requestCounts.size;
+    
+    // Skip cleanup if map is small and hasn't grown much
+    if (currentSize < 10 && (currentSize - lastCleanupSize) < 5) {
+      return;
     }
-  }
-  
-  // Batch delete for better performance
-  ipsToDelete.forEach(ip => requestCounts.delete(ip));
-  
-  const cleanedUp = beforeSize - requestCounts.size;
-  lastCleanupSize = requestCounts.size;
-  
-  if (cleanedUp > 0) {
-    console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs tracked`);
+    
+    const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
+    const beforeSize = currentSize;
+    
+    // Use more efficient cleanup approach
+    const ipsToDelete = [];
+    for (const [ip, data] of requestCounts.entries()) {
+      if (data && data.firstRequest && data.firstRequest < cutoffTime) {
+        ipsToDelete.push(ip);
+      }
+    }
+    
+    // Batch delete for better performance
+    ipsToDelete.forEach(ip => requestCounts.delete(ip));
+    
+    const cleanedUp = beforeSize - requestCounts.size;
+    lastCleanupSize = requestCounts.size;
+    
+    if (cleanedUp > 0) {
+      console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs tracked`);
+    }
+  } catch (error) {
+    console.error('❌ Rate limit cleanup error:', error);
   }
 }, RATE_LIMIT_WINDOW);
 

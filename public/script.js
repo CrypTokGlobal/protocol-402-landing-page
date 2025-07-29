@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
       '/sceta.png', 
       '/usc-law.png', 
       '/techinlaw.png', 
-      '/lady-justice-burgundy.png', 
+      '/lady-justice.png', 
       '/check-icon.svg',
       '/favicon.ico'
     ];
@@ -122,9 +122,15 @@ document.addEventListener('DOMContentLoaded', function() {
         checkComplete();
       };
       img.onerror = () => {
-        console.warn(`⚠️ Asset failed to load: ${asset} - This may be normal for SVG/ICO files`);
-        results.push({ asset, status: 'failed' });
-        failedCount++;
+        // SVG and ICO files may not load via Image() but still work in the browser
+        if (asset.includes('.svg') || asset.includes('.ico')) {
+          console.log(`ℹ️ ${asset} - SVG/ICO file, skipping Image() verification`);
+          results.push({ asset, status: 'skipped' });
+        } else {
+          console.warn(`⚠️ Asset failed to load: ${asset}`);
+          results.push({ asset, status: 'failed' });
+          failedCount++;
+        }
         checkComplete();
       };
       img.src = asset;
@@ -157,8 +163,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
         loadTime = timing.loadEventEnd - timing.navigationStart;
       } else if (document.readyState === 'complete') {
-        // Use performance.now() for accurate timing
-        loadTime = Math.round(performance.now());
+        // Use performance.now() for accurate timing only if reasonable
+        const perfNow = Math.round(performance.now());
+        loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'calculated_complete';
       }
 
       console.log('⚡ Page performance metrics:', {
