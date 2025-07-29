@@ -104,32 +104,40 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let loadedCount = 0;
     let failedCount = 0;
+    let verificationComplete = false;
     
     assets.forEach(asset => {
       const img = new Image();
       img.onload = () => {
         console.log(`✅ Asset verified: ${asset}`);
         loadedCount++;
-        if (loadedCount + failedCount === assets.length) {
-          console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
-        }
+        checkComplete();
       };
       img.onerror = () => {
-        console.error(`❌ Asset failed: ${asset}`);
+        console.warn(`⚠️ Asset failed: ${asset}`);
         failedCount++;
-        if (loadedCount + failedCount === assets.length) {
-          console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
-        }
+        checkComplete();
       };
       img.src = asset;
     });
+    
+    function checkComplete() {
+      if (!verificationComplete && loadedCount + failedCount === assets.length) {
+        verificationComplete = true;
+        console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
+        if (failedCount > 0) {
+          console.log(`⚠️ ${failedCount} assets failed to load but this may be normal for some file types`);
+        }
+      }
+    }
   }
 
   // Performance monitoring
   function logPerformance() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
-      const loadTime = timing.loadEventEnd - timing.navigationStart;
+      // Fix negative timing values by checking if loadEventEnd is set
+      const loadTime = timing.loadEventEnd > 0 ? timing.loadEventEnd - timing.navigationStart : 'pending';
       const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
       
       console.log('⚡ Page performance metrics:', {
