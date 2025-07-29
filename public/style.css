@@ -188,14 +188,14 @@ h1, h2, h3 {
 }
 
 .partner-logo {
-  max-height: 55px;
+  max-height: 75px;
   width: auto;
   object-fit: contain;
   transition: all 0.3s ease-in-out;
   display: block;
   margin-bottom: 15px;
   filter: 
-    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2))
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
     brightness(1);
 }
 
@@ -548,7 +548,7 @@ h1 {
   }
 
   .partner-logo {
-    max-height: 45px;
+    max-height: 55px;
     margin-bottom: 10px;
   }
 
@@ -923,15 +923,23 @@ footer p {
 }
 
 .footer-logo {
-  max-height: 40px;
+  max-height: 65px;
   height: auto;
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  opacity: 0.9;
-  filter: brightness(1.2);
+  transition: all 0.3s ease-in-out;
+  filter: 
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
+    brightness(1.1);
+  opacity: 0.95;
 }
 
 .footer-logo:hover {
   opacity: 1;
+  transform: scale(1.05);
+  filter: 
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0 15px rgba(245, 197, 24, 0.2))
+    brightness(1.2);
 }
