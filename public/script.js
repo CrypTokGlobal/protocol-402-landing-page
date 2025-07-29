@@ -153,14 +153,18 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Calculate load complete time with proper validation
       let loadTime = 'pending';
-      if (timing.loadEventEnd > 0 && timing.loadEventEnd > timing.navigationStart) {
+      if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
         loadTime = timing.loadEventEnd - timing.navigationStart;
+      } else if (document.readyState === 'complete') {
+        // Fallback: use current time if load event hasn't fired yet
+        loadTime = Date.now() - timing.navigationStart;
       }
       
       console.log('⚡ Page performance metrics:', {
         domContentLoaded: domReady,
         loadComplete: loadTime,
-        resourceCount: window.performance.getEntriesByType('resource').length
+        resourceCount: window.performance.getEntriesByType('resource').length,
+        readyState: document.readyState
       });
     }
   }
