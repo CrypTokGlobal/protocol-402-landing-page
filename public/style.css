@@ -71,18 +71,22 @@ h1, h2, h3 {
   border-left: 1px solid rgba(245, 197, 24, 0.2);
 }
 
-/* Header Logos - Updated for logo images */
+/* Header Logos - Optimized horizontal layout */
 .header-logos {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
   margin-bottom: 2rem;
+  padding-right: 1rem;
 }
 
 .logo-link {
   transition: all 0.3s ease;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-link:hover {
@@ -96,22 +100,26 @@ h1, h2, h3 {
   display: block;
   transition: all 0.3s ease;
   object-fit: contain;
+  vertical-align: middle;
 }
 
 /* Specific logo sizing for optimal display */
 .header-logo.sceta-logo {
-  max-height: 65px;
-  max-width: 65px;
+  max-height: 60px;
+  max-width: 60px;
+  min-height: 50px;
 }
 
 .header-logo.usc-logo {
-  max-height: 60px;
-  max-width: 150px;
+  max-height: 55px;
+  max-width: 140px;
+  min-height: 45px;
 }
 
 .header-logo.techlaw-logo {
-  max-height: 50px;
-  max-width: 100px;
+  max-height: 45px;
+  max-width: 90px;
+  min-height: 35px;
 }
 
 /* Typography */
@@ -283,14 +291,27 @@ h1 {
 
   .header-logos {
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1.5rem;
     margin-bottom: 2rem;
     align-items: center;
+    flex-wrap: wrap;
+    padding-right: 0;
   }
 
-  .header-logo {
-    max-height: 50px;
+  .header-logo.sceta-logo {
+    max-height: 45px;
+    max-width: 45px;
+  }
+
+  .header-logo.usc-logo {
+    max-height: 40px;
+    max-width: 100px;
+  }
+
+  .header-logo.techlaw-logo {
+    max-height: 35px;
+    max-width: 70px;
   }
 
   h1 {
