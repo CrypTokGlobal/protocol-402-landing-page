@@ -90,19 +90,39 @@ document.addEventListener('DOMContentLoaded', function() {
     return emailRegex.test(email.toLowerCase());
   }
 
-  // Enhanced asset verification
+  // Enhanced asset verification with detailed reporting
   function verifyAssets() {
     console.log('🔍 Verifying critical assets...');
-    const assets = ['/sceta.png', '/usc-law.png', '/techinlaw.png', '/lady-justice.png', '/favicon.ico'];
+    const assets = [
+      '/sceta.png', 
+      '/usc-law.png', 
+      '/techinlaw.png', 
+      '/lady-justice.png', 
+      '/favicon.ico',
+      '/check-icon.svg'
+    ];
+    
+    let loadedCount = 0;
+    let failedCount = 0;
     
     assets.forEach(asset => {
       const img = new Image();
-      img.onload = () => console.log(`✅ Asset verified: ${asset}`);
-      img.onerror = () => console.error(`❌ Asset failed: ${asset}`);
+      img.onload = () => {
+        console.log(`✅ Asset verified: ${asset}`);
+        loadedCount++;
+        if (loadedCount + failedCount === assets.length) {
+          console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
+        }
+      };
+      img.onerror = () => {
+        console.error(`❌ Asset failed: ${asset}`);
+        failedCount++;
+        if (loadedCount + failedCount === assets.length) {
+          console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
+        }
+      };
       img.src = asset;
     });
-    
-    setTimeout(() => console.log('✅ Asset verification completed'), 1000);
   }
 
   // Performance monitoring
