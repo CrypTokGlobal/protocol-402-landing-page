@@ -195,11 +195,13 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔍 Verifying critical assets...');
     const assets = [
       '/lady-justice-burgundy.png',
+      '/lady-justice.png',
       '/sceta.png',
       '/usc-law.png',
       '/techinlaw.png',
       '/check-icon.svg',
-      '/favicon.ico'
+      '/favicon.ico',
+      '/favicon.svg'
     ];
 
     let loadedCount = 0;
@@ -263,6 +265,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Use performance.now() for relative timing since page load
         const perfNow = Math.round(performance.now());
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
+      } else {
+        loadTime = 'loading';
       }
 
       console.log('⚡ Page performance metrics:', {
