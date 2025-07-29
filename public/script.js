@@ -105,16 +105,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('📋 Form data:', { name, email, timestamp });
 
-    // Basic validation
+    // Enhanced validation with professional feedback
     if (!name || !email || name.trim() === '' || email.trim() === '') {
-      showMessage('Please fill in all required fields.', 'error');
+      showMessage('Please complete all required fields to proceed.', 'error');
       return;
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Enhanced email validation
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     if (!emailRegex.test(email.trim())) {
-      showMessage('Please enter a valid email address.', 'error');
+      showMessage('Please provide a valid business email address.', 'error');
+      return;
+    }
+
+    // Name validation
+    if (name.trim().length < 2) {
+      showMessage('Please enter your full name.', 'error');
       return;
     }
 
@@ -161,8 +167,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleSuccessfulSubmission() {
       console.log('✅ Data logged to Google Sheet successfully');
 
-      // Show success message
-      showMessage('✅ Success! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
+      // Show professional success message
+      showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
 
       // Trigger PDF download immediately
       downloadPDF();
@@ -181,8 +187,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleFallbackSubmission() {
       console.log('🔄 Using fallback: PDF download without sheet logging');
 
-      // Show success message (user doesn't need to know about backend issues)
-      showMessage('✅ Thank you! Your download will begin shortly and you\'ll be redirected to the thank you page.', 'success');
+      // Show professional success message (user doesn't need to know about backend issues)
+      showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
 
       // Trigger PDF download immediately
       downloadPDF();
