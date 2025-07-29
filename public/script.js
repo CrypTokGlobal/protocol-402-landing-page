@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.warn(`⚠️ Expected src attribute: ${this.getAttribute('src')}`);
       console.warn(`⚠️ Logo alt text: ${this.alt}`);
       console.warn(`⚠️ Current working directory: ${window.location.origin}`);
-      
+
       // Check if this is the SCETA logo specifically
       if (this.src.includes('sceta-logo.png')) {
         console.error(`❌ SCETA logo path mismatch! Expected: /sceta.png, Got: ${this.src}`);
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.src = '/sceta.png';
         return;
       }
-      
+
       // Hide broken image and show alt text
       this.style.display = 'none';
       const link = this.closest('.logo-link, .footer-logo-link');
@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Get form data after timestamp is updated
       const formData = new FormData(form);
-      const name = formData.get('name');
-      const email = formData.get('email');
+      const name = formData.get('NAME'); // HTML form uses NAME
+      const email = formData.get('EMAIL'); // HTML form uses EMAIL  
       const timestamp = formData.get('TIMESTAMP');
 
       console.log('📋 Form data:', { name, email, timestamp });
@@ -146,18 +146,33 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
+      // Sanitize inputs
+      const cleanName = name.trim().replace(/[<>]/g, ''); // Remove potential XSS characters
+      const cleanEmail = email.trim().toLowerCase();
+
       // Enhanced email validation
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-      if (!emailRegex.test(email.trim())) {
-        showMessage('Please provide a valid email address to proceed.', 'error');
+      if (!emailRegex.test(cleanEmail)) {
+        showMessage('Please provide a valid business email address to proceed.', 'error');
         reEnableButton();
         return;
       }
 
       // Name validation
-      if (name.trim().length < 2) {
+      if (cleanName.length < 2) {
         showMessage('Please enter your full name to access the whitepaper.', 'error');
         reEnableButton();
+        return;
+      }
+
+      // Additional validations
+      if (cleanName.length > 100) {
+        showMessage('Name is too long. Please use a shorter name.', 'error');
+        return;
+      }
+
+      if (cleanEmail.length > 254) {
+        showMessage('Email address is too long.', 'error');
         return;
       }
 
@@ -215,12 +230,12 @@ document.addEventListener('DOMContentLoaded', function() {
       try {
         // Create form data for Sheet.best API with correct field names
         const formDataForAPI = new FormData();
-        formDataForAPI.append('NAME', name.trim());
-        formDataForAPI.append('EMAIL', email.trim());
+        formDataForAPI.append('NAME', cleanName);
+        formDataForAPI.append('EMAIL', cleanEmail);
         formDataForAPI.append('TIMESTAMP', timestamp);
 
         console.log('📤 Submitting to Sheet.best API...');
-        console.log('📤 Data being sent:', {NAME: name.trim(), EMAIL: email.trim(), TIMESTAMP: timestamp});
+        console.log('📤 Data being sent:', {NAME: cleanName, EMAIL: cleanEmail, TIMESTAMP: timestamp});
 
         const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
           method: 'POST',
@@ -230,10 +245,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('📤 Response status:', response.status);
         console.log('📤 Response ok:', response.ok);
-        
+
         // Enhanced error logging with full debugging information
         console.log('📤 Response headers:', Object.fromEntries(response.headers.entries()));
-        
+
         if (!response.ok) {
           console.error("❌ Submission failed:", response.status, response.statusText);
           console.error("❌ Response URL:", response.url);
@@ -245,19 +260,19 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error("❌ Could not read error response:", readError);
           }
         }
-        
+
         // Validate successful submission with proper data
         let submissionSuccessful = false;
-        
+
         try {
           const responseText = await response.clone().text();
           console.log('📤 Response body:', responseText);
-          
+
           if (response.ok) {
             try {
               const responseJson = JSON.parse(responseText);
               console.log('📤 Parsed response JSON:', responseJson);
-              
+
               // Verify that data was actually saved
               if (Array.isArray(responseJson) && responseJson.length > 0) {
                 const firstRecord = responseJson[0];
@@ -314,9 +329,9 @@ document.addEventListener('DOMContentLoaded', function() {
       '/lady-justice.png',
       '/favicon.ico'
     ];
-    
+
     console.log('🔍 Verifying critical assets...');
-    
+
     for (const asset of criticalAssets) {
       try {
         const response = await fetch(asset, { method: 'HEAD' });
@@ -330,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-  
+
   // Run asset verification
   verifyAssets();
 

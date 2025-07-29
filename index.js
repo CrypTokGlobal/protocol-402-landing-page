@@ -6,21 +6,76 @@ const https = require('https');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Security headers middleware
+// Production-ready security headers
 app.use((req, res, next) => {
+  // Log requests in production for monitoring
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - ${req.ip}`);
+  
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com fonts.googleapis.com; img-src 'self' data: blob:; connect-src 'self' https://api.sheetbest.com https://sceta.io; base-uri 'self'; form-action 'self' https://api.sheetbest.com");
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
+
+// Rate limiting store
+const requestCounts = new Map();
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 100;
+
+// Rate limiting middleware
+app.use((req, res, next) => {
+  const clientIP = req.ip || req.connection.remoteAddress;
+  const now = Date.now();
+  
+  // Clean up old entries
+  for (const [ip, data] of requestCounts.entries()) {
+    if (now - data.firstRequest > RATE_LIMIT_WINDOW) {
+      requestCounts.delete(ip);
+    }
+  }
+  
+  // Check current client
+  if (!requestCounts.has(clientIP)) {
+    requestCounts.set(clientIP, { count: 1, firstRequest: now });
+  } else {
+    const clientData = requestCounts.get(clientIP);
+    if (now - clientData.firstRequest < RATE_LIMIT_WINDOW) {
+      clientData.count++;
+      if (clientData.count > MAX_REQUESTS_PER_WINDOW) {
+        return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+      }
+    } else {
+      requestCounts.set(clientIP, { count: 1, firstRequest: now });
+    }
+  }
+  
   next();
 });
 
 // Middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use(express.static('public'));
+app.use(express.json({ limit: '1mb' })); // Reduced limit for security
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
+app.use(express.static('public', {
+  maxAge: '1d', // Cache static assets for 1 day
+  etag: true
+}));
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: Math.floor(process.uptime()),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
 
 // Routes
 app.get('/', (req, res) => {
