@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Test - Protocol 402</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    .test-container { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+    .test-button { background: #F5C518; color: black; padding: 15px 25px; border: none; border-radius: 5px; cursor: pointer; margin: 10px 5px; }
+    .test-button:hover { background: #FFD700; }
+    .log { background: #f8f8f8; padding: 10px; margin: 10px 0; border-radius: 4px; font-family: monospace; max-height: 300px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <h1>📄 Protocol 402 Download Test</h1>
+    <p>Use this page to test PDF download functionality:</p>
+    
+    <button class="test-button" onclick="testPDFDownload()">Test PDF Download</button>
+    <button class="test-button" onclick="testPDFExists()">Test PDF Exists</button>
+    <button class="test-button" onclick="clearLog()">Clear Log</button>
+    
+    <div id="log" class="log">
+      📋 Test log will appear here...<br>
+    </div>
+  </div>
+
+  <script>
+    function log(message) {
+      const logDiv = document.getElementById('log');
+      const timestamp = new Date().toISOString();
+      logDiv.innerHTML += `[${timestamp}] ${message}<br>`;
+      logDiv.scrollTop = logDiv.scrollHeight;
+      console.log(message);
+    }
+
+    function clearLog() {
+      document.getElementById('log').innerHTML = '📋 Test log cleared...<br>';
+    }
+
+    async function testPDFExists() {
+      log('🔍 Testing if PDF exists...');
+      try {
+        const response = await fetch('/whitepaper.pdf', { method: 'HEAD' });
+        const contentLength = response.headers.get('content-length');
+        const size = contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown';
+        
+        if (response.ok) {
+          log(`✅ PDF exists - Status: ${response.status}, Size: ${size}`);
+        } else {
+          log(`❌ PDF check failed - Status: ${response.status} ${response.statusText}`);
+        }
+      } catch (error) {
+        log(`❌ PDF check error: ${error.message}`);
+      }
+    }
+
+    async function testPDFDownload() {
+      log('📥 Testing PDF download...');
+      try {
+        // First check if PDF exists
+        const checkResponse = await fetch('/whitepaper.pdf', { method: 'HEAD' });
+        if (!checkResponse.ok) {
+          log(`❌ PDF not available - Status: ${checkResponse.status}`);
+          return;
+        }
+
+        // Test actual download
+        log('🔗 Initiating download...');
+        const link = document.createElement('a');
+        link.href = '/whitepaper.pdf';
+        link.download = 'Protocol_402_SCETA_Whitepaper.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        log('✅ Download initiated successfully');
+        
+        // Test window location method too
+        setTimeout(() => {
+          log('🔗 Testing window.location method...');
+          window.open('/whitepaper.pdf', '_blank');
+          log('✅ Window.open method tested');
+        }, 2000);
+        
+      } catch (error) {
+        log(`❌ Download test error: ${error.message}`);
+      }
+    }
+
+    // Auto-run basic tests when page loads
+    window.addEventListener('load', () => {
+      log('🚀 Download test page loaded');
+      log(`📱 Device: ${navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'}`);
+      log(`🌐 URL: ${window.location.href}`);
+      
+      // Auto-test PDF existence
+      setTimeout(testPDFExists, 1000);
+    });
+  </script>
+</body>
+</html>

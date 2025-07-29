@@ -251,10 +251,18 @@ app.post('/submit-form', express.json(), (req, res) => {
 
 
 
-// Serve whitepaper PDF with enhanced reliability
+// Serve whitepaper PDF with enhanced reliability and tracking
 app.get('/whitepaper.pdf', (req, res) => {
   try {
-    console.log(`📄 Whitepaper request from ${req.ip} at ${new Date().toISOString()}`);
+    const timestamp = new Date().toISOString();
+    const userAgent = req.headers['user-agent'] || 'Unknown';
+    const deviceType = userAgent.includes('Mobile') ? 'Mobile' : 'Desktop';
+    
+    console.log(`📄 WHITEPAPER DOWNLOAD REQUEST:`);
+    console.log(`   IP: ${req.ip}`);
+    console.log(`   Time: ${timestamp}`);
+    console.log(`   Device: ${deviceType}`);
+    console.log(`   User-Agent: ${userAgent}`);
 
     // Check if local PDF exists first
     const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
@@ -270,15 +278,22 @@ app.get('/whitepaper.pdf', (req, res) => {
       }
 
       console.log(`📄 Serving local PDF file (${fileSizeKB}KB)`);
+      console.log(`✅ PDF DOWNLOAD SUCCESS: Local file served to ${req.ip}`);
 
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', 'inline; filename="Protocol_402_SCETA_Whitepaper.pdf"');
       res.setHeader('Content-Length', stats.size);
       res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
+      res.setHeader('Access-Control-Allow-Origin', '*');
 
       // Stream the file for better performance
       const stream = fs.createReadStream(localPdfPath);
       stream.pipe(res);
+      
+      // Track successful PDF delivery
+      stream.on('end', () => {
+        console.log(`📈 TRACKING: PDF download completed successfully for ${req.ip}`);
+      });
 
       stream.on('error', (streamError) => {
         console.error('❌ PDF stream error:', streamError);
@@ -289,6 +304,7 @@ app.get('/whitepaper.pdf', (req, res) => {
 
     } else {
       console.log('📄 Local PDF not found, redirecting to external URL');
+      console.log(`📈 TRACKING: PDF fallback redirect triggered for ${req.ip}`);
       res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
     }
   } catch (error) {

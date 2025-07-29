@@ -88,8 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
           name: formattedName,
           email: formattedEmail,
           timestamp: timestampField.value,
-          userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop'
+          userAgent: navigator.userAgent.includes('Mobile') ? 'Mobile' : 'Desktop',
+          url: window.location.href,
+          referrer: document.referrer || 'direct'
         });
+        console.log('📈 TRACKING: Form submission initiated for:', formattedEmail);
 
         // Submit to SheetBest API
         try {
@@ -102,6 +105,15 @@ document.addEventListener('DOMContentLoaded', function() {
           if (response.ok) {
             console.log('✅ Successfully submitted to SheetBest');
             console.log('📈 Response status:', response.status);
+            console.log('📈 TRACKING: SheetBest submission confirmed for:', formattedEmail);
+            
+            // Get response data for verification
+            try {
+              const responseData = await response.text();
+              console.log('📋 SheetBest response data:', responseData);
+            } catch (logError) {
+              console.log('📋 SheetBest response (no data)');
+            }
 
             // Show success message
             if (submitButton) {
@@ -109,28 +121,49 @@ document.addEventListener('DOMContentLoaded', function() {
               submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
             }
 
-            // Verify PDF exists before redirecting
+            // Enhanced PDF download verification and tracking
             try {
               console.log('🔍 Checking PDF availability...');
-              const pdfCheck = await fetch('/whitepaper.pdf', { method: 'HEAD' });
-              console.log('📄 PDF check response:', pdfCheck.status);
+              const pdfCheck = await fetch('/whitepaper.pdf', { method: 'HEAD', cache: 'no-cache' });
+              console.log('📄 PDF check response:', pdfCheck.status, pdfCheck.statusText);
               
               if (pdfCheck.ok || pdfCheck.status === 200) {
                 const contentLength = pdfCheck.headers.get('content-length');
-                console.log('📊 PDF size:', contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown');
+                const pdfSize = contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown';
+                console.log('📊 PDF verified - Size:', pdfSize);
+                console.log('✅ PDF download confirmed available');
+                
+                // Track successful submission and PDF verification
+                console.log('📈 TRACKING: Form submitted successfully, PDF verified, initiating download');
                 
                 setTimeout(() => {
-                  console.log('🔗 Redirecting to local PDF download...');
+                  console.log('🔗 Initiating PDF download...');
+                  // Use both methods for maximum reliability
                   window.location.href = '/whitepaper.pdf';
+                  
+                  // Backup method after 2 seconds
+                  setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = '/whitepaper.pdf';
+                    link.download = 'Protocol_402_SCETA_Whitepaper.pdf';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    console.log('📥 Backup download method triggered');
+                  }, 2000);
                 }, 800);
               } else {
-                throw new Error(`PDF returned status: ${pdfCheck.status}`);
+                throw new Error(`PDF returned status: ${pdfCheck.status} ${pdfCheck.statusText}`);
               }
             } catch (pdfError) {
-              console.log('⚠️ Local PDF failed:', pdfError.message);
+              console.error('⚠️ Local PDF check failed:', pdfError.message);
               console.log('🌐 Using external fallback URL');
+              console.log('📈 TRACKING: Form submitted, local PDF failed, using external fallback');
+              
               setTimeout(() => {
-                window.open('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf', '_blank');
+                const fallbackUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+                window.open(fallbackUrl, '_blank');
+                console.log('🌐 External PDF opened:', fallbackUrl);
               }, 800);
             }
 
@@ -159,6 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (backupResult.success) {
               console.log('✅ Backup submission successful');
+              console.log('📈 TRACKING: Backup route submission confirmed for:', formattedEmail);
 
               // Show success message
               if (submitButton) {
@@ -167,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
               }
 
               setTimeout(() => {
+                console.log('🔗 Backup route triggering PDF download');
                 window.location.href = '/whitepaper.pdf';
               }, 800);
             } else {
@@ -272,11 +307,23 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!verificationComplete && totalProcessed === assets.length) {
         verificationComplete = true;
         console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully${skippedCount > 0 ? `, ${skippedCount} skipped` : ''}`);
+        console.log('📈 TRACKING: Asset verification complete');
+        
         if (failedCount > 0) {
           console.log(`⚠️ ${failedCount} assets failed to load`);
           console.log('📋 Failed assets:', results.filter(r => r.status === 'failed').map(r => r.asset));
+          console.log('📈 TRACKING: Asset failures detected - may impact user experience');
         } else {
           console.log('✅ All critical assets loaded successfully');
+          console.log('📈 TRACKING: All assets verified - optimal performance confirmed');
+        }
+        
+        // Special verification for Lady Justice hero image
+        const ladyJusticeLoaded = results.find(r => r.asset === '/lady-justice-burgundy.png' && r.status === 'loaded');
+        if (ladyJusticeLoaded) {
+          console.log('🏛️ Hero image (Lady Justice) verified successfully');
+        } else {
+          console.error('❌ CRITICAL: Hero image (Lady Justice) failed to load');
         }
       }
     }
@@ -308,14 +355,12 @@ document.addEventListener('DOMContentLoaded', function() {
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
       }
 
-      // Fix negative timing values completely
-      if (typeof loadTime === 'number' && loadTime < 0) {
-        loadTime = Math.abs(loadTime) > 60000 ? 'invalid_timing' : Math.abs(loadTime);
-      }
-      
-      // Final validation for unreasonable values
-      if (typeof loadTime === 'number' && loadTime > 60000) {
-        loadTime = 'timing_error';
+      // Complete fix for negative timing values and unreasonable numbers
+      if (typeof loadTime === 'number') {
+        if (loadTime < 0 || loadTime > 60000 || !isFinite(loadTime)) {
+          // Use document ready state as fallback
+          loadTime = document.readyState === 'complete' ? 'complete' : 'timing_error';
+        }
       }
 
       console.log('⚡ Page performance metrics:', {
