@@ -122,6 +122,7 @@ h1, h2, h3 {
     sepia(0.1);
   animation: elegantGlow 6s ease-in-out infinite alternate;
   transition: all 0.4s ease;
+  transform: scale(1.05);
 }
 
 @keyframes elegantGlow {
@@ -202,6 +203,38 @@ h1, h2, h3 {
   text-align: center;
   margin-bottom: 2rem;
   padding: 0;
+}
+
+/* Registration Section Styling */
+.registration-section {
+  text-align: center;
+  margin: 2.5rem 0;
+  padding: 1.5rem;
+  background: rgba(245, 197, 24, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(245, 197, 24, 0.3);
+}
+
+.registration-section p {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 500;
+}
+
+.registration-link {
+  color: #F5C518;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid rgba(245, 197, 24, 0.5);
+}
+
+.registration-link:hover {
+  color: #FFD700;
+  text-decoration: none;
+  border-bottom-color: #FFD700;
+  text-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
 }
 
 .join-sceta-btn {
@@ -412,7 +445,7 @@ h1 {
 }
 
 .quote-author {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: #F5C518;
   font-weight: 600;
   text-align: right;
@@ -641,6 +674,26 @@ h1 {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
+/* Desktop-specific Join SCETA positioning */
+@media (min-width: 769px) {
+  .join-sceta-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    order: -1;
+  }
+  
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header-logos {
+    order: 1;
+  }
+}
+
 /* Enhanced Mobile Responsive Design */
 @media (max-width: 768px) {
   .hero {
@@ -745,6 +798,16 @@ h1 {
     padding: 0.6rem 1rem;
     font-size: 1rem;
     margin-bottom: 1.2rem;
+  }
+
+  /* Registration Section Mobile */
+  .registration-section {
+    margin: 2rem 0;
+    padding: 1.2rem;
+  }
+
+  .registration-section p {
+    font-size: 1rem;
   }
 
   .logo-link {
