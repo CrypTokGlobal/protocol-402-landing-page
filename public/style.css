@@ -103,9 +103,9 @@ h1, h2, h3 {
 }
 
 .lady-justice-image {
-  width: 85%;
+  width: 95%;
   height: auto;
-  max-height: 90vh;
+  max-height: 95vh;
   object-fit: contain;
   filter: 
     drop-shadow(0 0 40px rgba(245, 197, 24, 0.4)) 
@@ -180,11 +180,11 @@ h1, h2, h3 {
 /* Header Logos - Executive Level Branding */
 .header-logos {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* Perfect horizontal centering */
   align-items: center;
   gap: 3rem; /* Enhanced spacing for better visual separation */
   margin-bottom: 3rem;
-  padding-right: 1rem;
+  padding: 0;
 }
 
 /* Header Logo Styling - Enhanced Size & Quality */
