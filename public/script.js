@@ -203,8 +203,18 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/thank-you.html';
       }, 3000);
     }
+  }).catch(error => {
+    // Final catch for any unhandled promise rejections
+    console.error('❌ Unhandled form submission error:', error);
+    reEnableButton();
+    showMessage('❌ An unexpected error occurred. Please try again.', 'error');
   });
 
   // Update timestamp when page loads
   updateTimestamp();
+
+  function reEnableButton() {
+    submitBtn.textContent = 'Submit';
+    submitBtn.disabled = false;
+  }
 });
