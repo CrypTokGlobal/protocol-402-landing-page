@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Handle form submission
-  form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', function(e) {
     e.preventDefault(); // Prevent default form submission
     console.log('📝 Form submission initiated');
 
@@ -94,6 +94,13 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('⚠️ Form already submitting, ignoring duplicate request');
       return;
     }
+
+    // Call async function to handle submission
+    handleFormSubmission();
+  });
+
+  // Async form submission handler
+  async function handleFormSubmission() {
 
     // Re-enable button function
     function reEnableButton() {
@@ -197,6 +204,17 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('📤 Response status:', response.status);
         console.log('📤 Response ok:', response.ok);
         
+        // Enhanced error logging
+        if (!response.ok) {
+          console.error("❌ Submission failed:", response.status, response.statusText);
+          try {
+            const errorText = await response.clone().text();
+            console.error("❌ Error response body:", errorText);
+          } catch (readError) {
+            console.error("❌ Could not read error response:", readError);
+          }
+        }
+        
         // Log response details for debugging
         try {
           const responseText = await response.clone().text();
@@ -216,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       } catch (error) {
         console.warn('⚠️ Network error, proceeding with fallback:', error);
-        console.error("Full error object:", error); // Log the full error object
+        console.error("❌ Full error object:", error); // Log the full error object
         handleFallbackSubmission();
       }
 
@@ -226,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
       reEnableButton();
       showMessage('❌ An unexpected error occurred. Please try again.', 'error');
     }
-  });
+  }
 
   // Update timestamp when page loads
   updateTimestamp();
