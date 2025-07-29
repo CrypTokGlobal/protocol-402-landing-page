@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Handle form submission
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault(); // Prevent default form submission
     console.log('📝 Form submission initiated');
 
@@ -95,14 +95,15 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Call async function to handle submission with proper error handling
-    handleFormSubmission().catch(error => {
+    try {
+      await handleFormSubmission();
+    } catch (error) {
       console.error('❌ Form submission error:', error);
       // Re-enable button on error
       submitBtn.textContent = 'Submit';
       submitBtn.disabled = false;
       showMessage('❌ An unexpected error occurred. Please try again.', 'error');
-    });
+    }
   });
 
   // Async form submission handler
@@ -120,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Get form data after timestamp is updated
       const formData = new FormData(form);
-      const name = formData.get('name');
-      const email = formData.get('email');
+      const name = formData.get('NAME');
+      const email = formData.get('EMAIL');
       const timestamp = formData.get('TIMESTAMP');
 
       console.log('📋 Form data:', { name, email, timestamp });
@@ -192,19 +193,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       try {
-        // Create FormData for Sheet.best API (they expect FormData, not JSON)
-        const formDataForAPI = new FormData();
-        formDataForAPI.append('name', name.trim());
-        formDataForAPI.append('email', email.trim());
-        formDataForAPI.append('TIMESTAMP', timestamp);
+        // Create JSON payload for Sheet.best API (correct field names matching spreadsheet headers)
+        const apiData = {
+          NAME: name.trim(),
+          EMAIL: email.trim(),
+          TIMESTAMP: timestamp
+        };
 
-        console.log('📤 Submitting to Sheet.best API with FormData...');
-        console.log('📤 FormData contents:', [...formDataForAPI.entries()]); // Log FormData contents
+        console.log('📤 Submitting to Sheet.best API with JSON...');
+        console.log('📤 JSON payload:', apiData);
 
         const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
           method: 'POST',
           mode: 'cors',
-          body: formDataForAPI // Send as FormData, no Content-Type header needed
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(apiData)
         });
 
         console.log('📤 Response status:', response.status);
@@ -249,11 +254,19 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('❌ Unhandled form submission error:', error);
       reEnableButton();
       showMessage('❌ An unexpected error occurred. Please try again.', 'error');
-      // Ensure we don't return an unhandled promise
-      throw error;
     }
   }
 
   // Update timestamp when page loads
   updateTimestamp();
+
+  // Global error handlers to prevent unhandled rejections
+  window.addEventListener('unhandledrejection', function(event) {
+    console.error('❌ Unhandled promise rejection prevented:', event.reason);
+    event.preventDefault(); // Prevent the default unhandled rejection behavior
+  });
+
+  window.addEventListener('error', function(event) {
+    console.error('❌ Global error caught:', event.error);
+  });
 });
