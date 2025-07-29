@@ -1,0 +1,97 @@
+Please help me finalize and polish the SCETA Protocol 402 landing page to look like it was designed by the smartest technology in the world — no templates, no shortcuts, just elegant code and world-class UI/UX.
+
+This is a billion-dollar legal + infrastructure proposal backed by state commissions, Supreme Court approval, and university partners. Every element should feel like legislation-grade design.
+
+🔗 LIVE PAGE: https://protocol-402-landing-page.onrender.com
+🖼️ New Lady Justice Image: Please use this version for the hero section: /static/images/lady-justice-burgundy.png (uploaded — glowing burgundy theme, no text).
+
+🔧 FINAL POLISH REQUESTS:
+1. 🧑‍⚖️ Lady Justice Panel
+
+Replace old image with new burgundy Lady Justice (no text version).
+
+Ensure she is centered and scales fluidly across all devices.
+
+Eliminate harsh gradient line at bottom — make it blend smoothly into background.
+
+No cropping or overflow on mobile/tablet.
+
+2. ✅ Remove Green Check Emoji
+
+Remove the ✅ emoji from the CLE approval section.
+
+Replace it with either:
+
+A clean inline gold check icon (SVG), or
+
+Just bold styled text — no emojis.
+
+Ensure the padding and border radius match the site's elegance.
+
+3. 🔲 Quote Box (David A. Pope)
+
+Fix spacing: top margin is too tight.
+
+Remove or replace the top-left quotation mark glyph — it's awkward.
+
+Reduce attribution font size by 1pt and align cleanly to bottom right.
+
+4. 💼 Join SCETA Button
+
+On desktop only, center above the 3 logos.
+
+Add a soft hover glow or pulse.
+
+Maintain current mobile placement.
+
+5. 🖼 Logo Trio (SCETA, USC, TECHINLAW)
+
+Make sure logos:
+
+Are not stretched or pixelated
+
+Align horizontally and responsively stack on smaller screens
+
+Use consistent sizing and spacing
+
+6. 📨 Whitepaper Form Section
+
+Add hover effect to the “Submit & Download PDF” button (soft glow or lift).
+
+Smooth form spacing — remove excess top and bottom padding.
+
+Add a light shadow or neon-style border on inputs to match design system.
+
+7. 🧱 Key Insights Grid
+
+Add hover animations for each card (glow, lift, or inner shadow).
+
+Ensure icons scale properly on high-res displays (not pixelated).
+
+Confirm layout stacks evenly on mobile/tablet.
+
+8. 🧾 Footer Section
+
+Align “Learn More About SCETA” button with logos below.
+
+Fix any white background blocks behind logos.
+
+Ensure copyright text is:
+
+Small, subtle, readable
+
+Aligned and spaced evenly (not touching bottom edge)
+
+🧪 Technical QA:
+Check for console errors and asset loading issues
+
+Compress and optimize all images (including Lady Justice)
+
+Ensure full mobile and tablet responsiveness
+
+Add Open Graph tags and favicon if not yet included
+
+🎯 This project is now in final stakeholder review with real legal commissioners and SC infrastructure leaders. Treat it like the landing page for a constitutional amendment — clean, tight, elite.
+
+Let me know if you need file paths or anything re-uploaded. Thank you 🙏
+
