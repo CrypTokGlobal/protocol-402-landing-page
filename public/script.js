@@ -211,47 +211,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const results = [];
 
     assets.forEach(asset => {
-      const img = new Image();
-      img.onload = () => {
-        console.log(`✅ Asset verified: ${asset}`);
-        results.push({ asset, status: 'loaded' });
-        loadedCount++;
-        checkComplete();
-      };
-      img.onerror = () => {
-        // SVG and ICO files may not load via Image() but still work in the browser
-        if (asset.includes('.svg') || asset.includes('.ico')) {
-          console.log(`ℹ️ ${asset} - SVG/ICO file, assuming available`);
-          results.push({ asset, status: 'skipped' });
-          skippedCount++;
-        } else {
-          console.warn(`⚠️ Asset failed to load: ${asset} - checking if accessible`);
-          
-          // Try fetch to verify if asset is actually accessible
-          fetch(asset, { method: 'HEAD' })
-            .then(response => {
-              if (response.ok) {
-                console.log(`✅ Asset accessible via fetch: ${asset}`);
-                results.push({ asset, status: 'loaded' });
-                loadedCount++;
-              } else {
-                console.error(`❌ Asset not accessible: ${asset} (${response.status})`);
-                results.push({ asset, status: 'failed' });
-                failedCount++;
-              }
+      // Use fetch for all assets to ensure consistent verification
+      fetch(asset, { method: 'HEAD' })
+        .then(response => {
+          if (response.ok) {
+            console.log(`✅ Asset verified: ${asset}`);
+            results.push({ asset, status: 'loaded' });
+            loadedCount++;
+          } else {
+            console.warn(`⚠️ Asset returned ${response.status}: ${asset}`);
+            results.push({ asset, status: 'failed' });
+            failedCount++;
+          }
+          checkComplete();
+        })
+        .catch(() => {
+          // For image assets, try Image() as fallback
+          if (asset.includes('.png') || asset.includes('.jpg') || asset.includes('.jpeg')) {
+            const img = new Image();
+            img.onload = () => {
+              console.log(`✅ Asset verified via Image(): ${asset}`);
+              results.push({ asset, status: 'loaded' });
+              loadedCount++;
               checkComplete();
-            })
-            .catch(() => {
+            };
+            img.onerror = () => {
               console.error(`❌ Asset completely inaccessible: ${asset}`);
               results.push({ asset, status: 'failed' });
               failedCount++;
               checkComplete();
-            });
-          return; // Don't call checkComplete() immediately
-        }
-        checkComplete();
-      };
-      img.src = asset;
+            };
+            img.src = asset;
+          } else {
+            console.error(`❌ Asset inaccessible: ${asset}`);
+            results.push({ asset, status: 'failed' });
+            failedCount++;
+            checkComplete();
+          }
+        });
     });
 
     function checkComplete() {
@@ -272,23 +269,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
 
-      // Calculate DOM ready time
-      const domReady = timing.domContentLoadedEventEnd > timing.navigationStart 
-        ? timing.domContentLoadedEventEnd - timing.navigationStart 
+      // Calculate DOM ready time with validation
+      const domReady = timing.domContentLoadedEventEnd > 0 && timing.navigationStart > 0
+        ? Math.max(0, timing.domContentLoadedEventEnd - timing.navigationStart)
         : 0;
 
       // Calculate load complete time with proper validation
       let loadTime = 'pending';
-      if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
+      if (timing.loadEventEnd > 0 && timing.navigationStart > 0) {
         const calculatedTime = timing.loadEventEnd - timing.navigationStart;
-        // Validate the calculated time is reasonable (less than 5 minutes)
-        loadTime = calculatedTime > 0 && calculatedTime < 300000 ? calculatedTime : 'invalid';
+        // Validate the calculated time is reasonable (0-60 seconds)
+        if (calculatedTime > 0 && calculatedTime < 60000) {
+          loadTime = calculatedTime;
+        } else {
+          loadTime = 'invalid';
+        }
       } else if (document.readyState === 'complete') {
         // Use performance.now() for relative timing since page load
         const perfNow = Math.round(performance.now());
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
-      } else {
-        loadTime = 'loading';
       }
 
       console.log('⚡ Page performance metrics:', {

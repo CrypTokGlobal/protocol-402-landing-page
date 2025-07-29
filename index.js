@@ -48,14 +48,14 @@ const MAX_REQUESTS_PER_WINDOW = 100;
 let lastCleanupSize = 0;
 setInterval(() => {
   try {
-    const now = Date.now();
     const currentSize = requestCounts.size;
     
     // Skip cleanup if map is small and hasn't grown much
-    if (currentSize < 10 && (currentSize - lastCleanupSize) < 5) {
+    if (currentSize < 20 && (currentSize - lastCleanupSize) < 10) {
       return;
     }
     
+    const now = Date.now();
     const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
     const beforeSize = currentSize;
     
@@ -79,22 +79,12 @@ setInterval(() => {
   } catch (error) {
     console.error('❌ Rate limit cleanup error:', error);
   }
-}, RATE_LIMIT_WINDOW);
+}, RATE_LIMIT_WINDOW * 2); // Run cleanup less frequently
 
 // Rate limiting middleware
 app.use((req, res, next) => {
   const clientIP = req.ip || req.connection.remoteAddress;
   const now = Date.now();
-  
-  // More efficient cleanup - only clean every 100 requests
-  if (Math.random() < 0.01) {
-    const cutoffTime = now - RATE_LIMIT_WINDOW;
-    for (const [ip, data] of requestCounts.entries()) {
-      if (data.firstRequest < cutoffTime) {
-        requestCounts.delete(ip);
-      }
-    }
-  }
   
   // Check current client
   if (!requestCounts.has(clientIP)) {
