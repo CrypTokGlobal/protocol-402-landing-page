@@ -184,20 +184,56 @@ h1, h2, h3 {
   50% { opacity: 1; }
 }
 
+/* Join SCETA Button Styling */
+.join-sceta-container {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.join-sceta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #F5C518 0%, #FFD700 100%);
+  color: #000000;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 6px 20px rgba(245, 197, 24, 0.3),
+    0 3px 10px rgba(245, 197, 24, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid rgba(245, 197, 24, 0.8);
+}
+
+.join-sceta-btn:hover {
+  background: linear-gradient(135deg, #FFD700 0%, #F5C518 100%);
+  transform: translateY(-3px);
+  text-decoration: none;
+  box-shadow: 
+    0 10px 30px rgba(245, 197, 24, 0.4),
+    0 5px 15px rgba(245, 197, 24, 0.3);
+  border-color: rgba(245, 197, 24, 1);
+}
+
 /* Header Logos - Executive Level Branding */
 .header-logos {
   display: flex;
   justify-content: center; /* Perfect horizontal centering */
   align-items: center;
-  gap: 2rem; /* Optimal spacing for stakeholder visibility */
+  gap: 2.5rem; /* Enhanced spacing for better presentation */
   margin-bottom: 3rem;
-  padding: 0;
+  padding: 1rem 0; /* Enhanced padding for even spacing */
   width: 100%;
 }
 
 /* Header Logo Styling - Enhanced Size & Quality */
 .partner-logo {
-  max-height: 85px; /* Desktop size - increased for better visibility */
+  max-height: 65px; /* Bolder appearance as requested */
   width: auto;
   object-fit: contain; /* Maintains aspect ratio without distortion */
   transition: all 0.3s ease-in-out; /* Smooth hover animation */
@@ -323,6 +359,45 @@ h1 {
   margin-bottom: 3.5rem;
   font-weight: 400;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* CLE Approval Line Styling */
+.cle-approval {
+  color: #F5C518;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(245, 197, 24, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(245, 197, 24, 0.3);
+  display: inline-block;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Testimonial Quote Enhanced Mobile */
+.testimonial-quote {
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: rgba(139, 21, 56, 0.2);
+  border-left: 4px solid #F5C518;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.quote-author {
+  font-size: 0.95rem;
+  color: #F5C518;
+  font-weight: 600;
+  text-align: right;
 }
 
 /* Premium Download Section */
@@ -552,6 +627,13 @@ h1 {
       0 5px 15px rgba(0, 0, 0, 0.3);
   }
 
+  /* Join SCETA Button Mobile */
+  .join-sceta-btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+
   /* Mobile Logo Layout - Enhanced Size & Center Alignment */
   .header-logos {
     justify-content: center; /* Center alignment on mobile */
@@ -559,11 +641,11 @@ h1 {
     gap: 2rem; /* Enhanced spacing */
     margin-bottom: 3rem;
     align-items: center;
-    padding: 0;
+    padding: 1rem 0;
   }
 
   .partner-logo {
-    max-height: 70px; /* Mobile size - increased for better visibility */
+    max-height: 50px; /* Mobile size as requested */
     margin-bottom: 10px;
   }
 
@@ -574,8 +656,46 @@ h1 {
   }
 
   .footer-logo {
-    max-height: 70px; /* Mobile size - increased for better visibility */
+    max-height: 50px; /* Mobile size consistency */
     margin-bottom: 10px;
+  }
+
+  /* Mobile Form Enhancements */
+  .form-box {
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+
+  .form-box input {
+    padding: 1.2rem 1.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-box button {
+    padding: 1.2rem 2rem;
+    font-size: 1.2rem;
+  }
+
+  /* Mobile Quote Enhancement */
+  .testimonial-quote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+  }
+
+  .quote-text {
+    font-size: 1rem;
+  }
+
+  .quote-author {
+    font-size: 0.9rem;
+  }
+
+  /* CLE Approval Mobile */
+  .cle-approval {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
   }
 
   .logo-link {
