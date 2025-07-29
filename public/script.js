@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', function(e) {
       try {
-        e.preventDefault();
         updateTimestamp();
 
         const nameField = form.querySelector('input[name="name"]');
@@ -44,6 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!nameField || !emailField) {
           console.error('❌ Form fields not found');
+          e.preventDefault();
           return;
         }
 
@@ -52,12 +52,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = emailField.value.trim();
 
         if (!name || name.length < 2) {
+          e.preventDefault();
           alert('Please enter a valid name (at least 2 characters)');
           nameField.focus();
           return;
         }
 
         if (!email || !isValidEmail(email)) {
+          e.preventDefault();
           alert('Please enter a valid email address');
           emailField.focus();
           return;
@@ -74,19 +76,15 @@ document.addEventListener('DOMContentLoaded', function() {
           submitButton.disabled = true;
         }
 
-        // Let the form submit naturally to Sheet.best
+        // Log successful validation - form will submit naturally to Sheet.best
         console.log('✅ Form validation passed, submitting to Sheet.best');
         
-        // Handle successful submission redirect
-        setTimeout(() => {
-          if (submitButton) {
-            submitButton.textContent = 'Redirecting...';
-          }
-          window.location.href = '/thank-you.html';
-        }, 2000);
+        // Don't prevent default - let the form submit to Sheet.best
+        // The action URL in the HTML will handle the redirect
         
       } catch (error) {
         console.error('❌ Form submission error:', error);
+        e.preventDefault();
         alert('An error occurred. Please try again.');
       }
     });
@@ -106,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
       '/usc-law.png', 
       '/techinlaw.png', 
       '/lady-justice.png', 
-      '/favicon.ico',
       '/check-icon.svg'
     ];
     
@@ -148,11 +145,17 @@ document.addEventListener('DOMContentLoaded', function() {
   function logPerformance() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
-      // Fix negative timing values by checking if loadEventEnd is set and valid
-      const loadTime = timing.loadEventEnd > 0 && timing.loadEventEnd > timing.navigationStart 
-        ? timing.loadEventEnd - timing.navigationStart 
-        : 'pending';
-      const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
+      
+      // Calculate DOM ready time
+      const domReady = timing.domContentLoadedEventEnd > timing.navigationStart 
+        ? timing.domContentLoadedEventEnd - timing.navigationStart 
+        : 0;
+      
+      // Calculate load complete time with proper validation
+      let loadTime = 'pending';
+      if (timing.loadEventEnd > 0 && timing.loadEventEnd > timing.navigationStart) {
+        loadTime = timing.loadEventEnd - timing.navigationStart;
+      }
       
       console.log('⚡ Page performance metrics:', {
         domContentLoaded: domReady,

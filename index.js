@@ -241,11 +241,19 @@ app.use((err, req, res, next) => {
   errorCount++;
   lastError = {
     message: err.message,
+    stack: err.stack,
     timestamp: new Date().toISOString(),
     url: req.url,
-    method: req.method
+    method: req.method,
+    ip: req.ip
   };
-  console.error('Global error handler:', err);
+  console.error('❌ Global error handler:', {
+    error: err.message,
+    stack: err.stack,
+    url: req.url,
+    method: req.method,
+    timestamp: new Date().toISOString()
+  });
   res.status(500).json({ 
     error: 'An unexpected error occurred. Please try again.' 
   });
