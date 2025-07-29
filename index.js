@@ -20,8 +20,10 @@ app.use((req, res, next) => {
 
 // Production-ready security headers
 app.use((req, res, next) => {
-  // Log requests in production for monitoring
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - ${req.ip}`);
+  // Log only important requests in production for monitoring
+  if (!req.url.includes('.css') && !req.url.includes('.js') && !req.url.includes('.png') && !req.url.includes('.ico') && !req.url.includes('.svg')) {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - ${req.ip}`);
+  }
   
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');

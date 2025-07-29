@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkComplete();
       };
       img.onerror = () => {
-        console.warn(`⚠️ Asset failed: ${asset}`);
+        console.warn(`⚠️ Asset failed to load: ${asset} - This may be normal for SVG files`);
         failedCount++;
         checkComplete();
       };
@@ -136,8 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function logPerformance() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
-      // Fix negative timing values by checking if loadEventEnd is set
-      const loadTime = timing.loadEventEnd > 0 ? timing.loadEventEnd - timing.navigationStart : 'pending';
+      // Fix negative timing values by checking if loadEventEnd is set and valid
+      const loadTime = timing.loadEventEnd > timing.navigationStart ? timing.loadEventEnd - timing.navigationStart : 'pending';
       const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
       
       console.log('⚡ Page performance metrics:', {
