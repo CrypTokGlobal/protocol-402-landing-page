@@ -130,6 +130,49 @@ let lastError = null;
 let submissionAttempts = 0;
 let lastSubmissionAttempt = null;
 
+// PDF verification endpoint for debugging
+app.get('/verify-pdf', (req, res) => {
+  const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
+  const externalUrl = 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf';
+  
+  let pdfStatus = {};
+  
+  try {
+    if (fs.existsSync(localPdfPath)) {
+      const stats = fs.statSync(localPdfPath);
+      pdfStatus = {
+        localExists: true,
+        sizeBytes: stats.size,
+        sizeKB: Math.round(stats.size / 1024),
+        sizeMB: Math.round(stats.size / 1024 / 1024 * 100) / 100,
+        isEmpty: stats.size === 0,
+        isSuspiciouslySmall: stats.size < 100000,
+        lastModified: stats.mtime,
+        path: localPdfPath
+      };
+    } else {
+      pdfStatus = {
+        localExists: false,
+        error: 'File does not exist'
+      };
+    }
+  } catch (error) {
+    pdfStatus = {
+      localExists: false,
+      error: error.message
+    };
+  }
+  
+  res.json({
+    timestamp: new Date().toISOString(),
+    pdfStatus: pdfStatus,
+    externalFallback: externalUrl,
+    recommendation: pdfStatus.isEmpty ? 'CRITICAL: Re-download PDF file' : 
+                   pdfStatus.isSuspiciouslySmall ? 'WARNING: Verify PDF integrity' : 
+                   'PDF appears valid'
+  });
+});
+
 // Health check endpoint with PDF verification
 app.get('/health', (req, res) => {
   // Check PDF availability
@@ -273,8 +316,15 @@ app.get('/whitepaper.pdf', (req, res) => {
 
       // Check if file is actually valid (not empty)
       if (stats.size === 0) {
-        console.error('❌ PDF file exists but is empty (0KB), redirecting to external URL');
+        console.error('❌ CRITICAL: PDF file exists but is empty (0KB), redirecting to external URL');
+        console.error('❌ TRACKING: Empty PDF file detected - this prevents whitepaper downloads');
         return res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+      }
+
+      // Additional validation for minimum expected PDF size (should be at least 100KB for a real PDF)
+      if (stats.size < 100000) {
+        console.error(`❌ WARNING: PDF file suspiciously small (${Math.round(stats.size / 1024)}KB), may be corrupted`);
+        console.error('❌ TRACKING: Potentially corrupted PDF detected');
       }
 
       console.log(`📄 Serving local PDF file (${fileSizeKB}KB)`);

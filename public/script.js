@@ -129,7 +129,18 @@ document.addEventListener('DOMContentLoaded', function() {
               
               if (pdfCheck.ok || pdfCheck.status === 200) {
                 const contentLength = pdfCheck.headers.get('content-length');
+                const pdfSizeBytes = contentLength ? parseInt(contentLength) : 0;
                 const pdfSize = contentLength ? Math.round(contentLength / 1024) + 'KB' : 'Unknown';
+                
+                // Check if PDF is empty or too small
+                if (pdfSizeBytes === 0) {
+                  console.error('❌ CRITICAL: PDF file is empty (0KB)');
+                  console.log('📈 TRACKING: Empty PDF detected, using external fallback');
+                  throw new Error('PDF file is empty');
+                } else if (pdfSizeBytes < 100000) {
+                  console.warn(`⚠️ WARNING: PDF suspiciously small (${pdfSize}), may be corrupted`);
+                }
+                
                 console.log('📊 PDF verified - Size:', pdfSize);
                 console.log('✅ PDF download confirmed available');
                 
