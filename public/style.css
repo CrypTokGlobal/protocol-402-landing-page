@@ -81,6 +81,19 @@ h1, h2, h3 {
   padding-right: 1rem;
 }
 
+/* Partner Logo Base Styles - Professional branding with smooth interactions */
+.partner-logo {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.partner-logo:hover {
+  transform: scale(1.05);
+}
+
 .logo-link {
   transition: all 0.3s ease;
   text-decoration: none;
@@ -116,13 +129,9 @@ h1, h2, h3 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.header-logo.sceta-logo {
-  max-height: 55px;
-  max-width: 55px;
-  min-height: 45px;
-  object-fit: contain;
-  background: transparent;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+.partner-logo.sceta-logo {
+  max-height: 60px;
+  max-width: 60px;
 }
 
 /* USC Logo Styles */
@@ -166,13 +175,9 @@ h1, h2, h3 {
   opacity: 0.9;
 }
 
-.header-logo.usc-logo {
-  max-height: 65px;
+.partner-logo.usc-logo {
+  max-height: 60px;
   max-width: 120px;
-  min-height: 50px;
-  object-fit: contain;
-  background: transparent;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* TECHINLAW Logo Styles */
@@ -209,13 +214,9 @@ h1, h2, h3 {
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.header-logo.techlaw-logo {
-  max-height: 55px;
-  max-width: 55px;
-  min-height: 45px;
-  object-fit: contain;
-  background: transparent;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+.partner-logo.techlaw-logo {
+  max-height: 60px;
+  max-width: 60px;
 }
 
 .header-logo {
@@ -439,16 +440,31 @@ h1 {
     text-align: center;
   }
 
-  .header-logo.sceta-logo {
-    max-height: 40px;
-    max-width: 40px;
-    min-width: 35px;
+  /* Mobile logo sizing - Professional scaling */
+  .partner-logo {
+    max-height: 50px;
+  }
+  
+  .partner-logo.sceta-logo {
+    max-height: 45px;
+    max-width: 45px;
   }
 
-  .header-logo.usc-logo {
+  .partner-logo.usc-logo {
     max-height: 45px;
-    max-width: 110px;
-    min-width: 80px;
+    max-width: 100px;
+  }
+  
+  .partner-logo.techlaw-logo {
+    max-height: 45px;
+    max-width: 45px;
+  }
+  
+  /* Footer mobile sizing */
+  .footer-sceta-logo,
+  .footer-usc-logo,
+  .footer-techlaw-logo {
+    max-height: 40px;
   }
 
   .sceta-text {
@@ -602,23 +618,20 @@ footer p {
   object-fit: contain;
 }
 
-/* Specific footer logo sizing */
-.footer-logo.sceta-logo {
-  max-height: 45px;
-  max-width: 45px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+/* Footer specific logo sizing - Clean professional styling */
+.footer-sceta-logo {
+  max-height: 50px;
+  max-width: 50px;
 }
 
-.footer-logo.usc-logo {
-  max-height: 40px;
+.footer-usc-logo {
+  max-height: 50px;
   max-width: 100px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
-.footer-logo.techlaw-logo {
-  max-height: 45px;
-  max-width: 45px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+.footer-techlaw-logo {
+  max-height: 50px;
+  max-width: 50px;
 }
 
 .legal {
