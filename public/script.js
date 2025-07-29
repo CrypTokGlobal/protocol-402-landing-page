@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
   logos.forEach(logo => {
     logo.addEventListener('error', function() {
       console.warn(`⚠️ Logo failed to load: ${this.src}`);
+      // Keep the text label visible even if image fails
+      const container = this.closest('.logo-container');
+      if (container) {
+        const textElements = container.querySelectorAll('.sceta-text, .logo-text-group, .techlaw-content');
+        textElements.forEach(el => el.style.display = 'block');
+      }
       this.style.display = 'none';
     });
     
