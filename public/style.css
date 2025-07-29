@@ -9,6 +9,23 @@ html {
   font-size: 16px;
 }
 
+/* Enhanced smooth scrolling for all browsers */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Refined fade-in animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #ffffff;
@@ -119,6 +136,7 @@ h1, h2, h3 {
   justify-content: center;
   position: relative;
   padding: 0;
+  overflow: hidden;
 }
 
 .lady-justice-image {
@@ -292,29 +310,31 @@ h1, h2, h3 {
 
 .join-sceta-btn:hover {
   background: linear-gradient(135deg, #FFD700 0%, #F5C518 50%, #FFD700 100%);
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.05);
   text-decoration: none;
   box-shadow: 
-    0 10px 30px rgba(245, 197, 24, 0.5),
-    0 5px 15px rgba(245, 197, 24, 0.4),
-    0 0 35px rgba(245, 197, 24, 0.4),
-    0 0 60px rgba(245, 197, 24, 0.2);
+    0 15px 40px rgba(245, 197, 24, 0.6),
+    0 8px 25px rgba(245, 197, 24, 0.5),
+    0 0 50px rgba(245, 197, 24, 0.5),
+    0 0 80px rgba(245, 197, 24, 0.3);
   border-color: rgba(245, 197, 24, 1);
-  animation: pulseGlow 2s ease-in-out infinite alternate;
+  animation: sophisticatedGlow 1.5s ease-in-out infinite alternate;
 }
 
-@keyframes pulseGlow {
+@keyframes sophisticatedGlow {
   0% {
+    filter: brightness(1.1);
     box-shadow: 
-      0 10px 30px rgba(245, 197, 24, 0.4),
-      0 5px 15px rgba(245, 197, 24, 0.3),
-      0 0 25px rgba(245, 197, 24, 0.3);
+      0 15px 40px rgba(245, 197, 24, 0.6),
+      0 8px 25px rgba(245, 197, 24, 0.5),
+      0 0 50px rgba(245, 197, 24, 0.5);
   }
   100% {
+    filter: brightness(1.2);
     box-shadow: 
-      0 12px 35px rgba(245, 197, 24, 0.5),
-      0 6px 18px rgba(245, 197, 24, 0.4),
-      0 0 35px rgba(245, 197, 24, 0.4);
+      0 18px 45px rgba(245, 197, 24, 0.7),
+      0 10px 30px rgba(245, 197, 24, 0.6),
+      0 0 60px rgba(245, 197, 24, 0.6);
   }
 }
 
@@ -514,12 +534,13 @@ h1 {
   font-weight: 600;
   font-size: 1.1rem;
   margin: 2rem 0 1.5rem 0;
-  padding: 1.5rem 2rem 1.5rem 3.5rem;
+  padding: 1.5rem 2rem;
   background: 
     linear-gradient(145deg, rgba(245, 197, 24, 0.15) 0%, rgba(245, 197, 24, 0.08) 100%);
   border-radius: 12px;
   border: 2px solid rgba(245, 197, 24, 0.4);
-  display: block;
+  display: flex;
+  align-items: center;
   text-align: left;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
@@ -528,27 +549,24 @@ h1 {
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.2),
     0 0 30px rgba(245, 197, 24, 0.1);
+  gap: 1rem;
 }
 
-.cle-approval::before {
-  content: '✓';
-  position: absolute;
-  left: 1.2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
+.cle-icon {
+  width: 20px;
+  height: 20px;
   background: linear-gradient(135deg, #F5C518 0%, #FFD700 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 900;
   color: #000;
   box-shadow: 
-    0 0 8px rgba(245, 197, 24, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 0 10px rgba(245, 197, 24, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
 }
 
 .cle-approval::after {
@@ -564,15 +582,15 @@ h1 {
 
 /* Premium Testimonial Quote */
 .testimonial-quote {
-  margin: 2.5rem 0;
-  padding: 2.5rem;
+  margin: 3rem 0;
+  padding: 3rem;
   background: 
     linear-gradient(145deg, rgba(139, 21, 56, 0.25) 0%, rgba(115, 0, 10, 0.2) 100%);
   border-left: 4px solid #F5C518;
-  border-radius: 12px;
+  border-radius: 16px;
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 12px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   order: 8;
@@ -580,33 +598,33 @@ h1 {
 
 .quote-text {
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.95);
-  line-height: 1.65;
-  margin-bottom: 2.2rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
   font-weight: 400;
   padding-left: 0.5rem;
 }
 
 .quote-author {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #F5C518;
   font-weight: 500;
   text-align: right;
-  line-height: 1.4;
-  opacity: 0.9;
-  letter-spacing: 0.3px;
+  line-height: 1.5;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
   font-style: normal;
-  padding-right: 0;
+  padding-right: 1rem;
   margin-right: 0;
 }
 
 /* Download Section */
 .download-section {
   text-align: center;
-  margin: 2.5rem 0 2rem 0;
+  margin: 2rem 0 1.5rem 0;
   position: relative;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   order: 9;
 }
 
@@ -739,11 +757,12 @@ h1 {
   background: 
     linear-gradient(145deg, rgba(139, 21, 56, 0.4) 0%, rgba(115, 0, 10, 0.3) 100%);
   color: #ffffff;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 3px 12px rgba(245, 197, 24, 0.2),
     inset 0 2px 0 rgba(255, 255, 255, 0.1),
     0 0 0 1px rgba(245, 197, 24, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -876,15 +895,32 @@ h1 {
 
 .form-box button:hover {
   background: linear-gradient(135deg, #FFD700 0%, #F5C518 50%, #FFD700 100%);
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-8px) scale(1.03);
   box-shadow: 
-    0 18px 45px rgba(245, 197, 24, 0.8),
-    0 10px 30px rgba(245, 197, 24, 0.6),
-    0 5px 18px rgba(245, 197, 24, 0.5),
-    0 0 60px rgba(245, 197, 24, 0.5),
-    0 0 100px rgba(245, 197, 24, 0.3);
-  animation: buttonHoverGlow 1.5s ease-in-out infinite alternate;
-  filter: brightness(1.1);
+    0 25px 60px rgba(245, 197, 24, 0.8),
+    0 15px 40px rgba(245, 197, 24, 0.7),
+    0 8px 25px rgba(245, 197, 24, 0.6),
+    0 0 80px rgba(245, 197, 24, 0.6),
+    0 0 120px rgba(245, 197, 24, 0.4);
+  animation: premiumButtonHoverGlow 1.2s ease-in-out infinite alternate;
+  filter: brightness(1.15);
+}
+
+@keyframes premiumButtonHoverGlow {
+  0% {
+    filter: brightness(1.15);
+    box-shadow: 
+      0 25px 60px rgba(245, 197, 24, 0.8),
+      0 15px 40px rgba(245, 197, 24, 0.7),
+      0 0 80px rgba(245, 197, 24, 0.6);
+  }
+  100% {
+    filter: brightness(1.2);
+    box-shadow: 
+      0 30px 70px rgba(245, 197, 24, 0.9),
+      0 18px 45px rgba(245, 197, 24, 0.8),
+      0 0 100px rgba(245, 197, 24, 0.7);
+  }
 }
 
 @keyframes buttonHoverGlow {
@@ -1023,19 +1059,28 @@ h1 {
 }
 
 .card:hover {
-  transform: translateY(-15px) scale(1.05);
-  border-color: rgba(245, 197, 24, 0.9);
+  transform: translateY(-20px) scale(1.06);
+  border-color: rgba(245, 197, 24, 0.95);
   box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.4),
-    0 20px 40px rgba(245, 197, 24, 0.3),
-    0 10px 20px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(245, 197, 24, 0.3),
-    0 0 70px rgba(245, 197, 24, 0.2),
-    inset 0 2px 0 rgba(255, 255, 255, 0.15),
-    0 0 0 2px rgba(245, 197, 24, 0.6);
+    0 40px 80px rgba(0, 0, 0, 0.5),
+    0 25px 50px rgba(245, 197, 24, 0.4),
+    0 15px 30px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(245, 197, 24, 0.4),
+    0 0 100px rgba(245, 197, 24, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 3px rgba(245, 197, 24, 0.7);
   background: 
-    linear-gradient(145deg, rgba(139, 21, 56, 0.35) 0%, rgba(90, 0, 8, 0.3) 50%, rgba(139, 21, 56, 0.25) 100%);
-  animation: cardGlow 2s ease-in-out infinite alternate;
+    linear-gradient(145deg, rgba(139, 21, 56, 0.4) 0%, rgba(90, 0, 8, 0.35) 50%, rgba(139, 21, 56, 0.3) 100%);
+  animation: premiumCardGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes premiumCardGlow {
+  0% {
+    filter: brightness(1.05);
+  }
+  100% {
+    filter: brightness(1.12);
+  }
 }
 
 @keyframes cardGlow {
@@ -1126,11 +1171,13 @@ footer p {
 
 .footer-btn:hover {
   background: linear-gradient(135deg, #FFD700 0%, #F5C518 100%);
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.03);
   text-decoration: none;
   box-shadow: 
-    0 10px 30px rgba(245, 197, 24, 0.4),
-    0 5px 15px rgba(245, 197, 24, 0.3);
+    0 15px 40px rgba(245, 197, 24, 0.5),
+    0 8px 25px rgba(245, 197, 24, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.4);
+  filter: brightness(1.1);
 }
 
 /* Footer Logos */
@@ -1138,12 +1185,13 @@ footer p {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2.5rem;
-  margin: 2.5rem auto;
+  gap: 3rem;
+  margin: 3rem auto;
   flex-wrap: wrap;
   position: relative;
   z-index: 2;
-  max-width: 800px;
+  max-width: 900px;
+  padding: 1rem 0;
 }
 
 .footer-logo-link {
@@ -1188,22 +1236,22 @@ footer p {
 }
 
 .legal {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(245, 197, 24, 0.2);
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 3rem;
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-top: 1px solid rgba(245, 197, 24, 0.25);
+  line-height: 1.6;
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 900px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .legal p {
-  margin-bottom: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 /* Mobile Responsive Design */
@@ -1307,12 +1355,13 @@ footer p {
   }
 
   .testimonial-quote {
-    padding: 1.8rem;
-    margin: 2rem 0;
+    padding: 2.2rem 1.8rem;
+    margin: 2.5rem 0;
   }
 
   .quote-author {
     font-size: 0.85rem;
+    padding-right: 0.5rem;
   }
 
   .form-box {

@@ -200,10 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', logPerformance);
   }
 
-  // Intersection Observer for scroll animations
+  // Enhanced Intersection Observer for sophisticated scroll animations
   const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -211,15 +211,40 @@ document.addEventListener('DOMContentLoaded', function() {
       if (entry.isIntersecting) {
         entry.target.style.animationPlayState = 'running';
         entry.target.classList.add('animate-in');
+        
+        // Special handling for cards with staggered animation
+        if (entry.target.classList.contains('card')) {
+          const cards = entry.target.parentElement.children;
+          Array.from(cards).forEach((card, index) => {
+            setTimeout(() => {
+              card.classList.add('animate-in');
+            }, index * 150);
+          });
+        }
       }
     });
   }, observerOptions);
+
+  // Enhanced animation observer for quote section
+  const quoteObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = 'fadeInUp 0.8s ease-out both';
+      }
+    });
+  }, { threshold: 0.2 });
 
   // Observe sections for animations
   const sectionsToAnimate = document.querySelectorAll('.features, .card, footer');
   sectionsToAnimate.forEach(section => {
     observer.observe(section);
   });
+
+  // Observe quote section for special animation
+  const quoteSection = document.querySelector('.testimonial-quote');
+  if (quoteSection) {
+    quoteObserver.observe(quoteSection);
+  }
 
   console.log('🎯 SCETA Protocol 402 - All systems ready');
 });
