@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault(); // Always prevent default form submission
-      
+
       try {
         updateTimestamp();
 
@@ -94,20 +94,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (response.ok) {
             console.log('✅ Successfully submitted to SheetBest');
-            
+
             // Short delay to show success, then redirect to PDF
             setTimeout(() => {
               console.log('🔗 Redirecting to PDF download...');
               window.location.href = '/whitepaper.pdf';
             }, 500);
-            
+
           } else {
             throw new Error(`SheetBest API error: ${response.status}`);
           }
 
         } catch (fetchError) {
           console.error('❌ SheetBest submission failed:', fetchError);
-          
+
           // Fallback: try backup route
           try {
             const backupResponse = await fetch('/submit-form', {
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             const backupResult = await backupResponse.json();
-            
+
             if (backupResult.success) {
               console.log('✅ Backup submission successful');
               setTimeout(() => {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
           } catch (backupError) {
             console.error('❌ Backup submission also failed:', backupError);
             alert('Unable to submit form. Please try again.');
-            
+
             // Reset button
             if (submitButton) {
               submitButton.textContent = originalText;
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } catch (error) {
         console.error('❌ Form submission error:', error);
         alert('An error occurred. Please try again.');
-        
+
         // Reset button
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) {
@@ -169,10 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function verifyAssets() {
     console.log('🔍 Verifying critical assets...');
     const assets = [
-      '/sceta.png', 
-      '/usc-law.png', 
-      '/techinlaw.png', 
-      '/lady-justice.png', 
+      '/lady-justice-burgundy.png',
+      '/sceta.png',
+      '/usc-law.png',
+      '/techinlaw.png',
       '/check-icon.svg',
       '/favicon.ico'
     ];

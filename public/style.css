@@ -158,6 +158,9 @@ h1, h2, h3 {
   transform-origin: center center;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Tablet and smaller desktop breakpoint fixes */
@@ -1328,6 +1331,7 @@ footer p {
     background-attachment: scroll;
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
     overflow-x: hidden;
   }
 
