@@ -77,6 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Let the form submit naturally to Sheet.best
         console.log('✅ Form validation passed, submitting to Sheet.best');
         
+        // Handle successful submission redirect
+        setTimeout(() => {
+          if (submitButton) {
+            submitButton.textContent = 'Redirecting...';
+          }
+          window.location.href = '/thank-you.html';
+        }, 2000);
+        
       } catch (error) {
         console.error('❌ Form submission error:', error);
         alert('An error occurred. Please try again.');
@@ -105,16 +113,19 @@ document.addEventListener('DOMContentLoaded', function() {
     let loadedCount = 0;
     let failedCount = 0;
     let verificationComplete = false;
+    const results = [];
     
     assets.forEach(asset => {
       const img = new Image();
       img.onload = () => {
         console.log(`✅ Asset verified: ${asset}`);
+        results.push({ asset, status: 'loaded' });
         loadedCount++;
         checkComplete();
       };
       img.onerror = () => {
-        console.warn(`⚠️ Asset failed to load: ${asset} - This may be normal for SVG files`);
+        console.warn(`⚠️ Asset failed to load: ${asset} - This may be normal for SVG/ICO files`);
+        results.push({ asset, status: 'failed' });
         failedCount++;
         checkComplete();
       };
@@ -127,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
         if (failedCount > 0) {
           console.log(`⚠️ ${failedCount} assets failed to load but this may be normal for some file types`);
+          console.log('📋 Failed assets:', results.filter(r => r.status === 'failed').map(r => r.asset));
         }
       }
     }
@@ -137,7 +149,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.performance && window.performance.timing) {
       const timing = window.performance.timing;
       // Fix negative timing values by checking if loadEventEnd is set and valid
-      const loadTime = timing.loadEventEnd > timing.navigationStart ? timing.loadEventEnd - timing.navigationStart : 'pending';
+      const loadTime = timing.loadEventEnd > 0 && timing.loadEventEnd > timing.navigationStart 
+        ? timing.loadEventEnd - timing.navigationStart 
+        : 'pending';
       const domReady = timing.domContentLoadedEventEnd - timing.navigationStart;
       
       console.log('⚡ Page performance metrics:', {
