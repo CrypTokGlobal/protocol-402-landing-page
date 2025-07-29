@@ -31,7 +31,7 @@
     }
 
     .logo {
-      max-height: 95px;
+      max-height: 105px; /* Enhanced size for stakeholder visibility */
       width: auto;
       margin: 0 auto 2rem auto;
       display: block;
@@ -62,6 +62,8 @@
       font-weight: 600;
       transition: all 0.3s ease;
       margin: 0.5rem;
+      width: 280px; /* Consistent button width */
+      text-align: center;
     }
 
     .btn:hover {
@@ -73,10 +75,24 @@
       margin-top: 2rem;
     }
 
+    /* Prep buttons for future activation - commented out but styled */
+    /*
+    .btn-secondary {
+      background: linear-gradient(135deg, #73000A 0%, #8B1538 100%);
+      color: white;
+      border: 2px solid #F5C518;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #8B1538 0%, #A01B47 100%);
+      border-color: #FFD700;
+    }
+    */
+
     /* Mobile responsive adjustments */
     @media (max-width: 768px) {
       .logo {
-        max-height: 80px;
+        max-height: 90px; /* Mobile size - enhanced */
         margin-bottom: 1.5rem;
       }
       
@@ -101,6 +117,14 @@
       <a href="https://sceta.io" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Visit SCETA.io">Visit SCETA.io</a>
       <br>
       <a href="https://bit.ly/Convergence01" target="_blank" rel="noopener noreferrer" class="btn" aria-label="Register for TechInLaw Event">Register for TechInLaw Event</a>
+      
+      <!-- Future action buttons - styled but commented out for later activation -->
+      <!--
+      <br>
+      <a href="https://sceta.io/join" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Join SCETA">Join SCETA</a>
+      <br>
+      <a href="https://bit.ly/LawInTech2025" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" aria-label="Register for LawInTech">Register for LawInTech</a>
+      -->
     </div>
   </div>
 </body>
