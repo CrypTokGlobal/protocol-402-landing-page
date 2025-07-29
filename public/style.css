@@ -557,16 +557,14 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 3.4rem;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
   line-height: 1.05;
   margin-bottom: 2rem;
   color: #ffffff;
   letter-spacing: -0.03em;
   text-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.8),
-    0 16px 32px rgba(0, 0, 0, 0.6),
-    0 4px 8px rgba(245, 197, 24, 0.3),
-    0 0 80px rgba(245, 197, 24, 0.5);
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.25);
   animation: premiumTitleGlow 6s ease-in-out infinite alternate;
   font-weight: 600;
   background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 20%, #e8e8e8 40%, #ffffff 60%, #f8f8f8 80%, #ffffff 100%);
@@ -577,6 +575,8 @@ h1 {
   animation: premiumTitleGlow 6s ease-in-out infinite alternate, textShimmer 8s ease-in-out infinite;
   order: 4;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @keyframes textShimmer {
@@ -710,6 +710,12 @@ h1::after {
     0 0 10px rgba(245, 197, 24, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
+  position: relative;
+}
+
+.cle-icon::before {
+  content: '⚖';
+  font-size: 10px;
 }
 
 .cle-approval::after {
@@ -742,14 +748,14 @@ h1::after {
 }
 
 .testimonial-quote::before {
-  content: '"';
+  content: '';
   position: absolute;
   top: 1rem;
   left: 2rem;
-  font-size: 4rem;
-  color: rgba(245, 197, 24, 0.3);
-  font-family: 'DM Serif Display', serif;
-  line-height: 1;
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, rgba(245, 197, 24, 0.2), rgba(245, 197, 24, 0.1));
+  border-radius: 8px;
 }
 
 .quote-text {
@@ -757,19 +763,19 @@ h1::after {
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.7;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   font-weight: 400;
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .quote-author {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #F5C518;
   font-weight: 500;
   text-align: right;
-  line-height: 1.5;
+  line-height: 1.4;
   opacity: 0.95;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   font-style: normal;
   padding-right: 1rem;
   margin-right: 0;
@@ -1120,15 +1126,15 @@ h1::after {
 
 .form-box button:hover {
   background: linear-gradient(135deg, #FFD700 0%, #F5C518 50%, #FFD700 100%);
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 
-    0 25px 60px rgba(245, 197, 24, 0.8),
-    0 15px 40px rgba(245, 197, 24, 0.7),
-    0 8px 25px rgba(245, 197, 24, 0.6),
-    0 0 80px rgba(245, 197, 24, 0.6),
-    0 0 120px rgba(245, 197, 24, 0.4);
-  animation: premiumButtonHoverGlow 1.2s ease-in-out infinite alternate;
-  filter: brightness(1.15);
+    0 20px 50px rgba(245, 197, 24, 0.7),
+    0 12px 30px rgba(245, 197, 24, 0.6),
+    0 6px 20px rgba(245, 197, 24, 0.5),
+    0 0 60px rgba(245, 197, 24, 0.5),
+    0 0 100px rgba(245, 197, 24, 0.3);
+  animation: premiumButtonHoverGlow 1.5s ease-in-out infinite alternate;
+  filter: brightness(1.12) saturate(1.1);
 }
 
 @keyframes premiumButtonHoverGlow {
@@ -1301,27 +1307,31 @@ h1::after {
 }
 
 .card:hover {
-  transform: translateY(-35px) scale(1.12) rotateX(8deg) rotateY(2deg);
+  transform: translateY(-25px) scale(1.08) rotateX(4deg) rotateY(1deg);
   border-color: rgba(245, 197, 24, 1);
   box-shadow: 
-    0 70px 140px rgba(0, 0, 0, 0.7),
-    0 45px 90px rgba(245, 197, 24, 0.6),
-    0 30px 60px rgba(139, 21, 56, 0.5),
-    0 20px 40px rgba(0, 0, 0, 0.6),
-    0 15px 30px rgba(245, 197, 24, 0.4),
-    0 0 100px rgba(245, 197, 24, 0.6),
-    0 0 150px rgba(245, 197, 24, 0.5),
-    0 0 250px rgba(245, 197, 24, 0.3),
-    0 0 350px rgba(245, 197, 24, 0.15),
-    inset 0 4px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.25),
-    0 0 0 5px rgba(245, 197, 24, 0.95),
-    0 0 0 7px rgba(255, 255, 255, 0.15),
-    0 0 0 9px rgba(245, 197, 24, 0.5);
+    0 40px 80px rgba(0, 0, 0, 0.6),
+    0 25px 50px rgba(245, 197, 24, 0.5),
+    0 15px 30px rgba(139, 21, 56, 0.4),
+    0 10px 20px rgba(0, 0, 0, 0.5),
+    0 8px 15px rgba(245, 197, 24, 0.3),
+    0 0 60px rgba(245, 197, 24, 0.4),
+    0 0 100px rgba(245, 197, 24, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 3px rgba(245, 197, 24, 0.8);
   background: 
-    linear-gradient(145deg, rgba(159, 31, 66, 0.6) 0%, rgba(139, 21, 56, 0.55) 25%, rgba(115, 0, 10, 0.5) 50%, rgba(139, 21, 56, 0.55) 75%, rgba(159, 31, 66, 0.5) 100%);
-  animation: ultimateCardGlow 1.8s ease-in-out infinite alternate, enhancedFloat 4s ease-in-out infinite;
-  backdrop-filter: blur(40px) brightness(1.15) saturate(1.2);
+    linear-gradient(145deg, rgba(159, 31, 66, 0.5) 0%, rgba(139, 21, 56, 0.45) 25%, rgba(115, 0, 10, 0.4) 50%, rgba(139, 21, 56, 0.45) 75%, rgba(159, 31, 66, 0.4) 100%);
+  animation: cardGlowPulse 2s ease-in-out infinite alternate;
+  backdrop-filter: blur(25px) brightness(1.1) saturate(1.15);
+}
+
+@keyframes cardGlowPulse {
+  0% {
+    filter: brightness(1.05);
+  }
+  100% {
+    filter: brightness(1.12);
+  }
 }
 
 @keyframes premiumCardGlow {
@@ -1489,7 +1499,7 @@ footer p {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.75);
   margin-top: 3rem;
-  padding: 2.5rem 2rem 2rem 2rem;
+  padding: 2.5rem 2rem 3rem 2rem;
   border-top: 1px solid rgba(245, 197, 24, 0.25);
   line-height: 1.6;
   position: relative;
@@ -1522,9 +1532,15 @@ footer p {
   }
 
   h1 {
-    font-size: 2.8rem;
+    font-size: clamp(2rem, 6vw, 2.8rem);
     line-height: 1.1;
     margin-bottom: 2.5rem;
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.6),
+      0 0 20px rgba(245, 197, 24, 0.15);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
   }
 
   .features h2 {
@@ -1617,13 +1633,14 @@ footer p {
   }
 
   .testimonial-quote {
-    padding: 2.2rem 1.8rem;
-    margin: 2.5rem 0;
+    padding: 2rem 1.5rem;
+    margin: 2rem 0;
   }
 
   .quote-author {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     padding-right: 0.5rem;
+    line-height: 1.3;
   }
 
   .form-box {
