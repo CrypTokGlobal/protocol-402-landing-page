@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Get form data after timestamp is updated
       const formData = new FormData(form);
-      const name = formData.get('NAME'); // HTML form uses NAME
-      const email = formData.get('EMAIL'); // HTML form uses EMAIL  
+      const name = formData.get('name'); // HTML form uses lowercase 'name'
+      const email = formData.get('email'); // HTML form uses lowercase 'email'  
       const timestamp = formData.get('TIMESTAMP');
 
       console.log('📋 Form data:', { name, email, timestamp });
