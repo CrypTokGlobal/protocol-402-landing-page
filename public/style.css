@@ -892,22 +892,44 @@ footer p {
 /* =================================================================
    LOGO STYLING SYSTEM - Enhanced Size & Responsive Design
    ================================================================= 
-   
+
    Desktop Sizes:
    - Header Logos: max-height: 85px (stakeholder visibility enhanced)
    - Footer Logos: max-height: 85px (stakeholder visibility enhanced)
-   
+
    Mobile Sizes (768px and below):
    - Header Logos: max-height: 70px (enhanced from 60px)
    - Footer Logos: max-height: 70px (enhanced from 60px)
-   
+
    Quality Settings:
    - object-fit: contain (maintains aspect ratio)
    - Smooth transitions: 0.3s ease-in-out
    - Scale hover effect: 1.05
-   
+
    Future Logo Changes:
    - Always use object-fit: contain to prevent distortion
    - Test on both desktop and mobile viewports
    - Maintain consistent gap spacing (2rem for optimal balance)
    ================================================================= */
+
+.visit-btn {
+  background: linear-gradient(135deg, #8B1538 0%, #A01B47 100%);
+  border: 2px solid rgba(245, 197, 24, 0.6);
+}
+
+.visit-btn:hover {
+  background: linear-gradient(135deg, #A01B47 0%, #8B1538 100%);
+  border-color: rgba(245, 197, 24, 0.8);
+}
+
+.register-btn {
+  background: linear-gradient(135deg, #F5C518 0%, #FFD700 100%);
+  color: #000000;
+  border: 2px solid rgba(245, 197, 24, 0.8);
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, #FFD700 0%, #F5C518 100%);
+  color: #000000;
+  border-color: rgba(245, 197, 24, 1);
+}
