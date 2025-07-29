@@ -161,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return str.replace(/\w\S*/g, (txt) => {
           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
+      }) + txt.substr(1).toLowerCase();
+        });
       }
 
       // Sanitize and format inputs
@@ -444,6 +446,10 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('⚡ Page performance metrics:', {
         domContentLoaded: Math.round(perfData.domContentLoadedEventEnd - perfData.fetchStart),
         loadComplete: Math.round(perfData.loadEventEnd - perfData.fetchStart),
+        resourceCount: performance.getEntriesByType('resource').length
+      });
+    }, 1000);
+  });lete: Math.round(perfData.loadEventEnd - perfData.fetchStart),
         resourceCount: performance.getEntriesByType('resource').length
       });
     }, 1000);

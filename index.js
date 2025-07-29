@@ -45,14 +45,17 @@ const MAX_REQUESTS_PER_WINDOW = 100;
 setInterval(() => {
   const now = Date.now();
   const beforeSize = requestCounts.size;
+  const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
+  
   for (const [ip, data] of requestCounts.entries()) {
-    if (now - data.firstRequest > RATE_LIMIT_WINDOW * 2) {
+    if (data.firstRequest < cutoffTime) {
       requestCounts.delete(ip);
     }
   }
+  
   const cleanedUp = beforeSize - requestCounts.size;
   if (cleanedUp > 0) {
-    console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs still tracked`);
+    console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs tracked`);
   }
 }, RATE_LIMIT_WINDOW);
 
@@ -123,6 +126,43 @@ app.get('/', (req, res) => {
 
 app.get('/thank-you.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'thank-you.html'));
+});
+
+// Backup form submission endpoint
+app.post('/submit-form', express.json(), (req, res) => {
+  submissionAttempts++;
+  lastSubmissionAttempt = new Date().toISOString();
+  
+  try {
+    const { name, email } = req.body;
+    
+    if (!name || !email) {
+      return res.status(400).json({ 
+        error: 'Name and email are required',
+        success: false 
+      });
+    }
+
+    console.log('📝 Backup form submission received:', { name, email, timestamp: lastSubmissionAttempt });
+    
+    // Log submission for admin review
+    res.status(200).json({ 
+      success: true,
+      message: 'Form submitted successfully',
+      redirect: '/thank-you.html'
+    });
+    
+  } catch (error) {
+    errorCount++;
+    lastError = {
+      message: error.message,
+      timestamp: new Date().toISOString(),
+      url: req.url,
+      method: req.method
+    };
+    console.error('Form submission error:', error);
+    res.status(500).json({ error: 'Submission failed. Please try again.' });
+  }
 });
 
 
