@@ -1,0 +1,92 @@
+Please help me finalize this landing page for Protocol 402 with the level of polish, performance, and design precision worthy of a billion-dollar legal and government-backed project. This is not a startup or gimmick site — it’s being reviewed by legal commissioners, law school officials, and government partners in South Carolina. Everything must look custom-built, powerful, and production-ready.
+
+✅ Current Live Page: https://protocol-402-landing-page.onrender.com
+
+🧠 Objectives:
+
+This cannot look like a template or MVP.
+
+No unstyled elements, uneven spacing, or visual bugs.
+
+Every section must reflect professionalism, credibility, and innovation.
+
+📸 Based on latest screenshots and QA, please update and polish the following:
+
+🔧 VISUAL + UI POLISH:
+1. Header & Hero Section:
+
+“Join SCETA” button: center above logos on desktop only, leave where it is on mobile.
+
+Ensure all three logos (SCETA, USC, TECHINLAW) load clearly, with equal size, padding, and alignment.
+
+Add subtle hover effect to “Join SCETA” (e.g. glow or smooth scale).
+
+Remove any layout shift between hero and Lady Justice background.
+
+2. Lady Justice Panel:
+
+Make sure Lady Justice panel does not overflow on mobile.
+
+Ensure it's vertically aligned with the content on the right.
+
+Fix bottom gradient transition — it should flow smoothly into the background (not look chopped).
+
+3. CLE Approval Block:
+
+Remove ✅ emoji.
+
+Replace with a styled inline icon OR just styled text (professional/legal tone).
+
+Fix border + padding — current spacing feels inconsistent.
+
+4. Quote Box (David A. Pope):
+
+Add clean spacing above and below the quote.
+
+Remove the awkward quotation mark glyph (or replace with a sleeker typographic option).
+
+Right-align attribution text with more breathing room, and reduce its size by 1pt.
+
+5. “Get the Whitepaper” Section:
+
+Add hover glow to the “Submit & Download PDF” button.
+
+Reduce vertical padding between form elements and top margin.
+
+Add subtle box-shadow to form fields (or glow) to give them depth.
+
+6. “Key Insights” Section:
+
+Add subtle hover effect on each card (glow, shadow, or lift).
+
+Ensure icons are not pixelated and scale well on retina displays.
+
+Confirm grid is fluid across all device breakpoints (mobile, tablet, desktop).
+
+7. Footer Area:
+
+Logos under “Learn More About SCETA” should be centered, evenly spaced, and scale cleanly.
+
+Remove any white background around logos.
+
+Ensure © 2025 SCETA text and disclaimer are not crowding the edge, use consistent margins.
+
+🧪 Technical QA:
+No console errors or asset loading failures.
+
+Fonts and images should be compressed and optimized.
+
+Favicon should be present and on-brand.
+
+Add Open Graph meta tags (title, preview image, description) for link sharing.
+
+Test mobile layout on Chrome + Safari — no overflow or horizontal scroll.
+
+🪄 Bonus (if time allows):
+Fade-in scroll animation on “Key Insights” or quote box.
+
+Smooth scroll behavior on anchor links.
+
+Add minor transition animation between sections for a more refined feel.
+
+This is the final polish pass before sending to external stakeholders. Please treat every detail like it’s going in front of a Supreme Court justice and a state technology board.
