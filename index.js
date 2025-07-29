@@ -44,12 +44,16 @@ const MAX_REQUESTS_PER_WINDOW = 100;
 // Periodic cleanup to prevent memory leaks
 setInterval(() => {
   const now = Date.now();
+  const beforeSize = requestCounts.size;
   for (const [ip, data] of requestCounts.entries()) {
     if (now - data.firstRequest > RATE_LIMIT_WINDOW * 2) {
       requestCounts.delete(ip);
     }
   }
-  console.log(`🧹 Rate limit cleanup: ${requestCounts.size} IPs tracked`);
+  const cleanedUp = beforeSize - requestCounts.size;
+  if (cleanedUp > 0) {
+    console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs still tracked`);
+  }
 }, RATE_LIMIT_WINDOW);
 
 // Rate limiting middleware
@@ -93,6 +97,8 @@ app.use(express.static('public', {
 // Error tracking
 let errorCount = 0;
 let lastError = null;
+let submissionAttempts = 0;
+let lastSubmissionAttempt = null;
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -104,6 +110,8 @@ app.get('/health', (req, res) => {
     rateLimitedIPs: requestCounts.size,
     errorCount: errorCount,
     lastError: lastError,
+    submissionAttempts: submissionAttempts,
+    lastSubmissionAttempt: lastSubmissionAttempt,
     memoryUsage: process.memoryUsage()
   });
 });

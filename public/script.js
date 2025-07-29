@@ -271,11 +271,17 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('📤 Submitting to Sheet.best API...');
         console.log('📤 Data being sent:', {NAME: cleanName, EMAIL: cleanEmail, TIMESTAMP: timestamp});
 
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
         const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
           method: 'POST',
           mode: 'cors',
-          body: formDataForAPI
+          body: formDataForAPI,
+          signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
 
         console.log('📤 Response status:', response.status);
         console.log('📤 Response ok:', response.ok);
@@ -356,10 +362,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Verify critical assets exist (with debouncing)
   let assetVerificationRunning = false;
+  let assetVerificationPromise = null;
+  
   async function verifyAssets() {
     if (assetVerificationRunning) {
       console.log('⏳ Asset verification already in progress...');
-      return;
+      return assetVerificationPromise;
     }
     
     assetVerificationRunning = true;
@@ -386,11 +394,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     assetVerificationRunning = false;
+    assetVerificationPromise = null;
     console.log('✅ Asset verification completed');
   }
 
-  // Run asset verification
-  verifyAssets();
+  // Store the promise and run asset verification
+  assetVerificationPromise = verifyAssets();
 
   // Production-ready global error handlers with enhanced logging
   window.addEventListener('unhandledrejection', function(event) {
