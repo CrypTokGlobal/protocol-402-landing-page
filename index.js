@@ -82,10 +82,13 @@ app.use((req, res, next) => {
   const clientIP = req.ip || req.connection.remoteAddress;
   const now = Date.now();
   
-  // Clean up old entries
-  for (const [ip, data] of requestCounts.entries()) {
-    if (now - data.firstRequest > RATE_LIMIT_WINDOW) {
-      requestCounts.delete(ip);
+  // More efficient cleanup - only clean every 100 requests
+  if (Math.random() < 0.01) {
+    const cutoffTime = now - RATE_LIMIT_WINDOW;
+    for (const [ip, data] of requestCounts.entries()) {
+      if (data.firstRequest < cutoffTime) {
+        requestCounts.delete(ip);
+      }
     }
   }
   
@@ -215,9 +218,17 @@ app.post('/submit-form', express.json(), (req, res) => {
 // Redirect to actual whitepaper PDF
 app.get('/whitepaper.pdf', (req, res) => {
   try {
-    res.redirect('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+    console.log(`📄 Whitepaper request from ${req.ip} at ${new Date().toISOString()}`);
+    res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
   } catch (error) {
-    console.error('PDF redirect error:', error);
+    errorCount++;
+    lastError = {
+      message: error.message,
+      timestamp: new Date().toISOString(),
+      url: req.url,
+      method: req.method
+    };
+    console.error('❌ PDF redirect error:', error);
     res.status(500).json({ error: 'Unable to access whitepaper. Please try again.' });
   }
 });

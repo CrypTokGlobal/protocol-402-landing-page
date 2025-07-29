@@ -104,7 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
       '/usc-law.png', 
       '/techinlaw.png', 
       '/lady-justice.png', 
-      '/check-icon.svg'
+      '/check-icon.svg',
+      '/favicon.ico'
     ];
     
     let loadedCount = 0;
@@ -156,8 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
         loadTime = timing.loadEventEnd - timing.navigationStart;
       } else if (document.readyState === 'complete') {
-        // Fallback: use current time if load event hasn't fired yet
-        loadTime = Date.now() - timing.navigationStart;
+        // Use performance.now() for accurate timing
+        loadTime = Math.round(performance.now());
       }
       
       console.log('⚡ Page performance metrics:', {
