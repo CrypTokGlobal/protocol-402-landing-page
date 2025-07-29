@@ -139,9 +139,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('📋 Form data:', { name, email, timestamp });
 
-      // Enhanced validation with professional feedback
+      // Enhanced client-side validation to prevent empty submissions
       if (!name || !email || name.trim() === '' || email.trim() === '') {
+        console.warn('⚠️ Form validation failed: Empty name or email field');
         showMessage('Please complete all required fields to download Protocol 402.', 'error');
+        reEnableButton();
+        return;
+      }
+
+      // Additional validation to ensure no whitespace-only submissions
+      if (name.trim().length === 0 || email.trim().length === 0) {
+        console.warn('⚠️ Form validation failed: Whitespace-only input detected');
+        showMessage('Please enter valid information in all required fields.', 'error');
         reEnableButton();
         return;
       }
@@ -237,6 +246,14 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       try {
+        // Final validation check before API submission
+        if (!cleanName || !cleanEmail || cleanName.length === 0 || cleanEmail.length === 0) {
+          console.error('❌ Critical validation error: Empty data detected before API submission');
+          showMessage('Please provide valid name and email to proceed.', 'error');
+          reEnableButton();
+          return;
+        }
+
         // Create form data for Sheet.best API with correct field names
         const formDataForAPI = new FormData();
         formDataForAPI.append('NAME', cleanName);
