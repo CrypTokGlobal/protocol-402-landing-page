@@ -131,33 +131,41 @@ document.addEventListener('DOMContentLoaded', function() {
       // Update timestamp before getting form data
       updateTimestamp();
 
-      // Get form data after timestamp is updated
-      const formData = new FormData(form);
-      const name = formData.get('name'); // HTML form uses lowercase 'name'
-      const email = formData.get('email'); // HTML form uses lowercase 'email'  
-      const timestamp = formData.get('TIMESTAMP');
+      // Get actual form field values directly from DOM elements
+      const nameField = form.querySelector('input[name="name"]');
+      const emailField = form.querySelector('input[name="email"]');
+      const timestampField = form.querySelector('input[name="TIMESTAMP"]');
+      
+      // Get raw values and trim them
+      const rawName = nameField ? nameField.value.trim() : '';
+      const rawEmail = emailField ? emailField.value.trim() : '';
+      const timestamp = timestampField ? timestampField.value : '';
 
-      console.log('📋 Form data:', { name, email, timestamp });
+      console.log('📋 Raw form values before validation:', { 
+        rawName: `"${rawName}"`, 
+        rawEmail: `"${rawEmail}"`, 
+        timestamp 
+      });
 
       // Enhanced client-side validation to prevent empty submissions
-      if (!name || !email || name.trim() === '' || email.trim() === '') {
+      if (!rawName || !rawEmail || rawName === '' || rawEmail === '') {
         console.warn('⚠️ Form validation failed: Empty name or email field');
+        console.warn('⚠️ Name length:', rawName.length, 'Email length:', rawEmail.length);
         showMessage('Please complete all required fields to download Protocol 402.', 'error');
         reEnableButton();
         return;
       }
 
-      // Additional validation to ensure no whitespace-only submissions
-      if (name.trim().length === 0 || email.trim().length === 0) {
-        console.warn('⚠️ Form validation failed: Whitespace-only input detected');
-        showMessage('Please enter valid information in all required fields.', 'error');
-        reEnableButton();
-        return;
+      // Function to convert to Title Case
+      function toTitleCase(str) {
+        return str.replace(/\w\S*/g, (txt) => {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
       }
 
-      // Sanitize inputs
-      const cleanName = name.trim().replace(/[<>]/g, ''); // Remove potential XSS characters
-      const cleanEmail = email.trim().toLowerCase();
+      // Sanitize and format inputs
+      const cleanName = toTitleCase(rawName.replace(/[<>]/g, '')); // Remove XSS characters and apply title case
+      const cleanEmail = rawEmail.toLowerCase();
 
       // Enhanced email validation with additional security checks
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
