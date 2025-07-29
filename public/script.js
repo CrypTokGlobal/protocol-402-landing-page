@@ -129,8 +129,10 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('📤 Submitting to Sheet.best API...');
       const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           name: name.trim(),

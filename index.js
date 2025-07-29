@@ -12,7 +12,7 @@ app.use((req, res, next) => {
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com fonts.googleapis.com; img-src 'self' data: blob:; connect-src 'self'; base-uri 'self'; form-action 'self'");
+  res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com fonts.googleapis.com; img-src 'self' data: blob:; connect-src 'self' https://api.sheetbest.com https://sceta.io; base-uri 'self'; form-action 'self' https://api.sheetbest.com");
   res.setHeader('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
   next();
 });
@@ -21,21 +21,6 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.static('public'));
-
-// Global error handler
-app.use((err, req, res, next) => {
-  console.error('Global error handler:', err);
-  res.status(500).json({ 
-    error: 'An unexpected error occurred. Please try again.' 
-  });
-});
-
-// Handle 404s
-app.use((req, res) => {
-  res.status(404).json({ error: 'Page not found' });
-});
-
-// No backend form processing - all submissions go directly to Sheet.best API
 
 // Routes
 app.get('/', (req, res) => {
@@ -59,6 +44,19 @@ app.get('/admin/submissions', (req, res) => {
     message: 'Form submissions now go directly to Sheet.best API',
     sheetUrl: 'https://docs.google.com/spreadsheets/d/1lJHdMg7TcefcHEnsgKzXUy-8O-xWsjTf8aWe1KBt7x0',
     localSubmissions: []
+  });
+});
+
+// Handle 404s
+app.use((req, res) => {
+  res.status(404).json({ error: 'Page not found' });
+});
+
+// Global error handler (must be last)
+app.use((err, req, res, next) => {
+  console.error('Global error handler:', err);
+  res.status(500).json({ 
+    error: 'An unexpected error occurred. Please try again.' 
   });
 });
 
