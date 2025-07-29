@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           if (response.ok) {
             console.log('✅ Successfully submitted to SheetBest');
-            
+
             // Show success message
             if (submitButton) {
               submitButton.textContent = 'Success! Downloading PDF...';
@@ -144,13 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (backupResult.success) {
               console.log('✅ Backup submission successful');
-              
+
               // Show success message
               if (submitButton) {
                 submitButton.textContent = 'Success! Downloading PDF...';
                 submitButton.style.background = 'linear-gradient(135deg, #10B981, #059669)';
               }
-              
+
               setTimeout(() => {
                 window.location.href = '/whitepaper.pdf';
               }, 800);
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (calculatedTime > 0 && calculatedTime < 60000) {
           loadTime = calculatedTime;
         } else {
-          loadTime = 'invalid';
+          loadTime = 'timing_error';
         }
       } else if (document.readyState === 'complete') {
         // Use performance.now() for relative timing since page load

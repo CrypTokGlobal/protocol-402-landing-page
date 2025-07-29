@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   if (!req.url.includes('.css') && !req.url.includes('.js') && !req.url.includes('.png') && !req.url.includes('.ico') && !req.url.includes('.svg')) {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url} - ${req.ip}`);
   }
-  
+
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('X-Frame-Options', 'DENY');
   res.setHeader('X-XSS-Protection', '1; mode=block');
@@ -49,16 +49,16 @@ let lastCleanupSize = 0;
 setInterval(() => {
   try {
     const currentSize = requestCounts.size;
-    
+
     // Skip cleanup if map is small and hasn't grown much
     if (currentSize < 20 && (currentSize - lastCleanupSize) < 10) {
       return;
     }
-    
+
     const now = Date.now();
     const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
     const beforeSize = currentSize;
-    
+
     // Use more efficient cleanup approach
     const ipsToDelete = [];
     for (const [ip, data] of requestCounts.entries()) {
@@ -66,13 +66,13 @@ setInterval(() => {
         ipsToDelete.push(ip);
       }
     }
-    
+
     // Batch delete for better performance
     ipsToDelete.forEach(ip => requestCounts.delete(ip));
-    
+
     const cleanedUp = beforeSize - requestCounts.size;
     lastCleanupSize = requestCounts.size;
-    
+
     if (cleanedUp > 0) {
       console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs tracked`);
     }
@@ -85,7 +85,7 @@ setInterval(() => {
 app.use((req, res, next) => {
   const clientIP = req.ip || req.connection.remoteAddress;
   const now = Date.now();
-  
+
   // Check current client
   if (!requestCounts.has(clientIP)) {
     requestCounts.set(clientIP, { count: 1, firstRequest: now });
@@ -100,7 +100,7 @@ app.use((req, res, next) => {
       requestCounts.set(clientIP, { count: 1, firstRequest: now });
     }
   }
-  
+
   next();
 });
 
@@ -136,7 +136,7 @@ app.get('/health', (req, res) => {
   const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
   const pdfExists = fs.existsSync(localPdfPath);
   let pdfSize = 0;
-  
+
   if (pdfExists) {
     try {
       const stats = fs.statSync(localPdfPath);
@@ -145,7 +145,7 @@ app.get('/health', (req, res) => {
       console.error('PDF stats error:', e);
     }
   }
-  
+
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),
@@ -184,13 +184,13 @@ app.get('/thank-you.html', (req, res) => {
 app.post('/submit-form', express.json(), (req, res) => {
   submissionAttempts++;
   lastSubmissionAttempt = new Date().toISOString();
-  
+
   try {
     // Accept both frontend naming conventions
     const name = req.body.name || req.body.NAME;
     const email = req.body.email || req.body.EMAIL;
     const timestamp = req.body.timestamp || req.body.TIMESTAMP || lastSubmissionAttempt;
-    
+
     // Enhanced validation matching frontend requirements
     if (!name || !email || name.trim() === '' || email.trim() === '') {
       return res.status(400).json({ 
@@ -217,7 +217,7 @@ app.post('/submit-form', express.json(), (req, res) => {
     };
 
     console.log('📝 Backup form submission received:', submissionData);
-    
+
     // In production, you could save to database or CSV here
     // For now, just log for admin review
     res.status(200).json({ 
@@ -226,7 +226,7 @@ app.post('/submit-form', express.json(), (req, res) => {
       redirect: '/thank-you.html',
       data: submissionData
     });
-    
+
   } catch (error) {
     errorCount++;
     lastError = {
@@ -249,38 +249,38 @@ app.post('/submit-form', express.json(), (req, res) => {
 app.get('/whitepaper.pdf', (req, res) => {
   try {
     console.log(`📄 Whitepaper request from ${req.ip} at ${new Date().toISOString()}`);
-    
+
     // Check if local PDF exists first
     const localPdfPath = path.join(__dirname, 'public', 'static', 'pdf', 'Protocol_402_SCETA_Whitepaper.pdf');
-    
+
     if (fs.existsSync(localPdfPath)) {
       const stats = fs.statSync(localPdfPath);
       const fileSizeKB = Math.round(stats.size / 1024);
-      
+
       // Check if file is actually valid (not empty)
       if (stats.size === 0) {
         console.error('❌ PDF file exists but is empty (0KB), redirecting to external URL');
         return res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
       }
-      
+
       console.log(`📄 Serving local PDF file (${fileSizeKB}KB)`);
-      
+
       res.setHeader('Content-Type', 'application/pdf');
       res.setHeader('Content-Disposition', 'inline; filename="Protocol_402_SCETA_Whitepaper.pdf"');
       res.setHeader('Content-Length', stats.size);
       res.setHeader('Cache-Control', 'public, max-age=3600'); // Cache for 1 hour
-      
+
       // Stream the file for better performance
       const stream = fs.createReadStream(localPdfPath);
       stream.pipe(res);
-      
+
       stream.on('error', (streamError) => {
         console.error('❌ PDF stream error:', streamError);
         if (!res.headersSent) {
           res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
         }
       });
-      
+
     } else {
       console.log('📄 Local PDF not found, redirecting to external URL');
       res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
@@ -294,7 +294,7 @@ app.get('/whitepaper.pdf', (req, res) => {
       method: req.method
     };
     console.error('❌ PDF serve error:', error);
-    
+
     // Fallback to external URL even on error
     try {
       res.redirect(301, 'https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
