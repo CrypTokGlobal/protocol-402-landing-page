@@ -5,17 +5,18 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('🚀 SCETA Protocol 402 - Landing page loaded');
 
   // Verify logo loading
-  const logos = document.querySelectorAll('.header-logo, .footer-logo');
+  const logos = document.querySelectorAll('.partner-logo, .footer-logo');
   logos.forEach(logo => {
     logo.addEventListener('error', function() {
       console.warn(`⚠️ Logo failed to load: ${this.src}`);
-      // Keep the text label visible even if image fails
-      const container = this.closest('.logo-container');
-      if (container) {
-        const textElements = container.querySelectorAll('.sceta-text, .logo-text-group, .techlaw-content');
-        textElements.forEach(el => el.style.display = 'block');
-      }
+      // Hide broken image and show alt text
       this.style.display = 'none';
+      const link = this.closest('.logo-link, .footer-logo-link');
+      if (link) {
+        link.style.fontSize = '14px';
+        link.style.color = '#F5C518';
+        link.textContent = this.alt;
+      }
     });
 
     logo.addEventListener('load', function() {
