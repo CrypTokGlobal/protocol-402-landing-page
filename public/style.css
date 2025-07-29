@@ -71,12 +71,12 @@ h1, h2, h3 {
   border-left: 1px solid rgba(245, 197, 24, 0.2);
 }
 
-/* Header Logos - Optimized horizontal layout */
+/* Header Logos - Branded layout with logo and text */
 .header-logos {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 2.5rem;
+  gap: 3rem;
   margin-bottom: 2rem;
   padding-right: 1rem;
 }
@@ -92,6 +92,40 @@ h1, h2, h3 {
 .logo-link:hover {
   transform: translateY(-2px);
   filter: brightness(1.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+}
+
+.logo-text {
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.sceta-text {
+  color: #F5C518;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.usc-text {
+  color: #ffffff;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.techlaw-text {
+  color: #F5C518;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .header-logo {
@@ -291,7 +325,7 @@ h1 {
 
   .header-logos {
     justify-content: center;
-    flex-direction: row;
+    flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 2rem;
     align-items: center;
@@ -299,19 +333,41 @@ h1 {
     padding-right: 0;
   }
 
+  .logo-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
   .header-logo.sceta-logo {
-    max-height: 45px;
-    max-width: 45px;
+    max-height: 40px;
+    max-width: 40px;
   }
 
   .header-logo.usc-logo {
-    max-height: 40px;
-    max-width: 100px;
+    max-height: 35px;
+    max-width: 80px;
   }
 
   .header-logo.techlaw-logo {
-    max-height: 35px;
-    max-width: 70px;
+    max-height: 30px;
+    max-width: 60px;
+  }
+
+  .logo-text {
+    font-size: 0.9rem;
+  }
+
+  .sceta-text {
+    font-size: 1.1rem;
+  }
+
+  .usc-text {
+    font-size: 0.8rem;
+  }
+
+  .techlaw-text {
+    font-size: 1rem;
   }
 
   h1 {
