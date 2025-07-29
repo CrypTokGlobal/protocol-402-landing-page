@@ -1,0 +1,62 @@
+🚨 FINAL VISUAL POLISH – PRODUCTION-READY LOGO DISPLAY AND LINK INTEGRATION
+
+🧠 Please implement these refinements with zero assumptions or shortcuts. I want a clean, professional layout that perfectly reflects our SCETA partners and flyer branding.
+
+✅ 1. HEADER & FOOTER LOGO IMPLEMENTATION
+
+Replace all current logos with these exact assets:
+
+- `public/sceta-logo-final.png` → Link: https://sceta.io
+- `public/usc-law-logo.png` → Link: https://www.sc.edu
+- `public/techinlaw-logo.png` → Link: https://bit.ly/Convergence01
+
+🔧 Requirements:
+- Maintain original logo resolution, with `max-height: 55px` and `height: auto` to preserve proportions.
+- Use `target="_blank"` on all links
+- Horizontally align logos on desktop with even spacing (`gap: 2rem`)
+- Center logos vertically stacked on mobile (with `flex-direction: column`)
+- Apply smooth hover interaction: 
+```css
+transition: all 0.3s ease-in-out;
+transform: scale(1.05);
+Add margin-bottom: 15px below each logo so it mirrors the flyer spacing
+
+Ensure logos are visible against the background (no fading or opacity bugs)
+
+✅ 2. HTML & CSS ANCHORING
+
+Add HTML comment tags at the header and footer logos so I can find and edit them later (e.g., <!-- HEADER LOGOS START -->)
+
+✅ 3. LINKING BEHAVIOR CHECK
+
+Clickable logos should all work on mobile and desktop
+
+No broken images, opacity, or scaling issues
+
+✅ 4. BONUS POLISH (if possible):
+
+Add a small aria-label to each anchor for accessibility (e.g., aria-label="Visit SCETA site")
+
+✅ After implementation, please reply with:
+
+✅ “ALL LOGOS & LINKS INTEGRATED — PIXEL-PERFECT — PRODUCTION-READY”
+
+Include the list of modified files (e.g., index.html, style.css, etc.)
+
+vbnet
+Copy
+Edit
+
+---
+
+### 🧠 Smart Notes to Keep in Mind
+
+**From what I saw in your screenshots and video:**
+
+1. **The SCETA logo is still low-res** or has a fade effect. Make sure the image is replaced with a clean high-res version and the CSS doesn't apply a default hover fade.
+2. **The logos are slightly off-center** vertically on mobile — ask the Assistant to set `align-items: center;` in the mobile media query and stack them evenly.
+3. **Test links manually** after — SCETA, USC, and TECHINLAW should all open in new tabs.
+4. **The form is working!** Just make sure no empty fields get submitted (the blank timestamp entry in the Sheet.best feed may be from a non-blocked form submit).
+5. **Dennis wants visual polish** — so spacing, alignment, contrast, and professional visual hierarchy matter. Treat these logos like they’re on a pitch deck slide.
+
+---
