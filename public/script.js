@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Async form submission handler
+  // Developer Note: Enhanced async form submission handler with comprehensive error handling
   async function handleFormSubmission() {
 
     // Re-enable button function
@@ -157,12 +157,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // Function to convert to Title Case
+      // Developer Note: Properly handles full names, titles, and edge cases
       function toTitleCase(str) {
-        return str.replace(/\w\S*/g, (txt) => {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-      }) + txt.substr(1).toLowerCase();
-        });
+        try {
+          return str.replace(/\w\S*/g, (txt) => {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+          });
+        } catch (error) {
+          console.warn('⚠️ toTitleCase error, returning original string:', error);
+          return str; // Fallback to original string
+        }
       }
 
       // Sanitize and format inputs
@@ -346,8 +350,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
       } catch (error) {
+        // Developer Note: Enhanced error handling with detailed logging
         console.warn('⚠️ Network error, proceeding with fallback:', error);
-        console.error("❌ Full error object:", error); // Log the full error object
+        console.error("❌ Full error details:", {
+          message: error.message,
+          name: error.name,
+          stack: error.stack,
+          timestamp: new Date().toISOString()
+        });
         handleFallbackSubmission();
       }
 
@@ -362,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update timestamp when page loads
   updateTimestamp();
 
-  // Verify critical assets exist (with debouncing)
+  // Developer Note: Enhanced asset verification with better error handling and debouncing
   let assetVerificationRunning = false;
   let assetVerificationPromise = null;
   
@@ -440,18 +450,21 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Performance monitoring
+  // Developer Note: Single performance monitoring implementation with error handling
   window.addEventListener('load', function() {
     setTimeout(() => {
-      const perfData = performance.getEntriesByType('navigation')[0];
-      console.log('⚡ Page performance metrics:', {
-        domContentLoaded: Math.round(perfData.domContentLoadedEventEnd - perfData.fetchStart),
-        loadComplete: Math.round(perfData.loadEventEnd - perfData.fetchStart),
-        resourceCount: performance.getEntriesByType('resource').length
-      });
-    }, 1000);
-  });lete: Math.round(perfData.loadEventEnd - perfData.fetchStart),
-        resourceCount: performance.getEntriesByType('resource').length
-      });
+      try {
+        const perfData = performance.getEntriesByType('navigation')[0];
+        if (perfData) {
+          console.log('⚡ Page performance metrics:', {
+            domContentLoaded: Math.round(perfData.domContentLoadedEventEnd - perfData.fetchStart),
+            loadComplete: Math.round(perfData.loadEventEnd - perfData.fetchStart),
+            resourceCount: performance.getEntriesByType('resource').length
+          });
+        }
+      } catch (error) {
+        console.warn('⚠️ Performance monitoring error:', error);
+      }
     }, 1000);
   });
 });

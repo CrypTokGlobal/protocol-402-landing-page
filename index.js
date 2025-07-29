@@ -41,19 +41,35 @@ const requestCounts = new Map();
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 100;
 
-// Periodic cleanup to prevent memory leaks
+// Developer Note: Optimized periodic cleanup with memory efficiency checks
+// Only runs cleanup when needed to reduce CPU overhead
+let lastCleanupSize = 0;
 setInterval(() => {
   const now = Date.now();
-  const beforeSize = requestCounts.size;
-  const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
+  const currentSize = requestCounts.size;
   
+  // Skip cleanup if map is small and hasn't grown much
+  if (currentSize < 10 && (currentSize - lastCleanupSize) < 5) {
+    return;
+  }
+  
+  const cutoffTime = now - (RATE_LIMIT_WINDOW * 2);
+  const beforeSize = currentSize;
+  
+  // Use more efficient cleanup approach
+  const ipsToDelete = [];
   for (const [ip, data] of requestCounts.entries()) {
     if (data.firstRequest < cutoffTime) {
-      requestCounts.delete(ip);
+      ipsToDelete.push(ip);
     }
   }
   
+  // Batch delete for better performance
+  ipsToDelete.forEach(ip => requestCounts.delete(ip));
+  
   const cleanedUp = beforeSize - requestCounts.size;
+  lastCleanupSize = requestCounts.size;
+  
   if (cleanedUp > 0) {
     console.log(`🧹 Rate limit cleanup: removed ${cleanedUp} entries, ${requestCounts.size} IPs tracked`);
   }
@@ -128,28 +144,52 @@ app.get('/thank-you.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'thank-you.html'));
 });
 
-// Backup form submission endpoint
+// Developer Note: Enhanced backup form processing route
+// Mirrors Sheet.best structure (NAME, EMAIL, TIMESTAMP) for API failure fallback
 app.post('/submit-form', express.json(), (req, res) => {
   submissionAttempts++;
   lastSubmissionAttempt = new Date().toISOString();
   
   try {
-    const { name, email } = req.body;
+    // Accept both frontend naming conventions
+    const name = req.body.name || req.body.NAME;
+    const email = req.body.email || req.body.EMAIL;
+    const timestamp = req.body.timestamp || req.body.TIMESTAMP || lastSubmissionAttempt;
     
-    if (!name || !email) {
+    // Enhanced validation matching frontend requirements
+    if (!name || !email || name.trim() === '' || email.trim() === '') {
       return res.status(400).json({ 
         error: 'Name and email are required',
         success: false 
       });
     }
 
-    console.log('📝 Backup form submission received:', { name, email, timestamp: lastSubmissionAttempt });
+    // Email validation matching frontend
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    if (!emailRegex.test(email.toLowerCase())) {
+      return res.status(400).json({ 
+        error: 'Please provide a valid email address',
+        success: false 
+      });
+    }
+
+    // Log submission with Sheet.best compatible format
+    const submissionData = {
+      NAME: name.trim(),
+      EMAIL: email.toLowerCase().trim(),
+      TIMESTAMP: timestamp,
+      source: 'backup_route'
+    };
+
+    console.log('📝 Backup form submission received:', submissionData);
     
-    // Log submission for admin review
+    // In production, you could save to database or CSV here
+    // For now, just log for admin review
     res.status(200).json({ 
       success: true,
       message: 'Form submitted successfully',
-      redirect: '/thank-you.html'
+      redirect: '/thank-you.html',
+      data: submissionData
     });
     
   } catch (error) {
@@ -160,8 +200,11 @@ app.post('/submit-form', express.json(), (req, res) => {
       url: req.url,
       method: req.method
     };
-    console.error('Form submission error:', error);
-    res.status(500).json({ error: 'Submission failed. Please try again.' });
+    console.error('❌ Backup form submission error:', error);
+    res.status(500).json({ 
+      error: 'Submission failed. Please try again.',
+      success: false 
+    });
   }
 });
 
