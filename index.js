@@ -6,6 +6,14 @@ const https = require('https');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// HTTPS redirect middleware for production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production' && req.header('x-forwarded-proto') !== 'https') {
+    return res.redirect(`https://${req.header('host')}${req.url}`);
+  }
+  next();
+});
+
 // Production-ready security headers
 app.use((req, res, next) => {
   // Log requests in production for monitoring
@@ -28,6 +36,16 @@ app.use((req, res, next) => {
 const requestCounts = new Map();
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
 const MAX_REQUESTS_PER_WINDOW = 100;
+
+// Periodic cleanup to prevent memory leaks
+setInterval(() => {
+  const now = Date.now();
+  for (const [ip, data] of requestCounts.entries()) {
+    if (now - data.firstRequest > RATE_LIMIT_WINDOW * 2) {
+      requestCounts.delete(ip);
+    }
+  }
+}, RATE_LIMIT_WINDOW);
 
 // Rate limiting middleware
 app.use((req, res, next) => {
@@ -90,7 +108,12 @@ app.get('/thank-you.html', (req, res) => {
 
 // Redirect to actual whitepaper PDF
 app.get('/whitepaper.pdf', (req, res) => {
-  res.redirect('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+  try {
+    res.redirect('https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf');
+  } catch (error) {
+    console.error('PDF redirect error:', error);
+    res.status(500).json({ error: 'Unable to access whitepaper. Please try again.' });
+  }
 });
 
 // Admin endpoint to view submissions (remove in production)

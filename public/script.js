@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   submissionSuccessful = true;
                 } else {
                   console.error("❌ Data verification failed - empty fields in response");
-                  console.error("❌ Expected:", {NAME: name.trim(), EMAIL: email.trim()});
+                  console.error("❌ Expected:", {NAME: cleanName.trim(), EMAIL: cleanEmail.trim()});
                   console.error("❌ Received:", firstRecord);
                 }
               }
