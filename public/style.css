@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +26,7 @@ body {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -39,14 +40,14 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-/* Hero Section - Premium Split Layout */
+/* Premium Hero Section */
 .hero {
   min-height: 100vh;
   display: flex;
   align-items: stretch;
   overflow: hidden;
   position: relative;
-  background: radial-gradient(ellipse at center, rgba(245, 197, 24, 0.03) 0%, transparent 60%);
+  background: radial-gradient(ellipse at center, rgba(245, 197, 24, 0.04) 0%, transparent 60%);
 }
 
 .hero::before {
@@ -63,7 +64,7 @@ h1, h2, h3 {
   z-index: 1;
 }
 
-/* Left Side - Lady Justice with Enhanced Presentation */
+/* Left Side - Lady Justice */
 .hero-left {
   width: 45%;
   background: 
@@ -71,7 +72,7 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 0;
   position: relative;
   overflow: hidden;
 }
@@ -85,8 +86,7 @@ h1, h2, h3 {
   bottom: 0;
   background: 
     radial-gradient(ellipse at 30% 50%, rgba(245, 197, 24, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 30%, rgba(139, 21, 56, 0.2) 0%, transparent 70%),
-    linear-gradient(45deg, transparent 20%, rgba(245, 197, 24, 0.08) 50%, transparent 80%);
+    radial-gradient(ellipse at 70% 30%, rgba(139, 21, 56, 0.2) 0%, transparent 70%);
   pointer-events: none;
   animation: subtleShimmer 8s ease-in-out infinite;
 }
@@ -115,14 +115,11 @@ h1, h2, h3 {
     drop-shadow(0 0 60px rgba(245, 197, 24, 0.6)) 
     drop-shadow(0 0 120px rgba(245, 197, 24, 0.3))
     drop-shadow(0 0 40px rgba(139, 21, 56, 0.4))
-    drop-shadow(0 30px 80px rgba(0, 0, 0, 0.5))
     contrast(1.3) 
     brightness(1.2)
-    saturate(1.3)
-    sepia(0.1);
+    saturate(1.3);
   animation: elegantGlow 6s ease-in-out infinite alternate;
   transition: all 0.4s ease;
-  transform: scale(1.05);
 }
 
 @keyframes elegantGlow {
@@ -130,25 +127,21 @@ h1, h2, h3 {
     filter: 
       drop-shadow(0 0 40px rgba(245, 197, 24, 0.4)) 
       drop-shadow(0 0 80px rgba(245, 197, 24, 0.2))
-      drop-shadow(0 20px 60px rgba(0, 0, 0, 0.3))
       contrast(1.15) 
       brightness(1.08)
       saturate(1.1);
-    transform: scale(1);
   }
   100% {
     filter: 
       drop-shadow(0 0 50px rgba(245, 197, 24, 0.5)) 
       drop-shadow(0 0 100px rgba(245, 197, 24, 0.3))
-      drop-shadow(0 25px 70px rgba(0, 0, 0, 0.4))
       contrast(1.2) 
       brightness(1.12)
       saturate(1.15);
-    transform: scale(1.02);
   }
 }
 
-/* Right Side - Premium Content Layout */
+/* Right Side - Premium Content */
 .hero-content {
   width: 55%;
   background: 
@@ -176,9 +169,7 @@ h1, h2, h3 {
   background: 
     radial-gradient(circle at 20% 20%, rgba(245, 197, 24, 0.2) 0%, transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(245, 197, 24, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(139, 21, 56, 0.15) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%),
-    linear-gradient(45deg, transparent 30%, rgba(245, 197, 24, 0.08) 50%, transparent 70%);
+    radial-gradient(circle at 50% 50%, rgba(139, 21, 56, 0.15) 0%, transparent 60%);
   pointer-events: none;
   animation: sophisticatedShimmer 12s ease-in-out infinite;
 }
@@ -186,26 +177,197 @@ h1, h2, h3 {
 @keyframes sophisticatedShimmer {
   0%, 100% { 
     opacity: 0.8;
-    transform: translateX(0) scale(1);
   }
-  33% { 
-    opacity: 0.9;
-    transform: translateX(-5px) scale(1.01);
-  }
-  66% { 
+  50% { 
     opacity: 1;
-    transform: translateX(5px) scale(1.02);
   }
 }
 
-/* Join SCETA Button Styling */
+/* Join SCETA Button - Desktop Only Centered */
 .join-sceta-container {
   text-align: center;
   margin-bottom: 2rem;
-  padding: 0;
+  order: -1;
 }
 
-/* Registration Section Styling */
+.join-sceta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #F5C518 0%, #FFD700 50%, #F5C518 100%);
+  color: #000000;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 6px 20px rgba(245, 197, 24, 0.3),
+    0 3px 10px rgba(245, 197, 24, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid rgba(245, 197, 24, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.join-sceta-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.join-sceta-btn:hover::before {
+  left: 100%;
+}
+
+.join-sceta-btn:hover {
+  background: linear-gradient(135deg, #FFD700 0%, #F5C518 50%, #FFD700 100%);
+  transform: translateY(-3px);
+  text-decoration: none;
+  box-shadow: 
+    0 10px 30px rgba(245, 197, 24, 0.4),
+    0 5px 15px rgba(245, 197, 24, 0.3);
+  border-color: rgba(245, 197, 24, 1);
+}
+
+/* Header Logos - Premium Layout */
+.header-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+  width: 100%;
+  order: 1;
+}
+
+.partner-logo {
+  max-height: 60px;
+  width: auto;
+  object-fit: contain;
+  transition: all 0.3s ease-in-out;
+  display: block;
+  filter: 
+    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
+    brightness(1);
+}
+
+.partner-logo:hover {
+  transform: scale(1.05) translateY(-2px);
+  filter: 
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))
+    drop-shadow(0 0 20px rgba(245, 197, 24, 0.3))
+    brightness(1.1);
+}
+
+.logo-link {
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(245, 197, 24, 0.1);
+}
+
+.logo-link:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(245, 197, 24, 0.2);
+  border-color: rgba(245, 197, 24, 0.3);
+}
+
+/* Premium Typography */
+.series-tag {
+  color: #F5C518;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  order: 2;
+}
+
+.series-tag::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, #F5C518, transparent);
+  opacity: 0.8;
+}
+
+.subtitle {
+  font-style: italic;
+  color: #F5C518;
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  font-family: 'DM Serif Display', serif;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+  order: 3;
+}
+
+h1 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  text-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(245, 197, 24, 0.3);
+  animation: premiumTitleGlow 4s ease-in-out infinite alternate;
+  font-weight: 500;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  order: 4;
+}
+
+@keyframes premiumTitleGlow {
+  0% {
+    text-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(245, 197, 24, 0.15);
+  }
+  100% {
+    text-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(245, 197, 24, 0.25);
+  }
+}
+
+.meta {
+  font-style: italic;
+  color: rgba(245, 197, 24, 0.95);
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  order: 5;
+}
+
+/* Registration Section */
 .registration-section {
   text-align: center;
   margin: 2.5rem 0;
@@ -213,6 +375,7 @@ h1, h2, h3 {
   background: rgba(245, 197, 24, 0.1);
   border-radius: 12px;
   border: 1px solid rgba(245, 197, 24, 0.3);
+  order: 6;
 }
 
 .registration-section p {
@@ -237,244 +400,89 @@ h1, h2, h3 {
   text-shadow: 0 0 10px rgba(245, 197, 24, 0.5);
 }
 
-.join-sceta-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #F5C518 0%, #FFD700 100%);
-  color: #000000;
-  padding: 1rem 2.5rem;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 6px 20px rgba(245, 197, 24, 0.3),
-    0 3px 10px rgba(245, 197, 24, 0.2);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid rgba(245, 197, 24, 0.8);
-}
-
-.join-sceta-btn:hover {
-  background: linear-gradient(135deg, #FFD700 0%, #F5C518 100%);
-  transform: translateY(-3px);
-  text-decoration: none;
-  box-shadow: 
-    0 10px 30px rgba(245, 197, 24, 0.4),
-    0 5px 15px rgba(245, 197, 24, 0.3);
-  border-color: rgba(245, 197, 24, 1);
-}
-
-/* Header Logos - Executive Level Branding */
-.header-logos {
-  display: flex;
-  justify-content: center; /* Perfect horizontal centering */
-  align-items: center;
-  gap: 2.5rem; /* Enhanced spacing for better presentation */
-  margin-bottom: 3rem;
-  padding: 1rem 0; /* Enhanced padding for even spacing */
-  width: 100%;
-}
-
-/* Header Logo Styling - Enhanced Size & Quality */
-.partner-logo {
-  max-height: 65px; /* Bolder appearance as requested */
-  width: auto;
-  object-fit: contain; /* Maintains aspect ratio without distortion */
-  transition: all 0.3s ease-in-out; /* Smooth hover animation */
-  display: block;
-  margin-bottom: 15px;
-  filter: 
-    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))
-    brightness(1);
-}
-
-.partner-logo:hover {
-  transform: scale(1.05) translateY(-2px); /* Subtle lift and scale effect */
-  filter: 
-    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))
-    drop-shadow(0 0 20px rgba(245, 197, 24, 0.3))
-    brightness(1.1);
-}
-
-.logo-link {
-  transition: all 0.3s ease-in-out; /* Consistent timing with logo */
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.8rem;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(245, 197, 24, 0.1);
-}
-
-.logo-link:hover {
-  transform: translateY(-3px) scale(1.05); /* Enhanced hover effect */
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(245, 197, 24, 0.2),
-    0 4px 15px rgba(245, 197, 24, 0.1); /* Added soft highlight */
-  border-color: rgba(245, 197, 24, 0.3);
-}
-
-.logo-link:focus {
-  outline: 2px solid rgba(245, 197, 24, 0.5);
-  outline-offset: 2px;
-}
-
-/* Premium Typography */
-.series-tag {
-  color: #F5C518;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.series-tag::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, #F5C518, transparent);
-  opacity: 0.8;
-}
-
-.subtitle {
-  font-style: italic;
-  color: #F5C518;
-  font-size: 1.4rem;
-  margin-bottom: 2.5rem;
-  font-family: 'DM Serif Display', serif;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  line-height: 1.4;
-}
-
-h1 {
-  font-size: 3.4rem;
-  line-height: 1.1;
-  margin-bottom: 2rem;
-  color: #ffffff;
-  letter-spacing: -0.02em;
-  text-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.6),
-    0 8px 16px rgba(0, 0, 0, 0.4),
-    0 0 40px rgba(245, 197, 24, 0.3),
-    0 0 80px rgba(245, 197, 24, 0.15);
-  animation: premiumTitleGlow 4s ease-in-out infinite alternate;
-  font-weight: 500;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 50%, #ffffff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-@keyframes premiumTitleGlow {
-  0% {
-    text-shadow: 
-      0 4px 8px rgba(0, 0, 0, 0.4),
-      0 8px 16px rgba(0, 0, 0, 0.3),
-      0 0 30px rgba(245, 197, 24, 0.15);
-  }
-  100% {
-    text-shadow: 
-      0 4px 8px rgba(0, 0, 0, 0.4),
-      0 8px 16px rgba(0, 0, 0, 0.3),
-      0 0 40px rgba(245, 197, 24, 0.25);
-  }
-}
-
-.meta {
-  font-style: italic;
-  color: rgba(245, 197, 24, 0.95);
-  font-size: 1.15rem;
-  margin-bottom: 2rem;
-  font-weight: 500;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
-
-.description {
-  color: #e8e8e8;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  margin-bottom: 3.5rem;
-  font-weight: 400;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* CLE Approval Line Styling */
+/* CLE Approval - Clean Design without Emoji */
 .cle-approval {
   color: #F5C518;
   font-weight: 600;
   font-size: 1.1rem;
   margin: 2rem 0 1.5rem 0;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   background: rgba(245, 197, 24, 0.1);
   border-radius: 8px;
-  border: 1px solid rgba(245, 197, 24, 0.3);
+  border-left: 4px solid #F5C518;
   display: block;
-  text-align: center;
+  text-align: left;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  order: 7;
 }
 
-/* Testimonial Quote Enhanced Mobile */
+.cle-approval::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #F5C518, #FFD700);
+}
+
+/* Premium Testimonial Quote */
 .testimonial-quote {
   margin: 2.5rem 0;
-  padding: 2rem;
-  background: rgba(139, 21, 56, 0.2);
+  padding: 2.5rem;
+  background: 
+    linear-gradient(145deg, rgba(139, 21, 56, 0.25) 0%, rgba(115, 0, 10, 0.2) 100%);
   border-left: 4px solid #F5C518;
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  order: 8;
+}
+
+.testimonial-quote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: rgba(245, 197, 24, 0.3);
+  font-family: 'DM Serif Display', serif;
+  line-height: 1;
 }
 
 .quote-text {
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: rgba(255, 255, 255, 0.95);
   line-height: 1.6;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
 }
 
 .quote-author {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #F5C518;
   font-weight: 600;
   text-align: right;
+  line-height: 1.4;
 }
 
-/* Premium Download Section */
+/* Download Section */
 .download-section {
   text-align: center;
   margin: 3rem 0 2.5rem 0;
   position: relative;
   padding: 2rem 0;
-}
-
-.download-section::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(245, 197, 24, 0.4), transparent);
-  z-index: -1;
+  order: 9;
 }
 
 .download-section h2 {
   font-family: 'DM Serif Display', serif;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
   color: #F5C518;
   margin-bottom: 1.5rem;
   font-weight: 400;
@@ -509,7 +517,17 @@ h1 {
   margin-right: auto;
 }
 
-/* Executive Level Form Design */
+.description {
+  color: #e8e8e8;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 3.5rem;
+  font-weight: 400;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  order: 10;
+}
+
+/* Premium Form Design */
 .form-box {
   background: 
     linear-gradient(145deg, rgba(139, 21, 56, 0.85) 0%, rgba(115, 0, 10, 0.8) 25%, rgba(90, 0, 8, 0.75) 50%, rgba(115, 0, 10, 0.8) 75%, rgba(139, 21, 56, 0.85) 100%);
@@ -520,13 +538,13 @@ h1 {
     0 20px 40px rgba(245, 197, 24, 0.25),
     0 8px 20px rgba(0, 0, 0, 0.5),
     inset 0 2px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
     0 0 0 3px rgba(245, 197, 24, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(25px);
+  order: 11;
 }
 
 .form-box::before {
@@ -561,14 +579,12 @@ h1 {
 }
 
 .form-box:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: 
-    0 35px 80px rgba(0, 0, 0, 0.6),
-    0 20px 40px rgba(0, 0, 0, 0.4),
-    0 10px 20px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    0 0 0 1px rgba(245, 197, 24, 0.5);
-  border-color: rgba(245, 197, 24, 0.6);
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    0 25px 50px rgba(0, 0, 0, 0.4),
+    0 12px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 3px rgba(245, 197, 24, 0.9);
 }
 
 .form-box input {
@@ -586,7 +602,6 @@ h1 {
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.4),
     inset 0 2px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(245, 197, 24, 0.3);
   font-weight: 500;
   position: relative;
@@ -603,8 +618,6 @@ h1 {
     0 0 0 4px rgba(245, 197, 24, 0.4),
     0 8px 20px rgba(245, 197, 24, 0.3),
     0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.1),
     0 0 30px rgba(245, 197, 24, 0.2);
   transform: translateY(-3px) scale(1.02);
 }
@@ -614,18 +627,19 @@ h1 {
   font-weight: 400;
 }
 
+/* Premium Submit Button with Animation */
 .form-box button {
   width: 100%;
   background: 
     linear-gradient(135deg, #F5C518 0%, #FFD700 25%, #FFF200 50%, #FFD700 75%, #F5C518 100%);
   color: #000000;
   border: none;
-  padding: 1.8rem 2.5rem;
+  padding: 2rem 2.5rem;
   border-radius: 18px;
   font-size: 1.3rem;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: 'Inter', sans-serif;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -636,10 +650,25 @@ h1 {
     0 4px 15px rgba(245, 197, 24, 0.4),
     0 2px 8px rgba(0, 0, 0, 0.3),
     inset 0 2px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.1),
     0 0 0 2px rgba(245, 197, 24, 0.6);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   z-index: 2;
+  animation: buttonPulse 3s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 25px rgba(245, 197, 24, 0.5),
+      0 4px 15px rgba(245, 197, 24, 0.4),
+      0 0 0 2px rgba(245, 197, 24, 0.6);
+  }
+  50% {
+    box-shadow: 
+      0 12px 35px rgba(245, 197, 24, 0.6),
+      0 6px 20px rgba(245, 197, 24, 0.5),
+      0 0 0 3px rgba(245, 197, 24, 0.8);
+  }
 }
 
 .form-box button::before {
@@ -659,182 +688,20 @@ h1 {
 
 .form-box button:hover {
   background: linear-gradient(135deg, #FFD700 0%, #F5C518 50%, #FFD700 100%);
-  transform: translateY(-4px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 
-    0 12px 35px rgba(245, 197, 24, 0.6),
-    0 6px 20px rgba(245, 197, 24, 0.4),
-    0 3px 10px rgba(245, 197, 24, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    0 15px 40px rgba(245, 197, 24, 0.7),
+    0 8px 25px rgba(245, 197, 24, 0.5),
+    0 4px 15px rgba(245, 197, 24, 0.4),
+    0 0 50px rgba(245, 197, 24, 0.3);
+  animation: none;
 }
 
 .form-box button:active {
-  transform: translateY(-2px);
-  box-shadow: 
-    0 8px 25px rgba(115, 0, 10, 0.5),
-    0 4px 15px rgba(115, 0, 10, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) scale(1.01);
 }
 
-/* Desktop-specific Join SCETA positioning */
-@media (min-width: 769px) {
-  .join-sceta-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2.5rem;
-    order: -1;
-  }
-  
-  .hero-content {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header-logos {
-    order: 1;
-  }
-}
-
-/* Enhanced Mobile Responsive Design */
-@media (max-width: 768px) {
-  .hero {
-    display: block;
-    background: 
-      linear-gradient(rgba(90, 0, 8, 0.75), rgba(115, 0, 10, 0.85), rgba(139, 21, 56, 0.8)),
-      url('/lady-justice.png') center/cover;
-    padding: 2rem;
-    text-align: center;
-    min-height: 100vh;
-    background-attachment: fixed;
-    background-size: cover;
-  }
-
-  .hero-left {
-    display: none;
-  }
-
-  .hero-content {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    background: 
-      linear-gradient(145deg, rgba(90, 0, 8, 0.95) 0%, rgba(115, 0, 10, 0.93) 25%, rgba(139, 21, 56, 0.9) 50%, rgba(115, 0, 10, 0.93) 75%, rgba(90, 0, 8, 0.95) 100%);
-    backdrop-filter: blur(20px);
-    border: 3px solid rgba(245, 197, 24, 0.6);
-    padding: 3rem 2.5rem;
-    border-radius: 20px;
-    margin: 2rem 0;
-    box-shadow: 
-      0 30px 60px rgba(0, 0, 0, 0.5),
-      0 15px 30px rgba(139, 21, 56, 0.3),
-      0 5px 15px rgba(0, 0, 0, 0.3);
-  }
-
-  /* Join SCETA Button Mobile */
-  .join-sceta-btn {
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-    margin: 1rem 0;
-  }
-
-  /* Mobile Logo Layout - Enhanced Size & Center Alignment */
-  .header-logos {
-    justify-content: center; /* Center alignment on mobile */
-    flex-direction: column;
-    gap: 2rem; /* Enhanced spacing */
-    margin-bottom: 3rem;
-    align-items: center;
-    padding: 1rem 0;
-  }
-
-  .partner-logo {
-    max-height: 50px; /* Mobile size as requested */
-    margin-bottom: 10px;
-  }
-
-  .footer-logos {
-    flex-direction: column;
-    gap: 2rem; /* Enhanced spacing */
-    align-items: center; /* Center alignment on mobile */
-  }
-
-  .footer-logo {
-    max-height: 50px; /* Mobile size consistency */
-    margin-bottom: 10px;
-  }
-
-  /* Mobile Form Enhancements */
-  .form-box {
-    padding: 2rem;
-    margin-top: 2rem;
-  }
-
-  .form-box input {
-    padding: 1.2rem 1.5rem;
-    font-size: 1.1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .form-box button {
-    padding: 1.2rem 2rem;
-    font-size: 1.2rem;
-  }
-
-  /* Mobile Quote Enhancement */
-  .testimonial-quote {
-    margin: 2rem 0;
-    padding: 1.5rem;
-  }
-
-  .quote-text {
-    font-size: 1rem;
-  }
-
-  .quote-author {
-    font-size: 0.9rem;
-  }
-
-  /* CLE Approval Mobile */
-  .cle-approval {
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  /* Registration Section Mobile */
-  .registration-section {
-    margin: 2rem 0;
-    padding: 1.2rem;
-  }
-
-  .registration-section p {
-    font-size: 1rem;
-  }
-
-  .logo-link {
-    padding: 0.6rem;
-  }
-
-  .footer-logo-link {
-    padding: 0.8rem;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .download-section h2 {
-    font-size: 2.2rem;
-  }
-
-  .form-box {
-    padding: 2.5rem;
-    margin-top: 2rem;
-  }
-}
-
-/* Premium Features Section */
+/* Features Section with Hover Effects */
 .features {
   background: 
     linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%, #000000 100%);
@@ -890,9 +757,7 @@ h1 {
   box-shadow: 
     0 15px 40px rgba(0, 0, 0, 0.3),
     0 8px 20px rgba(0, 0, 0, 0.2),
-    0 4px 10px rgba(245, 197, 24, 0.1),
-    inset 0 2px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    0 4px 10px rgba(245, 197, 24, 0.1);
 }
 
 .card::before {
@@ -913,17 +778,13 @@ h1 {
 }
 
 .card:hover {
-  transform: translateY(-20px) scale(1.05) rotateX(5deg);
+  transform: translateY(-15px) scale(1.05);
   border-color: rgba(245, 197, 24, 0.8);
   box-shadow: 
     0 35px 70px rgba(0, 0, 0, 0.4),
     0 20px 40px rgba(245, 197, 24, 0.2),
     0 10px 25px rgba(0, 0, 0, 0.3),
-    0 0 50px rgba(245, 197, 24, 0.15),
-    inset 0 2px 0 rgba(255, 255, 255, 0.2),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-  background: 
-    linear-gradient(145deg, rgba(115, 0, 10, 0.25) 0%, rgba(90, 0, 8, 0.2) 50%, rgba(115, 0, 10, 0.15) 100%);
+    0 0 50px rgba(245, 197, 24, 0.15);
 }
 
 .card span {
@@ -931,6 +792,11 @@ h1 {
   display: block;
   margin-bottom: 1.5rem;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.card:hover span {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .card h3 {
@@ -948,7 +814,7 @@ h1 {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Premium Footer */
+/* Footer */
 footer {
   background: 
     linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
@@ -1007,12 +873,12 @@ footer p {
     0 5px 15px rgba(245, 197, 24, 0.3);
 }
 
-/* Footer Logo Styles - Enhanced Size & Polish */
+/* Footer Logos */
 .footer-logos {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem; /* Optimal spacing for stakeholder visibility */
+  gap: 2rem;
   margin: 3rem 0;
   flex-wrap: wrap;
   position: relative;
@@ -1020,7 +886,7 @@ footer p {
 }
 
 .footer-logo-link {
-  transition: all 0.3s ease-in-out; /* Smooth hover animation */
+  transition: all 0.3s ease-in-out;
   text-decoration: none;
   padding: 1rem;
   border-radius: 12px;
@@ -1029,36 +895,28 @@ footer p {
 }
 
 .footer-logo-link:hover {
-  transform: translateY(-3px) scale(1.05); /* Smooth lift and scale */
+  transform: translateY(-3px) scale(1.05);
   background: rgba(255, 255, 255, 0.05);
   box-shadow: 
     0 8px 25px rgba(0, 0, 0, 0.2),
-    0 0 20px rgba(245, 197, 24, 0.2),
-    0 4px 15px rgba(245, 197, 24, 0.1); /* Added soft highlight */
+    0 0 20px rgba(245, 197, 24, 0.2);
   border-color: rgba(245, 197, 24, 0.3);
 }
 
-.footer-logo-link:focus {
-  outline: 2px solid rgba(245, 197, 24, 0.5);
-  outline-offset: 2px;
-}
-
-/* Footer Logo Sizing - Enhanced for Better Visibility */
 .footer-logo {
   height: auto;
   width: auto;
   display: block;
-  transition: all 0.3s ease-in-out; /* Consistent timing */
-  object-fit: contain; /* Maintains aspect ratio without distortion */
-  max-height: 85px; /* Desktop size - increased for stakeholder visibility */
-  margin-bottom: 15px;
+  transition: all 0.3s ease-in-out;
+  object-fit: contain;
+  max-height: 75px;
   filter: 
     drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2))
     brightness(1);
 }
 
 .footer-logo:hover {
-  transform: scale(1.05); /* Subtle scale effect */
+  transform: scale(1.05);
   filter: 
     drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3))
     drop-shadow(0 0 20px rgba(245, 197, 24, 0.3))
@@ -1076,7 +934,112 @@ footer p {
   z-index: 2;
 }
 
-/* Enhanced Success Message */
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    display: block;
+    background: 
+      linear-gradient(rgba(90, 0, 8, 0.75), rgba(115, 0, 10, 0.85), rgba(139, 21, 56, 0.8)),
+      url('/lady-justice.png') center/cover;
+    padding: 2rem;
+    text-align: center;
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .hero-left {
+    display: none;
+  }
+
+  .hero-content {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    background: 
+      linear-gradient(145deg, rgba(90, 0, 8, 0.95) 0%, rgba(115, 0, 10, 0.93) 25%, rgba(139, 21, 56, 0.9) 50%, rgba(115, 0, 10, 0.93) 75%, rgba(90, 0, 8, 0.95) 100%);
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(245, 197, 24, 0.6);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    margin: 2rem 0;
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      0 15px 30px rgba(139, 21, 56, 0.3);
+    display: block;
+  }
+
+  .join-sceta-container {
+    order: initial;
+    margin-bottom: 2rem;
+  }
+
+  .header-logos {
+    order: initial;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: center;
+  }
+
+  .partner-logo {
+    max-height: 50px;
+  }
+
+  .footer-logos {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .footer-logo {
+    max-height: 50px;
+  }
+
+  .form-box {
+    padding: 2.5rem;
+  }
+
+  .form-box input {
+    padding: 1.4rem 1.8rem;
+    font-size: 1.1rem;
+  }
+
+  .form-box button {
+    padding: 1.6rem 2rem;
+    font-size: 1.2rem;
+  }
+
+  .testimonial-quote {
+    padding: 2rem;
+  }
+
+  .quote-author {
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .download-section h2 {
+    font-size: 2.2rem;
+  }
+
+  .series-tag,
+  .subtitle,
+  .meta,
+  .registration-section,
+  .cle-approval,
+  .testimonial-quote,
+  .download-section,
+  .description,
+  .form-box {
+    order: initial;
+  }
+}
+
+/* Success Message */
 .success-message {
   position: fixed;
   top: 50%;
@@ -1124,49 +1087,4 @@ footer p {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* =================================================================
-   LOGO STYLING SYSTEM - Enhanced Size & Responsive Design
-   ================================================================= 
-
-   Desktop Sizes:
-   - Header Logos: max-height: 85px (stakeholder visibility enhanced)
-   - Footer Logos: max-height: 85px (stakeholder visibility enhanced)
-
-   Mobile Sizes (768px and below):
-   - Header Logos: max-height: 70px (enhanced from 60px)
-   - Footer Logos: max-height: 70px (enhanced from 60px)
-
-   Quality Settings:
-   - object-fit: contain (maintains aspect ratio)
-   - Smooth transitions: 0.3s ease-in-out
-   - Scale hover effect: 1.05
-
-   Future Logo Changes:
-   - Always use object-fit: contain to prevent distortion
-   - Test on both desktop and mobile viewports
-   - Maintain consistent gap spacing (2rem for optimal balance)
-   ================================================================= */
-
-.visit-btn {
-  background: linear-gradient(135deg, #8B1538 0%, #A01B47 100%);
-  border: 2px solid rgba(245, 197, 24, 0.6);
-}
-
-.visit-btn:hover {
-  background: linear-gradient(135deg, #A01B47 0%, #8B1538 100%);
-  border-color: rgba(245, 197, 24, 0.8);
-}
-
-.register-btn {
-  background: linear-gradient(135deg, #F5C518 0%, #FFD700 100%);
-  color: #000000;
-  border: 2px solid rgba(245, 197, 24, 0.8);
-}
-
-.register-btn:hover {
-  background: linear-gradient(135deg, #FFD700 0%, #F5C518 100%);
-  color: #000000;
-  border-color: rgba(245, 197, 24, 1);
 }
