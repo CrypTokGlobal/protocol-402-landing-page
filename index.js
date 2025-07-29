@@ -115,6 +115,28 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Graceful shutdown handling for production
+process.on('SIGTERM', () => {
+  console.log('🔄 SIGTERM received. Shutting down gracefully...');
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  console.log('🔄 SIGINT received. Shutting down gracefully...');
+  process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('❌ Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 SCETA Protocol 402 server running on port ${PORT}`);
   console.log(`📊 Admin submissions view: http://localhost:${PORT}/admin/submissions`);

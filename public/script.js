@@ -150,10 +150,19 @@ document.addEventListener('DOMContentLoaded', function() {
       const cleanName = name.trim().replace(/[<>]/g, ''); // Remove potential XSS characters
       const cleanEmail = email.trim().toLowerCase();
 
-      // Enhanced email validation
+      // Enhanced email validation with additional security checks
       const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
       if (!emailRegex.test(cleanEmail)) {
         showMessage('Please provide a valid business email address to proceed.', 'error');
+        reEnableButton();
+        return;
+      }
+
+      // Additional production security: prevent common throwaway email domains
+      const throwawayDomains = ['tempmail.org', '10minutemail.com', 'guerrillamail.com'];
+      const emailDomain = cleanEmail.split('@')[1]?.toLowerCase();
+      if (throwawayDomains.includes(emailDomain)) {
+        showMessage('Please use a professional email address to access Protocol 402.', 'error');
         reEnableButton();
         return;
       }
@@ -349,11 +358,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Run asset verification
   verifyAssets();
 
-  // Production-ready global error handlers
+  // Production-ready global error handlers with enhanced logging
   window.addEventListener('unhandledrejection', function(event) {
     console.error('❌ Unhandled promise rejection prevented:', event.reason);
     console.error('❌ Promise:', event.promise);
     console.error('❌ Stack trace:', event.reason?.stack);
+    
+    // Send critical errors to monitoring (in production, you'd send to your logging service)
+    if (event.reason && event.reason.message && event.reason.message.includes('network')) {
+      console.warn('🌐 Network-related error detected - user may have connectivity issues');
+    }
+    
     event.preventDefault(); // Prevent the default unhandled rejection behavior
   });
 
@@ -364,8 +379,19 @@ document.addEventListener('DOMContentLoaded', function() {
       filename: event.filename,
       lineno: event.lineno,
       colno: event.colno,
-      stack: event.error?.stack
+      stack: event.error?.stack,
+      userAgent: navigator.userAgent,
+      timestamp: new Date().toISOString()
     });
+  });
+
+  // Monitor page visibility for analytics
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      console.log('📱 Page hidden');
+    } else {
+      console.log('📱 Page visible');
+    }
   });
 
   // Performance monitoring
