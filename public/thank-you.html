@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,14 @@
       padding: 3rem 2rem;
     }
 
+    .logo {
+      max-height: 85px;
+      width: auto;
+      margin: 0 auto 2rem auto;
+      display: block;
+      object-fit: contain;
+    }
+
     h1 {
       font-family: 'DM Serif Display', serif;
       font-size: 2.5rem;
@@ -51,22 +60,47 @@
       text-decoration: none;
       font-weight: 600;
       transition: all 0.3s ease;
+      margin: 0.5rem;
     }
 
     .btn:hover {
       background: #FFD700;
       transform: translateY(-2px);
     }
+
+    .button-container {
+      margin-top: 2rem;
+    }
+
+    /* Mobile responsive adjustments */
+    @media (max-width: 768px) {
+      .logo {
+        max-height: 75px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .btn {
+        display: block;
+        margin: 1rem auto;
+        max-width: 280px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <img src="/sceta.png" alt="SCETA Logo" class="logo">
     <h1>🎉 Thank You!</h1>
     <p>Your download has started automatically. If it didn't start, please check your downloads folder or click the button below to download manually.</p>
     <p>We appreciate your interest in South Carolina's digital transformation.</p>
-    <a href="https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf" class="btn" target="_blank">Download PDF</a>
-    <br><br>
-    <a href="https://sceta.io" class="btn">Visit SCETA.io</a>
+    
+    <div class="button-container">
+      <a href="https://sceta.io/wp-content/uploads/2025/06/V.07.01.Protocol-402-South-Carolinas-Path-to-Monetized-Public-Infrastructure-Innovation.Final_.pdf" class="btn" target="_blank">Download PDF</a>
+      <br>
+      <a href="https://sceta.io" class="btn">Visit SCETA.io</a>
+      <br>
+      <a href="https://bit.ly/Convergence01" target="_blank" rel="noopener noreferrer" class="btn">Register for TechInLaw Event</a>
+    </div>
   </div>
 </body>
 </html>
