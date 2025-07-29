@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
       '/sceta.png',
       '/usc-law.png',
       '/techinlaw.png',
+      '/sceta-icon.png',
       '/check-icon.svg',
       '/favicon.ico',
       '/favicon.svg'
@@ -274,6 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (failedCount > 0) {
           console.log(`⚠️ ${failedCount} assets failed to load`);
           console.log('📋 Failed assets:', results.filter(r => r.status === 'failed').map(r => r.asset));
+        } else {
+          console.log('✅ All critical assets loaded successfully');
         }
       }
     }
@@ -305,9 +308,14 @@ document.addEventListener('DOMContentLoaded', function() {
         loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
       }
 
-      // Fallback for invalid timing data - fix the negative number issue
-      if (typeof loadTime === 'number' && (loadTime < 0 || loadTime > 60000)) {
-        loadTime = 'invalid_timing';
+      // Fix negative timing values completely
+      if (typeof loadTime === 'number' && loadTime < 0) {
+        loadTime = Math.abs(loadTime) > 60000 ? 'invalid_timing' : Math.abs(loadTime);
+      }
+      
+      // Final validation for unreasonable values
+      if (typeof loadTime === 'number' && loadTime > 60000) {
+        loadTime = 'timing_error';
       }
 
       console.log('⚡ Page performance metrics:', {

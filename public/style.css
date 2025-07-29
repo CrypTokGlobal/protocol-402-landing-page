@@ -234,6 +234,10 @@ h1, h2, h3 {
   margin: 0;
   padding: 0;
   position: relative;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .lady-justice-image::before {
@@ -1519,7 +1523,7 @@ footer p {
   .hero {
     display: block;
     background: 
-      linear-gradient(rgba(90, 0, 8, 0.8), rgba(115, 0, 10, 0.88), rgba(139, 21, 56, 0.85)),
+      linear-gradient(rgba(90, 0, 8, 0.85), rgba(115, 0, 10, 0.9), rgba(139, 21, 56, 0.88)),
       url('/lady-justice-burgundy.png') center/cover;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -1529,6 +1533,8 @@ footer p {
     background-position: center center;
     background-repeat: no-repeat;
     overflow-x: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   }
 
   h1 {
@@ -1892,6 +1898,12 @@ footer {
   max-width: 100%;
   height: auto;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Lady Justice image optimization */
