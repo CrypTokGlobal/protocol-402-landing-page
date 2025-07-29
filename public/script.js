@@ -95,126 +95,139 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Update timestamp before getting form data
-    updateTimestamp();
-
-    // Get form data after timestamp is updated
-    const formData = new FormData(form);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const timestamp = formData.get('TIMESTAMP');
-
-    console.log('📋 Form data:', { name, email, timestamp });
-
-    // Enhanced validation with professional feedback
-    if (!name || !email || name.trim() === '' || email.trim() === '') {
-      showMessage('Please complete all required fields to proceed.', 'error');
-      return;
+    // Re-enable button function
+    function reEnableButton() {
+      submitBtn.textContent = 'Submit';
+      submitBtn.disabled = false;
     }
-
-    // Enhanced email validation
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-    if (!emailRegex.test(email.trim())) {
-      showMessage('Please provide a valid business email address.', 'error');
-      return;
-    }
-
-    // Name validation
-    if (name.trim().length < 2) {
-      showMessage('Please enter your full name.', 'error');
-      return;
-    }
-
-    // Disable submit button and show loading state
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.disabled = true;
 
     try {
-      // Create FormData for Sheet.best API (they expect FormData, not JSON)
-      const formDataForAPI = new FormData();
-      formDataForAPI.append('name', name.trim());
-      formDataForAPI.append('email', email.trim());
-      formDataForAPI.append('TIMESTAMP', timestamp);
+      // Update timestamp before getting form data
+      updateTimestamp();
 
-      console.log('📤 Submitting to Sheet.best API with FormData...');
-      console.log('📤 FormData contents:', [...formDataForAPI.entries()]); // Log FormData contents
+      // Get form data after timestamp is updated
+      const formData = new FormData(form);
+      const name = formData.get('name');
+      const email = formData.get('email');
+      const timestamp = formData.get('TIMESTAMP');
 
-      const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
-        method: 'POST',
-        mode: 'cors',
-        body: formDataForAPI // Send as FormData, no Content-Type header needed
-      });
+      console.log('📋 Form data:', { name, email, timestamp });
 
-      console.log('📤 Response status:', response.status);
-      console.log('📤 Response ok:', response.ok);
+      // Enhanced validation with professional feedback
+      if (!name || !email || name.trim() === '' || email.trim() === '') {
+        showMessage('Please complete all required fields to proceed.', 'error');
+        return;
+      }
 
-      // Handle successful submission or fallback
-      if (response.ok || response.status === 200 || response.status === 201) {
-        console.log('✅ Form submitted successfully to Sheet.best');
-        handleSuccessfulSubmission();
-      } else {
-        console.warn('⚠️ Sheet.best API error, proceeding with fallback:', response.status, response.statusText);
+      // Enhanced email validation
+      const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      if (!emailRegex.test(email.trim())) {
+        showMessage('Please provide a valid business email address.', 'error');
+        return;
+      }
+
+      // Name validation
+      if (name.trim().length < 2) {
+        showMessage('Please enter your full name.', 'error');
+        return;
+      }
+
+      // Disable submit button and show loading state
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+
+      // Success handler function
+      function handleSuccessfulSubmission() {
+        console.log('✅ Data logged to Google Sheet successfully');
+
+        // Show professional success message
+        showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
+
+        // Trigger PDF download immediately
+        downloadPDF();
+
+        // Reset form
+        form.reset();
+
+        // Redirect to thank you page after 3 seconds
+        setTimeout(() => {
+          console.log('🔄 Redirecting to thank-you page');
+          window.location.href = '/thank-you.html';
+        }, 3000);
+      }
+
+      // Fallback handler function
+      function handleFallbackSubmission() {
+        console.log('🔄 Using fallback: PDF download without sheet logging');
+        reEnableButton();
+
+        // Show professional success message (user doesn't need to know about backend issues)
+        showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
+
+        // Trigger PDF download immediately
+        downloadPDF();
+
+        // Reset form
+        form.reset();
+
+        // Redirect to thank you page after 3 seconds
+        setTimeout(() => {
+          console.log('🔄 Redirecting to thank-you page');
+          window.location.href = '/thank-you.html';
+        }, 3000);
+      }
+
+      try {
+        // Create FormData for Sheet.best API (they expect FormData, not JSON)
+        const formDataForAPI = new FormData();
+        formDataForAPI.append('name', name.trim());
+        formDataForAPI.append('email', email.trim());
+        formDataForAPI.append('TIMESTAMP', timestamp);
+
+        console.log('📤 Submitting to Sheet.best API with FormData...');
+        console.log('📤 FormData contents:', [...formDataForAPI.entries()]); // Log FormData contents
+
+        const response = await fetch('https://api.sheetbest.com/sheets/07bd8119-35d1-486f-9b88-8646578c0ef9', {
+          method: 'POST',
+          mode: 'cors',
+          body: formDataForAPI // Send as FormData, no Content-Type header needed
+        });
+
+        console.log('📤 Response status:', response.status);
+        console.log('📤 Response ok:', response.ok);
+        
+        // Log response details for debugging
+        try {
+          const responseText = await response.clone().text();
+          console.log('📤 Response body:', responseText);
+        } catch (readError) {
+          console.log('📤 Could not read response body:', readError);
+        }
+
+        // Handle successful submission or fallback
+        if (response.ok || response.status === 200 || response.status === 201) {
+          console.log('✅ Form submitted successfully to Sheet.best');
+          handleSuccessfulSubmission();
+        } else {
+          console.warn('⚠️ Sheet.best API error, proceeding with fallback:', response.status, response.statusText);
+          handleFallbackSubmission();
+        }
+
+      } catch (error) {
+        console.warn('⚠️ Network error, proceeding with fallback:', error);
+        console.error("Full error object:", error); // Log the full error object
         handleFallbackSubmission();
       }
 
     } catch (error) {
-      console.warn('⚠️ Network error, proceeding with fallback:', error);
-      console.error("Full error object:", error); // Log the full error object
-      handleFallbackSubmission();
+      // Final catch for any unhandled errors in the main try block
+      console.error('❌ Unhandled form submission error:', error);
+      reEnableButton();
+      showMessage('❌ An unexpected error occurred. Please try again.', 'error');
     }
-
-    // Success handler function
-    function handleSuccessfulSubmission() {
-      console.log('✅ Data logged to Google Sheet successfully');
-
-      // Show professional success message
-      showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
-
-      // Trigger PDF download immediately
-      downloadPDF();
-
-      // Reset form
-      form.reset();
-
-      // Redirect to thank you page after 3 seconds
-      setTimeout(() => {
-        console.log('🔄 Redirecting to thank-you page');
-        window.location.href = '/thank-you.html';
-      }, 3000);
-    }
-
-    // Fallback handler function
-    function handleFallbackSubmission() {
-      console.log('🔄 Using fallback: PDF download without sheet logging');
-
-      // Show professional success message (user doesn't need to know about backend issues)
-      showMessage('✅ Thank you! Protocol 402 download initiated. Redirecting to confirmation page...', 'success');
-
-      // Trigger PDF download immediately
-      downloadPDF();
-
-      // Reset form
-      form.reset();
-
-      // Redirect to thank you page after 3 seconds
-      setTimeout(() => {
-        console.log('🔄 Redirecting to thank-you page');
-        window.location.href = '/thank-you.html';
-      }, 3000);
-    }
-  }).catch(error => {
-    // Final catch for any unhandled promise rejections
-    console.error('❌ Unhandled form submission error:', error);
-    reEnableButton();
-    showMessage('❌ An unexpected error occurred. Please try again.', 'error');
   });
 
   // Update timestamp when page loads
   updateTimestamp();
-
-  function reEnableButton() {
-    submitBtn.textContent = 'Submit';
-    submitBtn.disabled = false;
-  }
 });
