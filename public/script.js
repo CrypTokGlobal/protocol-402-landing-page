@@ -95,8 +95,14 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Call async function to handle submission
-    handleFormSubmission();
+    // Call async function to handle submission with proper error handling
+    handleFormSubmission().catch(error => {
+      console.error('❌ Form submission error:', error);
+      // Re-enable button on error
+      submitBtn.textContent = 'Submit';
+      submitBtn.disabled = false;
+      showMessage('❌ An unexpected error occurred. Please try again.', 'error');
+    });
   });
 
   // Async form submission handler
@@ -243,6 +249,8 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('❌ Unhandled form submission error:', error);
       reEnableButton();
       showMessage('❌ An unexpected error occurred. Please try again.', 'error');
+      // Ensure we don't return an unhandled promise
+      throw error;
     }
   }
 
