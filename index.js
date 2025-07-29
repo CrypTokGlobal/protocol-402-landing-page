@@ -62,7 +62,7 @@ setInterval(() => {
     // Use more efficient cleanup approach
     const ipsToDelete = [];
     for (const [ip, data] of requestCounts.entries()) {
-      if (data && data.firstRequest && data.firstRequest < cutoffTime) {
+      if (data && typeof data === 'object' && data.firstRequest && data.firstRequest < cutoffTime) {
         ipsToDelete.push(ip);
       }
     }

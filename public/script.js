@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     let loadedCount = 0;
+    let skippedCount = 0;
     let failedCount = 0;
     let verificationComplete = false;
     const results = [];
@@ -124,8 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
       img.onerror = () => {
         // SVG and ICO files may not load via Image() but still work in the browser
         if (asset.includes('.svg') || asset.includes('.ico')) {
-          console.log(`ℹ️ ${asset} - SVG/ICO file, skipping Image() verification`);
+          console.log(`ℹ️ ${asset} - SVG/ICO file, assuming available`);
           results.push({ asset, status: 'skipped' });
+          skippedCount++;
         } else {
           console.warn(`⚠️ Asset failed to load: ${asset}`);
           results.push({ asset, status: 'failed' });
@@ -137,11 +139,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function checkComplete() {
-      if (!verificationComplete && loadedCount + failedCount === assets.length) {
+      const totalProcessed = loadedCount + skippedCount + failedCount;
+      if (!verificationComplete && totalProcessed === assets.length) {
         verificationComplete = true;
-        console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully`);
+        console.log(`🎯 Asset verification completed: ${loadedCount}/${assets.length} loaded successfully${skippedCount > 0 ? `, ${skippedCount} skipped` : ''}`);
         if (failedCount > 0) {
-          console.log(`⚠️ ${failedCount} assets failed to load but this may be normal for some file types`);
+          console.log(`⚠️ ${failedCount} assets failed to load`);
           console.log('📋 Failed assets:', results.filter(r => r.status === 'failed').map(r => r.asset));
         }
       }
@@ -163,9 +166,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (timing.loadEventEnd > 0 && timing.loadEventEnd >= timing.navigationStart) {
         loadTime = timing.loadEventEnd - timing.navigationStart;
       } else if (document.readyState === 'complete') {
-        // Use performance.now() for accurate timing only if reasonable
+        // Use performance.now() for relative timing since page load
         const perfNow = Math.round(performance.now());
-        loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'calculated_complete';
+        loadTime = perfNow > 0 && perfNow < 60000 ? perfNow : 'complete';
       }
 
       console.log('⚡ Page performance metrics:', {
